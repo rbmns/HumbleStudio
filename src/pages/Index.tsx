@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
@@ -9,12 +8,13 @@ import FreeOffer from '../components/FreeOffer';
 import Portfolio from '../components/Portfolio';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
+// We're keeping StarBackground for now but it will be less visible with our new sparkles
 import StarBackground from '../components/StarBackground';
 
 const Index = () => {
   useEffect(() => {
     // Update page title
-    document.title = "HumbleStudio.ai | Beautiful Websites. Built with AI.";
+    document.title = "HumbleStudio | Beautiful Websites. Built with AI.";
   }, []);
 
   return (

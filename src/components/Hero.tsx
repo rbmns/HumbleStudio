@@ -1,6 +1,7 @@
 
 import { useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { SparklesCore } from './ui/sparkles';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -26,11 +27,27 @@ const Hero = () => {
 
   return (
     <div ref={heroRef} className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-radial from-humble-purple-600/20 to-transparent opacity-30"></div>
+      {/* SparklesCore as background */}
+      <div className="absolute inset-0 z-0">
+        <SparklesCore
+          id="heroSparkles"
+          background="transparent"
+          minSize={0.6}
+          maxSize={1.4}
+          particleDensity={100}
+          className="w-full h-full"
+          particleColor="#FFFFFF"
+          speed={1}
+        />
+        
+        {/* Gradients overlay */}
+        <div className="absolute inset-0 bg-gradient-radial from-humble-purple-600/20 to-transparent opacity-30"></div>
+      </div>
       
       <div className="max-w-4xl mx-auto text-center z-10 mt-16">
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight">
-          <span className="gradient-text animate-pulse-slow">HumbleStudio.ai</span>
+          <span className="text-white">Humble</span>
+          <span className="bg-gradient-to-r from-humble-purple-500 to-humble-pink-500 bg-clip-text text-transparent">Studio</span>
         </h1>
         
         <div className="w-full max-w-lg mx-auto h-[2px] bg-gradient-to-r from-humble-purple-500 to-humble-pink-500 mb-8 opacity-70"></div>
