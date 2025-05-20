@@ -26,7 +26,7 @@ const Hero = () => {
   };
 
   return (
-    <div ref={heroRef} className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+    <div ref={heroRef} className="relative min-h-screen flex items-center justify-center px-6 sm:px-4 overflow-hidden">
       {/* SparklesCore as background */}
       <div className="absolute inset-0 z-0">
         <SparklesCore
@@ -65,14 +65,14 @@ const Hero = () => {
             href="https://form.typeform.com/to/iwNqCI7O"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-500 to-humble-pink-500 text-white font-medium text-lg flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/20"
+            className="max-w-[240px] w-full mx-auto sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-purple-500 to-humble-pink-500 text-white font-medium text-lg flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/20"
           >
             Book a Free Site
             <ArrowRight size={18} />
           </a>
           <button 
             onClick={() => scrollToSection('how-it-works')}
-            className="px-8 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium text-lg transition-all duration-300 backdrop-blur-sm"
+            className="max-w-[240px] w-full mx-auto sm:w-auto px-8 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium text-lg transition-all duration-300 backdrop-blur-sm"
           >
             How It Works
           </button>

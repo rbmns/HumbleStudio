@@ -42,10 +42,10 @@ const Portfolio = () => {
 
   return (
     <section id="portfolio" className="section-padding bg-humble-gray-800/30">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-5 sm:px-4 md:px-6">
         <h2 className="section-title text-center">Portfolio Preview</h2>
-        <p className="text-center text-white/80 text-xl mb-8 max-w-2xl mx-auto">A glimpse into infinite possibilities</p>
-        <p className="text-center text-white/70 mb-12">Check back soon for more project examples. Or have yours in here. 👀</p>
+        <p className="text-center text-white/80 text-lg sm:text-xl mb-8 max-w-2xl mx-auto">A glimpse into infinite possibilities</p>
+        <p className="text-center text-white/70 text-base sm:text-lg mb-12">Check back soon for more project examples. Or have yours in here. 👀</p>
         
         <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
           {categories.map(category => (
@@ -87,7 +87,7 @@ const Portfolio = () => {
               
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-white/70 mb-4">{project.description}</p>
+                <p className="text-white/70 mb-4 text-base">{project.description}</p>
                 
                 {!project.isComing && (
                   <a 

@@ -115,12 +115,20 @@
 /* Optimize for mobile */
 @media (max-width: 640px) {
   html {
-    font-size: 14px; /* Slightly smaller base font for mobile */
+    font-size: 16px; /* Increased base font for better readability on mobile */
   }
 
   .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  
+  p {
+    font-size: 1.05rem;
+  }
+  
+  h2.section-title {
+    font-size: 2rem;
   }
 }
 
@@ -129,6 +137,10 @@
   button, a {
     min-height: 44px;
     min-width: 44px;
+  }
+  
+  .text-sm {
+    font-size: 0.9rem;
   }
 }
 
@@ -139,5 +151,13 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 480px) {
+  .section-padding {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 }
