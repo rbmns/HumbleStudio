@@ -30,8 +30,11 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-xl">HumbleStudio<span className="text-humble-blue-500">.ai</span></span>
+        <div className="flex items-center">
+          <h1 className="text-xl md:text-2xl font-bold">
+            <span className="text-white">Humble</span>
+            <span className="bg-gradient-to-r from-humble-purple-500 to-humble-pink-500 bg-clip-text text-transparent">Studio</span>
+          </h1>
         </div>
         
         {/* Desktop Menu */}

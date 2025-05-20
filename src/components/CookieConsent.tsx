@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Cookie, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface CookieConsentProps {
   onConsent: (accepted: boolean) => void;
@@ -18,14 +19,14 @@ const CookieConsent = ({ onConsent }: CookieConsentProps) => {
             <div>
               <h3 className="text-lg font-medium text-white mb-2">Cookie Consent</h3>
               <p className="text-white/70 text-sm md:text-base">
-                We use cookies to ensure you get the best experience on our website. By using our site, 
-                you agree to our use of cookies for analytics and personalized content in accordance with our 
-                <a href="#" className="text-humble-green-400 hover:underline ml-1">Privacy Policy</a>.
+                This website uses cookies and similar technologies to analyze traffic, enhance functionality, and personalize content. 
+                By clicking "Accept All", you consent to our use of cookies as described in our 
+                <Link to="/privacy-policy" className="text-humble-green-400 hover:underline ml-1">Privacy Policy</Link>.
               </p>
             </div>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-3 items-center mt-2 md:mt-0">
+          <div className="flex flex-col sm:flex-row gap-3 items-center mt-2 md:mt-0 ml-0 md:ml-4">
             <button
               onClick={() => onConsent(true)}
               className="px-5 py-2 rounded-md bg-gradient-to-r from-humble-blue-500 to-humble-green-500 text-white font-medium text-sm hover:from-humble-blue-600 hover:to-humble-green-600 transition-all min-w-[120px]"

@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,7 +10,10 @@ const Footer = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between mb-8 pb-8 border-b border-humble-gray-800">
           <div className="flex items-center gap-2 mb-6 md:mb-0">
-            <span className="font-bold text-xl">HumbleStudio<span className="text-humble-blue-500">.ai</span></span>
+            <h2 className="font-bold text-xl">
+              <span className="text-white">Humble</span>
+              <span className="bg-gradient-to-r from-humble-purple-500 to-humble-pink-500 bg-clip-text text-transparent">Studio</span>
+            </h2>
           </div>
           
           <div className="flex flex-wrap justify-center gap-8">
@@ -27,9 +31,9 @@ const Footer = () => {
           </div>
           
           <div className="flex items-center gap-4">
-            <a href="#" className="text-white/60 hover:text-white transition-colors">Privacy Policy</a>
+            <Link to="/privacy-policy" className="text-white/60 hover:text-white transition-colors">Privacy Policy</Link>
             <div className="w-1 h-1 rounded-full bg-humble-gray-700"></div>
-            <a href="#" className="text-white/60 hover:text-white transition-colors">Terms of Service</a>
+            <Link to="/terms-of-service" className="text-white/60 hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
