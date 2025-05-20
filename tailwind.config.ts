@@ -56,9 +56,9 @@ export default {
 				// HumbleStudio Brand Colors
 				humble: {
 					purple: {
-						400: '#C084FC',
-						500: '#A855F7',
-						600: '#9333EA'
+						400: '#C084FC', // Lighter purple
+						500: '#A855F7', // Main purple (from image)
+						600: '#9333EA'  // Darker purple
 					},
 					pink: {
 						400: '#F472B6',
@@ -69,7 +69,7 @@ export default {
 						300: '#FCD34D',
 						400: '#FBBF24'
 					},
-					// New extended color palette
+					// Extended color palette
 					blue: {
 						400: '#8BE1FB',
 						500: '#0EA5E9',
@@ -90,7 +90,7 @@ export default {
 						600: '#4B5563',
 						700: '#374151',
 						800: '#1F2937',
-						900: '#111827'
+						900: '#0F1220'  // Darkened to match the brand image background
 					}
 				}
 			},
