@@ -36,21 +36,21 @@ const Hero = () => {
           maxSize={1.4}
           particleDensity={100}
           className="w-full h-full"
-          particleColor="#A855F7"
+          particleColor="#EC4899"
           speed={1}
         />
         
         {/* Gradients overlay */}
-        <div className="absolute inset-0 bg-gradient-radial from-humble-purple-600/20 to-transparent opacity-30"></div>
+        <div className="absolute inset-0 bg-gradient-radial from-humble-pink-600/20 to-transparent opacity-30"></div>
       </div>
       
       <div className="max-w-4xl mx-auto text-center z-10">
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight">
           <span className="text-white">Humble</span>
-          <span className="bg-gradient-to-r from-humble-purple-500 to-humble-purple-400 bg-clip-text text-transparent">Studio</span>
+          <span className="bg-gradient-to-r from-humble-pink-500 to-humble-pink-400 bg-clip-text text-transparent">Studio</span>
         </h1>
         
-        <div className="w-full max-w-lg mx-auto h-[2px] bg-gradient-to-r from-humble-purple-500 to-humble-purple-400 mb-8 opacity-70"></div>
+        <div className="w-full max-w-lg mx-auto h-[2px] bg-gradient-to-r from-humble-pink-500 to-humble-pink-400 mb-8 opacity-70"></div>
         
         <h2 className="text-2xl md:text-3xl lg:text-4xl mb-8 text-white/90 leading-relaxed">
           Beautiful Websites. <span className="whitespace-nowrap">Built with AI.</span> <span className="whitespace-nowrap">Delivered in a Day.</span>
@@ -65,7 +65,7 @@ const Hero = () => {
             href="https://form.typeform.com/to/iwNqCI7O"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-3 rounded-full bg-gradient-to-r from-humble-purple-500 to-humble-purple-400 text-white font-medium text-lg flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300 shadow-lg shadow-humble-purple-500/20"
+            className="px-8 py-3 rounded-full bg-gradient-to-r from-humble-pink-500 to-humble-pink-400 text-white font-medium text-lg flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300 shadow-lg shadow-humble-pink-500/20"
           >
             Book a Free Site
             <ArrowRight size={18} />
@@ -82,6 +82,7 @@ const Hero = () => {
       <div 
         onClick={() => scrollToSection('about')} 
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer"
+        aria-label="Scroll to About section"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />

@@ -1,8 +1,22 @@
 
-import React from 'react';
-import { Mail, Instagram } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, Instagram, Copy, Check } from 'lucide-react';
 
 const Contact = () => {
+  const [isCopied, setIsCopied] = useState(false);
+  const email = "humblestudio@rosiebiemans.com";
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000);
+      })
+      .catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+  };
+
   return (
     <section id="contact" className="section-padding bg-humble-gray-900/50">
       <div className="container mx-auto px-4 md:px-6">
@@ -15,22 +29,38 @@ const Contact = () => {
           </p>
           
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-humble-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-blue-500/50 transition-all duration-300">
-              <a href="mailto:humblestudio@rosiebiemans.com" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors">
+            <div className="bg-humble-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-pink-500/50 transition-all duration-300">
+              <div className="flex items-center gap-4 text-white/80">
                 <div className="w-12 h-12 rounded-full bg-humble-gray-800 flex items-center justify-center">
-                  <Mail size={20} className="text-humble-blue-500" />
+                  <Mail size={20} className="text-humble-pink-500" />
                 </div>
-                <div>
+                <div className="flex-1">
                   <div className="text-sm text-white/60">Email</div>
-                  <div>humblestudio@rosiebiemans.com</div>
+                  <button
+                    onClick={() => copyToClipboard(email)}
+                    className="flex items-center gap-2 text-white hover:text-humble-pink-400 transition-colors group"
+                    aria-label="Copy email address"
+                  >
+                    <span>Copy Email</span>
+                    {isCopied ? (
+                      <Check size={16} className="text-green-500" />
+                    ) : (
+                      <Copy size={16} className="opacity-70 group-hover:opacity-100" />
+                    )}
+                  </button>
                 </div>
-              </a>
+              </div>
+              {isCopied && (
+                <div className="mt-2 text-sm text-green-500 animate-fade-in">
+                  Email copied to clipboard!
+                </div>
+              )}
             </div>
             
-            <div className="bg-humble-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-green-500/50 transition-all duration-300">
+            <div className="bg-humble-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-pink-500/50 transition-all duration-300">
               <a href="https://instagram.com/humblestudio.ai" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors">
                 <div className="w-12 h-12 rounded-full bg-humble-gray-800 flex items-center justify-center">
-                  <Instagram size={20} className="text-humble-green-500" />
+                  <Instagram size={20} className="text-humble-pink-500" />
                 </div>
                 <div>
                   <div className="text-sm text-white/60">Instagram</div>

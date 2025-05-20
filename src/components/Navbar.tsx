@@ -33,7 +33,7 @@ const Navbar = () => {
         <div className="flex items-center">
           <h1 className="text-xl md:text-2xl font-bold">
             <span className="text-white">Humble</span>
-            <span className="bg-gradient-to-r from-humble-purple-500 to-humble-purple-400 bg-clip-text text-transparent">Studio</span>
+            <span className="bg-gradient-to-r from-humble-pink-500 to-humble-pink-400 bg-clip-text text-transparent">Studio</span>
           </h1>
         </div>
         
@@ -45,7 +45,7 @@ const Navbar = () => {
           <button onClick={() => scrollToSection('portfolio')} className="text-white/80 hover:text-white transition-colors">Portfolio</button>
           <button 
             onClick={() => scrollToSection('contact')} 
-            className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-purple-500 to-humble-purple-400 text-white font-medium hover:from-humble-purple-600 hover:to-humble-purple-500 transition-all"
+            className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 to-humble-pink-400 text-white font-medium hover:from-humble-pink-600 hover:to-humble-pink-500 transition-all"
           >
             Contact
           </button>
@@ -55,6 +55,7 @@ const Navbar = () => {
         <button 
           className="md:hidden text-white"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -70,7 +71,7 @@ const Navbar = () => {
             <button onClick={() => scrollToSection('portfolio')} className="text-white/80 hover:text-white transition-colors py-2">Portfolio</button>
             <button 
               onClick={() => scrollToSection('contact')} 
-              className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-purple-500 to-humble-purple-400 text-white font-medium"
+              className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 to-humble-pink-400 text-white font-medium"
             >
               Contact
             </button>
