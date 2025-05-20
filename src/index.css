@@ -17,7 +17,7 @@
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 327 73% 57%;  /* Updated to match HumbleStudio pink */
+    --primary: 276 100% 72%;  /* Updated to match purple color */
     --primary-foreground: 210 40% 98%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -26,7 +26,7 @@
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 327 73% 57%;  /* Updated to match brand accent */
+    --accent: 276 100% 72%;  /* Updated to match brand accent */
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -34,17 +34,18 @@
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 327 73% 57%;
+    --ring: 276 100% 72%;
     
     --radius: 0.5rem;
     
     /* Humble Studio Colors */
-    --humble-purple-400: #C084FC;
-    --humble-purple-500: #A855F7;
-    --humble-purple-600: #9333EA;
+    --humble-purple-400: #9b87f5;
+    --humble-purple-500: #8A70F9;
+    --humble-purple-600: #7F61F8;
     --humble-pink-400: #F472B6;
     --humble-pink-500: #EC4899;
     --humble-pink-600: #DB2777;
+    --humble-coral: #FF7178;
     --humble-yellow-300: #FCD34D;
     --humble-yellow-400: #FBBF24;
   }
@@ -59,7 +60,7 @@
 
 @layer components {
   .gradient-text {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-humble-pink-500 to-humble-pink-400;
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-humble-coral;
   }
   
   .gradient-border {
@@ -68,7 +69,7 @@
   
   .gradient-border::before {
     content: "";
-    @apply absolute -inset-[1px] rounded-lg bg-gradient-to-r from-humble-pink-500 to-humble-pink-400 -z-10;
+    @apply absolute -inset-[1px] rounded-lg bg-gradient-to-r from-purple-500 to-humble-coral -z-10;
   }
   
   .star {
@@ -76,7 +77,7 @@
   }
   
   .button-gradient {
-    @apply bg-gradient-to-r from-humble-pink-500 to-humble-pink-400 hover:from-humble-pink-600 hover:to-humble-pink-500 transition-all duration-300;
+    @apply bg-gradient-to-r from-purple-500 to-humble-pink-500 hover:from-purple-600 hover:to-humble-pink-600 transition-all duration-300;
   }
   
   .section-title {
@@ -88,7 +89,7 @@
   }
   
   .service-card {
-    @apply bg-humble-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-pink-500/50 transition-all duration-300 h-full;
+    @apply bg-humble-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-purple-500/50 transition-all duration-300 h-full;
   }
   
   .star-background {

@@ -56,15 +56,16 @@ export default {
 				// HumbleStudio Brand Colors
 				humble: {
 					purple: {
-						400: '#C084FC', // Lighter purple
-						500: '#A855F7', // Main purple (from image)
-						600: '#9333EA'  // Darker purple
+						400: '#9b87f5',
+						500: '#8A70F9',
+						600: '#7F61F8'
 					},
 					pink: {
 						400: '#F472B6',
 						500: '#EC4899',
 						600: '#DB2777'
 					},
+					coral: '#FF7178',
 					yellow: {
 						300: '#FCD34D',
 						400: '#FBBF24'
@@ -90,7 +91,7 @@ export default {
 						600: '#4B5563',
 						700: '#374151',
 						800: '#1F2937',
-						900: '#0F1220'  // Darkened to match the brand image background
+						900: '#0F1220'
 					}
 				}
 			},
@@ -144,7 +145,7 @@ export default {
 				'satoshi': ['Satoshi', 'sans-serif']
 			},
 			backgroundImage: {
-				'gradient-primary': 'linear-gradient(90deg, var(--humble-blue-500), var(--humble-green-500))'
+				'gradient-primary': 'linear-gradient(90deg, var(--humble-purple-500), var(--humble-coral))'
 			}
 		}
 	},
