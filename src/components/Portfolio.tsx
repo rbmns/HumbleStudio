@@ -26,6 +26,14 @@ const Portfolio = () => {
       image: 'https://res.cloudinary.com/dita7stkt/image/upload/v1747775827/events_s5wzht.png',
       link: 'https://the-lineup.com/events',
     },
+      {
+      title: 'Coming Soon',
+      description: 'New projects in the works',
+      category: 'web',
+      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6',
+      link: '#',
+      isComing: true,
+    },
   ];
   
   const filteredProjects = activeCategory === 'all' 
