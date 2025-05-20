@@ -31,8 +31,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <img src="/lovable-uploads/f1c45144-63a0-4f95-8d0c-21b19d944045.png" alt="HumbleStudio.ai Logo" className="h-8" />
-          <span className="font-bold text-xl">HumbleStudio<span className="text-humble-purple-500">.ai</span></span>
+          <span className="font-bold text-xl">HumbleStudio<span className="text-humble-blue-500">.ai</span></span>
         </div>
         
         {/* Desktop Menu */}
@@ -43,7 +42,7 @@ const Navbar = () => {
           <button onClick={() => scrollToSection('portfolio')} className="text-white/80 hover:text-white transition-colors">Portfolio</button>
           <button 
             onClick={() => scrollToSection('contact')} 
-            className="px-5 py-2 rounded-full button-gradient text-white font-medium"
+            className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-blue-500 to-humble-green-500 text-white font-medium hover:from-humble-blue-600 hover:to-humble-green-600 transition-all"
           >
             Contact
           </button>
@@ -68,7 +67,7 @@ const Navbar = () => {
             <button onClick={() => scrollToSection('portfolio')} className="text-white/80 hover:text-white transition-colors py-2">Portfolio</button>
             <button 
               onClick={() => scrollToSection('contact')} 
-              className="px-5 py-2 rounded-full button-gradient text-white font-medium w-full"
+              className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-blue-500 to-humble-green-500 text-white font-medium"
             >
               Contact
             </button>

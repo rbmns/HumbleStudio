@@ -69,6 +69,17 @@ export default {
 						300: '#FCD34D',
 						400: '#FBBF24'
 					},
+					// New extended color palette
+					blue: {
+						400: '#8BE1FB',
+						500: '#0EA5E9',
+						600: '#0284C7'
+					},
+					green: {
+						400: '#4ADE80',
+						500: '#22C55E',
+						600: '#16A34A'
+					},
 					gray: {
 						50: '#F9FAFB',
 						100: '#F3F4F6',
@@ -82,6 +93,9 @@ export default {
 						900: '#111827'
 					}
 				}
+			},
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -130,7 +144,7 @@ export default {
 				'satoshi': ['Satoshi', 'sans-serif']
 			},
 			backgroundImage: {
-				'gradient-primary': 'linear-gradient(90deg, var(--humble-purple-500), var(--humble-pink-500))'
+				'gradient-primary': 'linear-gradient(90deg, var(--humble-blue-500), var(--humble-green-500))'
 			}
 		}
 	},
