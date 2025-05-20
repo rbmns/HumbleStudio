@@ -17,14 +17,14 @@ const Portfolio = () => {
       description: 'An interactive CV that sets you apart',
       category: 'web',
       image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b',
-      link: '#',
+      link: 'https://rosiebiemans.com/',
     },
     {
       title: 'The Lineup',
       description: 'A social platform for nomads to connect locally',
       category: 'web',
       image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
-      link: '#',
+      link: 'https://the-lineup.com/events',
     },
     {
       title: 'Eco Store',
@@ -32,6 +32,7 @@ const Portfolio = () => {
       category: 'ecommerce',
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f',
       link: '#',
+      isComing: true,
     },
     {
       title: 'Creative Agency',
@@ -39,6 +40,7 @@ const Portfolio = () => {
       category: 'branding',
       image: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7',
       link: '#',
+      isComing: true,
     },
     {
       title: 'Coming Soon',
@@ -66,6 +68,8 @@ const Portfolio = () => {
     <section id="portfolio" className="section-padding bg-humble-gray-800/30">
       <div className="container mx-auto px-4 md:px-6">
         <h2 className="section-title text-center">Portfolio Preview</h2>
+        <p className="text-center text-white/80 text-xl mb-8 max-w-2xl mx-auto">A glimpse into infinite possibilities</p>
+        <p className="text-center text-white/70 mb-12">Check back soon for more project examples. Or have yours in here. 👀</p>
         
         <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
           {categories.map(category => (
@@ -111,7 +115,9 @@ const Portfolio = () => {
                 
                 {!project.isComing && (
                   <a 
-                    href={project.link} 
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-humble-purple-500 hover:text-humble-purple-400 font-medium flex items-center gap-1 transition-colors"
                   >
                     Visit site

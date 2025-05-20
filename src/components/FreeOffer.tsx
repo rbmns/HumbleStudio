@@ -11,10 +11,11 @@ const FreeOffer = () => {
           <div className="relative z-10 max-w-3xl mx-auto text-center">
             <span className="inline-block bg-gradient-to-r from-humble-purple-500 to-humble-pink-500 text-white px-4 py-1 rounded-full text-sm font-medium mb-6">Limited Time Offer</span>
             
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Free Website For Early Clients</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">I'm offering free websites to early clients. Want in?</h2>
             
             <p className="text-white/80 text-lg mb-8 leading-relaxed">
-              I'm looking for a few select businesses to build showcase websites for my portfolio. If you're chosen, you'll get a beautiful, custom website at no cost. Limited spots available.
+              While I build my portfolio, I'm offering fully functional websites — for free — to a limited number of small businesses.
+              If you've been meaning to get online, this is your sign.
             </p>
             
             <div className="grid gap-6 sm:grid-cols-3 text-center mb-8">
@@ -32,17 +33,14 @@ const FreeOffer = () => {
               </div>
             </div>
             
-            <button 
-              onClick={() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-              className="px-8 py-3 rounded-full button-gradient text-white font-medium text-lg hover:scale-105 transition-all duration-300"
+            <a 
+              href="https://form.typeform.com/to/iwNqCI7O"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3 rounded-full button-gradient text-white font-medium text-lg hover:scale-105 transition-all duration-300 inline-flex items-center justify-center"
             >
-              Apply Now
-            </button>
+              Claim Your Spot
+            </a>
           </div>
         </div>
       </div>

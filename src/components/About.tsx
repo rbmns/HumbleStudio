@@ -9,15 +9,12 @@ const About = () => {
         
         <div className="grid md:grid-cols-2 gap-12 items-center mt-12">
           <div className="order-2 md:order-1">
-            <h3 className="text-2xl font-semibold mb-4">Hi, I'm <span className="gradient-text">John Smith</span></h3>
+            <h3 className="text-2xl font-semibold mb-4">Hi, I'm <span className="gradient-text">Rosie</span> — the face behind HumbleStudio.</h3>
             <p className="text-white/80 mb-6 leading-relaxed">
-              With over 10 years of experience in UX design and product development, I've helped companies of all sizes create digital experiences that delight users and drive results.
-            </p>
-            <p className="text-white/80 mb-6 leading-relaxed">
-              Frustrated by the complexity and cost of traditional web design, I founded Humble Studio to bring beautiful, AI-powered websites to small businesses within days, not months.
+              After 10+ years building digital products with global teams as an agile project manager, I decided to flip the script. With AI as my sidekick, I'm now offering beautiful, fast websites for small businesses — without the big agency price tag.
             </p>
             <p className="text-white/80 leading-relaxed">
-              My approach combines my design expertise with cutting-edge AI tools, allowing me to deliver stunning, functional websites at a fraction of the time and cost of traditional agencies.
+              HumbleStudio is my creative playground, and you're invited.
             </p>
             
             <div className="mt-8 flex flex-wrap gap-4">

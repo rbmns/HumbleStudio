@@ -37,23 +37,23 @@ const Contact = () => {
   return (
     <section id="contact" className="section-padding">
       <div className="container mx-auto px-4 md:px-6">
-        <h2 className="section-title text-center">Get In Touch</h2>
+        <h2 className="section-title text-center">Let's build your site.</h2>
         
         <div className="grid md:grid-cols-2 gap-12 mt-12">
           <div>
-            <h3 className="text-2xl font-semibold mb-6">Let's Talk About Your Project</h3>
+            <h3 className="text-2xl font-semibold mb-6">Get In Touch</h3>
             <p className="text-white/80 mb-8 leading-relaxed">
-              Ready to transform your online presence? Reach out to discuss your project, ask questions, or book your free consultation. I typically respond within 24 hours.
+              Interested in working together, or just have questions? Reach out anytime.
             </p>
             
             <div className="space-y-6">
-              <a href="mailto:hello@humblestudio.ai" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors">
+              <a href="mailto:humblestudio@rosiebiemans.com" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors">
                 <div className="w-12 h-12 rounded-full bg-humble-gray-800 flex items-center justify-center">
                   <Mail size={20} className="text-humble-purple-500" />
                 </div>
                 <div>
                   <div className="text-sm text-white/60">Email</div>
-                  <div>hello@humblestudio.ai</div>
+                  <div>humblestudio@rosiebiemans.com</div>
                 </div>
               </a>
               
@@ -64,16 +64,6 @@ const Contact = () => {
                 <div>
                   <div className="text-sm text-white/60">Instagram</div>
                   <div>@humblestudio.ai</div>
-                </div>
-              </a>
-              
-              <a href="https://linkedin.com/in/humblestudio" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors">
-                <div className="w-12 h-12 rounded-full bg-humble-gray-800 flex items-center justify-center">
-                  <Linkedin size={20} className="text-humble-yellow-400" />
-                </div>
-                <div>
-                  <div className="text-sm text-white/60">LinkedIn</div>
-                  <div>HumbleStudio</div>
                 </div>
               </a>
             </div>

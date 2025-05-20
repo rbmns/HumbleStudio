@@ -39,14 +39,20 @@ const Hero = () => {
           Beautiful Websites. <span className="whitespace-nowrap">Built with AI.</span> <span className="whitespace-nowrap">Delivered in a Day.</span>
         </h2>
         
+        <p className="text-xl mb-10 text-white/80">
+          You've got a business. I'll get it online — fast, functional, and designed to impress.
+        </p>
+        
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-          <button 
-            onClick={() => scrollToSection('contact')}
+          <a
+            href="https://form.typeform.com/to/iwNqCI7O"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-8 py-3 rounded-full button-gradient text-white font-medium text-lg flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300"
           >
             Book a Free Site
             <ArrowRight size={18} />
-          </button>
+          </a>
           <button 
             onClick={() => scrollToSection('how-it-works')}
             className="px-8 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium text-lg transition-all duration-300"

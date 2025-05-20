@@ -6,8 +6,8 @@ const HowItWorks = () => {
   const steps = [
     {
       number: '01',
-      title: 'Idea',
-      description: "Share your website vision and goals. I'll help clarify your brand message and target audience.",
+      title: 'Share your idea',
+      description: "Tell me what your business does — and what you need online.",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-humble-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -16,8 +16,8 @@ const HowItWorks = () => {
     },
     {
       number: '02',
-      title: 'AI Build',
-      description: "Using AI and my design expertise, I'll create your website with stunning visuals and compelling content.",
+      title: 'I design & build it',
+      description: "I'll use suitable AI tools to create a beautiful site, fast.",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-humble-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -26,8 +26,8 @@ const HowItWorks = () => {
     },
     {
       number: '03',
-      title: 'Launch',
-      description: 'Your website goes live within 24 hours, ready to attract and convert visitors into customers.',
+      title: 'You go live',
+      description: 'We do a final check together — and you're ready to roll.',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-humble-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
@@ -40,6 +40,7 @@ const HowItWorks = () => {
     <section id="how-it-works" className="section-padding">
       <div className="container mx-auto px-4 md:px-6">
         <h2 className="section-title text-center">How It Works</h2>
+        <p className="text-center text-white/80 text-xl mb-12 max-w-2xl mx-auto">Launch your website in 1 day — seriously.</p>
         
         <div className="relative mt-16">
           {/* Progress Line */}
