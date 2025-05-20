@@ -16,7 +16,7 @@ const Portfolio = () => {
       title: 'Digital CV',
       description: 'An interactive CV that sets you apart',
       category: 'web',
-      image: 'https://res.cloudinary.com/dita7stkt/image/upload/v1747775536/IMG_1619_olo1vg.png',
+      image: 'https://res.cloudinary.com/dita7stkt/image/upload/v1747776038/hero_y59g41.png',
       link: 'https://rosiebiemans.com/',
     },
     {
