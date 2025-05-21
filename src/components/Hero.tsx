@@ -60,7 +60,7 @@ const Hero = () => {
           You've got a business. I'll get it online — fast, functional, and designed to impress.
         </p>
         
-        <div className="flex flex-col sm:flex-row sm:gap-2 gap-3 mt-8 items-center">
+        <div className="flex flex-col sm:flex-row justify-center sm:gap-2 gap-3 mt-8 items-center">
           <a
             href="https://form.typeform.com/to/iwNqCI7O"
             target="_blank"
