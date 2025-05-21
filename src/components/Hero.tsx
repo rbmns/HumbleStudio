@@ -60,19 +60,19 @@ const Hero = () => {
           You've got a business. I'll get it online — fast, functional, and designed to impress.
         </p>
         
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="flex flex-col sm:flex-row sm:gap-2 gap-3 mt-8 items-center">
           <a
             href="https://form.typeform.com/to/iwNqCI7O"
             target="_blank"
             rel="noopener noreferrer"
-            className="max-w-[240px] w-auto sm:w-auto px-8 py-3 sm:py-3 rounded-full bg-gradient-to-r from-purple-500 to-humble-pink-500 text-white font-medium text-lg flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/20"
+            className="max-w-[240px] w-auto sm:w-auto px-8 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-purple-500 to-humble-pink-500 text-white font-medium text-lg flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/20"
           >
             Book a Free Site
             <ArrowRight size={18} />
           </a>
           <button 
             onClick={() => scrollToSection('how-it-works')}
-            className="max-w-[240px] w-auto sm:w-auto px-8 py-3 sm:py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium text-lg transition-all duration-300 backdrop-blur-sm"
+            className="max-w-[240px] w-auto sm:w-auto px-8 py-2.5 sm:py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium text-lg transition-all duration-300 backdrop-blur-sm"
           >
             How It Works
           </button>
