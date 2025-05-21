@@ -161,9 +161,3 @@
     padding-bottom: 3rem;
   }
 }
-
-/* Portfolio image handling */
-.portfolio-image {
-  @apply w-full h-full object-cover object-left;
-  transform-origin: left center;
-}

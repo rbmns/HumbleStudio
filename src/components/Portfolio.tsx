@@ -74,7 +74,7 @@ const Portfolio = () => {
                 <img 
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover object-left transition-all duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                 />
                 {project.isComing && (
                   <div className="absolute inset-0 flex items-center justify-center bg-humble-gray-900/60 z-20">
