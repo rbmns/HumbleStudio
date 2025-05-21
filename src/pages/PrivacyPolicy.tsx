@@ -83,7 +83,8 @@ const PrivacyPolicy = () => {
           
           <h2>9. Contact Us</h2>
           <p>
-            If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:humblestudio@rosiebiemans.com" className="text-humble-blue-400 hover:text-humble-blue-300">humblestudio@rosiebiemans.com</a>
+            If you have any questions about this Privacy Policy, please contact us via the email adress listed on the main page.<br>
+            <a href ="https://humblestudio.ai/">Back to home </a></br>
           </p>
         </div>
       </div>
