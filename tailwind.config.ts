@@ -53,33 +53,48 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// HumbleStudio Brand Colors
+				// Updated HumbleStudio Brand Colors
 				humble: {
-					purple: {
-						400: '#9b87f5',
-						500: '#8A70F9',
-						600: '#7F61F8'
+					// Primary colors
+					navy: {
+						DEFAULT: '#0A1128',
+						500: '#0A1128'
 					},
-					pink: {
-						400: '#F472B6',
-						500: '#EC4899',
-						600: '#DB2777'
+					charcoal: {
+						DEFAULT: '#1C1C28',
+						500: '#1C1C28'
 					},
-					coral: '#FF7178',
-					yellow: {
-						300: '#FCD34D',
-						400: '#FBBF24'
-					},
-					// Extended color palette
+					// Accent colors
 					blue: {
-						400: '#8BE1FB',
-						500: '#0EA5E9',
-						600: '#0284C7'
+						DEFAULT: '#0082FF',
+						400: '#50A7FF',
+						500: '#0082FF',
+						600: '#0066CC'
 					},
 					green: {
+						DEFAULT: '#10B981',
 						400: '#4ADE80',
-						500: '#22C55E',
-						600: '#16A34A'
+						500: '#10B981',
+						600: '#059669'
+					},
+					purple: {
+						DEFAULT: '#9D4EDD',
+						400: '#B87CEE',
+						500: '#9D4EDD',
+						600: '#8126C5'
+					},
+					mint: {
+						DEFAULT: '#00F5D4',
+						400: '#5DFAE2',
+						500: '#00F5D4',
+						600: '#00C4AA'
+					},
+					yellow: {
+						DEFAULT: '#FFD166',
+						300: '#FFE0A3',
+						400: '#FFDB8F',
+						500: '#FFD166',
+						600: '#EFBD47'
 					},
 					gray: {
 						50: '#F9FAFB',
@@ -145,7 +160,7 @@ export default {
 				'satoshi': ['Satoshi', 'sans-serif']
 			},
 			backgroundImage: {
-				'gradient-primary': 'linear-gradient(90deg, var(--humble-purple-500), var(--humble-coral))'
+				'gradient-primary': 'linear-gradient(90deg, var(--humble-blue-500), var(--humble-purple-500))'
 			}
 		}
 	},
