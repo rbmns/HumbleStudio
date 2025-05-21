@@ -33,7 +33,7 @@ const Navbar = () => {
         <div className="flex items-center">
           <h1 className="text-xl md:text-2xl font-bold">
             <span className="text-white">Humble</span>
-            <span className="bg-gradient-to-r from-purple-500 to-humble-pink-500 bg-clip-text text-transparent">Studio</span>
+            <span className="bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 bg-clip-text text-transparent">Studio</span>
           </h1>
         </div>
         
@@ -45,7 +45,7 @@ const Navbar = () => {
           <button onClick={() => scrollToSection('portfolio')} className="text-white/80 hover:text-white transition-colors">Portfolio</button>
           <button 
             onClick={() => scrollToSection('contact')} 
-            className="px-5 py-2 rounded-full bg-gradient-to-r from-purple-500 to-humble-pink-500 text-white font-medium hover:from-purple-600 hover:to-humble-pink-600 transition-all"
+            className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 text-white font-medium hover:from-humble-blue-600 hover:to-humble-purple-600 transition-all"
           >
             Contact
           </button>
@@ -71,7 +71,7 @@ const Navbar = () => {
             <button onClick={() => scrollToSection('portfolio')} className="text-white/80 hover:text-white transition-colors py-2">Portfolio</button>
             <button 
               onClick={() => scrollToSection('contact')} 
-              className="px-5 py-2 rounded-full bg-gradient-to-r from-purple-500 to-humble-pink-500 text-white font-medium"
+              className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 text-white font-medium hover:from-humble-blue-600 hover:to-humble-purple-600 transition-all"
             >
               Contact
             </button>
