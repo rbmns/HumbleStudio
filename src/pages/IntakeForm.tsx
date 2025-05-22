@@ -44,7 +44,7 @@ const IntakeForm = () => {
   return (
     <div className="min-h-screen bg-humble-charcoal">
       <Navbar />
-      <div className="container mx-auto px-4 md:px-6 py-18 md:py-24">
+      <div className="container mx-auto px-4 md:px-6 py-16 md:py-24">
         <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-white">HumbleStudio Intake Form</h1>
         
         <div className="max-w-4xl mx-auto mb-16">
