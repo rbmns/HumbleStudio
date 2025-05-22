@@ -63,8 +63,8 @@ const TermsOfService = () => {
           <h2>9. Contact Us</h2>
           <p>
             If you have any questions about these Terms of Service, please contact me by copying the email adress listed on the home page.
-<br>
- <a href ="https://humblestudio.ai/">Back to home </a></br></br>
+            <br />
+            <a href="https://humblestudio.ai/">Back to home</a>
           </p>
         </div>
       </div>
