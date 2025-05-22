@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="flex items-center gap-2 mb-6 md:mb-0">
             <h2 className="font-bold text-xl">
               <span className="text-white">Humble</span>
-              <span className="bg-gradient-to-r from-purple-500 to-humble-pink-500 bg-clip-text text-transparent">Studio</span>
+              <span className="bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 bg-clip-text text-transparent">Studio</span>
             </h2>
           </div>
           
