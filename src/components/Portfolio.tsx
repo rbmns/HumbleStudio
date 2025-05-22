@@ -41,7 +41,7 @@ const Portfolio = () => {
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <section id="portfolio" className="section-padding bg-humble-gray-800/30">
+    <section id="portfolio" className="section-padding bg-humble-charcoal/30">
       <div className="container mx-auto px-5 sm:px-4 md:px-6">
         <h2 className="section-title text-center">Portfolio Preview</h2>
         <p className="text-center text-white/80 text-lg sm:text-xl mb-8 max-w-2xl mx-auto">A glimpse into infinite possibilities</p>
@@ -53,8 +53,8 @@ const Portfolio = () => {
               key={category.id}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeCategory === category.id 
-                  ? 'bg-gradient-to-r from-humble-purple-500 to-humble-pink-500 text-white' 
-                  : 'bg-humble-gray-800 text-white/70 hover:bg-humble-gray-700'
+                  ? 'bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white' 
+                  : 'bg-humble-charcoal text-white/70 hover:bg-humble-charcoal/80'
               }`}
               onClick={() => setActiveCategory(category.id)}
             >
@@ -67,17 +67,17 @@ const Portfolio = () => {
           {filteredProjects.map((project, index) => (
             <div 
               key={index} 
-              className="group relative overflow-hidden rounded-lg bg-humble-gray-800 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="group relative overflow-hidden rounded-lg bg-humble-charcoal shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <div className="relative h-64 overflow-hidden">
-                <div className="absolute inset-0 bg-humble-gray-900/20 group-hover:bg-humble-gray-900/0 transition-all duration-300 z-10"></div>
+                <div className="absolute inset-0 bg-humble-charcoal/20 group-hover:bg-humble-charcoal/0 transition-all duration-300 z-10"></div>
                 <img 
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                 />
                 {project.isComing && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-humble-gray-900/60 z-20">
+                  <div className="absolute inset-0 flex items-center justify-center bg-humble-charcoal/60 z-20">
                     <div className="bg-humble-purple-500 text-white px-4 py-2 rounded-full text-sm font-medium">
                       Coming Soon
                     </div>
@@ -94,7 +94,7 @@ const Portfolio = () => {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-humble-purple-500 hover:text-humble-purple-400 font-medium flex items-center gap-1 transition-colors"
+                    className="text-humble-pink-500 hover:text-humble-pink-400 font-medium flex items-center gap-1 transition-colors"
                   >
                     Visit site
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

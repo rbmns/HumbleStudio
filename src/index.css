@@ -17,7 +17,7 @@
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 100% 50%;  /* Updated to match blue color */
+    --primary: 342 100% 65%;  /* Updated to match pink color */
     --primary-foreground: 210 40% 98%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -26,7 +26,7 @@
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 271 69% 59%;  /* Updated to match purple color */
+    --accent: 270 84% 55%;  /* Updated to match purple color */
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -34,42 +34,39 @@
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 271 69% 59%;
+    --ring: 270 84% 55%;
     
     --radius: 0.5rem;
     
-    /* Updated Humble Studio Colors */
+    /* Updated Humble Studio Colors based on logo */
     --humble-navy: #0A1128;
-    --humble-charcoal: #1C1C28;
-    --humble-blue-400: #50A7FF;
-    --humble-blue-500: #0082FF;
-    --humble-blue-600: #0066CC;
-    --humble-green-400: #4ADE80;
-    --humble-green-500: #10B981;
-    --humble-green-600: #059669;
-    --humble-purple-400: #B87CEE;
-    --humble-purple-500: #9D4EDD;
-    --humble-purple-600: #8126C5;
-    --humble-mint-400: #5DFAE2;
-    --humble-mint-500: #00F5D4;
-    --humble-mint-600: #00C4AA;
-    --humble-yellow-300: #FFE0A3;
-    --humble-yellow-400: #FFDB8F;
-    --humble-yellow-500: #FFD166;
-    --humble-yellow-600: #EFBD47;
+    --humble-charcoal: #141432;
+    --humble-pink-300: #FF78A0;
+    --humble-pink-400: #FF5F8C;
+    --humble-pink-500: #FF4B7C;
+    --humble-pink-600: #E3355F;
+    --humble-purple-400: #C955F6;
+    --humble-purple-500: #B72DEC;
+    --humble-purple-600: #9721C8;
+    --humble-blue-400: #5080FF;
+    --humble-blue-500: #3466FF;
+    --humble-blue-600: #244EE0;
+    --humble-indigo-400: #7D5BFF;
+    --humble-indigo-500: #6236FF;
+    --humble-indigo-600: #4E20E0;
   }
 }
 
 @layer base {
   body {
     @apply bg-humble-navy text-white font-space-grotesk;
-    background-image: radial-gradient(circle at center, rgba(15, 18, 32, 0.7) 0%, rgba(10, 10, 15, 0.95) 100%);
+    background-image: radial-gradient(circle at center, rgba(20, 20, 50, 0.7) 0%, rgba(10, 10, 25, 0.95) 100%);
   }
 }
 
 @layer components {
   .gradient-text {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-humble-blue-500 to-humble-purple-500;
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500;
   }
   
   .gradient-border {
@@ -78,7 +75,7 @@
   
   .gradient-border::before {
     content: "";
-    @apply absolute -inset-[1px] rounded-lg bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 -z-10;
+    @apply absolute -inset-[1px] rounded-lg bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 -z-10;
   }
   
   .star {
@@ -86,7 +83,7 @@
   }
   
   .button-gradient {
-    @apply bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 hover:from-humble-blue-600 hover:to-humble-purple-600 transition-all duration-300;
+    @apply bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all duration-300;
   }
   
   .section-title {
@@ -98,7 +95,7 @@
   }
   
   .service-card {
-    @apply bg-humble-charcoal/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-blue-500/50 transition-all duration-300 h-full;
+    @apply bg-humble-charcoal/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-pink-500/50 transition-all duration-300 h-full;
   }
   
   .star-background {

@@ -53,7 +53,7 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// Updated HumbleStudio Brand Colors
+				// Updated HumbleStudio Brand Colors based on logo
 				humble: {
 					// Primary colors
 					navy: {
@@ -61,41 +61,36 @@ export default {
 						500: '#0A1128'
 					},
 					charcoal: {
-						DEFAULT: '#1C1C28',
-						500: '#1C1C28'
+						DEFAULT: '#141432',
+						500: '#141432'
 					},
-					// Accent colors
+					// Accent colors from logo
+					pink: {
+						DEFAULT: '#FF4B7C',
+						300: '#FF78A0',
+						400: '#FF5F8C',
+						500: '#FF4B7C',
+						600: '#E3355F'
+					},
 					blue: {
-						DEFAULT: '#0082FF',
-						400: '#50A7FF',
-						500: '#0082FF',
-						600: '#0066CC'
-					},
-					green: {
-						DEFAULT: '#10B981',
-						400: '#4ADE80',
-						500: '#10B981',
-						600: '#059669'
+						DEFAULT: '#3466FF',
+						400: '#5080FF',
+						500: '#3466FF',
+						600: '#244EE0'
 					},
 					purple: {
-						DEFAULT: '#9D4EDD',
-						400: '#B87CEE',
-						500: '#9D4EDD',
-						600: '#8126C5'
+						DEFAULT: '#B72DEC',
+						400: '#C955F6',
+						500: '#B72DEC',
+						600: '#9721C8'
 					},
-					mint: {
-						DEFAULT: '#00F5D4',
-						400: '#5DFAE2',
-						500: '#00F5D4',
-						600: '#00C4AA'
+					indigo: {
+						DEFAULT: '#6236FF',
+						400: '#7D5BFF',
+						500: '#6236FF',
+						600: '#4E20E0'
 					},
-					yellow: {
-						DEFAULT: '#FFD166',
-						300: '#FFE0A3',
-						400: '#FFDB8F',
-						500: '#FFD166',
-						600: '#EFBD47'
-					},
+					// Supporting colors
 					gray: {
 						50: '#F9FAFB',
 						100: '#F3F4F6',
@@ -112,6 +107,7 @@ export default {
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'logo-gradient': 'linear-gradient(135deg, var(--humble-pink-500), var(--humble-purple-500), var(--humble-blue-500))',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -160,7 +156,7 @@ export default {
 				'satoshi': ['Satoshi', 'sans-serif']
 			},
 			backgroundImage: {
-				'gradient-primary': 'linear-gradient(90deg, var(--humble-blue-500), var(--humble-purple-500))'
+				'gradient-primary': 'linear-gradient(90deg, var(--humble-pink-500), var(--humble-purple-500))'
 			}
 		}
 	},

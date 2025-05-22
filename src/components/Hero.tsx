@@ -36,21 +36,21 @@ const Hero = () => {
           maxSize={1.4}
           particleDensity={100}
           className="w-full h-full"
-          particleColor="#0082FF"
+          particleColor="#FF4B7C"
           speed={1}
         />
         
         {/* Gradients overlay */}
-        <div className="absolute inset-0 bg-gradient-radial from-humble-blue-500/20 to-transparent opacity-30"></div>
+        <div className="absolute inset-0 bg-gradient-radial from-humble-pink-500/10 to-transparent opacity-30"></div>
       </div>
       
       <div className="max-w-4xl mx-auto text-center z-10">
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight">
           <span className="text-white">Humble</span>
-          <span className="bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 bg-clip-text text-transparent">Studio</span>
+          <span className="bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">Studio</span>
         </h1>
         
-        <div className="w-full max-w-lg mx-auto h-[2px] bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 mb-8 opacity-70"></div>
+        <div className="w-full max-w-lg mx-auto h-[2px] bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 mb-8 opacity-70"></div>
         
         <h2 className="text-2xl md:text-3xl lg:text-4xl mb-8 text-white/90 leading-relaxed">
           Beautiful Websites. <span className="whitespace-nowrap">Built with AI.</span> <span className="whitespace-nowrap">Delivered in a Day.</span>
@@ -65,7 +65,7 @@ const Hero = () => {
             href="https://form.typeform.com/to/iwNqCI7O"
             target="_blank"
             rel="noopener noreferrer"
-            className="max-w-[240px] w-auto sm:w-auto px-8 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 text-white font-medium text-lg flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300 shadow-lg shadow-humble-blue-500/20"
+            className="max-w-[240px] w-auto sm:w-auto px-8 py-2.5 sm:py-3 rounded-full button-gradient text-white font-medium text-lg flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300 shadow-lg shadow-humble-pink-500/20"
           >
             Book a Free Site
             <ArrowRight size={18} />

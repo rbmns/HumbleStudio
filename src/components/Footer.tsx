@@ -6,13 +6,13 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="py-12 bg-humble-gray-900 relative">
+    <footer className="py-12 bg-humble-charcoal relative">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between mb-8 pb-8 border-b border-humble-gray-800">
           <div className="flex items-center gap-2 mb-6 md:mb-0">
             <h2 className="font-bold text-xl">
               <span className="text-white">Humble</span>
-              <span className="bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 bg-clip-text text-transparent">Studio</span>
+              <span className="bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">Studio</span>
             </h2>
           </div>
           
@@ -38,7 +38,7 @@ const Footer = () => {
         </div>
       </div>
       
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-humble-pink-500 to-humble-pink-400"></div>
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500"></div>
     </footer>
   );
 };

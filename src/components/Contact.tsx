@@ -18,7 +18,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="section-padding bg-humble-gray-900/50">
+    <section id="contact" className="section-padding bg-humble-charcoal/50">
       <div className="container mx-auto px-4 md:px-6">
         <h2 className="section-title text-center">Let's build your site.</h2>
         
@@ -29,9 +29,9 @@ const Contact = () => {
           </p>
           
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-humble-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-pink-500/50 transition-all duration-300">
+            <div className="bg-humble-charcoal/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-pink-500/50 transition-all duration-300">
               <div className="flex items-center gap-4 text-white/80">
-                <div className="w-12 h-12 rounded-full bg-humble-gray-800 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-humble-charcoal flex items-center justify-center">
                   <Mail size={20} className="text-humble-pink-500" />
                 </div>
                 <div className="flex-1">
@@ -57,9 +57,9 @@ const Contact = () => {
               )}
             </div>
             
-            <div className="bg-humble-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-pink-500/50 transition-all duration-300">
+            <div className="bg-humble-charcoal/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-pink-500/50 transition-all duration-300">
               <a href="https://instagram.com/humblestudio.ai" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors">
-                <div className="w-12 h-12 rounded-full bg-humble-gray-800 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-humble-charcoal flex items-center justify-center">
                   <Instagram size={20} className="text-humble-pink-500" />
                 </div>
                 <div>
