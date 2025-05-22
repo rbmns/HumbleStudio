@@ -15,10 +15,22 @@ declare global {
 
 const IntakeForm = () => {
   useEffect(() => {
-    // Ensure the Tally script is loaded and executed
-    if (window.Tally) {
-      window.Tally.loadEmbeds();
-    }
+    // Load Tally script dynamically
+    const script = document.createElement('script');
+    script.src = 'https://tally.so/widgets/embed.js';
+    script.async = true;
+    script.onload = () => {
+      // Execute Tally.loadEmbeds once script is loaded
+      if (window.Tally) {
+        window.Tally.loadEmbeds();
+      }
+    };
+    document.body.appendChild(script);
+    
+    return () => {
+      // Cleanup on unmount
+      document.body.removeChild(script);
+    };
   }, []);
 
   return (
