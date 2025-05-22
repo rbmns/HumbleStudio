@@ -4,6 +4,15 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Helmet } from 'react-helmet';
 
+// Add type definition for the Tally object
+declare global {
+  interface Window {
+    Tally?: {
+      loadEmbeds: () => void;
+    };
+  }
+}
+
 const IntakeForm = () => {
   useEffect(() => {
     // Ensure the Tally script is loaded and executed
