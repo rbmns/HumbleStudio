@@ -13,6 +13,14 @@ const Portfolio = () => {
   
   const projects = [
     {
+      title: 'Shen Taxi & Tours',
+      description: 'Professional taxi and tour services in Sri Lanka with comprehensive pricing and booking',
+      category: 'web',
+      image: '/lovable-uploads/8bf3485c-add8-4333-80b0-2239cb0caff7.png',
+      link: '#',
+      isFeatured: true,
+    },
+    {
       title: 'Digital CV',
       description: 'An interactive CV that sets you apart',
       category: 'web',
@@ -26,7 +34,7 @@ const Portfolio = () => {
       image: 'https://res.cloudinary.com/dita7stkt/image/upload/v1747775827/events_s5wzht.png',
       link: 'https://the-lineup.com/events',
     },
-      {
+    {
       title: 'Coming Soon',
       description: 'New projects in the works',
       category: 'web',
@@ -67,9 +75,11 @@ const Portfolio = () => {
           {filteredProjects.map((project, index) => (
             <div 
               key={index} 
-              className="group relative overflow-hidden rounded-lg bg-humble-charcoal shadow-lg hover:shadow-xl transition-all duration-300"
+              className={`group relative overflow-hidden rounded-lg bg-humble-charcoal shadow-lg hover:shadow-xl transition-all duration-300 ${
+                project.isFeatured ? 'sm:col-span-2 lg:col-span-2' : ''
+              }`}
             >
-              <div className="relative h-64 overflow-hidden">
+              <div className={`relative overflow-hidden ${project.isFeatured ? 'h-80' : 'h-64'}`}>
                 <div className="absolute inset-0 bg-humble-charcoal/20 group-hover:bg-humble-charcoal/0 transition-all duration-300 z-10"></div>
                 <img 
                   src={project.image}
@@ -81,6 +91,11 @@ const Portfolio = () => {
                     <div className="bg-humble-purple-500 text-white px-4 py-2 rounded-full text-sm font-medium">
                       Coming Soon
                     </div>
+                  </div>
+                )}
+                {project.isFeatured && (
+                  <div className="absolute top-4 left-4 bg-humble-pink-500 text-white px-3 py-1 rounded-full text-sm font-medium z-20">
+                    Featured
                   </div>
                 )}
               </div>
@@ -96,7 +111,7 @@ const Portfolio = () => {
                     rel="noopener noreferrer"
                     className="text-humble-pink-500 hover:text-humble-pink-400 font-medium flex items-center gap-1 transition-colors"
                   >
-                    Visit site
+                    {project.link === '#' ? 'View details' : 'Visit site'}
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
