@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ExternalLink, Monitor, Smartphone, Play } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
@@ -59,8 +58,12 @@ const Portfolio = () => {
       // Transform the data to match our interface
       const transformedProjects: PortfolioProject[] = (data || []).map(project => ({
         ...project,
-        technologies: Array.isArray(project.technologies) ? project.technologies : [],
-        key_features: Array.isArray(project.key_features) ? project.key_features : [],
+        technologies: Array.isArray(project.technologies) 
+          ? project.technologies.filter((tech): tech is string => typeof tech === 'string')
+          : [],
+        key_features: Array.isArray(project.key_features) 
+          ? project.key_features.filter((feature): feature is string => typeof feature === 'string')
+          : [],
         portfolio_media: project.portfolio_media || []
       }));
 
