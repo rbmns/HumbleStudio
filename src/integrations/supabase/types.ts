@@ -9,7 +9,113 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      contact_submissions: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      portfolio_media: {
+        Row: {
+          alt_text: string | null
+          created_at: string
+          device_type: string | null
+          id: string
+          is_primary: boolean | null
+          media_type: string
+          media_url: string
+          project_id: string | null
+        }
+        Insert: {
+          alt_text?: string | null
+          created_at?: string
+          device_type?: string | null
+          id?: string
+          is_primary?: boolean | null
+          media_type: string
+          media_url: string
+          project_id?: string | null
+        }
+        Update: {
+          alt_text?: string | null
+          created_at?: string
+          device_type?: string | null
+          id?: string
+          is_primary?: boolean | null
+          media_type?: string
+          media_url?: string
+          project_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "portfolio_media_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "portfolio_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      portfolio_projects: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          id: string
+          is_coming_soon: boolean | null
+          is_featured: boolean | null
+          key_features: Json | null
+          link: string | null
+          technologies: Json | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description: string
+          id?: string
+          is_coming_soon?: boolean | null
+          is_featured?: boolean | null
+          key_features?: Json | null
+          link?: string | null
+          technologies?: Json | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          id?: string
+          is_coming_soon?: boolean | null
+          is_featured?: boolean | null
+          key_features?: Json | null
+          link?: string | null
+          technologies?: Json | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
