@@ -56,7 +56,15 @@ const Portfolio = () => {
 
       if (error) throw error;
 
-      setProjects(data || []);
+      // Transform the data to match our interface
+      const transformedProjects: PortfolioProject[] = (data || []).map(project => ({
+        ...project,
+        technologies: Array.isArray(project.technologies) ? project.technologies : [],
+        key_features: Array.isArray(project.key_features) ? project.key_features : [],
+        portfolio_media: project.portfolio_media || []
+      }));
+
+      setProjects(transformedProjects);
     } catch (error) {
       console.error('Error fetching projects:', error);
     } finally {
