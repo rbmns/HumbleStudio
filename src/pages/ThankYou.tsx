@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 
 const ThankYou = () => {
   const handleEmailCopy = () => {
-    navigator.clipboard.writeText('hello@humblestudio.ai');
+    navigator.clipboard.writeText('hi@humblestudio.ai');
     // You could add a toast notification here in the future if desired
   };
 
