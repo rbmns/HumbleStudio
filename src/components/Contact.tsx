@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 import { Mail, Instagram, Copy, Check } from 'lucide-react';
 import ContactForm from './ContactForm';
 
 const Contact = () => {
   const [isCopied, setIsCopied] = useState(false);
-  const email = "humblestudio@rosiebiemans.com";
+  const email = "hi@humblestudio.ai";
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)

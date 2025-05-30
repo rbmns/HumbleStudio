@@ -28,7 +28,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     const emailResponse = await resend.emails.send({
       from: "HumbleStudio Contact <onboarding@resend.dev>",
-      to: ["humblestudio@rosiebiemans.com"],
+      to: ["hi@humblestudio.ai"],
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <h2>New Contact Form Submission</h2>
