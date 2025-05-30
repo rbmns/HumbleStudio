@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Home, Mail } from 'lucide-react';
@@ -7,7 +8,7 @@ import { Button } from '@/components/ui/button';
 
 const ThankYou = () => {
   const handleEmailCopy = () => {
-    navigator.clipboard.writeText('hi@humblestudio.ai');
+    navigator.clipboard.writeText('hello@humblestudio.ai');
     // You could add a toast notification here in the future if desired
   };
 
