@@ -40,7 +40,12 @@ const Portfolio = () => {
     currentIndex: number;
   } | null>(null);
 
-
+  const categories = [
+    { id: 'all', label: 'All Projects' },
+    { id: 'web', label: 'Web Design' },
+    { id: 'branding', label: 'Branding' },
+    { id: 'ecommerce', label: 'E-Commerce' },
+  ];
 
   // Fetch projects from Supabase
   const { data: projects = [], isLoading: projectsLoading } = useQuery({
