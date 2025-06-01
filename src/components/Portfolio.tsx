@@ -1,74 +1,101 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image"; // Optional: use if you're using Next.js
+import React, { useState } from "react";
+import Image from "next/image";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
-type Project = {
-  title: string;
-  thumbnail: string;
-  large: string;
-};
+interface EventImagesProps {
+  images: string[];
+}
 
-const projects: Project[] = [
-  {
-    title: "Shen Taxi and Tours",
-    thumbnail: "/images/shen-thumb.jpg",
-    large: "/images/shen-full.jpg",
-  },
-  {
-    title: "Another Project",
-    thumbnail: "/images/another-thumb.jpg",
-    large: "/images/another-full.jpg",
-  },
-  // Add more projects as needed
-];
+export default function EventImages({ images }: EventImagesProps) {
+  const [currentIndex, setCurrentIndex] = useState<number | null>(null);
 
-export default function Portfolio() {
-  const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState<Project | null>(null);
+  const showNextImage = () => {
+    if (currentIndex === null) return;
+    setCurrentIndex((currentIndex + 1) % images.length);
+  };
 
-  const handleClick = (project: Project) => {
-    setSelected(project);
-    setOpen(true);
+  const showPrevImage = () => {
+    if (currentIndex === null) return;
+    setCurrentIndex((currentIndex - 1 + images.length) % images.length);
   };
 
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-8 text-center">Portfolio</h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
+    <>
+      {images.length > 0 ? (
+        <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+          {images.map((src, index) => (
             <div
               key={index}
-              className="cursor-pointer group relative overflow-hidden rounded-xl shadow hover:shadow-lg transition"
-              onClick={() => handleClick(project)}
+              className="relative aspect-square cursor-pointer overflow-hidden rounded-md"
+              onClick={() => setCurrentIndex(index)}
             >
-              <img
-                src={project.thumbnail}
-                alt={project.title}
-                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+              <Image
+                src={src}
+                alt={`Event Image ${index + 1}`}
+                layout="fill"
+                objectFit="cover"
+                className="hover:scale-105 transition-transform duration-300 ease-in-out"
               />
-              <div className="absolute bottom-0 bg-black bg-opacity-50 w-full text-white text-sm p-2 text-center">
-                {project.title}
-              </div>
             </div>
           ))}
         </div>
+      ) : (
+        <p className="text-muted-foreground">No images available.</p>
+      )}
 
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogContent className="max-w-3xl w-full p-0 overflow-hidden">
-            {selected && (
-              <img
-                src={selected.large}
-                alt={selected.title}
-                className="w-full h-auto object-contain"
-              />
+      {/* Fullscreen Dialog Overlay */}
+      <Dialog open={currentIndex !== null} onOpenChange={() => setCurrentIndex(null)}>
+        <DialogContent className="max-w-full max-h-full bg-black p-0">
+          <div className="relative w-full h-screen flex items-center justify-center">
+            {currentIndex !== null && (
+              <>
+                {/* Fullscreen Image */}
+                <Image
+                  src={images[currentIndex]}
+                  alt={`Fullscreen image ${currentIndex + 1}`}
+                  layout="fill"
+                  objectFit="contain"
+                  className="bg-black"
+                />
+
+                {/* Close Button */}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-4 right-4 text-white z-10"
+                  onClick={() => setCurrentIndex(null)}
+                >
+                  <X className="h-6 w-6" />
+                </Button>
+
+                {/* Prev Button */}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white z-10"
+                  onClick={showPrevImage}
+                >
+                  <ChevronLeft className="h-8 w-8" />
+                </Button>
+
+                {/* Next Button */}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white z-10"
+                  onClick={showNextImage}
+                >
+                  <ChevronRight className="h-8 w-8" />
+                </Button>
+              </>
             )}
-          </DialogContent>
-        </Dialog>
-      </div>
-    </section>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
