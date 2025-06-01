@@ -20,7 +20,7 @@ const FreeOffer = () => {
             
             <div className="grid gap-6 sm:grid-cols-3 text-center mb-8">
               <div className="bg-humble-charcoal/50 rounded-lg p-4">
-                <div className="text-3xl font-bold text-humble-purple-500 mb-2">5</div>
+                <div className="text-3xl font-bold text-humble-purple-500 mb-2">3</div>
                 <div className="text-white/70">Spots Available</div>
               </div>
               <div className="bg-humble-charcoal/50 rounded-lg p-4">
