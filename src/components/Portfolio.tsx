@@ -96,10 +96,11 @@ const Portfolio = () => {
   const openImageOverlay = (media: PortfolioMedia, projectId: string) => {
     const projectMedia = getProjectMedia(projectId).filter(m => m.media_type === 'image');
     const currentIndex = projectMedia.findIndex(m => m.id === media.id);
+    const project = projects.find(p => p.id === projectId);
     
     setSelectedImage({
       url: media.media_url,
-      alt: media.alt_text || media.project_name || 'Project image',
+      alt: media.alt_text || project?.title || 'Project image',
       projectId,
       currentIndex
     });
@@ -118,9 +119,11 @@ const Portfolio = () => {
     }
     
     const newMedia = projectMedia[newIndex];
+    const project = projects.find(p => p.id === selectedImage.projectId);
+    
     setSelectedImage({
       url: newMedia.media_url,
-      alt: newMedia.alt_text || newMedia.project_name || 'Project image',
+      alt: newMedia.alt_text || project?.title || 'Project image',
       projectId: selectedImage.projectId,
       currentIndex: newIndex
     });
