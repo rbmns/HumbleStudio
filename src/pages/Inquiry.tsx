@@ -24,4 +24,4 @@ import Footer from '../components/Footer';
   );
 };
 
-export default IntakeForm;
+export default Inquiry;
