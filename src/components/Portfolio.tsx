@@ -167,7 +167,7 @@ const Portfolio = () => {
     <>
       <section id="portfolio" className="section-padding bg-humble-charcoal/30">
         <div className="container mx-auto px-5 sm:px-4 md:px-6">
-          <h2 className="section-title text-center">Portfolio Preview</h2>
+          <h2 className="section-title text-center">Selected Work</h2>
           <p className="text-center text-white/80 text-lg sm:text-xl mb-8 max-w-2xl mx-auto">A glimpse into infinite possibilities</p>
           <p className="text-center text-white/70 text-base sm:text-lg mb-12">Check back soon for more project examples. Or have yours in here. 👀</p>
           
@@ -193,141 +193,75 @@ const Portfolio = () => {
               const projectMedia = getProjectMedia(project.id);
               const imageCount = projectMedia.filter(m => m.media_type === 'image').length;
               
-              return (
-                <div 
-                  key={project.id} 
-                  className="group bg-humble-charcoal rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  {/* Main Project Card */}
-                  <div className={`grid ${project.is_featured ? 'lg:grid-cols-2' : 'md:grid-cols-2'} gap-0`}>
-                    {/* Image Section */}
-                    <div className={`relative overflow-hidden ${project.is_featured ? 'h-80' : 'h-64'}`}>
-                      <div className="absolute inset-0 bg-humble-charcoal/20 group-hover:bg-humble-charcoal/0 transition-all duration-300 z-10"></div>
-                      {primaryImage && (
-                        <img 
-                          src={primaryImage.media_url}
-                          alt={primaryImage.alt_text || project.title}
-                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 cursor-pointer"
-                          onClick={() => !project.is_coming_soon && openImageOverlay(primaryImage, project.id)}
-                        />
-                      )}
-                      {project.is_coming_soon && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-humble-charcoal/60 z-20">
-                          <div className="bg-humble-purple-500 text-white px-4 py-2 rounded-full text-sm font-medium">
-                            Coming Soon
-                          </div>
-                        </div>
-                      )}
-                      {project.is_featured && (
-                        <div className="absolute top-4 left-4 bg-humble-pink-500 text-white px-3 py-1 rounded-full text-sm font-medium z-20">
-                          Featured
-                        </div>
-                      )}
-                      {imageCount > 1 && !project.is_coming_soon && (
-                        <div className="absolute bottom-4 right-4 bg-humble-charcoal/80 text-white px-2 py-1 rounded text-sm z-20">
-                          +{imageCount - 1} more
-                        </div>
-                      )}
-                    </div>
-                    
-                    {/* Content Section */}
-                    <div className="p-6 flex flex-col justify-between">
-                      <div>
-                        <h3 className="text-xl font-semibold mb-3 text-white">{project.title}</h3>
-                        <p className="text-white/70 mb-4 text-base leading-relaxed">{project.description}</p>
-                        
-                        {project.technologies.length > 0 && (
-                          <div className="flex flex-wrap gap-2 mb-4">
-                            {project.technologies.map((tech, techIndex) => (
-                              <span 
-                                key={techIndex}
-                                className="text-xs px-3 py-1 bg-humble-purple-500/20 text-humble-purple-300 rounded-full"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        )}
+         
+               return (
+  <div
+    key={project.id}
+    className="grid md:grid-cols-2 gap-6 bg-humble-charcoal rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+  >
+    {/* Left: Image */}
+    <div className="relative overflow-hidden h-64 md:h-auto cursor-pointer" onClick={() => !project.is_coming_soon && openImageOverlay(primaryImage, project.id)}>
+      <img
+        src={primaryImage?.media_url}
+        alt={primaryImage?.alt_text || project.title}
+        className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+      />
+      {project.is_coming_soon && (
+        <div className="absolute inset-0 flex items-center justify-center bg-humble-charcoal/60 z-20">
+          <div className="bg-humble-purple-500 text-white px-4 py-2 rounded-full text-sm font-medium">
+            Coming Soon
+          </div>
+        </div>
+      )}
+      {project.is_featured && (
+        <div className="absolute top-4 left-4 bg-humble-pink-500 text-white px-3 py-1 rounded-full text-sm font-medium z-20">
+          Featured
+        </div>
+      )}
+    </div>
 
-                        {project.build_time && (
-                          <div className="flex items-center gap-2 mb-4 text-humble-blue-400">
-                            <Clock className="h-4 w-4" />
-                            <span className="text-sm">Built in {project.build_time}</span>
-                          </div>
-                        )}
-                      </div>
-                      
-                      <div className="flex items-center justify-between">
-                        {!project.is_coming_soon && project.link && (
-                          <a 
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-humble-pink-500 hover:text-humble-pink-400 font-medium flex items-center gap-2 transition-colors"
-                          >
-                            Visit Site
-                            <ExternalLink className="h-4 w-4" />
-                          </a>
-                        )}
-                        
-                        {!project.is_coming_soon && project.key_features.length > 0 && (
-                          <button
-                            onClick={() => toggleProject(project.id)}
-                            className="text-humble-blue-500 hover:text-humble-blue-400 font-medium flex items-center gap-2 transition-colors"
-                          >
-                            {expandedProject === project.id ? 'Less Details' : 'More Details'}
-                            {expandedProject === project.id ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
+    {/* Right: Text */}
+    <div className="p-6 flex flex-col justify-between">
+      <div>
+        <h3 className="text-xl font-semibold mb-3 text-white">{project.title}</h3>
+        <p className="text-white/70 mb-4 text-base leading-relaxed">{project.description}</p>
 
-                  {/* Expanded Content */}
-                  {expandedProject === project.id && !project.is_coming_soon && (
-                    <div className="border-t border-humble-gray-700/50 bg-humble-charcoal/50 animate-fade-in">
-                      <div className="p-6">
-                        <div className="grid md:grid-cols-2 gap-8">
-                          {/* Features */}
-                          <div>
-                            <h4 className="text-lg font-semibold mb-4 text-humble-pink-500">Key Features</h4>
-                            <ul className="space-y-2">
-                              {project.key_features.map((feature, featureIndex) => (
-                                <li key={featureIndex} className="text-white/80 flex items-center gap-2">
-                                  <div className="w-1.5 h-1.5 bg-humble-purple-500 rounded-full"></div>
-                                  {feature}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          
-                          {/* Media Gallery */}
-                          <div>
-                            <h4 className="text-lg font-semibold mb-4 text-humble-blue-500">Project Gallery</h4>
-                            <div className="grid grid-cols-2 gap-3">
-                              {projectMedia.filter(m => m.media_type === 'image').slice(0, 4).map((media) => (
-                                <div key={media.id} className="relative group cursor-pointer">
-                                  <img 
-                                    src={media.media_url}
-                                    alt={media.alt_text || project.title}
-                                    className="w-full h-20 object-cover rounded-lg hover:opacity-80 transition-opacity"
-                                    onClick={() => openImageOverlay(media, project.id)}
-                                  />
-                                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors rounded-lg"></div>
-                                </div>
-                              ))}
-                            </div>
-                            {projectMedia.filter(m => m.media_type === 'image').length > 4 && (
-                              <p className="text-white/60 text-sm mt-2">
-                                +{projectMedia.filter(m => m.media_type === 'image').length - 4} more images
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
+        {project.technologies.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {project.technologies.map((tech, techIndex) => (
+              <span
+                key={techIndex}
+                className="text-xs px-3 py-1 bg-humble-purple-500/20 text-humble-purple-300 rounded-full"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {project.build_time && (
+          <div className="flex items-center gap-2 mb-4 text-humble-blue-400">
+            <Clock className="h-4 w-4" />
+            <span className="text-sm">Built in {project.build_time}</span>
+          </div>
+        )}
+      </div>
+
+      <div className="flex items-center justify-between mt-4">
+        {!project.is_coming_soon && project.link && (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-humble-pink-500 hover:text-humble-pink-400 font-medium flex items-center gap-2 transition-colors"
+          >
+            Visit Project <ExternalLink size={16} />
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+);
               );
             })}
           </div>
