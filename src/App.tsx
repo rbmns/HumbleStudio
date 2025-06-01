@@ -10,6 +10,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import ThankYou from "./pages/ThankYou";
 import IntakeForm from "./pages/IntakeForm";
+import Inquiry from "./pages/Inquiry";
 
 const queryClient = new QueryClient();
 
