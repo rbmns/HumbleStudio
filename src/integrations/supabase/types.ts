@@ -38,31 +38,37 @@ export type Database = {
           alt_text: string | null
           created_at: string
           device_type: string | null
+          display_order: number | null
           id: string
           is_primary: boolean | null
           media_type: string
           media_url: string
           project_id: string | null
+          project_name: string | null
         }
         Insert: {
           alt_text?: string | null
           created_at?: string
           device_type?: string | null
+          display_order?: number | null
           id?: string
           is_primary?: boolean | null
           media_type: string
           media_url: string
           project_id?: string | null
+          project_name?: string | null
         }
         Update: {
           alt_text?: string | null
           created_at?: string
           device_type?: string | null
+          display_order?: number | null
           id?: string
           is_primary?: boolean | null
           media_type?: string
           media_url?: string
           project_id?: string | null
+          project_name?: string | null
         }
         Relationships: [
           {
@@ -76,6 +82,7 @@ export type Database = {
       }
       portfolio_projects: {
         Row: {
+          build_time: string | null
           category: string
           created_at: string
           description: string
@@ -89,6 +96,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          build_time?: string | null
           category: string
           created_at?: string
           description: string
@@ -102,6 +110,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          build_time?: string | null
           category?: string
           created_at?: string
           description?: string
