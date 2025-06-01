@@ -9,24 +9,7 @@ import Footer from '../components/Footer';
     if (metaDescription) {
       metaDescription.setAttribute('content', "Ready for Your Free Website? Let's get started. This quick form helps us build a beautiful site that fits you.");
     }
-
-    // Load Tally script dynamically
-    const script = document.createElement('script');
-    script.src = 'https://tally.so/widgets/embed.js';
-    script.async = true;
-    script.onload = () => {
-      // Execute Tally.loadEmbeds once script is loaded
-      if (window.Tally) {
-        window.Tally.loadEmbeds();
-      }
-    };
-    document.body.appendChild(script);
-    
-    return () => {
-      // Cleanup on unmount
-      document.body.removeChild(script);
-    };
-  }, []);
+  
 
   return (
     <div className="min-h-screen bg-humble-charcoal">
