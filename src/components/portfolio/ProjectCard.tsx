@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { ExternalLink, Clock } from 'lucide-react';
 
 interface ProjectCardProps {
@@ -20,26 +20,52 @@ interface ProjectCardProps {
       media_type: string;
     }>;
   };
-  onImageClick: (mediaIndex: number) => void;
+  onImageClick: (projectId: string, mediaIndex: number) => void;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, onImageClick }) => {
+const ProjectCard: React.FC<ProjectCardProps> = React.memo(({ project, onImageClick }) => {
   const [hoveredImageIndex, setHoveredImageIndex] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
   
   const primaryImage = project.media[0];
   const displayImage = project.media[hoveredImageIndex] || primaryImage;
 
+  const handleImageClick = useCallback(() => {
+    if (!project.is_coming_soon) {
+      onImageClick(project.id, hoveredImageIndex);
+    }
+  }, [project.is_coming_soon, project.id, hoveredImageIndex, onImageClick]);
+
+  const handleImageHover = useCallback((index: number) => {
+    setHoveredImageIndex(index);
+  }, []);
+
+  const handleImageLoad = useCallback(() => {
+    setImageLoaded(true);
+  }, []);
+
   return (
     <div className="bg-humble-charcoal rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group">
       {/* Image Section */}
-      <div className="relative aspect-[4/3] overflow-hidden">
+      <div className="relative aspect-[4/3] overflow-hidden bg-humble-charcoal/50">
         {displayImage && (
-          <img
-            src={displayImage.media_url}
-            alt={displayImage.alt_text || project.title}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 cursor-pointer"
-            onClick={() => !project.is_coming_soon && onImageClick(hoveredImageIndex)}
-          />
+          <>
+            {!imageLoaded && (
+              <div className="absolute inset-0 bg-humble-charcoal/50 animate-pulse flex items-center justify-center">
+                <div className="text-white/50 text-sm">Loading...</div>
+              </div>
+            )}
+            <img
+              src={displayImage.media_url}
+              alt={displayImage.alt_text || project.title}
+              className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-105 cursor-pointer ${
+                imageLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
+              onClick={handleImageClick}
+              onLoad={handleImageLoad}
+              loading="lazy"
+            />
+          </>
         )}
 
         {project.is_coming_soon && (
@@ -56,7 +82,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onImageClick }) => {
             {project.media.slice(0, 4).map((_, index) => (
               <button
                 key={index}
-                onMouseEnter={() => setHoveredImageIndex(index)}
+                onMouseEnter={() => handleImageHover(index)}
                 className={`w-2 h-2 rounded-full transition-colors ${
                   index === hoveredImageIndex ? 'bg-white' : 'bg-white/50'
                 }`}
@@ -133,6 +159,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onImageClick }) => {
       </div>
     </div>
   );
-};
+});
+
+ProjectCard.displayName = 'ProjectCard';
 
 export default ProjectCard;

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import FeaturedProject from './FeaturedProject';
 import ProjectCard from './ProjectCard';
@@ -36,7 +36,7 @@ const categories = [
   { id: 'ecommerce', label: 'E-Commerce' },
 ];
 
-const PortfolioGrid = () => {
+const PortfolioGrid = React.memo(() => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [loading, setLoading] = useState(true);
@@ -50,11 +50,7 @@ const PortfolioGrid = () => {
     currentIndex: 0
   });
 
-  useEffect(() => {
-    fetchProjects();
-  }, []);
-
-  const fetchProjects = async () => {
+  const fetchProjects = useCallback(async () => {
     try {
       console.log('Fetching projects from Supabase...');
       
@@ -122,32 +118,43 @@ const PortfolioGrid = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const filteredProjects = activeCategory === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === activeCategory);
+  useEffect(() => {
+    fetchProjects();
+  }, [fetchProjects]);
 
-  const featuredProject = filteredProjects.find(p => p.is_featured);
-  const regularProjects = filteredProjects.filter(p => !p.is_featured);
+  // Memoize filtered projects to prevent unnecessary recalculations
+  const filteredProjects = useMemo(() => {
+    return activeCategory === 'all' 
+      ? projects 
+      : projects.filter(project => project.category === activeCategory);
+  }, [projects, activeCategory]);
 
-  const openLightbox = (projectId: string, mediaIndex: number) => {
+  // Memoize featured and regular projects
+  const { featuredProject, regularProjects } = useMemo(() => {
+    const featured = filteredProjects.find(p => p.is_featured);
+    const regular = filteredProjects.filter(p => !p.is_featured);
+    return { featuredProject: featured, regularProjects: regular };
+  }, [filteredProjects]);
+
+  const openLightbox = useCallback((projectId: string, mediaIndex: number) => {
     setLightbox({
       isOpen: true,
       projectId,
       currentIndex: mediaIndex
     });
-  };
+  }, []);
 
-  const closeLightbox = () => {
+  const closeLightbox = useCallback(() => {
     setLightbox({
       isOpen: false,
       projectId: '',
       currentIndex: 0
     });
-  };
+  }, []);
 
-  const navigateLightbox = (direction: 'prev' | 'next') => {
+  const navigateLightbox = useCallback((direction: 'prev' | 'next') => {
     const project = projects.find(p => p.id === lightbox.projectId);
     if (!project) return;
 
@@ -159,9 +166,16 @@ const PortfolioGrid = () => {
     }
 
     setLightbox(prev => ({ ...prev, currentIndex: newIndex }));
-  };
+  }, [projects, lightbox.projectId, lightbox.currentIndex]);
 
-  const currentLightboxProject = projects.find(p => p.id === lightbox.projectId);
+  // Memoize current lightbox project
+  const currentLightboxProject = useMemo(() => {
+    return projects.find(p => p.id === lightbox.projectId);
+  }, [projects, lightbox.projectId]);
+
+  const handleCategoryChange = useCallback((categoryId: string) => {
+    setActiveCategory(categoryId);
+  }, []);
 
   if (loading) {
     return (
@@ -189,7 +203,7 @@ const PortfolioGrid = () => {
                   ? 'bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white' 
                   : 'bg-humble-charcoal text-white/70 hover:bg-humble-charcoal/80'
               }`}
-              onClick={() => setActiveCategory(category.id)}
+              onClick={() => handleCategoryChange(category.id)}
             >
               {category.label}
             </button>
@@ -200,7 +214,7 @@ const PortfolioGrid = () => {
         {featuredProject && (
           <FeaturedProject
             project={featuredProject}
-            onImageClick={(mediaIndex) => openLightbox(featuredProject.id, mediaIndex)}
+            onImageClick={openLightbox}
           />
         )}
 
@@ -211,7 +225,7 @@ const PortfolioGrid = () => {
               <ProjectCard
                 key={project.id}
                 project={project}
-                onImageClick={(mediaIndex) => openLightbox(project.id, mediaIndex)}
+                onImageClick={openLightbox}
               />
             ))}
           </div>
@@ -237,6 +251,8 @@ const PortfolioGrid = () => {
       )}
     </>
   );
-};
+});
+
+PortfolioGrid.displayName = 'PortfolioGrid';
 
 export default PortfolioGrid;

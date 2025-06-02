@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { ExternalLink, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface FeaturedProjectProps {
@@ -19,23 +19,39 @@ interface FeaturedProjectProps {
       media_type: string;
     }>;
   };
-  onImageClick: (mediaIndex: number) => void;
+  onImageClick: (projectId: string, mediaIndex: number) => void;
 }
 
-const FeaturedProject: React.FC<FeaturedProjectProps> = ({ project, onImageClick }) => {
+const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, onImageClick }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-  const nextImage = () => {
+  const nextImage = useCallback(() => {
     setCurrentImageIndex((prev) => 
       prev < project.media.length - 1 ? prev + 1 : 0
     );
-  };
+    setImageLoaded(false);
+  }, [project.media.length]);
 
-  const prevImage = () => {
+  const prevImage = useCallback(() => {
     setCurrentImageIndex((prev) => 
       prev > 0 ? prev - 1 : project.media.length - 1
     );
-  };
+    setImageLoaded(false);
+  }, [project.media.length]);
+
+  const handleImageClick = useCallback(() => {
+    onImageClick(project.id, currentImageIndex);
+  }, [project.id, currentImageIndex, onImageClick]);
+
+  const handleImageLoad = useCallback(() => {
+    setImageLoaded(true);
+  }, []);
+
+  const handleIndicatorClick = useCallback((index: number) => {
+    setCurrentImageIndex(index);
+    setImageLoaded(false);
+  }, []);
 
   if (!project.media.length) return null;
 
@@ -43,18 +59,29 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = ({ project, onImageClick
     <div className="bg-humble-charcoal rounded-2xl overflow-hidden shadow-2xl mb-16">
       <div className="grid lg:grid-cols-2 gap-0">
         {/* Image Gallery Section */}
-        <div className="relative h-96 lg:h-[500px] group">
+        <div className="relative h-96 lg:h-[500px] group bg-humble-charcoal/50">
           <div className="absolute top-4 left-4 bg-humble-pink-500 text-white px-4 py-2 rounded-full text-sm font-medium z-10">
             Featured Project
           </div>
           
           {project.media[currentImageIndex] && (
-            <img
-              src={project.media[currentImageIndex].media_url}
-              alt={project.media[currentImageIndex].alt_text || project.title}
-              className="w-full h-full object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
-              onClick={() => onImageClick(currentImageIndex)}
-            />
+            <>
+              {!imageLoaded && (
+                <div className="absolute inset-0 bg-humble-charcoal/50 animate-pulse flex items-center justify-center">
+                  <div className="text-white/50">Loading...</div>
+                </div>
+              )}
+              <img
+                src={project.media[currentImageIndex].media_url}
+                alt={project.media[currentImageIndex].alt_text || project.title}
+                className={`w-full h-full object-cover cursor-pointer transition-all duration-300 group-hover:scale-105 ${
+                  imageLoaded ? 'opacity-100' : 'opacity-0'
+                }`}
+                onClick={handleImageClick}
+                onLoad={handleImageLoad}
+                loading="lazy"
+              />
+            </>
           )}
 
           {/* Navigation overlay */}
@@ -63,12 +90,14 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = ({ project, onImageClick
               <button
                 onClick={prevImage}
                 className="bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+                aria-label="Previous image"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
               <button
                 onClick={nextImage}
                 className="bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+                aria-label="Next image"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
@@ -81,10 +110,11 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = ({ project, onImageClick
               {project.media.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentImageIndex(index)}
+                  onClick={() => handleIndicatorClick(index)}
                   className={`w-2 h-2 rounded-full transition-colors ${
                     index === currentImageIndex ? 'bg-white' : 'bg-white/50'
                   }`}
+                  aria-label={`Go to image ${index + 1}`}
                 />
               ))}
             </div>
@@ -168,6 +198,8 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = ({ project, onImageClick
       </div>
     </div>
   );
-};
+});
+
+FeaturedProject.displayName = 'FeaturedProject';
 
 export default FeaturedProject;

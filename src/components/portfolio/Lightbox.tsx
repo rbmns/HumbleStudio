@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface LightboxProps {
@@ -16,7 +16,7 @@ interface LightboxProps {
   projectTitle: string;
 }
 
-const Lightbox: React.FC<LightboxProps> = ({
+const Lightbox: React.FC<LightboxProps> = React.memo(({
   isOpen,
   onClose,
   media,
@@ -24,19 +24,27 @@ const Lightbox: React.FC<LightboxProps> = ({
   onNavigate,
   projectTitle
 }) => {
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isOpen) return;
-      
-      if (e.key === 'Escape') {
-        onClose();
-      } else if (e.key === 'ArrowLeft') {
-        onNavigate('prev');
-      } else if (e.key === 'ArrowRight') {
-        onNavigate('next');
-      }
-    };
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (!isOpen) return;
+    
+    if (e.key === 'Escape') {
+      onClose();
+    } else if (e.key === 'ArrowLeft') {
+      onNavigate('prev');
+    } else if (e.key === 'ArrowRight') {
+      onNavigate('next');
+    }
+  }, [isOpen, onNavigate, onClose]);
 
+  const handlePrevious = useCallback(() => {
+    onNavigate('prev');
+  }, [onNavigate]);
+
+  const handleNext = useCallback(() => {
+    onNavigate('next');
+  }, [onNavigate]);
+
+  useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
     
     // Prevent body scroll when lightbox is open
@@ -50,7 +58,7 @@ const Lightbox: React.FC<LightboxProps> = ({
       document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen, onNavigate, onClose]);
+  }, [isOpen, handleKeyDown]);
 
   if (!isOpen || !media[currentIndex]) return null;
 
@@ -63,6 +71,7 @@ const Lightbox: React.FC<LightboxProps> = ({
       <button
         onClick={onClose}
         className="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors"
+        aria-label="Close lightbox"
       >
         <X className="h-6 w-6" />
       </button>
@@ -71,15 +80,17 @@ const Lightbox: React.FC<LightboxProps> = ({
       {media.length > 1 && (
         <>
           <button
-            onClick={() => onNavigate('prev')}
+            onClick={handlePrevious}
             className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors"
+            aria-label="Previous image"
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
 
           <button
-            onClick={() => onNavigate('next')}
+            onClick={handleNext}
             className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors"
+            aria-label="Next image"
           >
             <ChevronRight className="h-6 w-6" />
           </button>
@@ -94,12 +105,14 @@ const Lightbox: React.FC<LightboxProps> = ({
             controls
             className="max-w-full max-h-full object-contain"
             autoPlay
+            preload="metadata"
           />
         ) : (
           <img
             src={currentMedia.media_url}
             alt={currentMedia.alt_text || projectTitle}
             className="max-w-full max-h-full object-contain"
+            loading="eager"
           />
         )}
       </div>
@@ -115,6 +128,8 @@ const Lightbox: React.FC<LightboxProps> = ({
       </div>
     </div>
   );
-};
+});
+
+Lightbox.displayName = 'Lightbox';
 
 export default Lightbox;
