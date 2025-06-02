@@ -49,13 +49,13 @@ const Inquiry = () => {
         
         <div className="max-w-4xl mx-auto mb-16">
           <iframe
-            data-tally-src="https://tally.so/embed/wzvRe8?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            data-tally-src="https://tally.so/embed/3jYXqR?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
             width="100%"
             height="600"
             frameBorder="0"
             marginHeight={0}
             marginWidth={0}
-            title="HumbleStudio Intake Form"
+            title="HumbleStudio Inquiry Form"
             className="bg-transparent"
           ></iframe>
         </div>
