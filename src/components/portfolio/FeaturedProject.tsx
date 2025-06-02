@@ -59,7 +59,7 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
     <div className="bg-humble-charcoal rounded-2xl overflow-hidden shadow-2xl mb-16">
       <div className="grid lg:grid-cols-2 gap-0">
         {/* Image Gallery Section */}
-        <div className="relative h-96 lg:h-[500px] group bg-humble-charcoal/50">
+        <div className="relative h-96 lg:h-[400px] group bg-humble-charcoal/50">
           <div className="absolute top-4 left-4 bg-humble-pink-500 text-white px-4 py-2 rounded-full text-sm font-medium z-10">
             Featured Project
           </div>
@@ -127,38 +127,38 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
           )}
         </div>
 
-        {/* Content Section */}
-        <div className="p-8 lg:p-12 flex flex-col justify-center">
-          <div className="mb-4">
+        {/* Content Section - Made more compact */}
+        <div className="p-6 lg:p-8 flex flex-col justify-center">
+          <div className="mb-3">
             <span className="text-humble-pink-500 text-sm font-medium uppercase tracking-wide">
               {project.category}
             </span>
           </div>
           
-          <h3 className="text-3xl lg:text-4xl font-bold mb-6 text-white">
+          <h3 className="text-2xl lg:text-3xl font-bold mb-4 text-white">
             {project.title}
           </h3>
           
-          <p className="text-white/80 text-lg leading-relaxed mb-8">
+          <p className="text-white/80 text-base leading-relaxed mb-6">
             {project.description}
           </p>
 
           {project.build_time && (
-            <div className="flex items-center gap-2 mb-6 text-humble-blue-400">
-              <Clock className="h-5 w-5" />
+            <div className="flex items-center gap-2 mb-4 text-humble-blue-400">
+              <Clock className="h-4 w-4" />
               <span className="text-sm">Built in {project.build_time}</span>
             </div>
           )}
 
           {/* Technologies */}
           {project.technologies.length > 0 && (
-            <div className="mb-8">
-              <h4 className="text-white font-semibold mb-3">Technologies Used</h4>
+            <div className="mb-5">
+              <h4 className="text-white font-semibold mb-2 text-sm">Technologies Used</h4>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-humble-purple-500/20 text-humble-purple-300 rounded-full text-sm"
+                    className="px-2.5 py-1 bg-humble-purple-500/20 text-humble-purple-300 rounded-full text-xs"
                   >
                     {tech}
                   </span>
@@ -169,12 +169,12 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
 
           {/* Key Features */}
           {project.key_features.length > 0 && (
-            <div className="mb-8">
-              <h4 className="text-white font-semibold mb-3">Key Features</h4>
-              <ul className="space-y-2">
-                {project.key_features.slice(0, 4).map((feature, index) => (
-                  <li key={index} className="text-white/70 flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-humble-pink-500 rounded-full"></div>
+            <div className="mb-6">
+              <h4 className="text-white font-semibold mb-2 text-sm">Key Features</h4>
+              <ul className="space-y-1.5">
+                {project.key_features.slice(0, 3).map((feature, index) => (
+                  <li key={index} className="text-white/70 flex items-center gap-2 text-sm">
+                    <div className="w-1.5 h-1.5 bg-humble-pink-500 rounded-full flex-shrink-0"></div>
                     {feature}
                   </li>
                 ))}
@@ -188,7 +188,7 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform w-fit"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-5 py-2.5 rounded-full font-medium hover:scale-105 transition-transform w-fit text-sm"
             >
               View Live Site
               <ExternalLink className="h-4 w-4" />
