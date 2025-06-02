@@ -10,11 +10,7 @@ const Inquiry = () => {
   return (
     <div className="min-h-screen bg-humble-navy flex items-center justify-center p-4">
       <div className="w-full max-w-4xl">
-        <div 
-          data-tf-live="01JWPE2JWXMNKPY45E8DQGX3P1"
-          className="min-h-[600px] rounded-lg overflow-hidden"
-        ></div>
-        <script src="//embed.typeform.com/next/embed.js"></script>
+       <div data-tf-live="01JWPDVE76G8DJHJ0VWRH89HK7"></div><script src="//embed.typeform.com/next/embed.js"></script>
       </div>
     </div>
   );
