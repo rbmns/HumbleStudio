@@ -80,10 +80,27 @@ const Portfolio = () => {
 
       console.log('Media fetched:', mediaData);
 
-      // Combine projects with their media
-      const projectsWithMedia = projectsData?.map(project => ({
-        ...project,
-        media: mediaData?.filter(media => media.project_id === project.id) || []
+      // Combine projects with their media and ensure type safety
+      const projectsWithMedia: PortfolioProject[] = projectsData?.map(project => ({
+        id: project.id,
+        title: project.title,
+        description: project.description,
+        category: project.category,
+        link: project.link,
+        is_featured: project.is_featured || false,
+        is_coming_soon: project.is_coming_soon || false,
+        build_time: project.build_time,
+        technologies: Array.isArray(project.technologies) ? project.technologies : [],
+        key_features: Array.isArray(project.key_features) ? project.key_features : [],
+        media: mediaData?.filter(media => media.project_id === project.id).map(media => ({
+          id: media.id,
+          media_url: media.media_url,
+          alt_text: media.alt_text || undefined,
+          is_primary: media.is_primary || false,
+          media_type: media.media_type,
+          device_type: media.device_type || undefined,
+          display_order: media.display_order || 0
+        })) || []
       })) || [];
 
       console.log('Combined projects with media:', projectsWithMedia);
