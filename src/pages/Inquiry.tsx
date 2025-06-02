@@ -15,12 +15,12 @@ declare global {
 const Inquiry = () => {
   useEffect(() => {
     // Set page title and meta tags
-    document.title = "HumbleStudio Inquiry form";
+    document.title = "HumbleStudio inquiry form";
     
     // Update meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', "Ready for Your Free Website? Let's get started. This quick form helps us build a beautiful site that fits you.");
+      metaDescription.setAttribute('content', "Leave your contact details - no pressure");
     }
 
     // Load Tally script dynamically
@@ -45,11 +45,11 @@ const Inquiry = () => {
     <div className="min-h-screen bg-humble-charcoal">
       <Navbar />
       <div className="container mx-auto px-4 md:px-6 py-16 md:py-24">
-        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-white">HumbleStudio Intake Form</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-white">HumbleStudio Inquiry Form</h1>
         
         <div className="max-w-4xl mx-auto mb-16">
           <iframe
-            data-tally-src="https://tally.so/embed/3jYXqR?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            data-tally-src="ttps://tally.so/embed/n9yYNV?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
             width="100%"
             height="600"
             frameBorder="0"
