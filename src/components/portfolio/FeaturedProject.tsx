@@ -25,6 +25,8 @@ interface FeaturedProjectProps {
 const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, onImageClick }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   const nextImage = useCallback(() => {
     setCurrentImageIndex((prev) => 
@@ -53,13 +55,43 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
     setImageLoaded(false);
   }, []);
 
+  // Touch handlers for mobile swipe
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  }, []);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && project.media.length > 1) {
+      nextImage();
+    }
+    if (isRightSwipe && project.media.length > 1) {
+      prevImage();
+    }
+  }, [touchStart, touchEnd, nextImage, prevImage, project.media.length]);
+
   if (!project.media.length) return null;
 
   return (
     <div className="bg-humble-charcoal rounded-2xl overflow-hidden shadow-2xl mb-16">
       <div className="grid lg:grid-cols-2 gap-0">
         {/* Image Gallery Section */}
-        <div className="relative h-96 lg:h-[400px] group bg-humble-charcoal/50">
+        <div 
+          className="relative h-96 lg:h-[400px] group bg-humble-charcoal/50"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div className="absolute top-4 left-4 bg-humble-pink-500 text-white px-4 py-2 rounded-full text-sm font-medium z-10">
             Featured Project
           </div>
@@ -74,29 +106,30 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
               <img
                 src={project.media[currentImageIndex].media_url}
                 alt={project.media[currentImageIndex].alt_text || project.title}
-                className={`w-full h-full object-cover cursor-pointer transition-all duration-300 group-hover:scale-105 ${
+                className={`w-full h-full object-cover cursor-pointer transition-all duration-300 group-hover:scale-105 select-none ${
                   imageLoaded ? 'opacity-100' : 'opacity-0'
                 }`}
                 onClick={handleImageClick}
                 onLoad={handleImageLoad}
                 loading="lazy"
+                draggable={false}
               />
             </>
           )}
 
-          {/* Navigation overlay */}
+          {/* Navigation overlay - hidden on mobile */}
           {project.media.length > 1 && (
-            <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute inset-0 items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:flex">
               <button
                 onClick={prevImage}
-                className="bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+                className="bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors touch-manipulation"
                 aria-label="Previous image"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
               <button
                 onClick={nextImage}
-                className="bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+                className="bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors touch-manipulation"
                 aria-label="Next image"
               >
                 <ChevronRight className="h-5 w-5" />
@@ -104,14 +137,14 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
             </div>
           )}
 
-          {/* Image indicators */}
+          {/* Image indicators - optimized for mobile */}
           {project.media.length > 1 && (
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2">
               {project.media.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => handleIndicatorClick(index)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
+                  className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-colors touch-manipulation ${
                     index === currentImageIndex ? 'bg-white' : 'bg-white/50'
                   }`}
                   aria-label={`Go to image ${index + 1}`}
@@ -123,11 +156,12 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
           {project.media.length > 1 && (
             <div className="absolute top-4 right-4 bg-black/50 text-white px-2 py-1 rounded text-sm">
               {currentImageIndex + 1} / {project.media.length}
+              <span className="sm:hidden ml-1 text-xs">• Swipe</span>
             </div>
           )}
         </div>
 
-        {/* Content Section - Made more compact */}
+        {/* Content Section */}
         <div className="p-6 lg:p-8 flex flex-col justify-center">
           <div className="mb-3">
             <span className="text-humble-pink-500 text-sm font-medium uppercase tracking-wide">
