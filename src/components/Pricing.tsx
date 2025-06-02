@@ -115,7 +115,7 @@ const Pricing = () => {
                 All sites are built with AI. Fast, clean, and optimized — just like your business.
               </p>
               <a 
-                href="/inquiry"
+                href="/inquiry" target="_blank"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-6 py-3 rounded-full font-medium text-lg hover:scale-105 transition-all duration-300"
               >
                 Have something else in mind? Let's chat
