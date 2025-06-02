@@ -1,10 +1,11 @@
+
 import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
 import Services from '../components/Services';
 import HowItWorks from '../components/HowItWorks';
-import FreeOffer from '../components/FreeOffer';
+import Pricing from '../components/Pricing';
 import Portfolio from '../components/Portfolio';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
@@ -39,7 +40,7 @@ const Index = () => {
       <About />
       <Services />
       <HowItWorks />
-      <FreeOffer />
+      <Pricing />
       <Portfolio />
       <Contact />
       <Footer />
