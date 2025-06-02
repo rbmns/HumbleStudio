@@ -67,7 +67,7 @@ const Hero = () => {
             rel="noopener noreferrer"
             className="max-w-[240px] w-auto sm:w-auto px-8 py-2.5 sm:py-3 rounded-full button-gradient text-white font-medium text-lg flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300 shadow-lg shadow-humble-pink-500/20"
           >
-            Book a Free Site
+            Inquiry
             <ArrowRight size={18} />
           </a>
           <button 
