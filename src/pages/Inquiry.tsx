@@ -8,7 +8,7 @@ const Inquiry = () => {
   }, []);
 
   return (
-    <div bgcolor='white'>
+    <div className="min-h-screen bg-humble-navy flex items-center justify-center p-4">
       <div className="w-full max-w-4xl">
         <div 
           data-tf-live="01JWPE2JWXMNKPY45E8DQGX3P1"
