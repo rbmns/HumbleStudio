@@ -11,10 +11,10 @@ const FreeOffer = () => {
           <div className="relative z-10 max-w-3xl mx-auto text-center">
             <span className="inline-block bg-gradient-to-r from-humble-purple-500 to-humble-pink-500 text-white px-4 py-1 rounded-full text-sm font-medium mb-6">Limited Time Offer</span>
             
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">I'm offering free websites to early clients. Want in?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">I'm offering super cheap websites to early clients. Want in?</h2>
             
             <p className="text-white/80 text-lg mb-8 leading-relaxed">
-              While I build my portfolio, I'm offering fully functional websites — for free — to a limited number of small businesses.
+              While I build my portfolio, I'm offering fully functional websites — starting at €49,- to a limited number of small businesses.
               If you've been meaning to get online, this is your sign.
             </p>
             
