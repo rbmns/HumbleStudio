@@ -62,12 +62,12 @@ const Hero = () => {
         
         <div className="flex flex-col sm:flex-row justify-center sm:gap-2 gap-3 mt-8 items-center">
           <a
-            href="https://form.typeform.com/to/iwNqCI7O"
+            href="https://humblestudio.ai/inquiry"
             target="_blank"
             rel="noopener noreferrer"
             className="max-w-[240px] w-auto sm:w-auto px-8 py-2.5 sm:py-3 rounded-full button-gradient text-white font-medium text-lg flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300 shadow-lg shadow-humble-pink-500/20"
           >
-            Inquiry
+            Request info
             <ArrowRight size={18} />
           </a>
           <button 
