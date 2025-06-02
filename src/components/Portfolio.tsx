@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp, ExternalLink, X, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
@@ -80,6 +79,14 @@ const Portfolio = () => {
 
       console.log('Media fetched:', mediaData);
 
+      // Helper function to safely convert JSON to string array
+      const toStringArray = (data: any): string[] => {
+        if (Array.isArray(data)) {
+          return data.map(item => String(item));
+        }
+        return [];
+      };
+
       // Combine projects with their media and ensure type safety
       const projectsWithMedia: PortfolioProject[] = projectsData?.map(project => ({
         id: project.id,
@@ -90,8 +97,8 @@ const Portfolio = () => {
         is_featured: project.is_featured || false,
         is_coming_soon: project.is_coming_soon || false,
         build_time: project.build_time,
-        technologies: Array.isArray(project.technologies) ? project.technologies : [],
-        key_features: Array.isArray(project.key_features) ? project.key_features : [],
+        technologies: toStringArray(project.technologies),
+        key_features: toStringArray(project.key_features),
         media: mediaData?.filter(media => media.project_id === project.id).map(media => ({
           id: media.id,
           media_url: media.media_url,
