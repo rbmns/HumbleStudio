@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp, ExternalLink, X, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
@@ -82,7 +83,15 @@ const Portfolio = () => {
       // Helper function to safely convert JSON to string array
       const toStringArray = (data: any): string[] => {
         if (Array.isArray(data)) {
-          return data.map(item => String(item));
+          return data.filter(item => typeof item === 'string');
+        }
+        if (typeof data === 'string') {
+          try {
+            const parsed = JSON.parse(data);
+            return Array.isArray(parsed) ? parsed.filter(item => typeof item === 'string') : [];
+          } catch {
+            return [];
+          }
         }
         return [];
       };
@@ -90,13 +99,13 @@ const Portfolio = () => {
       // Combine projects with their media and ensure type safety
       const projectsWithMedia: PortfolioProject[] = projectsData?.map(project => ({
         id: project.id,
-        title: project.title,
-        description: project.description,
-        category: project.category,
-        link: project.link,
+        title: project.title || '',
+        description: project.description || '',
+        category: project.category || '',
+        link: project.link || undefined,
         is_featured: project.is_featured || false,
         is_coming_soon: project.is_coming_soon || false,
-        build_time: project.build_time,
+        build_time: project.build_time || undefined,
         technologies: toStringArray(project.technologies),
         key_features: toStringArray(project.key_features),
         media: mediaData?.filter(media => media.project_id === project.id).map(media => ({
@@ -233,14 +242,14 @@ const Portfolio = () => {
                   {/* Main Project Card */}
                   <div className={`grid ${project.is_featured ? 'lg:grid-cols-2' : 'md:grid-cols-2'} gap-0`}>
                     {/* Image Section */}
-                    <div className={`relative overflow-hidden ${project.is_featured ? 'h-80' : 'h-64'}`}>
+                    <div className={`relative overflow-hidden ${project.is_featured ? 'h-80' : 'h-64'} cursor-pointer`}>
                       <div className="absolute inset-0 bg-humble-charcoal/20 group-hover:bg-humble-charcoal/0 transition-all duration-300 z-10"></div>
                       {primaryImage && (
                         <img 
                           src={primaryImage.media_url}
                           alt={primaryImage.alt_text || project.title}
-                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 cursor-pointer"
-                          onClick={() => openImageOverlay(project, 0)}
+                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                          onClick={() => !project.is_coming_soon && openImageOverlay(project, 0)}
                         />
                       )}
                       {project.is_coming_soon && (
@@ -379,19 +388,23 @@ const Portfolio = () => {
             </button>
 
             {/* Navigation buttons */}
-            <button
-              onClick={() => navigateImage('prev')}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors"
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </button>
+            {projects.find(p => p.id === selectedImage.projectId)?.media.length! > 1 && (
+              <>
+                <button
+                  onClick={() => navigateImage('prev')}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
 
-            <button
-              onClick={() => navigateImage('next')}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors"
-            >
-              <ChevronRight className="h-6 w-6" />
-            </button>
+                <button
+                  onClick={() => navigateImage('next')}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              </>
+            )}
 
             {/* Image */}
             <img 

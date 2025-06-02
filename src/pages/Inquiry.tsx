@@ -49,7 +49,7 @@ const Inquiry = () => {
         
         <div className="max-w-4xl mx-auto mb-16">
           <iframe
-            data-tally-src="ttps://tally.so/embed/n9yYNV?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            data-tally-src="https://tally.so/embed/n9yYNV?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
             width="100%"
             height="600"
             frameBorder="0"
