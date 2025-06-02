@@ -1,34 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp, ExternalLink, Monitor, Smartphone, Play, X, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
-import { useQuery } from '@tanstack/react-query';
-
-interface PortfolioProject {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  link: string | null;
-  is_featured: boolean;
-  is_coming_soon: boolean;
-  technologies: string[];
-  key_features: string[];
-  build_time: string | null;
-  created_at: string;
-  updated_at: string;
-}
-
-interface PortfolioMedia {
-  id: string;
-  project_id: string;
-  media_type: string;
-  media_url: string;
-  device_type: string | null;
-  is_primary: boolean;
-  display_order: number;
-  alt_text: string | null;
-}
 
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -47,33 +19,105 @@ const Portfolio = () => {
     { id: 'ecommerce', label: 'E-Commerce' },
   ];
 
-  // Fetch projects from Supabase
-  const { data: projects = [], isLoading: projectsLoading } = useQuery({
-    queryKey: ['portfolio-projects'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('portfolio_projects')
-        .select('*')
-        .order('created_at', { ascending: false });
-      
-      if (error) throw error;
-      return data as PortfolioProject[];
+  // Mock data with multiple images per project
+  const projects = [
+    {
+      id: '1',
+      title: 'Shen Taxi & Tours',
+      description: 'Professional taxi and tour services in Sri Lanka with comprehensive pricing and booking',
+      category: 'web',
+      link: 'https://shentaxiandtours.humblestudio.ai/',
+      is_featured: true,
+      is_coming_soon: false,
+      technologies: ['React', 'Tailwind CSS', 'Responsive Design'],
+      key_features: ['WhatsApp Integration', 'Service Booking', 'Gallery System', 'Contact Forms'],
+      build_time: '2 weeks',
+      images: [
+        {
+          url: '/lovable-uploads/3b4f4164-0508-45f5-93c7-643329942ec1.png',
+          alt: 'Shen Taxi & Tours website screenshot',
+          is_primary: true
+        },
+        {
+          url: 'https://raw.githubusercontent.com/rbmns/images/main/hs/shen_services.png',
+          alt: 'Shen Taxi & Tours services page',
+          is_primary: false
+        },
+        {
+          url: 'https://raw.githubusercontent.com/rbmns/images/main/hs/shen_pricing.png',
+          alt: 'Shen Taxi & Tours pricing page',
+          is_primary: false
+        }
+      ]
     },
-  });
-
-  // Fetch media for all projects
-  const { data: mediaData = [], isLoading: mediaLoading } = useQuery({
-    queryKey: ['portfolio-media'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('portfolio_media')
-        .select('*')
-        .order('display_order', { ascending: true });
-      
-      if (error) throw error;
-      return data as PortfolioMedia[];
+    {
+      id: '2',
+      title: 'Digital CV',
+      description: 'An interactive CV that sets you apart',
+      category: 'web',
+      link: 'https://rosiebiemans.com/',
+      is_featured: false,
+      is_coming_soon: false,
+      technologies: ['React', 'Animation', 'Interactive Design'],
+      key_features: ['Animated Sections', 'Download PDF', 'Contact Integration'],
+      build_time: '1 week',
+      images: [
+        {
+          url: 'https://raw.githubusercontent.com/rbmns/images/main/hs/rb_front.png',
+          alt: 'Digital CV website screenshot',
+          is_primary: true
+        },
+        {
+          url: 'https://res.cloudinary.com/dita7stkt/image/upload/v1747776038/hero_y59g41.png',
+          alt: 'Digital CV hero section',
+          is_primary: false
+        }
+      ]
     },
-  });
+    {
+      id: '3',
+      title: 'The Lineup',
+      description: 'A social platform for nomads to connect locally',
+      category: 'web',
+      link: 'https://the-lineup.com/events',
+      is_featured: false,
+      is_coming_soon: false,
+      technologies: ['React', 'Social Features', 'Event Management'],
+      key_features: ['Event Creation', 'User Profiles', 'Location-based Matching'],
+      build_time: '3 weeks',
+      images: [
+        {
+          url: 'https://raw.githubusercontent.com/rbmns/images/main/hs/lineup_full.png',
+          alt: 'The Lineup website screenshot',
+          is_primary: true
+        },
+        {
+          url: 'https://res.cloudinary.com/dita7stkt/image/upload/v1747775827/events_s5wzht.png',
+          alt: 'The Lineup events page',
+          is_primary: false
+        }
+      ]
+    },
+    {
+      id: '4',
+      title: 'Coming Soon',
+      description: 'New projects in the works',
+      category: 'web',
+      link: '#',
+      is_featured: false,
+      is_coming_soon: true,
+      technologies: [],
+      key_features: [],
+      build_time: null,
+      images: [
+        {
+          url: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6',
+          alt: 'Coming soon placeholder',
+          is_primary: true
+        }
+      ]
+    }
+  ];
 
   const filteredProjects = activeCategory === 'all' 
     ? projects 
@@ -83,47 +127,38 @@ const Portfolio = () => {
     setExpandedProject(expandedProject === projectId ? null : projectId);
   };
 
-  const getProjectMedia = (projectId: string) => {
-    return mediaData.filter(media => media.project_id === projectId);
+  const getPrimaryImage = (project: any) => {
+    return project.images.find((img: any) => img.is_primary) || project.images[0];
   };
 
-  const getPrimaryImage = (projectId: string) => {
-    const media = getProjectMedia(projectId);
-    const primary = media.find(m => m.is_primary);
-    return primary || media[0];
-  };
-
-  const openImageOverlay = (media: PortfolioMedia, projectId: string) => {
-    const projectMedia = getProjectMedia(projectId).filter(m => m.media_type === 'image');
-    const currentIndex = projectMedia.findIndex(m => m.id === media.id);
-    const project = projects.find(p => p.id === projectId);
+  const openImageOverlay = (project: any, imageIndex: number = 0) => {
+    if (project.is_coming_soon) return;
     
     setSelectedImage({
-      url: media.media_url,
-      alt: media.alt_text || project?.title || 'Project image',
-      projectId,
-      currentIndex
+      url: project.images[imageIndex].url,
+      alt: project.images[imageIndex].alt,
+      projectId: project.id,
+      currentIndex: imageIndex
     });
   };
 
   const navigateImage = (direction: 'prev' | 'next') => {
     if (!selectedImage) return;
     
-    const projectMedia = getProjectMedia(selectedImage.projectId).filter(m => m.media_type === 'image');
+    const project = projects.find(p => p.id === selectedImage.projectId);
+    if (!project) return;
+    
     let newIndex = selectedImage.currentIndex;
     
     if (direction === 'prev') {
-      newIndex = newIndex > 0 ? newIndex - 1 : projectMedia.length - 1;
+      newIndex = newIndex > 0 ? newIndex - 1 : project.images.length - 1;
     } else {
-      newIndex = newIndex < projectMedia.length - 1 ? newIndex + 1 : 0;
+      newIndex = newIndex < project.images.length - 1 ? newIndex + 1 : 0;
     }
     
-    const newMedia = projectMedia[newIndex];
-    const project = projects.find(p => p.id === selectedImage.projectId);
-    
     setSelectedImage({
-      url: newMedia.media_url,
-      alt: newMedia.alt_text || project?.title || 'Project image',
+      url: project.images[newIndex].url,
+      alt: project.images[newIndex].alt,
       projectId: selectedImage.projectId,
       currentIndex: newIndex
     });
@@ -151,18 +186,6 @@ const Portfolio = () => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [selectedImage]);
 
-  if (projectsLoading || mediaLoading) {
-    return (
-      <section id="portfolio" className="section-padding bg-humble-charcoal/30">
-        <div className="container mx-auto px-5 sm:px-4 md:px-6">
-          <div className="flex items-center justify-center h-64">
-            <div className="text-white/70">Loading portfolio...</div>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <>
       <section id="portfolio" className="section-padding bg-humble-charcoal/30">
@@ -189,9 +212,8 @@ const Portfolio = () => {
           
           <div className="space-y-6">
             {filteredProjects.map((project) => {
-              const primaryImage = getPrimaryImage(project.id);
-              const projectMedia = getProjectMedia(project.id);
-              const imageCount = projectMedia.filter(m => m.media_type === 'image').length;
+              const primaryImage = getPrimaryImage(project);
+              const imageCount = project.images.length;
               
               return (
                 <div 
@@ -205,10 +227,10 @@ const Portfolio = () => {
                       <div className="absolute inset-0 bg-humble-charcoal/20 group-hover:bg-humble-charcoal/0 transition-all duration-300 z-10"></div>
                       {primaryImage && (
                         <img 
-                          src={primaryImage.media_url}
-                          alt={primaryImage.alt_text || project.title}
+                          src={primaryImage.url}
+                          alt={primaryImage.alt}
                           className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 cursor-pointer"
-                          onClick={() => !project.is_coming_soon && openImageOverlay(primaryImage, project.id)}
+                          onClick={() => openImageOverlay(project, 0)}
                         />
                       )}
                       {project.is_coming_soon && (
@@ -305,21 +327,21 @@ const Portfolio = () => {
                           <div>
                             <h4 className="text-lg font-semibold mb-4 text-humble-blue-500">Project Gallery</h4>
                             <div className="grid grid-cols-2 gap-3">
-                              {projectMedia.filter(m => m.media_type === 'image').slice(0, 4).map((media) => (
-                                <div key={media.id} className="relative group cursor-pointer">
+                              {project.images.slice(0, 4).map((image, imageIndex) => (
+                                <div key={imageIndex} className="relative group cursor-pointer">
                                   <img 
-                                    src={media.media_url}
-                                    alt={media.alt_text || project.title}
+                                    src={image.url}
+                                    alt={image.alt}
                                     className="w-full h-20 object-cover rounded-lg hover:opacity-80 transition-opacity"
-                                    onClick={() => openImageOverlay(media, project.id)}
+                                    onClick={() => openImageOverlay(project, imageIndex)}
                                   />
                                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors rounded-lg"></div>
                                 </div>
                               ))}
                             </div>
-                            {projectMedia.filter(m => m.media_type === 'image').length > 4 && (
+                            {project.images.length > 4 && (
                               <p className="text-white/60 text-sm mt-2">
-                                +{projectMedia.filter(m => m.media_type === 'image').length - 4} more images
+                                +{project.images.length - 4} more images
                               </p>
                             )}
                           </div>
