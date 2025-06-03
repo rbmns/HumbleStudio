@@ -57,7 +57,7 @@ const OptimizedPortfolioCard: React.FC<OptimizedPortfolioCardProps> = ({ project
         {/* Loading skeleton */}
         {!imageLoaded && (
           <div className="absolute inset-0 bg-humble-charcoal/50 animate-pulse flex items-center justify-center">
-            <div className="w-6 h-6 md:w-8 md:h-8 border-2 border-humble-pink-500 border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-4 h-4 border-2 border-humble-pink-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
         )}
         
@@ -71,59 +71,61 @@ const OptimizedPortfolioCard: React.FC<OptimizedPortfolioCardProps> = ({ project
             onLoad={handleImageLoad}
             onError={handleImageError}
             loading="lazy"
+            decoding="async"
+            style={{ contentVisibility: 'auto' }}
           />
         ) : imageError ? (
           <div className="w-full h-full bg-humble-charcoal/80 flex items-center justify-center">
-            <div className="text-white/50 text-xs md:text-sm">Image unavailable</div>
+            <div className="text-white/50 text-xs">Image unavailable</div>
           </div>
         ) : null}
 
         {/* Coming Soon Overlay */}
         {project.is_coming_soon && (
           <div className="absolute inset-0 flex items-center justify-center bg-humble-charcoal/90">
-            <div className="bg-humble-purple-500 text-white px-3 py-2 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium">
+            <div className="bg-humble-purple-500 text-white px-3 py-1 rounded-full text-xs font-medium">
               Coming Soon
             </div>
           </div>
         )}
 
-        {/* Preview Button Overlay - Hidden on mobile, shown on hover for desktop */}
+        {/* Preview Button Overlay - Only on desktop hover */}
         {!project.is_coming_soon && project.media.length > 0 && (
-          <div className="absolute inset-0 bg-black/0 md:group-hover:bg-black/20 transition-colors md:flex items-center justify-center opacity-0 md:group-hover:opacity-100 hidden">
-            <button className="bg-white/90 hover:bg-white text-humble-charcoal px-4 py-2 rounded-full font-medium flex items-center gap-2 transform scale-90 group-hover:scale-100 transition-transform">
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100">
+            <button className="bg-white/90 hover:bg-white text-humble-charcoal px-3 py-2 rounded-full font-medium flex items-center gap-2 transform scale-90 group-hover:scale-100 transition-transform text-sm">
               <Eye className="h-4 w-4" />
               Preview
             </button>
           </div>
         )}
 
-        {/* Media Count */}
+        {/* Media Count - Smaller and better positioned */}
         {project.media.length > 1 && (
-          <div className="absolute top-2 right-2 md:top-3 md:right-3 bg-black/60 text-white px-2 py-1 rounded text-xs backdrop-blur-sm">
-            {project.media.length} images
+          <div className="absolute top-2 right-2 bg-black/60 text-white px-2 py-1 rounded text-xs backdrop-blur-sm">
+            {project.media.length}
           </div>
         )}
       </div>
 
       {/* Content Section */}
-      <div className="p-4 md:p-5">
+      <div className="p-4">
         <div className="mb-2">
           <span className="text-humble-purple-400 text-xs font-medium uppercase tracking-wide">
             {project.category}
           </span>
         </div>
 
-        <h3 className="text-base md:text-lg font-semibold mb-2 text-white line-clamp-2">
+        <h3 className="text-base font-semibold mb-2 text-white line-clamp-2">
           {project.title}
         </h3>
 
-        <p className="text-white/70 text-sm leading-relaxed mb-4 line-clamp-2">
+        <p className="text-white/70 text-sm leading-relaxed mb-3 line-clamp-2">
           {project.description}
         </p>
 
         {/* Technologies */}
         {project.technologies.length > 0 && (
-          <div className="flex flex-wrap gap-1 mb-4">
+          <div className="flex flex-wrap gap-1 mb-3">
             {project.technologies.slice(0, 3).map((tech, index) => (
               <span
                 key={index}
@@ -153,7 +155,7 @@ const OptimizedPortfolioCard: React.FC<OptimizedPortfolioCardProps> = ({ project
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-humble-pink-500 hover:text-humble-pink-400 text-sm font-medium flex items-center gap-1 transition-colors min-h-[44px] px-2 py-2 -m-2"
+              className="text-humble-pink-500 hover:text-humble-pink-400 text-sm font-medium flex items-center gap-1 transition-colors p-2 -m-2"
               onClick={handleLinkClick}
             >
               View Site
