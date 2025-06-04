@@ -1,6 +1,6 @@
-
 import React, { useEffect, useCallback, useState } from 'react';
 import { X, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import OptimizedImage from './OptimizedImage';
 
 interface ProjectPreviewModalProps {
   isOpen: boolean;
@@ -28,6 +28,27 @@ const ProjectPreviewModal: React.FC<ProjectPreviewModalProps> = ({ isOpen, onClo
   const [imageLoaded, setImageLoaded] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  // Preload adjacent images
+  useEffect(() => {
+    if (!project || !isOpen) return;
+
+    const preloadImage = (src: string) => {
+      const img = new Image();
+      img.src = src;
+    };
+
+    // Preload next and previous images
+    const nextIndex = currentImageIndex < project.media.length - 1 ? currentImageIndex + 1 : 0;
+    const prevIndex = currentImageIndex > 0 ? currentImageIndex - 1 : project.media.length - 1;
+
+    if (project.media[nextIndex]) {
+      preloadImage(project.media[nextIndex].media_url);
+    }
+    if (project.media[prevIndex] && prevIndex !== nextIndex) {
+      preloadImage(project.media[prevIndex].media_url);
+    }
+  }, [currentImageIndex, project, isOpen]);
 
   useEffect(() => {
     if (isOpen && project) {
@@ -133,12 +154,6 @@ const ProjectPreviewModal: React.FC<ProjectPreviewModalProps> = ({ isOpen, onClo
         >
           {currentMedia && (
             <>
-              {!imageLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-8 h-8 border-2 border-humble-pink-500 border-t-transparent rounded-full animate-spin"></div>
-                </div>
-              )}
-              
               {currentMedia.media_type === 'video' ? (
                 <video
                   src={currentMedia.media_url}
@@ -147,15 +162,14 @@ const ProjectPreviewModal: React.FC<ProjectPreviewModalProps> = ({ isOpen, onClo
                   onLoadedData={() => setImageLoaded(true)}
                 />
               ) : (
-                <img
+                <OptimizedImage
                   src={currentMedia.media_url}
                   alt={currentMedia.alt_text || project.title}
                   className={`max-w-full max-h-full object-contain transition-opacity ${
                     imageLoaded ? 'opacity-100' : 'opacity-0'
                   }`}
                   onLoad={() => setImageLoaded(true)}
-                  loading="eager"
-                  decoding="async"
+                  priority={true}
                 />
               )}
             </>

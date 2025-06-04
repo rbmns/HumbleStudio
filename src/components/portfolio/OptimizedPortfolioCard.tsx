@@ -1,6 +1,6 @@
-
 import React, { useState, useCallback } from 'react';
 import { ExternalLink, Clock, Eye } from 'lucide-react';
+import OptimizedImage from './OptimizedImage';
 
 interface OptimizedPortfolioCardProps {
   project: {
@@ -54,25 +54,13 @@ const OptimizedPortfolioCard: React.FC<OptimizedPortfolioCardProps> = ({ project
     >
       {/* Image Section */}
       <div className="relative aspect-[4/3] overflow-hidden bg-humble-charcoal/50">
-        {/* Loading skeleton */}
-        {!imageLoaded && (
-          <div className="absolute inset-0 bg-humble-charcoal/50 animate-pulse flex items-center justify-center">
-            <div className="w-4 h-4 border-2 border-humble-pink-500 border-t-transparent rounded-full animate-spin"></div>
-          </div>
-        )}
-        
         {primaryImage && !imageError ? (
-          <img
+          <OptimizedImage
             src={primaryImage.media_url}
             alt={primaryImage.alt_text || project.title}
-            className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-105 ${
-              imageLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
+            className="w-full h-full group-hover:scale-105 transition-transform duration-300"
             onLoad={handleImageLoad}
             onError={handleImageError}
-            loading="lazy"
-            decoding="async"
-            style={{ contentVisibility: 'auto' }}
           />
         ) : imageError ? (
           <div className="w-full h-full bg-humble-charcoal/80 flex items-center justify-center">
@@ -99,7 +87,7 @@ const OptimizedPortfolioCard: React.FC<OptimizedPortfolioCardProps> = ({ project
           </div>
         )}
 
-        {/* Media Count - Smaller and better positioned */}
+        {/* Media Count */}
         {project.media.length > 1 && (
           <div className="absolute top-2 right-2 bg-black/60 text-white px-2 py-1 rounded text-xs backdrop-blur-sm">
             {project.media.length}
