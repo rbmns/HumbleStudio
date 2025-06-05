@@ -15,12 +15,12 @@ declare global {
 const IntakeForm = () => {
   useEffect(() => {
     // Set page title and meta tags
-    document.title = "HumbleStudio intake form";
+    document.title = "HumbleStudio Brand Discovery Form";
     
     // Update meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', "Ready for Your Free Website? Let's get started. This quick form helps us build a beautiful site that fits you.");
+      metaDescription.setAttribute('content', "Help us understand your vision so we can create the perfect website for you.");
     }
 
     // Load Tally script dynamically
@@ -49,13 +49,13 @@ const IntakeForm = () => {
         
         <div className="max-w-4xl mx-auto mb-16">
           <iframe
-            data-tally-src="https://tally.so/embed/wzvRe8?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            data-tally-src="https://tally.so/embed/nrbjqX?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
             width="100%"
             height="600"
             frameBorder="0"
             marginHeight={0}
             marginWidth={0}
-            title="HumbleStudio Intake Form"
+            title="HumbleStudio Brand Discovery Form"
             className="bg-transparent"
           ></iframe>
         </div>
