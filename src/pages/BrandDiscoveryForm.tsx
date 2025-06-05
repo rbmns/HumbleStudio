@@ -12,7 +12,7 @@ declare global {
   }
 }
 
-const IntakeForm = () => {
+const BrandDiscoveryForm = () => {
   useEffect(() => {
     // Set page title and meta tags
     document.title = "HumbleStudio Brand Discovery Form";
@@ -65,4 +65,4 @@ const IntakeForm = () => {
   );
 };
 
-export default IntakeForm;
+export default BrandDiscoveryForm;
