@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from 'react';
 import { ExternalLink, Clock, Eye } from 'lucide-react';
 import OptimizedImage from './OptimizedImage';
@@ -7,7 +8,7 @@ interface OptimizedPortfolioCardProps {
     id: string;
     title: string;
     description: string;
-    category: string;
+    categories: string[]; // Changed from category to categories array
     link?: string;
     build_time?: string;
     technologies: string[];
@@ -98,9 +99,20 @@ const OptimizedPortfolioCard: React.FC<OptimizedPortfolioCardProps> = ({ project
       {/* Content Section */}
       <div className="p-4">
         <div className="mb-2">
-          <span className="text-humble-purple-400 text-xs font-medium uppercase tracking-wide">
-            {project.category}
-          </span>
+          {/* Display multiple categories */}
+          <div className="flex flex-wrap gap-1">
+            {project.categories.slice(0, 2).map((category, index) => (
+              <span key={index} className="text-humble-purple-400 text-xs font-medium uppercase tracking-wide">
+                {category}
+                {index < Math.min(project.categories.length - 1, 1) && ','}
+              </span>
+            ))}
+            {project.categories.length > 2 && (
+              <span className="text-humble-purple-400/60 text-xs font-medium uppercase tracking-wide">
+                +{project.categories.length - 2}
+              </span>
+            )}
+          </div>
         </div>
 
         <h3 className="text-base font-semibold mb-2 text-white line-clamp-2">

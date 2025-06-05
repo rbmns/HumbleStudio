@@ -8,7 +8,7 @@ interface PortfolioProject {
   id: string;
   title: string;
   description: string;
-  category: string;
+  categories: string[]; // Changed from category to categories array
   link?: string;
   is_featured: boolean;
   is_coming_soon: boolean;
@@ -83,7 +83,9 @@ const OptimizedPortfolioGrid = React.memo(() => {
         id: project.id,
         title: project.title || '',
         description: project.description || '',
-        category: project.category || '',
+        categories: project.category ? 
+          (Array.isArray(project.category) ? project.category : [project.category]) : 
+          [], // Handle both old single category and new multiple categories
         link: project.link || undefined,
         is_featured: project.is_featured || false,
         is_coming_soon: project.is_coming_soon || false,
@@ -116,7 +118,7 @@ const OptimizedPortfolioGrid = React.memo(() => {
   const filteredProjects = useMemo(() => {
     return activeCategory === 'all' 
       ? projects 
-      : projects.filter(project => project.category === activeCategory);
+      : projects.filter(project => project.categories.includes(activeCategory));
   }, [projects, activeCategory]);
 
   const handlePreview = useCallback((project: PortfolioProject) => {
