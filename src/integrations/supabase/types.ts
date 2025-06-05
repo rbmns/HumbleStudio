@@ -9,6 +9,74 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      bibi_project_media: {
+        Row: {
+          alt_text: string | null
+          created_at: string
+          display_order: number | null
+          id: string
+          media_type: string
+          media_url: string
+          project_id: string | null
+        }
+        Insert: {
+          alt_text?: string | null
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          media_type: string
+          media_url: string
+          project_id?: string | null
+        }
+        Update: {
+          alt_text?: string | null
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          media_type?: string
+          media_url?: string
+          project_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bibi_project_media_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "bibi_projects"
+            referencedColumns: ["project_uuid"]
+          },
+        ]
+      }
+      bibi_projects: {
+        Row: {
+          created_at: string
+          long_description: string | null
+          main_picture: string | null
+          project_name: string | null
+          project_uuid: string
+          responsibility: string | null
+          short_description: string | null
+        }
+        Insert: {
+          created_at?: string
+          long_description?: string | null
+          main_picture?: string | null
+          project_name?: string | null
+          project_uuid?: string
+          responsibility?: string | null
+          short_description?: string | null
+        }
+        Update: {
+          created_at?: string
+          long_description?: string | null
+          main_picture?: string | null
+          project_name?: string | null
+          project_uuid?: string
+          responsibility?: string | null
+          short_description?: string | null
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string

@@ -11,6 +11,7 @@ import TermsOfService from "./pages/TermsOfService";
 import ThankYou from "./pages/ThankYou";
 import IntakeForm from "./pages/IntakeForm";
 import Inquiry from "./pages/Inquiry";
+import BrandDiscoveryForm from "./pages/BrandDiscoveryForm";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/intake-form" element={<IntakeForm />} />
           <Route path="/inquiry" element={<Inquiry />} />
+          <Route path="/brand-discovery-form" element={<BrandDiscoveryForm />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

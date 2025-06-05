@@ -60,7 +60,7 @@ const ThankYou = () => {
                 className="bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 hover:from-humble-blue-600 hover:to-humble-purple-600"
               >
                 <Home className="w-5 h-5 mr-2" />
-                Back to Home
+                Back home
               </Button>
             </Link>
           </div>
