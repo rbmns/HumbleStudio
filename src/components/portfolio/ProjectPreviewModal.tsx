@@ -1,3 +1,4 @@
+
 import React, { useEffect, useCallback, useState } from 'react';
 import { X, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import OptimizedImage from './OptimizedImage';
@@ -9,7 +10,7 @@ interface ProjectPreviewModalProps {
     id: string;
     title: string;
     description: string;
-    category: string;
+    categories: string[]; // Changed from category to categories array
     link?: string;
     build_time?: string;
     technologies: string[];
@@ -133,7 +134,19 @@ const ProjectPreviewModal: React.FC<ProjectPreviewModalProps> = ({ isOpen, onClo
       <div className="flex items-center justify-between p-4 bg-humble-charcoal/90 backdrop-blur-sm shrink-0">
         <div className="min-w-0 flex-1 mr-4">
           <h2 className="text-lg font-semibold text-white truncate">{project.title}</h2>
-          <span className="text-humble-purple-400 text-sm">{project.category}</span>
+          <div className="flex flex-wrap gap-1">
+            {project.categories.slice(0, 2).map((category, index) => (
+              <span key={index} className="text-humble-purple-400 text-sm">
+                {category}
+                {index < Math.min(project.categories.length - 1, 1) && ','}
+              </span>
+            ))}
+            {project.categories.length > 2 && (
+              <span className="text-humble-purple-400/60 text-sm">
+                +{project.categories.length - 2}
+              </span>
+            )}
+          </div>
         </div>
         <button
           onClick={onClose}
