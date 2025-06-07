@@ -108,6 +108,8 @@ const NonnasTableCaseStudy = () => {
         return;
       }
 
+      console.log('Found case study data:', caseStudyData);
+
       const { data: mediaData, error: mediaError } = await supabase
         .from('case_study_media')
         .select('*')
@@ -116,6 +118,8 @@ const NonnasTableCaseStudy = () => {
 
       if (mediaError) {
         console.error('Error fetching media:', mediaError);
+      } else {
+        console.log('Found case study media:', mediaData);
       }
 
       // Convert JSON fields to arrays with proper type checking
@@ -409,21 +413,27 @@ const NonnasTableCaseStudy = () => {
                 </ul>
               </div>
 
-              {/* Feature Screenshots Grid */}
-              {solutionMedia.length > 0 && (
-                <div className="grid md:grid-cols-2 gap-8 mb-16 px-4 md:px-0">
-                  {solutionMedia.map((mediaItem) => (
-                    <div key={mediaItem.id} className="bg-black/40 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                      <h3 className="text-lg md:text-xl font-semibold text-white mb-4 font-space-grotesk">{mediaItem.caption}</h3>
-                      <div className="aspect-[4/3] bg-black/60 rounded-xl border border-white/10 p-3">
-                        <img
-                          src={mediaItem.media_url}
-                          alt={mediaItem.alt_text || mediaItem.caption || ''}
-                          className="w-full h-full object-cover rounded-lg"
-                        />
+              {/* Case Study Media Gallery */}
+              {media.length > 0 && (
+                <div className="mb-16">
+                  <h3 className="text-2xl font-bold text-white mb-8 font-space-grotesk">Project Gallery</h3>
+                  <div className="grid md:grid-cols-2 gap-8 px-4 md:px-0">
+                    {media.map((mediaItem) => (
+                      <div key={mediaItem.id} className="bg-black/40 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+                        {mediaItem.caption && (
+                          <h4 className="text-lg md:text-xl font-semibold text-white mb-4 font-space-grotesk">{mediaItem.caption}</h4>
+                        )}
+                        <div className="aspect-[4/3] bg-black/60 rounded-xl border border-white/10 p-3">
+                          <img
+                            src={mediaItem.media_url}
+                            alt={mediaItem.alt_text || mediaItem.caption || 'Case study image'}
+                            className="w-full h-full object-cover rounded-lg"
+                            loading="lazy"
+                          />
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
