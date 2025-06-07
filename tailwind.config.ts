@@ -53,16 +53,16 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// Updated HumbleStudio Brand Colors based on logo
+				// Updated HumbleStudio Brand Colors - much darker
 				humble: {
-					// Primary colors
+					// Primary colors - almost black with blue tint
 					navy: {
-						DEFAULT: '#0A1128',
-						500: '#0A1128'
+						DEFAULT: '#000308',
+						500: '#000308'
 					},
 					charcoal: {
-						DEFAULT: '#141432',
-						500: '#141432'
+						DEFAULT: '#0A0A1A',
+						500: '#0A0A1A'
 					},
 					// Accent colors from logo
 					pink: {
@@ -90,7 +90,7 @@ export default {
 						500: '#6236FF',
 						600: '#4E20E0'
 					},
-					// Supporting colors
+					// Supporting colors - darker versions
 					gray: {
 						50: '#F9FAFB',
 						100: '#F3F4F6',
@@ -99,12 +99,12 @@ export default {
 						400: '#9CA3AF',
 						500: '#6B7280',
 						600: '#4B5563',
-						700: '#374151',
-						800: '#1F2937',
-						900: '#0F1220'
+						700: '#0F1020',
+						800: '#050510',
+						900: '#000308'
 					}
 				},
-				// New Brand Colors
+				// New Brand Colors - darker versions
 				brand: {
 					// Primary
 					'neon-pink': '#FF007F',
@@ -112,7 +112,7 @@ export default {
 					'white': '#FFFFFF',
 					// Secondary
 					'warm-gray': '#F5F5F5',
-					'charcoal-gray': '#1A1A1A',
+					'charcoal-gray': '#050510',
 					// Accent
 					'cool-beige': '#EAE4DC',
 					'electric-blue': '#3D5AFE'
