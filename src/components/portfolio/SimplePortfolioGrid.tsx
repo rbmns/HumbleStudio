@@ -129,10 +129,14 @@ const SimplePortfolioGrid = React.memo(() => {
   }, [filteredProjects]);
 
   const handleProjectClick = useCallback((project: PortfolioProject) => {
+    console.log('handleProjectClick called for:', project.title);
+    
     // Check if this is Nonna's Table specifically for case study
     if (project.title === "Nonna's Table" || project.title.toLowerCase().includes("nonna")) {
+      console.log('Navigating to Nonnas Table case study');
       navigate('/case-studies/nonnas-table');
     } else if (project.link && !project.is_coming_soon) {
+      console.log('Opening external link:', project.link);
       window.open(project.link, '_blank');
     }
   }, [navigate]);

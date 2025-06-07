@@ -39,8 +39,14 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({ project, onCl
     setImageLoaded(true);
   }, []);
 
-  const handleCardClick = useCallback(() => {
+  const handleCardClick = useCallback((e: React.MouseEvent) => {
+    // Prevent click if it's on a link element
+    if ((e.target as HTMLElement).closest('a')) {
+      return;
+    }
+    
     if (!project.is_coming_soon) {
+      console.log('Card clicked for project:', project.title);
       onClick(project);
     }
   }, [project, onClick]);
@@ -54,6 +60,7 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({ project, onCl
       className={`bg-humble-charcoal rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer ${
         featured ? 'transform hover:scale-[1.02]' : ''
       }`}
+      onClick={handleCardClick}
     >
       <div className={`relative overflow-hidden bg-humble-charcoal/50 ${
         featured ? 'aspect-[16/10]' : 'aspect-[4/3]'
