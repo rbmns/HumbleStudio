@@ -71,14 +71,14 @@ const IlNonnaCaseStudy = () => {
         console.error('Error fetching media:', mediaError);
       }
 
-      // Convert JSON fields to arrays
+      // Convert JSON fields to arrays with proper type checking
       const processedCaseStudy: CaseStudy = {
         ...caseStudyData,
         key_features: Array.isArray(caseStudyData.key_features) 
-          ? caseStudyData.key_features 
+          ? caseStudyData.key_features.filter((item): item is string => typeof item === 'string')
           : [],
         technologies: Array.isArray(caseStudyData.technologies) 
-          ? caseStudyData.technologies 
+          ? caseStudyData.technologies.filter((item): item is string => typeof item === 'string')
           : []
       };
 
