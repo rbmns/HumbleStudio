@@ -205,14 +205,14 @@ const NonnasTableCaseStudy = () => {
             )}
           </div>
 
-          {/* Hero Image - Fixed corners and added spacing */}
+          {/* Hero Image */}
           <div className="max-w-5xl mx-auto px-4 md:px-8">
-            <div className="aspect-[16/10] rounded-lg bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-1">
-              <div className="w-full h-full rounded-lg">
+            <div className="aspect-[16/10] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-1">
+              <div className="w-full h-full rounded-xl">
                 <img
                   src={caseStudy.hero_image_url || '/lovable-uploads/cabbeeb2-4701-40ca-8f62-75cb957be030.png'}
                   alt={`${caseStudy.client_name} Website`}
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-full object-cover rounded-xl"
                 />
               </div>
             </div>
@@ -229,11 +229,69 @@ const NonnasTableCaseStudy = () => {
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-space-grotesk bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">
-                {caseStudy.challenge_heading}
+                Our Process: Crafting a Cohesive Digital Presence
               </h2>
-              <p className="text-lg text-gray-300 leading-relaxed font-serif">
-                {caseStudy.challenge_content}
-              </p>
+              <div className="text-lg text-gray-300 leading-relaxed font-serif space-y-6">
+                <p>
+                  Our approach to developing the digital solution for the Nonna's Table concept involved a methodical sequence, emphasizing both aesthetic precision and functional excellence:
+                </p>
+                
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-3 font-space-grotesk">Defining Vision & Style</h3>
+                  <p>
+                    We began by meticulously defining the brand's essence. This involved establishing a digital brand identity and a moodboard to capture the "warm & authentic Italian comfort" that a restaurant like Nonna's Table embodies. This foundational work guided every subsequent visual decision, including the selection of a color palette (warm neutrals, earthy tones, fresh accents), appropriate typography (classic serifs for authenticity, clean sans-serifs for readability), and a consistent imagery style (rustic-yet-refined food photography, inviting interior shots).
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-3 font-space-grotesk">Strategic System Selection & Architecture</h3>
+                  <p className="mb-4">
+                    With the visual identity set, we designed the website's main sections, prioritizing intuitive navigation and a user-friendly experience reflecting the restaurant's welcoming atmosphere. Simultaneously, extensive research into best practices for restaurant technology led to the identification and integration of the most suitable systems for core operations:
+                  </p>
+                  <ul className="space-y-3 ml-6">
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                      <span>A seamless table reservation system to facilitate direct bookings, implemented with a booking overlay for a smooth user flow.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                      <span>A robust online ordering system (for both delivery & pickup) powered by Sitedish, chosen for its efficiency and local relevance within the Netherlands.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                      <span>Secure payment integrations with MultiSafepay, ensuring smooth processing of essential Dutch payment methods like iDEAL, alongside credit cards and digital wallets.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-3 font-space-grotesk">Implementation & Refinement</h3>
+                  <p className="mb-4">
+                    The final phase focused on the detailed development and rigorous testing of all integrated features. This included:
+                  </p>
+                  <ul className="space-y-3 ml-6">
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                      <span>A dedicated admin tool for efficient order management, designed to centralize incoming orders from all channels.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                      <span>Automated email notifications to streamline communication regarding new orders.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                      <span>A beautifully designed, interactive menu showcase that reflects the established visual style.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                      <span>Easy-access buttons for mobile users to reserve, call, or order online, ensuring critical actions are always a tap away.</span>
+                    </li>
+                  </ul>
+                  <p className="mt-4">
+                    Comprehensive testing ensured flawless functionality, a consistent user experience, and a pixel-perfect rendition of the visual style across all devices.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -243,35 +301,75 @@ const NonnasTableCaseStudy = () => {
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-space-grotesk bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">
-                {caseStudy.solution_heading}
+                Key Features & Capabilities
               </h2>
               <div className="text-lg text-gray-300 leading-relaxed mb-12 font-serif">
                 <p className="mb-6">
-                  {caseStudy.solution_content}
+                  The resulting digital platform for Nonna's Table is equipped with powerful features designed to empower a modern restaurant:
                 </p>
-                {caseStudy.key_features.length > 0 && (
-                  <ul className="space-y-3 mb-6">
-                    {caseStudy.key_features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                <ul className="space-y-4 mb-6">
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                    <div>
+                      <strong className="text-white">Custom-Branded Website:</strong> A visually appealing, mobile-responsive website that fully embodies the "warm & authentic Italian comfort" aesthetic.
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                    <div>
+                      <strong className="text-white">Integrated Table Reservations (with Overlay):</strong> Allows customers to book directly through a convenient booking overlay on the site, powered by a leading system like TheFork Manager, ensuring seamless booking management.
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                    <div>
+                      <strong className="text-white">Direct Online Ordering (Delivery & Pickup):</strong> Facilitates commission-free orders via the website, covering both takeaway and delivery services.
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                    <div>
+                      <strong className="text-white">Localized Payment Processing:</strong> Supports key Dutch payment methods, including iDEAL, credit cards, and digital wallets, powered by MultiSafepay.
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                    <div>
+                      <strong className="text-white">Centralized Order Management:</strong> An intuitive admin tool to efficiently handle all orders from various sources (website, phone, and even external platforms like TheFork).
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                    <div>
+                      <strong className="text-white">Automated Order Notifications:</strong> Ensures timely communication with customers and kitchen staff for smooth operations.
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                    <div>
+                      <strong className="text-white">Interactive Menu Showcase:</strong> Presents the menu beautifully with descriptions and appealing visuals, making it easy for customers to browse and order.
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                    <div>
+                      <strong className="text-white">Mobile-Optimized Action Buttons:</strong> Prominent and easy-to-use buttons for mobile users to reserve, call, or order online, ensuring quick access to essential functions.
+                    </div>
+                  </li>
+                </ul>
               </div>
 
-              {/* Feature Screenshots Grid - Fixed spacing and corners */}
+              {/* Feature Screenshots Grid */}
               {solutionMedia.length > 0 && (
-                <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-16 px-4 md:px-0">
+                <div className="grid md:grid-cols-2 gap-8 mb-16 px-4 md:px-0">
                   {solutionMedia.map((mediaItem) => (
-                    <div key={mediaItem.id} className="bg-black/40 backdrop-blur-sm rounded-lg p-4 md:p-6 border border-white/10">
+                    <div key={mediaItem.id} className="bg-black/40 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
                       <h3 className="text-lg md:text-xl font-semibold text-white mb-4 font-space-grotesk">{mediaItem.caption}</h3>
-                      <div className="aspect-[4/3] bg-black/60 rounded-lg border border-white/10 p-2">
+                      <div className="aspect-[4/3] bg-black/60 rounded-xl border border-white/10 p-3">
                         <img
                           src={mediaItem.media_url}
                           alt={mediaItem.alt_text || mediaItem.caption || ''}
-                          className="w-full h-full object-cover rounded"
+                          className="w-full h-full object-cover rounded-lg"
                         />
                       </div>
                     </div>
@@ -293,8 +391,8 @@ const NonnasTableCaseStudy = () => {
                 {caseStudy.impact_content}
               </p>
 
-              {/* Results Grid - Added mobile spacing */}
-              <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4 md:px-0">
+              {/* Results Grid */}
+              <div className="grid md:grid-cols-3 gap-8 px-4 md:px-0">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="text-2xl font-bold text-white">🌐</span>

@@ -120,6 +120,14 @@ const SimplePortfolioGrid = React.memo(() => {
       : projects.filter(project => project.categories.includes(activeCategory));
   }, [projects, activeCategory]);
 
+  const featuredProjects = useMemo(() => {
+    return filteredProjects.filter(project => project.is_featured);
+  }, [filteredProjects]);
+
+  const regularProjects = useMemo(() => {
+    return filteredProjects.filter(project => !project.is_featured);
+  }, [filteredProjects]);
+
   const handleProjectClick = useCallback((project: PortfolioProject) => {
     if (project.title === "Nonna's Table") {
       navigate('/case-study/nonna-table');
@@ -180,14 +188,35 @@ const SimplePortfolioGrid = React.memo(() => {
       </div>
 
       {filteredProjects.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {filteredProjects.map((project) => (
-            <SimplePortfolioCard
-              key={project.id}
-              project={project}
-              onClick={handleProjectClick}
-            />
-          ))}
+        <div className="space-y-8">
+          {/* Featured Projects - Larger display */}
+          {featuredProjects.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              {featuredProjects.map((project) => (
+                <div key={project.id} className="md:col-span-1">
+                  <SimplePortfolioCard
+                    project={project}
+                    onClick={handleProjectClick}
+                    featured={true}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Regular Projects */}
+          {regularProjects.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {regularProjects.map((project) => (
+                <SimplePortfolioCard
+                  key={project.id}
+                  project={project}
+                  onClick={handleProjectClick}
+                  featured={false}
+                />
+              ))}
+            </div>
+          )}
         </div>
       ) : (
         <div className="text-center text-white/60 py-16">
