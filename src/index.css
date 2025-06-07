@@ -54,6 +54,15 @@
     --humble-indigo-400: #7D5BFF;
     --humble-indigo-500: #6236FF;
     --humble-indigo-600: #4E20E0;
+
+    /* New Brand Colors */
+    --brand-neon-pink: #FF007F;
+    --brand-black: #000000;
+    --brand-white: #FFFFFF;
+    --brand-warm-gray: #F5F5F5;
+    --brand-charcoal-gray: #1A1A1A;
+    --brand-cool-beige: #EAE4DC;
+    --brand-electric-blue: #3D5AFE;
   }
 }
 
@@ -100,6 +109,33 @@
   
   .star-background {
     @apply fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-[-1];
+  }
+
+  /* New Brand Components */
+  .brand-button-primary {
+    background-color: var(--brand-neon-pink);
+    color: var(--brand-white);
+    border-radius: 1rem;
+    font-weight: 600;
+    transition: all 150ms ease;
+  }
+
+  .brand-button-primary:hover {
+    opacity: 0.9;
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.3);
+  }
+
+  .brand-button-secondary {
+    border: 1px solid var(--brand-neon-pink);
+    color: var(--brand-neon-pink);
+    background: transparent;
+    border-radius: 1rem;
+    font-weight: 600;
+    transition: all 150ms ease;
+  }
+
+  .brand-button-secondary:hover {
+    background-color: rgba(255, 0, 127, 0.1);
   }
 }
 

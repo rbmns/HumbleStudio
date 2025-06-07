@@ -103,6 +103,19 @@ export default {
 						800: '#1F2937',
 						900: '#0F1220'
 					}
+				},
+				// New Brand Colors
+				brand: {
+					// Primary
+					'neon-pink': '#FF007F',
+					'black': '#000000',
+					'white': '#FFFFFF',
+					// Secondary
+					'warm-gray': '#F5F5F5',
+					'charcoal-gray': '#1A1A1A',
+					// Accent
+					'cool-beige': '#EAE4DC',
+					'electric-blue': '#3D5AFE'
 				}
 			},
 			backgroundImage: {
@@ -153,7 +166,8 @@ export default {
 			},
 			fontFamily: {
 				'space-grotesk': ['"Space Grotesk"', 'sans-serif'],
-				'satoshi': ['Satoshi', 'sans-serif']
+				'satoshi': ['Satoshi', 'sans-serif'],
+				'serif': ['Georgia', '"Source Serif Pro"', '"Libre Baskerville"', 'serif']
 			},
 			backgroundImage: {
 				'gradient-primary': 'linear-gradient(90deg, var(--humble-pink-500), var(--humble-purple-500))'

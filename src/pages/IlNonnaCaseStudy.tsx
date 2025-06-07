@@ -1,9 +1,8 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 
 interface CaseStudy {
   id: string;
@@ -93,24 +92,20 @@ const IlNonnaCaseStudy = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen relative overflow-x-hidden bg-humble-navy">
-        <Navbar />
+      <div className="min-h-screen bg-black">
         <div className="pt-24 pb-16 flex items-center justify-center">
           <div className="text-white">Loading...</div>
         </div>
-        <Footer />
       </div>
     );
   }
 
   if (!caseStudy) {
     return (
-      <div className="min-h-screen relative overflow-x-hidden bg-humble-navy">
-        <Navbar />
+      <div className="min-h-screen bg-black">
         <div className="pt-24 pb-16 flex items-center justify-center">
           <div className="text-white">Case study not found</div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -118,42 +113,45 @@ const IlNonnaCaseStudy = () => {
   const solutionMedia = media.filter(m => m.section === 'solution');
 
   return (
-    <div className="min-h-screen relative overflow-x-hidden bg-humble-navy">
-      <Navbar />
-      
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-gradient-to-br from-humble-navy via-humble-charcoal to-humble-navy">
-        <div className="container mx-auto px-4 sm:px-6">
+    <div className="min-h-screen bg-black text-white">
+      {/* Simple Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-gray-800">
+        <div className="container mx-auto px-6 py-4">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-white/70 hover:text-white mb-8 transition-colors"
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Portfolio
           </button>
-          
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+        </div>
+      </nav>
+      
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 bg-black">
+        <div className="container mx-auto px-6">          
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 font-space-grotesk">
               {caseStudy.title}
             </h1>
             {caseStudy.subtitle && (
-              <p className="text-xl md:text-2xl text-white/80 mb-4">
+              <p className="text-xl md:text-2xl text-gray-300 mb-4 font-serif">
                 {caseStudy.subtitle}
               </p>
             )}
             {caseStudy.description && (
-              <p className="text-lg text-white/70">
+              <p className="text-lg text-gray-400 font-serif leading-relaxed">
                 {caseStudy.description}
               </p>
             )}
           </div>
 
           {/* Hero Image */}
-          <div className="max-w-6xl mx-auto">
-            <div className="aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl">
+          <div className="max-w-5xl mx-auto">
+            <div className="aspect-[16/10] rounded-lg overflow-hidden shadow-2xl">
               <img
-                src={caseStudy.hero_image_url || 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'}
-                alt={`${caseStudy.client_name} Website - Desktop and Mobile View`}
+                src={caseStudy.hero_image_url || '/lovable-uploads/cabbeeb2-4701-40ca-8f62-75cb957be030.png'}
+                alt={`${caseStudy.client_name} Website`}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -162,13 +160,13 @@ const IlNonnaCaseStudy = () => {
       </section>
 
       {/* Challenge Section */}
-      <section className="py-16 bg-humble-charcoal/30">
-        <div className="container mx-auto px-4 sm:px-6">
+      <section className="py-20 bg-gray-950">
+        <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-space-grotesk">
               {caseStudy.challenge_heading}
             </h2>
-            <p className="text-lg text-white/80 leading-relaxed">
+            <p className="text-lg text-gray-300 leading-relaxed font-serif">
               {caseStudy.challenge_content}
             </p>
           </div>
@@ -176,13 +174,13 @@ const IlNonnaCaseStudy = () => {
       </section>
 
       {/* Solution Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 sm:px-6">
+      <section className="py-20 bg-black">
+        <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-space-grotesk">
               {caseStudy.solution_heading}
             </h2>
-            <div className="text-lg text-white/80 leading-relaxed mb-12">
+            <div className="text-lg text-gray-300 leading-relaxed mb-12 font-serif">
               <p className="mb-6">
                 {caseStudy.solution_content}
               </p>
@@ -190,7 +188,7 @@ const IlNonnaCaseStudy = () => {
                 <ul className="space-y-3 mb-6">
                   {caseStudy.key_features.map((feature, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-humble-pink-500 rounded-full flex-shrink-0 mt-3"></div>
+                      <div className="w-2 h-2 bg-pink-500 rounded-full flex-shrink-0 mt-3" style={{ backgroundColor: '#FF007F' }}></div>
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -202,9 +200,9 @@ const IlNonnaCaseStudy = () => {
             {solutionMedia.length > 0 && (
               <div className="grid md:grid-cols-2 gap-8 mb-16">
                 {solutionMedia.map((mediaItem) => (
-                  <div key={mediaItem.id} className="bg-humble-charcoal rounded-xl p-6">
-                    <h3 className="text-xl font-semibold text-white mb-4">{mediaItem.caption}</h3>
-                    <div className="aspect-[4/3] bg-humble-charcoal/50 rounded-lg overflow-hidden">
+                  <div key={mediaItem.id} className="bg-gray-900 rounded-lg p-6">
+                    <h3 className="text-xl font-semibold text-white mb-4 font-space-grotesk">{mediaItem.caption}</h3>
+                    <div className="aspect-[4/3] bg-gray-800 rounded-lg overflow-hidden">
                       <img
                         src={mediaItem.media_url}
                         alt={mediaItem.alt_text || mediaItem.caption || ''}
@@ -220,40 +218,40 @@ const IlNonnaCaseStudy = () => {
       </section>
 
       {/* Impact & Results Section */}
-      <section className="py-16 bg-humble-charcoal/30">
-        <div className="container mx-auto px-4 sm:px-6">
+      <section className="py-20 bg-gray-950">
+        <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-space-grotesk">
               {caseStudy.impact_heading}
             </h2>
-            <p className="text-lg text-white/80 leading-relaxed mb-12">
+            <p className="text-lg text-gray-300 leading-relaxed mb-12 font-serif">
               {caseStudy.impact_content}
             </p>
 
             {/* Results Grid */}
             <div className="grid md:grid-cols-3 gap-8">
               <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#FF007F' }}>
                   <span className="text-2xl font-bold text-white">↗</span>
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Direct Orders</h3>
-                <p className="text-white/70">Significant increase in direct online orders</p>
+                <h3 className="text-xl font-semibold text-white mb-2 font-space-grotesk">Direct Orders</h3>
+                <p className="text-gray-400 font-serif">Significant increase in direct online orders</p>
               </div>
               
               <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-humble-blue-500 to-humble-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#FF007F' }}>
                   <span className="text-2xl font-bold text-white">💰</span>
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Cost Reduction</h3>
-                <p className="text-white/70">Reduced third-party commission fees</p>
+                <h3 className="text-xl font-semibold text-white mb-2 font-space-grotesk">Cost Reduction</h3>
+                <p className="text-gray-400 font-serif">Reduced third-party commission fees</p>
               </div>
               
               <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-humble-purple-500 to-humble-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#FF007F' }}>
                   <span className="text-2xl font-bold text-white">⭐</span>
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Brand Identity</h3>
-                <p className="text-white/70">Enhanced digital presence and customer loyalty</p>
+                <h3 className="text-xl font-semibold text-white mb-2 font-space-grotesk">Brand Identity</h3>
+                <p className="text-gray-400 font-serif">Enhanced digital presence and customer loyalty</p>
               </div>
             </div>
           </div>
@@ -261,18 +259,19 @@ const IlNonnaCaseStudy = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 sm:px-6">
+      <section className="py-20 bg-black">
+        <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-space-grotesk">
               {caseStudy.cta_heading}
             </h2>
-            <p className="text-lg text-white/80 mb-8">
+            <p className="text-lg text-gray-300 mb-8 font-serif">
               {caseStudy.cta_description}
             </p>
             <button
               onClick={() => navigate('/#contact')}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition-transform text-lg"
+              className="inline-flex items-center gap-2 text-white px-8 py-4 rounded-full font-semibold hover:opacity-90 transition-opacity text-lg font-space-grotesk"
+              style={{ backgroundColor: '#FF007F' }}
             >
               {caseStudy.cta_button_text}
               <ExternalLink className="h-5 w-5" />
@@ -280,8 +279,6 @@ const IlNonnaCaseStudy = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };
