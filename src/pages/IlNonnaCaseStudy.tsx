@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
@@ -72,7 +71,18 @@ const IlNonnaCaseStudy = () => {
         console.error('Error fetching media:', mediaError);
       }
 
-      setCaseStudy(caseStudyData);
+      // Convert JSON fields to arrays
+      const processedCaseStudy: CaseStudy = {
+        ...caseStudyData,
+        key_features: Array.isArray(caseStudyData.key_features) 
+          ? caseStudyData.key_features 
+          : [],
+        technologies: Array.isArray(caseStudyData.technologies) 
+          ? caseStudyData.technologies 
+          : []
+      };
+
+      setCaseStudy(processedCaseStudy);
       setMedia(mediaData || []);
     } catch (error) {
       console.error('Error in fetchCaseStudy:', error);
