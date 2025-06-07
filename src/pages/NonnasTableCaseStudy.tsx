@@ -1,9 +1,10 @@
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Menu, X } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import StarBackground from '@/components/StarBackground';
+import Contact from '@/components/Contact';
 
 interface CaseStudy {
   id: string;
@@ -42,6 +43,7 @@ const NonnasTableCaseStudy = () => {
   const [caseStudy, setCaseStudy] = useState<CaseStudy | null>(null);
   const [media, setMedia] = useState<CaseStudyMedia[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     document.title = "Nonna's Table: Restaurant Digital Transformation | HumbleStudio";
@@ -91,6 +93,14 @@ const NonnasTableCaseStudy = () => {
     }
   };
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-humble-navy relative">
@@ -124,13 +134,54 @@ const NonnasTableCaseStudy = () => {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-white/10">
         <div className="container mx-auto px-6 py-4">
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Portfolio
-          </button>
+          <div className="flex justify-between items-center">
+            <button
+              onClick={() => navigate('/')}
+              className="flex items-center"
+            >
+              <h1 className="text-xl md:text-2xl font-bold">
+                <span className="text-white">Humble</span>
+                <span className="bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">Studio</span>
+              </h1>
+            </button>
+            
+            {/* Desktop Menu */}
+            <div className="hidden md:flex space-x-8 items-center">
+              <button onClick={() => navigate('/')} className="text-white/80 hover:text-white transition-colors">Home</button>
+              <button onClick={() => navigate('/inquiry')} className="text-white/80 hover:text-white transition-colors">Inquiry</button>
+              <button 
+                onClick={() => scrollToSection('contact')} 
+                className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all"
+              >
+                Contact
+              </button>
+            </div>
+            
+            {/* Mobile Menu Toggle */}
+            <button 
+              className="md:hidden text-white"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+          
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden absolute top-full left-0 w-full bg-humble-charcoal/95 backdrop-blur-md shadow-lg">
+              <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                <button onClick={() => navigate('/')} className="text-white/80 hover:text-white transition-colors py-2">Home</button>
+                <button onClick={() => navigate('/inquiry')} className="text-white/80 hover:text-white transition-colors py-2">Inquiry</button>
+                <button 
+                  onClick={() => scrollToSection('contact')} 
+                  className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all"
+                >
+                  Contact
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
       
@@ -154,14 +205,14 @@ const NonnasTableCaseStudy = () => {
             )}
           </div>
 
-          {/* Hero Image */}
-          <div className="max-w-5xl mx-auto">
-            <div className="aspect-[16/10] rounded-lg overflow-hidden shadow-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-1">
-              <div className="w-full h-full rounded-lg overflow-hidden">
+          {/* Hero Image - Fixed corners and added spacing */}
+          <div className="max-w-5xl mx-auto px-4 md:px-8">
+            <div className="aspect-[16/10] rounded-lg bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-1">
+              <div className="w-full h-full rounded-lg">
                 <img
                   src={caseStudy.hero_image_url || '/lovable-uploads/cabbeeb2-4701-40ca-8f62-75cb957be030.png'}
                   alt={`${caseStudy.client_name} Website`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-lg"
                 />
               </div>
             </div>
@@ -169,9 +220,9 @@ const NonnasTableCaseStudy = () => {
         </div>
       </section>
 
-      {/* From here onwards - Dark overlay for focus on content */}
+      {/* From here onwards - Darker overlay for focus on content */}
       <div className="relative">
-        <div className="absolute inset-0 bg-black/85"></div>
+        <div className="absolute inset-0 bg-black/90"></div>
         
         {/* Challenge Section */}
         <section className="py-20 relative z-10">
@@ -210,17 +261,17 @@ const NonnasTableCaseStudy = () => {
                 )}
               </div>
 
-              {/* Feature Screenshots Grid */}
+              {/* Feature Screenshots Grid - Fixed spacing and corners */}
               {solutionMedia.length > 0 && (
-                <div className="grid md:grid-cols-2 gap-8 mb-16">
+                <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-16 px-4 md:px-0">
                   {solutionMedia.map((mediaItem) => (
-                    <div key={mediaItem.id} className="bg-black/40 backdrop-blur-sm rounded-lg p-6 border border-white/10">
-                      <h3 className="text-xl font-semibold text-white mb-4 font-space-grotesk">{mediaItem.caption}</h3>
-                      <div className="aspect-[4/3] bg-black/60 rounded-lg overflow-hidden border border-white/10">
+                    <div key={mediaItem.id} className="bg-black/40 backdrop-blur-sm rounded-lg p-4 md:p-6 border border-white/10">
+                      <h3 className="text-lg md:text-xl font-semibold text-white mb-4 font-space-grotesk">{mediaItem.caption}</h3>
+                      <div className="aspect-[4/3] bg-black/60 rounded-lg border border-white/10 p-2">
                         <img
                           src={mediaItem.media_url}
                           alt={mediaItem.alt_text || mediaItem.caption || ''}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover rounded"
                         />
                       </div>
                     </div>
@@ -242,8 +293,8 @@ const NonnasTableCaseStudy = () => {
                 {caseStudy.impact_content}
               </p>
 
-              {/* Results Grid */}
-              <div className="grid md:grid-cols-3 gap-8">
+              {/* Results Grid - Added mobile spacing */}
+              <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4 md:px-0">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="text-2xl font-bold text-white">🌐</span>
@@ -307,6 +358,9 @@ const NonnasTableCaseStudy = () => {
             </div>
           </div>
         </section>
+
+        {/* Contact Section */}
+        <Contact />
       </div>
     </div>
   );
