@@ -79,7 +79,7 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({ project, onCl
         {!project.is_coming_soon && (
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100">
             <button className="bg-white/90 hover:bg-white text-humble-charcoal px-3 py-2 rounded-full font-medium text-sm">
-              {project.id === 'il-nonna' ? 'View Case Study' : 'View Project'}
+              {project.title === "Nonna's Table" ? 'View Case Study' : 'View Project'}
             </button>
           </div>
         )}
@@ -136,7 +136,7 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({ project, onCl
             </div>
           )}
 
-          {!project.is_coming_soon && project.link && project.id !== 'il-nonna' && (
+          {!project.is_coming_soon && project.link && project.title !== "Nonna's Table" && (
             <a
               href={project.link}
               target="_blank"

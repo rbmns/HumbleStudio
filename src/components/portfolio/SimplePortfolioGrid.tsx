@@ -102,28 +102,7 @@ const SimplePortfolioGrid = React.memo(() => {
         })) || []
       })) || [];
 
-      // Add the Nonna's Table case study as a static project
-      const nonnasTableProject: PortfolioProject = {
-        id: 'nonna-table',
-        title: "Nonna's Table",
-        description: 'Authentic Italian Restaurant website with direct ordering and reservation system',
-        categories: ['web', 'ecommerce'],
-        is_featured: true,
-        is_coming_soon: false,
-        technologies: ['React', 'TypeScript', 'Supabase', 'Stripe'],
-        key_features: ['Direct Online Ordering', 'Table Reservations', 'Admin Dashboard'],
-        build_time: '2 weeks',
-        media: [{
-          id: 'nonna-table-hero',
-          media_url: 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/nonnas-table/1.png',
-          alt_text: "Nonna's Table Restaurant Website Hero",
-          is_primary: true,
-          media_type: 'image',
-          display_order: 0
-        }]
-      };
-
-      setProjects([nonnasTableProject, ...projectsWithMedia]);
+      setProjects(projectsWithMedia);
     } catch (error) {
       console.error('Error in fetchProjects:', error);
     } finally {
@@ -142,7 +121,7 @@ const SimplePortfolioGrid = React.memo(() => {
   }, [projects, activeCategory]);
 
   const handleProjectClick = useCallback((project: PortfolioProject) => {
-    if (project.id === 'nonna-table') {
+    if (project.title === "Nonna's Table") {
       navigate('/case-study/nonna-table');
     } else if (project.link && !project.is_coming_soon) {
       window.open(project.link, '_blank');
