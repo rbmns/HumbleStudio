@@ -189,18 +189,20 @@ const SimplePortfolioGrid = React.memo(() => {
 
       {filteredProjects.length > 0 ? (
         <div className="space-y-8">
-          {/* Featured Projects - Larger display */}
+          {/* Featured Projects - Centered on desktop */}
           {featuredProjects.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              {featuredProjects.map((project) => (
-                <div key={project.id} className="md:col-span-1">
-                  <SimplePortfolioCard
-                    project={project}
-                    onClick={handleProjectClick}
-                    featured={true}
-                  />
-                </div>
-              ))}
+            <div className="flex justify-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-6xl">
+                {featuredProjects.map((project) => (
+                  <div key={project.id} className="md:col-span-1">
+                    <SimplePortfolioCard
+                      project={project}
+                      onClick={handleProjectClick}
+                      featured={true}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
