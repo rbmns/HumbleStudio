@@ -129,7 +129,8 @@ const SimplePortfolioGrid = React.memo(() => {
   }, [filteredProjects]);
 
   const handleProjectClick = useCallback((project: PortfolioProject) => {
-    if (project.title === "Nonna's Table") {
+    // Check if this is Nonna's Table specifically for case study
+    if (project.title === "Nonna's Table" || project.title.toLowerCase().includes("nonna")) {
       navigate('/case-studies/nonnas-table');
     } else if (project.link && !project.is_coming_soon) {
       window.open(project.link, '_blank');
