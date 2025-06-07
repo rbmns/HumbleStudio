@@ -130,7 +130,7 @@ const SimplePortfolioGrid = React.memo(() => {
 
   const handleProjectClick = useCallback((project: PortfolioProject) => {
     if (project.title === "Nonna's Table") {
-      navigate('/case-study/nonna-table');
+      navigate('/case-studies/nonnas-table');
     } else if (project.link && !project.is_coming_soon) {
       window.open(project.link, '_blank');
     }
