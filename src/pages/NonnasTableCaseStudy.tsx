@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Menu, X } from 'lucide-react';
@@ -38,6 +37,47 @@ interface CaseStudyMedia {
   display_order: number;
 }
 
+// Fallback data for Nonna's Table case study
+const fallbackCaseStudy: CaseStudy = {
+  id: 'fallback-nonnas-table',
+  slug: 'nonna-table',
+  title: "Nonna's Table",
+  subtitle: "A Complete Digital Transformation for Authentic Italian Dining",
+  description: "Creating a warm, welcoming digital presence that captures the essence of traditional Italian hospitality while providing modern functionality for reservations and online ordering.",
+  client_name: "Nonna's Table",
+  client_location: "Netherlands",
+  hero_image_url: '/lovable-uploads/cabbeeb2-4701-40ca-8f62-75cb957be030.png',
+  challenge_heading: "The Challenge",
+  challenge_content: "Traditional Italian restaurants need to balance authentic charm with modern digital expectations.",
+  solution_heading: "Our Solution",
+  solution_content: "We created a comprehensive digital platform that maintains the warmth of Italian hospitality while providing cutting-edge functionality.",
+  impact_heading: "The Impact",
+  impact_content: "A beautifully crafted website that successfully bridges traditional Italian dining culture with modern digital convenience, resulting in improved customer engagement and streamlined operations.",
+  key_features: [
+    "Custom-Branded Website",
+    "Integrated Table Reservations",
+    "Direct Online Ordering",
+    "Localized Payment Processing",
+    "Centralized Order Management",
+    "Automated Order Notifications",
+    "Interactive Menu Showcase",
+    "Mobile-Optimized Action Buttons"
+  ],
+  technologies: [
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "Supabase",
+    "TheFork Manager",
+    "Sitedish",
+    "MultiSafepay"
+  ],
+  project_duration: "2 weeks",
+  cta_heading: "Ready to Transform Your Restaurant's Digital Presence?",
+  cta_description: "Let's create a beautiful, functional website that captures your restaurant's unique personality and drives real business results.",
+  cta_button_text: "Start Your Project"
+};
+
 const NonnasTableCaseStudy = () => {
   const navigate = useNavigate();
   const [caseStudy, setCaseStudy] = useState<CaseStudy | null>(null);
@@ -52,6 +92,8 @@ const NonnasTableCaseStudy = () => {
 
   const fetchCaseStudy = async () => {
     try {
+      console.log('Attempting to fetch case study with slug: nonna-table');
+      
       const { data: caseStudyData, error: caseStudyError } = await supabase
         .from('case_studies')
         .select('*')
@@ -59,7 +101,10 @@ const NonnasTableCaseStudy = () => {
         .single();
 
       if (caseStudyError) {
-        console.error('Error fetching case study:', caseStudyError);
+        console.log('Case study not found in database, using fallback data:', caseStudyError);
+        setCaseStudy(fallbackCaseStudy);
+        setMedia([]);
+        setLoading(false);
         return;
       }
 
@@ -88,6 +133,9 @@ const NonnasTableCaseStudy = () => {
       setMedia(mediaData || []);
     } catch (error) {
       console.error('Error in fetchCaseStudy:', error);
+      // Use fallback data on any error
+      setCaseStudy(fallbackCaseStudy);
+      setMedia([]);
     } finally {
       setLoading(false);
     }
@@ -231,6 +279,7 @@ const NonnasTableCaseStudy = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-space-grotesk bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">
                 Our Process: Crafting a Cohesive Digital Presence
               </h2>
+              
               <div className="text-lg text-gray-300 leading-relaxed font-serif space-y-6">
                 <p>
                   Our approach to developing the digital solution for the Nonna's Table concept involved a methodical sequence, emphasizing both aesthetic precision and functional excellence:
@@ -303,6 +352,7 @@ const NonnasTableCaseStudy = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-space-grotesk bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">
                 Key Features & Capabilities
               </h2>
+              
               <div className="text-lg text-gray-300 leading-relaxed mb-12 font-serif">
                 <p className="mb-6">
                   The resulting digital platform for Nonna's Table is equipped with powerful features designed to empower a modern restaurant:
