@@ -77,6 +77,131 @@ export type Database = {
         }
         Relationships: []
       }
+      case_studies: {
+        Row: {
+          challenge_content: string | null
+          challenge_heading: string | null
+          client_location: string | null
+          client_name: string | null
+          created_at: string
+          cta_button_text: string | null
+          cta_description: string | null
+          cta_heading: string | null
+          description: string | null
+          hero_image_url: string | null
+          id: string
+          impact_content: string | null
+          impact_heading: string | null
+          is_featured: boolean | null
+          is_published: boolean | null
+          key_features: Json | null
+          project_duration: string | null
+          slug: string
+          solution_content: string | null
+          solution_heading: string | null
+          subtitle: string | null
+          technologies: Json | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          challenge_content?: string | null
+          challenge_heading?: string | null
+          client_location?: string | null
+          client_name?: string | null
+          created_at?: string
+          cta_button_text?: string | null
+          cta_description?: string | null
+          cta_heading?: string | null
+          description?: string | null
+          hero_image_url?: string | null
+          id?: string
+          impact_content?: string | null
+          impact_heading?: string | null
+          is_featured?: boolean | null
+          is_published?: boolean | null
+          key_features?: Json | null
+          project_duration?: string | null
+          slug: string
+          solution_content?: string | null
+          solution_heading?: string | null
+          subtitle?: string | null
+          technologies?: Json | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          challenge_content?: string | null
+          challenge_heading?: string | null
+          client_location?: string | null
+          client_name?: string | null
+          created_at?: string
+          cta_button_text?: string | null
+          cta_description?: string | null
+          cta_heading?: string | null
+          description?: string | null
+          hero_image_url?: string | null
+          id?: string
+          impact_content?: string | null
+          impact_heading?: string | null
+          is_featured?: boolean | null
+          is_published?: boolean | null
+          key_features?: Json | null
+          project_duration?: string | null
+          slug?: string
+          solution_content?: string | null
+          solution_heading?: string | null
+          subtitle?: string | null
+          technologies?: Json | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      case_study_media: {
+        Row: {
+          alt_text: string | null
+          caption: string | null
+          case_study_id: string
+          created_at: string
+          display_order: number | null
+          id: string
+          media_type: string
+          media_url: string
+          section: string | null
+        }
+        Insert: {
+          alt_text?: string | null
+          caption?: string | null
+          case_study_id: string
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          media_type?: string
+          media_url: string
+          section?: string | null
+        }
+        Update: {
+          alt_text?: string | null
+          caption?: string | null
+          case_study_id?: string
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          media_type?: string
+          media_url?: string
+          section?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "case_study_media_case_study_id_fkey"
+            columns: ["case_study_id"]
+            isOneToOne: false
+            referencedRelation: "case_studies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contact_submissions: {
         Row: {
           created_at: string

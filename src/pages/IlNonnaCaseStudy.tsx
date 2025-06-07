@@ -1,16 +1,111 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+interface CaseStudy {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle?: string;
+  description?: string;
+  client_name?: string;
+  client_location?: string;
+  hero_image_url?: string;
+  challenge_heading: string;
+  challenge_content?: string;
+  solution_heading: string;
+  solution_content?: string;
+  impact_heading: string;
+  impact_content?: string;
+  key_features: string[];
+  technologies: string[];
+  project_duration?: string;
+  cta_heading?: string;
+  cta_description?: string;
+  cta_button_text: string;
+}
+
+interface CaseStudyMedia {
+  id: string;
+  media_url: string;
+  alt_text?: string;
+  caption?: string;
+  section?: string;
+  display_order: number;
+}
+
 const IlNonnaCaseStudy = () => {
   const navigate = useNavigate();
+  const [caseStudy, setCaseStudy] = useState<CaseStudy | null>(null);
+  const [media, setMedia] = useState<CaseStudyMedia[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     document.title = "Il Nonna: Direct Growth in Rotterdam | HumbleStudio";
+    fetchCaseStudy();
   }, []);
+
+  const fetchCaseStudy = async () => {
+    try {
+      const { data: caseStudyData, error: caseStudyError } = await supabase
+        .from('case_studies')
+        .select('*')
+        .eq('slug', 'il-nonna')
+        .single();
+
+      if (caseStudyError) {
+        console.error('Error fetching case study:', caseStudyError);
+        return;
+      }
+
+      const { data: mediaData, error: mediaError } = await supabase
+        .from('case_study_media')
+        .select('*')
+        .eq('case_study_id', caseStudyData.id)
+        .order('display_order', { ascending: true });
+
+      if (mediaError) {
+        console.error('Error fetching media:', mediaError);
+      }
+
+      setCaseStudy(caseStudyData);
+      setMedia(mediaData || []);
+    } catch (error) {
+      console.error('Error in fetchCaseStudy:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen relative overflow-x-hidden bg-humble-navy">
+        <Navbar />
+        <div className="pt-24 pb-16 flex items-center justify-center">
+          <div className="text-white">Loading...</div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!caseStudy) {
+    return (
+      <div className="min-h-screen relative overflow-x-hidden bg-humble-navy">
+        <Navbar />
+        <div className="pt-24 pb-16 flex items-center justify-center">
+          <div className="text-white">Case study not found</div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  const solutionMedia = media.filter(m => m.section === 'solution');
 
   return (
     <div className="min-h-screen relative overflow-x-hidden bg-humble-navy">
@@ -29,22 +124,26 @@ const IlNonnaCaseStudy = () => {
           
           <div className="max-w-4xl mx-auto text-center mb-12">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              Il Nonna: Direct Growth in Rotterdam
+              {caseStudy.title}
             </h1>
-            <p className="text-xl md:text-2xl text-white/80 mb-4">
-              Authentic Italian Restaurant, Rotterdam
-            </p>
-            <p className="text-lg text-white/70">
-              Reduce third-party costs, boost reservations, enhance digital presence.
-            </p>
+            {caseStudy.subtitle && (
+              <p className="text-xl md:text-2xl text-white/80 mb-4">
+                {caseStudy.subtitle}
+              </p>
+            )}
+            {caseStudy.description && (
+              <p className="text-lg text-white/70">
+                {caseStudy.description}
+              </p>
+            )}
           </div>
 
           {/* Hero Image */}
           <div className="max-w-6xl mx-auto">
             <div className="aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                alt="Il Nonna Restaurant Website - Desktop and Mobile View"
+                src={caseStudy.hero_image_url || 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'}
+                alt={`${caseStudy.client_name} Website - Desktop and Mobile View`}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -57,10 +156,10 @@ const IlNonnaCaseStudy = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
-              The Challenge
+              {caseStudy.challenge_heading}
             </h2>
             <p className="text-lg text-white/80 leading-relaxed">
-              Il Nonna faced high commission fees from platforms like Thuisbezorgd.nl and struggled with limited direct online orders and reservations due to an outdated website and fragmented digital identity.
+              {caseStudy.challenge_content}
             </p>
           </div>
         </div>
@@ -71,89 +170,41 @@ const IlNonnaCaseStudy = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
-              Our Solution
+              {caseStudy.solution_heading}
             </h2>
             <div className="text-lg text-white/80 leading-relaxed mb-12">
               <p className="mb-6">
-                We developed a new, branded website for Il Nonna featuring:
+                {caseStudy.solution_content}
               </p>
-              <ul className="space-y-3 mb-6">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-humble-pink-500 rounded-full flex-shrink-0 mt-3"></div>
-                  <span>Direct online ordering (for both delivery & pickup) via Sitedish, integrated with MultiSafepay for seamless iDEAL and card payments.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-humble-pink-500 rounded-full flex-shrink-0 mt-3"></div>
-                  <span>An integrated table reservation system.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-humble-pink-500 rounded-full flex-shrink-0 mt-3"></div>
-                  <span>A dedicated admin tool for efficient order management.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-humble-pink-500 rounded-full flex-shrink-0 mt-3"></div>
-                  <span>Automated email notifications for new orders.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-humble-pink-500 rounded-full flex-shrink-0 mt-3"></div>
-                  <span>A beautifully designed, interactive menu showcase.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-humble-pink-500 rounded-full flex-shrink-0 mt-3"></div>
-                  <span>A warm, authentic visual style reflecting their Italian comfort.</span>
-                </li>
-              </ul>
-              <p>
-                This centralized all operations and significantly enhanced their digital presence.
-              </p>
+              {caseStudy.key_features.length > 0 && (
+                <ul className="space-y-3 mb-6">
+                  {caseStudy.key_features.map((feature, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-humble-pink-500 rounded-full flex-shrink-0 mt-3"></div>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
 
             {/* Feature Screenshots Grid */}
-            <div className="grid md:grid-cols-2 gap-8 mb-16">
-              <div className="bg-humble-charcoal rounded-xl p-6">
-                <h3 className="text-xl font-semibold text-white mb-4">Online Ordering Interface</h3>
-                <div className="aspect-[4/3] bg-humble-charcoal/50 rounded-lg overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                    alt="Online Ordering Interface Screenshot"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+            {solutionMedia.length > 0 && (
+              <div className="grid md:grid-cols-2 gap-8 mb-16">
+                {solutionMedia.map((mediaItem) => (
+                  <div key={mediaItem.id} className="bg-humble-charcoal rounded-xl p-6">
+                    <h3 className="text-xl font-semibold text-white mb-4">{mediaItem.caption}</h3>
+                    <div className="aspect-[4/3] bg-humble-charcoal/50 rounded-lg overflow-hidden">
+                      <img
+                        src={mediaItem.media_url}
+                        alt={mediaItem.alt_text || mediaItem.caption || ''}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                ))}
               </div>
-              
-              <div className="bg-humble-charcoal rounded-xl p-6">
-                <h3 className="text-xl font-semibold text-white mb-4">Reservation System</h3>
-                <div className="aspect-[4/3] bg-humble-charcoal/50 rounded-lg overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                    alt="Reservation System Interface Screenshot"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-              
-              <div className="bg-humble-charcoal rounded-xl p-6">
-                <h3 className="text-xl font-semibold text-white mb-4">Admin Dashboard</h3>
-                <div className="aspect-[4/3] bg-humble-charcoal/50 rounded-lg overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                    alt="Admin Order Dashboard Screenshot"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-              
-              <div className="bg-humble-charcoal rounded-xl p-6">
-                <h3 className="text-xl font-semibold text-white mb-4">Mobile Experience</h3>
-                <div className="aspect-[4/3] bg-humble-charcoal/50 rounded-lg overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                    alt="Mobile Website Mockup"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
@@ -163,10 +214,10 @@ const IlNonnaCaseStudy = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
-              Impact & Results
+              {caseStudy.impact_heading}
             </h2>
             <p className="text-lg text-white/80 leading-relaxed mb-12">
-              The integrated platform led to increased direct online orders, significantly reducing reliance on high-commission third-party services and boosting profitability. The seamless reservation system resulted in more direct table bookings, giving Il Nonna greater control. Overall, the enhanced digital presence strengthened brand identity, improved the customer experience, and fostered greater loyalty.
+              {caseStudy.impact_content}
             </p>
 
             {/* Results Grid */}
@@ -204,16 +255,16 @@ const IlNonnaCaseStudy = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Ready to transform your restaurant's online presence?
+              {caseStudy.cta_heading}
             </h2>
             <p className="text-lg text-white/80 mb-8">
-              Contact us today for a free consultation!
+              {caseStudy.cta_description}
             </p>
             <button
               onClick={() => navigate('/#contact')}
               className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition-transform text-lg"
             >
-              Get Your Free Consultation
+              {caseStudy.cta_button_text}
               <ExternalLink className="h-5 w-5" />
             </button>
           </div>
