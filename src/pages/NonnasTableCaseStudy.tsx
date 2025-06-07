@@ -107,7 +107,7 @@ const NonnasTableCaseStudy = () => {
           description: "Creating a warm, welcoming digital presence that captures the essence of traditional Italian hospitality while providing modern functionality for reservations and online ordering.",
           client_name: "Nonna's Table",
           client_location: "Netherlands",
-          hero_image_url: '/lovable-uploads/cabbeeb2-4701-40ca-8f62-75cb957be030.png',
+          hero_image_url: 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/nonnas-table/d-1a.png',
           challenge_heading: "Our Process: Crafting a Cohesive Digital Presence",
           challenge_content: "Traditional Italian restaurants need to balance authentic charm with modern digital expectations.",
           solution_heading: "Key Features & Capabilities",
@@ -151,7 +151,7 @@ const NonnasTableCaseStudy = () => {
         description: "Creating a warm, welcoming digital presence that captures the essence of traditional Italian hospitality while providing modern functionality for reservations and online ordering.",
         client_name: "Nonna's Table",
         client_location: "Netherlands",
-        hero_image_url: '/lovable-uploads/cabbeeb2-4701-40ca-8f62-75cb957be030.png',
+        hero_image_url: 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/nonnas-table/d-1a.png',
         challenge_heading: "Our Process: Crafting a Cohesive Digital Presence",
         challenge_content: "Traditional Italian restaurants need to balance authentic charm with modern digital expectations.",
         solution_heading: "Key Features & Capabilities",
@@ -222,8 +222,8 @@ const NonnasTableCaseStudy = () => {
     <div className="min-h-screen bg-humble-navy text-white relative">
       <StarBackground />
       
-      {/* Navigation - Updated to match general site styling */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-humble-charcoal/90 backdrop-blur-md border-b border-white/10">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-humble-navy/90 backdrop-blur-md border-b border-white/10">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <button
@@ -260,7 +260,7 @@ const NonnasTableCaseStudy = () => {
           
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
-            <div className="md:hidden absolute top-full left-0 w-full bg-humble-charcoal/95 backdrop-blur-md shadow-lg">
+            <div className="md:hidden absolute top-full left-0 w-full bg-humble-navy/95 backdrop-blur-md shadow-lg">
               <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
                 <button onClick={() => navigate('/')} className="text-white/80 hover:text-white transition-colors py-2">Home</button>
                 <button onClick={() => navigate('/inquiry')} className="text-white/80 hover:text-white transition-colors py-2">Inquiry</button>
@@ -300,7 +300,7 @@ const NonnasTableCaseStudy = () => {
             <div className="aspect-[16/10] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-1">
               <div className="w-full h-full rounded-xl">
                 <img
-                  src={caseStudy.hero_image_url || '/lovable-uploads/cabbeeb2-4701-40ca-8f62-75cb957be030.png'}
+                  src={caseStudy.hero_image_url || 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/nonnas-table/d-1a.png'}
                   alt={`${caseStudy.client_name} Website`}
                   className="w-full h-full object-cover rounded-xl"
                 />
@@ -536,8 +536,10 @@ const NonnasTableCaseStudy = () => {
         </div>
       </section>
 
-      {/* Contact Section - Removed black overlay */}
-      <Contact />
+      {/* Contact Section */}
+      <div id="contact">
+        <Contact />
+      </div>
     </div>
   );
 };
