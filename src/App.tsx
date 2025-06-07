@@ -31,9 +31,6 @@ const App = () => (
           <Route path="/inquiry" element={<Inquiry />} />
           <Route path="/brand-discovery-form" element={<BrandDiscoveryForm />} />
           <Route path="/case-studies/nonnas-table" element={<NonnasTableCaseStudy />} />
-          {/* Legacy route redirects */}
-          <Route path="/case-study/nonna-table" element={<NonnasTableCaseStudy />} />
-          <Route path="/case-study/il-nonna" element={<NonnasTableCaseStudy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

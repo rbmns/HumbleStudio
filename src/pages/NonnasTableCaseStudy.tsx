@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Menu, X } from 'lucide-react';
@@ -37,47 +38,6 @@ interface CaseStudyMedia {
   display_order: number;
 }
 
-// Fallback data for Nonna's Table case study
-const fallbackCaseStudy: CaseStudy = {
-  id: 'fallback-nonnas-table',
-  slug: 'nonna-table',
-  title: "Nonna's Table",
-  subtitle: "A Complete Digital Transformation for Authentic Italian Dining",
-  description: "Creating a warm, welcoming digital presence that captures the essence of traditional Italian hospitality while providing modern functionality for reservations and online ordering.",
-  client_name: "Nonna's Table",
-  client_location: "Netherlands",
-  hero_image_url: '/lovable-uploads/cabbeeb2-4701-40ca-8f62-75cb957be030.png',
-  challenge_heading: "The Challenge",
-  challenge_content: "Traditional Italian restaurants need to balance authentic charm with modern digital expectations.",
-  solution_heading: "Our Solution",
-  solution_content: "We created a comprehensive digital platform that maintains the warmth of Italian hospitality while providing cutting-edge functionality.",
-  impact_heading: "The Impact",
-  impact_content: "A beautifully crafted website that successfully bridges traditional Italian dining culture with modern digital convenience, resulting in improved customer engagement and streamlined operations.",
-  key_features: [
-    "Custom-Branded Website",
-    "Integrated Table Reservations",
-    "Direct Online Ordering",
-    "Localized Payment Processing",
-    "Centralized Order Management",
-    "Automated Order Notifications",
-    "Interactive Menu Showcase",
-    "Mobile-Optimized Action Buttons"
-  ],
-  technologies: [
-    "React",
-    "TypeScript",
-    "Tailwind CSS",
-    "Supabase",
-    "TheFork Manager",
-    "Sitedish",
-    "MultiSafepay"
-  ],
-  project_duration: "2 weeks",
-  cta_heading: "Ready to Transform Your Restaurant's Digital Presence?",
-  cta_description: "Let's create a beautiful, functional website that captures your restaurant's unique personality and drives real business results.",
-  cta_button_text: "Start Your Project"
-};
-
 const NonnasTableCaseStudy = () => {
   const navigate = useNavigate();
   const [caseStudy, setCaseStudy] = useState<CaseStudy | null>(null);
@@ -92,53 +52,137 @@ const NonnasTableCaseStudy = () => {
 
   const fetchCaseStudy = async () => {
     try {
-      console.log('Attempting to fetch case study with slug: nonna-table');
+      console.log('Fetching case study with slug: nonnas-table');
       
+      // Try to fetch from database first
       const { data: caseStudyData, error: caseStudyError } = await supabase
         .from('case_studies')
         .select('*')
-        .eq('slug', 'nonna-table')
-        .single();
+        .eq('slug', 'nonnas-table')
+        .maybeSingle();
 
       if (caseStudyError) {
-        console.log('Case study not found in database, using fallback data:', caseStudyError);
-        setCaseStudy(fallbackCaseStudy);
-        setMedia([]);
-        setLoading(false);
-        return;
+        console.error('Error fetching case study:', caseStudyError);
       }
 
-      console.log('Found case study data:', caseStudyData);
+      console.log('Case study data from DB:', caseStudyData);
 
-      const { data: mediaData, error: mediaError } = await supabase
-        .from('case_study_media')
-        .select('*')
-        .eq('case_study_id', caseStudyData.id)
-        .order('display_order', { ascending: true });
+      // Fetch media for this case study
+      let mediaData: CaseStudyMedia[] = [];
+      if (caseStudyData?.id) {
+        const { data: fetchedMedia, error: mediaError } = await supabase
+          .from('case_study_media')
+          .select('*')
+          .eq('case_study_id', caseStudyData.id)
+          .order('display_order', { ascending: true });
 
-      if (mediaError) {
-        console.error('Error fetching media:', mediaError);
+        if (mediaError) {
+          console.error('Error fetching media:', mediaError);
+        } else {
+          console.log('Media data from DB:', fetchedMedia);
+          mediaData = fetchedMedia || [];
+        }
+      }
+
+      if (caseStudyData) {
+        // Use database data
+        const processedCaseStudy: CaseStudy = {
+          ...caseStudyData,
+          key_features: Array.isArray(caseStudyData.key_features) 
+            ? caseStudyData.key_features.filter((item): item is string => typeof item === 'string')
+            : [],
+          technologies: Array.isArray(caseStudyData.technologies) 
+            ? caseStudyData.technologies.filter((item): item is string => typeof item === 'string')
+            : []
+        };
+        setCaseStudy(processedCaseStudy);
+        setMedia(mediaData);
       } else {
-        console.log('Found case study media:', mediaData);
+        // Use fallback data if not in database
+        console.log('Using fallback data for Nonnas Table case study');
+        setCaseStudy({
+          id: 'fallback-nonnas-table',
+          slug: 'nonnas-table',
+          title: "Nonna's Table",
+          subtitle: "A Complete Digital Transformation for Authentic Italian Dining",
+          description: "Creating a warm, welcoming digital presence that captures the essence of traditional Italian hospitality while providing modern functionality for reservations and online ordering.",
+          client_name: "Nonna's Table",
+          client_location: "Netherlands",
+          hero_image_url: '/lovable-uploads/cabbeeb2-4701-40ca-8f62-75cb957be030.png',
+          challenge_heading: "Our Process: Crafting a Cohesive Digital Presence",
+          challenge_content: "Traditional Italian restaurants need to balance authentic charm with modern digital expectations.",
+          solution_heading: "Key Features & Capabilities",
+          solution_content: "We created a comprehensive digital platform that maintains the warmth of Italian hospitality while providing cutting-edge functionality.",
+          impact_heading: "The Impact",
+          impact_content: "A beautifully crafted website that successfully bridges traditional Italian dining culture with modern digital convenience, resulting in improved customer engagement and streamlined operations.",
+          key_features: [
+            "Custom-Branded Website",
+            "Integrated Table Reservations",
+            "Direct Online Ordering",
+            "Localized Payment Processing",
+            "Centralized Order Management",
+            "Automated Order Notifications",
+            "Interactive Menu Showcase",
+            "Mobile-Optimized Action Buttons"
+          ],
+          technologies: [
+            "React",
+            "TypeScript",
+            "Tailwind CSS",
+            "Supabase",
+            "TheFork Manager",
+            "Sitedish",
+            "MultiSafepay"
+          ],
+          project_duration: "2 weeks",
+          cta_heading: "Ready to Transform Your Restaurant's Digital Presence?",
+          cta_description: "Let's create a beautiful, functional website that captures your restaurant's unique personality and drives real business results.",
+          cta_button_text: "Start Your Project"
+        });
+        setMedia([]);
       }
-
-      // Convert JSON fields to arrays with proper type checking
-      const processedCaseStudy: CaseStudy = {
-        ...caseStudyData,
-        key_features: Array.isArray(caseStudyData.key_features) 
-          ? caseStudyData.key_features.filter((item): item is string => typeof item === 'string')
-          : [],
-        technologies: Array.isArray(caseStudyData.technologies) 
-          ? caseStudyData.technologies.filter((item): item is string => typeof item === 'string')
-          : []
-      };
-
-      setCaseStudy(processedCaseStudy);
-      setMedia(mediaData || []);
     } catch (error) {
       console.error('Error in fetchCaseStudy:', error);
       // Use fallback data on any error
-      setCaseStudy(fallbackCaseStudy);
+      setCaseStudy({
+        id: 'fallback-nonnas-table',
+        slug: 'nonnas-table',
+        title: "Nonna's Table",
+        subtitle: "A Complete Digital Transformation for Authentic Italian Dining",
+        description: "Creating a warm, welcoming digital presence that captures the essence of traditional Italian hospitality while providing modern functionality for reservations and online ordering.",
+        client_name: "Nonna's Table",
+        client_location: "Netherlands",
+        hero_image_url: '/lovable-uploads/cabbeeb2-4701-40ca-8f62-75cb957be030.png',
+        challenge_heading: "Our Process: Crafting a Cohesive Digital Presence",
+        challenge_content: "Traditional Italian restaurants need to balance authentic charm with modern digital expectations.",
+        solution_heading: "Key Features & Capabilities",
+        solution_content: "We created a comprehensive digital platform that maintains the warmth of Italian hospitality while providing cutting-edge functionality.",
+        impact_heading: "The Impact",
+        impact_content: "A beautifully crafted website that successfully bridges traditional Italian dining culture with modern digital convenience, resulting in improved customer engagement and streamlined operations.",
+        key_features: [
+          "Custom-Branded Website",
+          "Integrated Table Reservations",
+          "Direct Online Ordering",
+          "Localized Payment Processing",
+          "Centralized Order Management",
+          "Automated Order Notifications",
+          "Interactive Menu Showcase",
+          "Mobile-Optimized Action Buttons"
+        ],
+        technologies: [
+          "React",
+          "TypeScript",
+          "Tailwind CSS",
+          "Supabase",
+          "TheFork Manager",
+          "Sitedish",
+          "MultiSafepay"
+        ],
+        project_duration: "2 weeks",
+        cta_heading: "Ready to Transform Your Restaurant's Digital Presence?",
+        cta_description: "Let's create a beautiful, functional website that captures your restaurant's unique personality and drives real business results.",
+        cta_button_text: "Start Your Project"
+      });
       setMedia([]);
     } finally {
       setLoading(false);
@@ -176,8 +220,6 @@ const NonnasTableCaseStudy = () => {
       </div>
     );
   }
-
-  const solutionMedia = media.filter(m => m.section === 'solution');
 
   return (
     <div className="min-h-screen bg-humble-navy text-white relative">
@@ -276,12 +318,12 @@ const NonnasTableCaseStudy = () => {
       <div className="relative">
         <div className="absolute inset-0 bg-black/90"></div>
         
-        {/* Challenge Section */}
+        {/* Challenge/Process Section */}
         <section className="py-20 relative z-10">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-space-grotesk bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">
-                Our Process: Crafting a Cohesive Digital Presence
+                {caseStudy.challenge_heading}
               </h2>
               
               <div className="text-lg text-gray-300 leading-relaxed font-serif space-y-6">
@@ -354,7 +396,7 @@ const NonnasTableCaseStudy = () => {
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-space-grotesk bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">
-                Key Features & Capabilities
+                {caseStudy.solution_heading}
               </h2>
               
               <div className="text-lg text-gray-300 leading-relaxed mb-12 font-serif">
@@ -362,54 +404,18 @@ const NonnasTableCaseStudy = () => {
                   The resulting digital platform for Nonna's Table is equipped with powerful features designed to empower a modern restaurant:
                 </p>
                 <ul className="space-y-4 mb-6">
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                    <div>
-                      <strong className="text-white">Custom-Branded Website:</strong> A visually appealing, mobile-responsive website that fully embodies the "warm & authentic Italian comfort" aesthetic.
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                    <div>
-                      <strong className="text-white">Integrated Table Reservations (with Overlay):</strong> Allows customers to book directly through a convenient booking overlay on the site, powered by a leading system like TheFork Manager, ensuring seamless booking management.
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                    <div>
-                      <strong className="text-white">Direct Online Ordering (Delivery & Pickup):</strong> Facilitates commission-free orders via the website, covering both takeaway and delivery services.
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                    <div>
-                      <strong className="text-white">Localized Payment Processing:</strong> Supports key Dutch payment methods, including iDEAL, credit cards, and digital wallets, powered by MultiSafepay.
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                    <div>
-                      <strong className="text-white">Centralized Order Management:</strong> An intuitive admin tool to efficiently handle all orders from various sources (website, phone, and even external platforms like TheFork).
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                    <div>
-                      <strong className="text-white">Automated Order Notifications:</strong> Ensures timely communication with customers and kitchen staff for smooth operations.
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                    <div>
-                      <strong className="text-white">Interactive Menu Showcase:</strong> Presents the menu beautifully with descriptions and appealing visuals, making it easy for customers to browse and order.
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                    <div>
-                      <strong className="text-white">Mobile-Optimized Action Buttons:</strong> Prominent and easy-to-use buttons for mobile users to reserve, call, or order online, ensuring quick access to essential functions.
-                    </div>
-                  </li>
+                  {caseStudy.key_features.map((feature, index) => {
+                    const [title, description] = feature.includes(':') ? feature.split(':', 2) : [feature, ''];
+                    return (
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                        <div>
+                          <strong className="text-white">{title}:</strong>
+                          {description && <span> {description}</span>}
+                        </div>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
 
