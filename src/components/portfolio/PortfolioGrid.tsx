@@ -1,8 +1,6 @@
-
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import FeaturedProject from './FeaturedProject';
-import ProjectCard from './ProjectCard';
 import Lightbox from './Lightbox';
 
 interface PortfolioProject {
@@ -218,18 +216,8 @@ const PortfolioGrid = React.memo(() => {
           />
         )}
 
-        {/* Regular Projects Grid */}
-        {regularProjects.length > 0 && (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {regularProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                onImageClick={openLightbox}
-              />
-            ))}
-          </div>
-        )}
+        {/* Note: Regular projects grid removed since ProjectCard was deleted */}
+        {/* If you need regular projects, use SimplePortfolioGrid instead */}
 
         {filteredProjects.length === 0 && (
           <div className="text-center text-white/60 py-16">
