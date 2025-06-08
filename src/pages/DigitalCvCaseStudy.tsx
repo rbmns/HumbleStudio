@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Menu, X, Target, Lightbulb, TrendingUp, Link, User, Smartphone, FileText, Palette, CheckCircle, DollarSign, Quote } from 'lucide-react';
@@ -29,19 +30,9 @@ interface CaseStudy {
   cta_button_text: string;
 }
 
-interface CaseStudyMedia {
-  id: string;
-  media_url: string;
-  alt_text?: string;
-  caption?: string;
-  section?: string;
-  display_order: number;
-}
-
 const DigitalCvCaseStudy = () => {
   const navigate = useNavigate();
   const [caseStudy, setCaseStudy] = useState<CaseStudy | null>(null);
-  const [media, setMedia] = useState<CaseStudyMedia[]>([]);
   const [loading, setLoading] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -66,22 +57,6 @@ const DigitalCvCaseStudy = () => {
 
       console.log('Case study data from DB:', caseStudyData);
 
-      let mediaData: CaseStudyMedia[] = [];
-      if (caseStudyData?.id) {
-        const { data: fetchedMedia, error: mediaError } = await supabase
-          .from('case_study_media')
-          .select('*')
-          .eq('case_study_id', caseStudyData.id)
-          .order('display_order', { ascending: true });
-
-        if (mediaError) {
-          console.error('Error fetching media:', mediaError);
-        } else {
-          console.log('Media data from DB:', fetchedMedia);
-          mediaData = fetchedMedia || [];
-        }
-      }
-
       if (caseStudyData) {
         const processedCaseStudy: CaseStudy = {
           ...caseStudyData,
@@ -93,7 +68,6 @@ const DigitalCvCaseStudy = () => {
             : []
         };
         setCaseStudy(processedCaseStudy);
-        setMedia(mediaData);
       }
     } catch (error) {
       console.error('Error in fetchCaseStudy:', error);
@@ -108,10 +82,6 @@ const DigitalCvCaseStudy = () => {
       element.scrollIntoView({ behavior: 'smooth' });
       setIsMobileMenuOpen(false);
     }
-  };
-
-  const getMediaBySection = (section: string) => {
-    return media.filter(item => item.section === section);
   };
 
   if (loading) {
@@ -217,28 +187,6 @@ const DigitalCvCaseStudy = () => {
                 </div>
               </div>
             </div>
-
-            {/* Additional Overview Media */}
-            {getMediaBySection('overview').length > 0 && (
-              <div className="mb-20">
-                <div className="grid md:grid-cols-2 gap-8">
-                  {getMediaBySection('overview').map((item) => (
-                    <div key={item.id} className="aspect-[16/10] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
-                      <div className="w-full h-full rounded-xl overflow-hidden">
-                        <OptimizedImage
-                          src={item.media_url}
-                          alt={item.alt_text || 'Case study image'}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      {item.caption && (
-                        <p className="text-white/60 text-sm mt-4 text-center">{item.caption}</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
 
             {/* Project Info Grid */}
             <div className="grid md:grid-cols-2 gap-12 mb-16">
@@ -346,45 +294,48 @@ const DigitalCvCaseStudy = () => {
               We built a modern one-page resume website that combines clarity, confidence, and personal style — all in under 24 hours.
             </p>
 
-            {/* Solution Video */}
-            <div className="mb-20">
-              <div className="max-w-md mx-auto aspect-[9/16] rounded-3xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
-                <div className="w-full h-full rounded-2xl overflow-hidden">
-                  <video
-                    src="https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/m-jun8.mov"
-                    className="w-full h-full object-cover"
-                    controls
-                    muted
-                    playsInline
-                    poster={caseStudy?.hero_image_url || 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png'}
-                  >
-                    Your browser does not support the video tag.
-                  </video>
+            {/* Mobile Demo Section */}
+            <div className="flex flex-col lg:flex-row items-center gap-16 mb-20">
+              <div className="lg:w-1/3">
+                <div className="max-w-xs mx-auto aspect-[9/16] rounded-3xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
+                  <div className="w-full h-full rounded-2xl overflow-hidden">
+                    <video
+                      src="https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/m-jun8.mov"
+                      className="w-full h-full object-cover object-left-top"
+                      controls
+                      muted
+                      playsInline
+                      poster={caseStudy?.hero_image_url || 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png'}
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:w-2/3">
+                <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                  <h3 className="text-2xl font-semibold text-white mb-6 font-space-grotesk">Mobile-First Design</h3>
+                  <p className="text-white/80 text-lg leading-relaxed mb-6">
+                    The site works beautifully on mobile devices, ensuring recruiters can view it seamlessly whether they're at their desk or on-the-go.
+                  </p>
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <Smartphone className="h-5 w-5 text-humble-pink-500 mt-1 flex-shrink-0" />
+                      <span className="text-white/80">Optimized for mobile viewing</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <FileText className="h-5 w-5 text-humble-purple-500 mt-1 flex-shrink-0" />
+                      <span className="text-white/80">Clear information hierarchy</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Palette className="h-5 w-5 text-humble-blue-500 mt-1 flex-shrink-0" />
+                      <span className="text-white/80">Professional color scheme</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-
-            {/* Solution Media */}
-            {getMediaBySection('solution').length > 0 && (
-              <div className="mb-20">
-                <div className="grid md:grid-cols-2 gap-8">
-                  {getMediaBySection('solution').map((item) => (
-                    <div key={item.id} className="aspect-[16/10] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
-                      <div className="w-full h-full rounded-xl overflow-hidden">
-                        <OptimizedImage
-                          src={item.media_url}
-                          alt={item.alt_text || 'Solution image'}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      {item.caption && (
-                        <p className="text-white/60 text-sm mt-4 text-center">{item.caption}</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
 
             {/* Key Features */}
             <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10 mb-20">
@@ -449,28 +400,6 @@ const DigitalCvCaseStudy = () => {
                 <div className="text-white font-medium text-lg">Total cost: just €49</div>
               </div>
             </div>
-
-            {/* Results Media */}
-            {getMediaBySection('results').length > 0 && (
-              <div className="mt-16">
-                <div className="grid md:grid-cols-2 gap-8">
-                  {getMediaBySection('results').map((item) => (
-                    <div key={item.id} className="aspect-[16/10] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
-                      <div className="w-full h-full rounded-xl overflow-hidden">
-                        <OptimizedImage
-                          src={item.media_url}
-                          alt={item.alt_text || 'Results image'}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      {item.caption && (
-                        <p className="text-white/60 text-sm mt-4 text-center">{item.caption}</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
 
             {/* Client Quote */}
             <div className="bg-gradient-to-r from-humble-pink-500/10 via-humble-purple-500/10 to-humble-blue-500/10 rounded-3xl p-12 border border-white/10 text-center">
