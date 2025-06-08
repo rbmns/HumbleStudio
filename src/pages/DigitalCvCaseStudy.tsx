@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Menu, X, Target, Lightbulb, TrendingUp, Link, User, Smartphone, FileText, Palette, CheckCircle, DollarSign, Quote } from 'lucide-react';
@@ -322,7 +321,7 @@ const DigitalCvCaseStudy = () => {
 
             {/* Solution Video */}
             <div className="mb-20">
-              <div className="aspect-[16/9] rounded-3xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
+              <div className="max-w-md mx-auto aspect-[9/16] rounded-3xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
                 <div className="w-full h-full rounded-2xl overflow-hidden">
                   <video
                     src="https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/m-jun8.mov"
