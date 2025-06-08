@@ -72,7 +72,7 @@ const Pricing = () => {
                   </div>
 
                   <div className="text-xs text-white/60 italic leading-relaxed">
-                    "Just getting started? This gives you everything you need to look pro online — without the overwhelm or cost."
+                    Just getting started? This gives you everything you need to look pro online — without the overwhelm or cost.
                   </div>
                 </div>
               </div>
@@ -84,7 +84,7 @@ const Pricing = () => {
                   <p className="text-white/70 text-sm mb-4">Great for small service businesses & creators</p>
                   
                   <div className="mb-6">
-                    <div className="text-3xl font-bold text-humble-purple-500">€149</div>
+                    <div className="text-3xl font-bold text-humble-purple-500">From €99</div>
                   </div>
 
                   <div className="space-y-3 mb-6">
@@ -119,7 +119,7 @@ const Pricing = () => {
                   </div>
 
                   <div className="text-xs text-white/60 italic leading-relaxed">
-                    "A more tailored site to showcase what you do — and start converting visitors into clients."
+                    A more tailored site to showcase what you do — and start converting visitors into clients.
                   </div>
                 </div>
               </div>
@@ -131,7 +131,7 @@ const Pricing = () => {
                   <p className="text-white/70 text-sm mb-4">For those ready to stand out</p>
                   
                   <div className="mb-6">
-                    <div className="text-3xl font-bold text-humble-blue-500">€250–€500</div>
+                    <div className="text-3xl font-bold text-humble-blue-500">€249–€500</div>
                   </div>
 
                   <div className="space-y-3 mb-6">
@@ -162,7 +162,7 @@ const Pricing = () => {
                   </div>
 
                   <div className="text-xs text-white/60 italic leading-relaxed">
-                    "You've got a vision. I'll help bring it to life online — simply and beautifully."
+                    You've got a vision. I'll help bring it to life online — simply and beautifully.
                   </div>
                 </div>
               </div>
