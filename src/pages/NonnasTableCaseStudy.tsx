@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Menu, X } from 'lucide-react';
@@ -277,71 +278,73 @@ const NonnasTableCaseStudy = () => {
       </nav>
       
       {/* Section 1: Project Overview */}
-      <section className="pt-32 pb-20 relative">
+      <section className="pt-32 pb-24 relative">
         <div className="container mx-auto px-6 relative z-10">
-          {/* Hero Image */}
-          <div className="max-w-5xl mx-auto mb-16">
-            <div className="aspect-[16/10] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-1">
-              <div className="w-full h-full rounded-xl">
-                <img
-                  src={caseStudy.hero_image_url || 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/nonnas-table/d-1a.png'}
-                  alt={`${caseStudy.client_name} Website`}
-                  className="w-full h-full object-cover rounded-xl"
-                />
+          <div className="max-w-6xl mx-auto">
+            {/* Project Title & Description - MOVED ABOVE IMAGE */}
+            <div className="text-center mb-16 max-w-4xl mx-auto">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 font-space-grotesk leading-tight">
+                {caseStudy.title}
+              </h1>
+              
+              <p className="text-xl md:text-2xl lg:text-3xl text-white/80 leading-relaxed font-light max-w-3xl mx-auto">
+                {caseStudy.description}
+              </p>
+            </div>
+
+            {/* Hero Image */}
+            <div className="mb-20">
+              <div className="aspect-[16/10] rounded-3xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
+                <div className="w-full h-full rounded-2xl overflow-hidden">
+                  <img
+                    src={caseStudy.hero_image_url || 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/nonnas-table/d-1a.png'}
+                    alt={`${caseStudy.client_name} Website`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* Project Details */}
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 text-center">
-              {caseStudy.title}
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-white/80 mb-12 text-center leading-relaxed">
-              {caseStudy.description}
-            </p>
 
             {/* Project Info Grid */}
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                <h3 className="text-lg font-semibold text-white mb-4">Business Details</h3>
-                <div className="space-y-3 text-white/80">
+            <div className="grid md:grid-cols-2 gap-12 mb-16">
+              <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <h3 className="text-xl font-semibold text-white mb-6 font-space-grotesk">Business Details</h3>
+                <div className="space-y-4 text-white/80 text-lg">
                   <div>
-                    <strong className="text-white">Business:</strong> {caseStudy.client_name}
+                    <strong className="text-white font-medium">Business:</strong> {caseStudy.client_name}
                   </div>
                   <div>
-                    <strong className="text-white">Type:</strong> Italian Restaurant
+                    <strong className="text-white font-medium">Type:</strong> Italian Restaurant
                   </div>
                   <div>
-                    <strong className="text-white">Location:</strong> {caseStudy.client_location}
+                    <strong className="text-white font-medium">Location:</strong> {caseStudy.client_location}
                   </div>
                 </div>
               </div>
 
-              <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                <h3 className="text-lg font-semibold text-white mb-4">What They Needed</h3>
-                <p className="text-white/80">
+              <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <h3 className="text-xl font-semibold text-white mb-6 font-space-grotesk">What They Needed</h3>
+                <p className="text-white/80 text-lg leading-relaxed">
                   A warm, welcoming digital presence that captures traditional Italian hospitality while providing modern functionality for reservations and online ordering.
                 </p>
               </div>
             </div>
 
             {/* Main Deliverables */}
-            <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-6 border border-white/10 mb-8">
-              <h3 className="text-lg font-semibold text-white mb-4">Main Deliverables</h3>
-              <div className="grid sm:grid-cols-3 gap-4 text-center">
-                <div className="bg-humble-pink-500/20 rounded-lg p-4">
-                  <div className="text-2xl mb-2">🎨</div>
-                  <div className="text-white font-medium">Digital Branding</div>
+            <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10 mb-12">
+              <h3 className="text-xl font-semibold text-white mb-8 text-center font-space-grotesk">Main Deliverables</h3>
+              <div className="grid sm:grid-cols-3 gap-6">
+                <div className="bg-humble-pink-500/20 rounded-xl p-6 text-center border border-humble-pink-500/30">
+                  <div className="text-3xl mb-4">🎨</div>
+                  <div className="text-white font-medium text-lg">Digital Branding</div>
                 </div>
-                <div className="bg-humble-purple-500/20 rounded-lg p-4">
-                  <div className="text-2xl mb-2">🍽️</div>
-                  <div className="text-white font-medium">Restaurant Website</div>
+                <div className="bg-humble-purple-500/20 rounded-xl p-6 text-center border border-humble-purple-500/30">
+                  <div className="text-3xl mb-4">🍽️</div>
+                  <div className="text-white font-medium text-lg">Restaurant Website</div>
                 </div>
-                <div className="bg-humble-blue-500/20 rounded-lg p-4">
-                  <div className="text-2xl mb-2">📱</div>
-                  <div className="text-white font-medium">Online Ordering</div>
+                <div className="bg-humble-blue-500/20 rounded-xl p-6 text-center border border-humble-blue-500/30">
+                  <div className="text-3xl mb-4">📱</div>
+                  <div className="text-white font-medium text-lg">Online Ordering</div>
                 </div>
               </div>
             </div>
@@ -352,10 +355,10 @@ const NonnasTableCaseStudy = () => {
                 href="https://nonnas-table.humblestudio.ai/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-full font-semibold text-lg hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-2xl font-semibold text-xl hover:opacity-90 transition-opacity font-space-grotesk"
               >
                 View Live Website
-                <ExternalLink className="h-5 w-5" />
+                <ExternalLink className="h-6 w-6" />
               </a>
             </div>
           </div>
@@ -363,22 +366,21 @@ const NonnasTableCaseStudy = () => {
       </section>
 
       {/* Section 2: The Challenge */}
-      <section className="py-20 bg-humble-charcoal/20 relative z-10">
+      <section className="py-24 bg-humble-charcoal/20 relative z-10">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-8">
-              <span className="text-6xl mb-4 block">⸻</span>
+            <div className="text-center mb-12">
+              <span className="text-6xl mb-8 block font-light">⸻</span>
             </div>
             
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-space-grotesk">
               The Challenge
             </h2>
             
-            <div className="text-lg text-white/80 leading-relaxed text-center max-w-3xl mx-auto">
+            <div className="text-xl text-white/80 leading-relaxed text-center max-w-3xl mx-auto space-y-6">
               <p>
                 Traditional Italian restaurants face a unique challenge: how do you maintain the authentic, warm charm that makes dining special while meeting modern customer expectations for digital convenience? 
               </p>
-              <br />
               <p>
                 Nonna's Table needed a digital presence that would feel as welcoming as stepping into a family kitchen, but with the functionality to handle reservations, online ordering, and payment processing seamlessly.
               </p>
@@ -388,27 +390,27 @@ const NonnasTableCaseStudy = () => {
       </section>
 
       {/* Section 3: The Solution */}
-      <section className="py-20 relative z-10">
+      <section className="py-24 relative z-10">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-8">
-              <span className="text-6xl mb-4 block">⸻</span>
+            <div className="text-center mb-12">
+              <span className="text-6xl mb-8 block font-light">⸻</span>
             </div>
             
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center flex items-center justify-center gap-3">
-              <span className="text-4xl">💡</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center flex items-center justify-center gap-4 font-space-grotesk">
+              <span className="text-5xl">💡</span>
               The Solution
             </h2>
             
-            <p className="text-lg text-white/80 leading-relaxed text-center max-w-3xl mx-auto mb-16">
+            <p className="text-xl text-white/80 leading-relaxed text-center max-w-3xl mx-auto mb-20">
               We created a comprehensive digital platform that maintains the warmth of Italian hospitality while providing cutting-edge functionality.
             </p>
 
             {/* Solution Features */}
-            <div className="grid md:grid-cols-2 gap-8 mb-16">
-              <div className="space-y-6">
-                <h3 className="text-2xl font-semibold text-white mb-6">Website Features</h3>
-                <div className="space-y-4">
+            <div className="grid md:grid-cols-2 gap-12 mb-20">
+              <div className="space-y-8">
+                <h3 className="text-2xl font-semibold text-white mb-8 font-space-grotesk">Website Features</h3>
+                <div className="space-y-6">
                   {[
                     "Seamless table reservation system with booking overlay",
                     "Direct online ordering for delivery & pickup",
@@ -416,30 +418,30 @@ const NonnasTableCaseStudy = () => {
                     "Mobile-optimized contact and ordering buttons",
                     "Warm, authentic Italian visual design"
                   ].map((feature, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                      <span className="text-white/80">{feature}</span>
+                    <div key={index} className="flex items-start gap-4">
+                      <div className="w-3 h-3 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-2"></div>
+                      <span className="text-white/80 text-lg">{feature}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="space-y-6">
-                <h3 className="text-2xl font-semibold text-white mb-6">Technology & Strategy</h3>
-                <div className="space-y-4">
+              <div className="space-y-8">
+                <h3 className="text-2xl font-semibold text-white mb-8 font-space-grotesk">Technology & Strategy</h3>
+                <div className="space-y-6">
                   <div>
-                    <strong className="text-white">Tech Stack:</strong>
-                    <div className="flex flex-wrap gap-2 mt-2">
+                    <strong className="text-white text-lg font-medium">Tech Stack:</strong>
+                    <div className="flex flex-wrap gap-3 mt-3">
                       {caseStudy.technologies.map((tech, index) => (
-                        <span key={index} className="px-3 py-1 bg-humble-blue-500/20 text-humble-blue-300 rounded text-sm">
+                        <span key={index} className="px-4 py-2 bg-humble-blue-500/20 text-humble-blue-300 rounded-lg border border-humble-blue-500/30">
                           {tech}
                         </span>
                       ))}
                     </div>
                   </div>
                   <div className="text-white/80">
-                    <strong className="text-white">Strategic Decisions:</strong>
-                    <ul className="mt-2 space-y-2">
+                    <strong className="text-white text-lg font-medium">Strategic Decisions:</strong>
+                    <ul className="mt-4 space-y-3 text-lg">
                       <li>• Warm color palette with earthy tones</li>
                       <li>• Classic serif typography for authenticity</li>
                       <li>• Dutch payment integration (iDEAL, MultiSafepay)</li>
@@ -452,26 +454,26 @@ const NonnasTableCaseStudy = () => {
 
             {/* Screenshots Section */}
             {media.length > 0 && (
-              <div className="space-y-16">
-                <h3 className="text-2xl font-semibold text-white text-center mb-8">Website Showcase</h3>
+              <div className="space-y-20">
+                <h3 className="text-3xl font-semibold text-white text-center mb-12 font-space-grotesk">Website Showcase</h3>
                 {media.slice(0, 3).map((mediaItem, index) => (
-                  <div key={mediaItem.id} className={`${index % 2 === 1 ? 'lg:flex-row-reverse' : ''} flex flex-col lg:flex-row items-center gap-12`}>
+                  <div key={mediaItem.id} className={`${index % 2 === 1 ? 'lg:flex-row-reverse' : ''} flex flex-col lg:flex-row items-center gap-16`}>
                     <div className="lg:w-2/3">
-                      <div className="aspect-[16/10] bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-1 rounded-2xl">
+                      <div className="aspect-[16/10] bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2 rounded-3xl">
                         <img
                           src={mediaItem.media_url}
                           alt={mediaItem.alt_text || 'Website feature'}
-                          className="w-full h-full object-cover rounded-xl"
+                          className="w-full h-full object-cover rounded-2xl"
                           loading="lazy"
                         />
                       </div>
                     </div>
                     {mediaItem.caption && (
                       <div className="lg:w-1/3">
-                        <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                          <h4 className="text-xl font-semibold text-white mb-3">{mediaItem.caption}</h4>
+                        <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                          <h4 className="text-2xl font-semibold text-white mb-4 font-space-grotesk">{mediaItem.caption}</h4>
                           {mediaItem.alt_text && (
-                            <p className="text-white/80">{mediaItem.alt_text}</p>
+                            <p className="text-white/80 text-lg leading-relaxed">{mediaItem.alt_text}</p>
                           )}
                         </div>
                       </div>
@@ -485,79 +487,79 @@ const NonnasTableCaseStudy = () => {
       </section>
 
       {/* Section 4: The Results */}
-      <section className="py-20 bg-humble-charcoal/20 relative z-10">
+      <section className="py-24 bg-humble-charcoal/20 relative z-10">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-8">
-              <span className="text-6xl mb-4 block">⸻</span>
+            <div className="text-center mb-12">
+              <span className="text-6xl mb-8 block font-light">⸻</span>
             </div>
             
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center flex items-center justify-center gap-3">
-              <span className="text-4xl">🎯</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center flex items-center justify-center gap-4 font-space-grotesk">
+              <span className="text-5xl">🎯</span>
               The Results
             </h2>
 
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                <div className="text-3xl font-bold text-humble-pink-500 mb-2">{caseStudy.project_duration}</div>
-                <div className="text-white font-medium">Site Launched</div>
-                <div className="text-white/60 text-sm">From concept to live</div>
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
+              <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div className="text-4xl font-bold text-humble-pink-500 mb-3 font-space-grotesk">{caseStudy.project_duration}</div>
+                <div className="text-white font-medium text-lg">Site Launched</div>
+                <div className="text-white/60">From concept to live</div>
               </div>
               
-              <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                <div className="text-3xl font-bold text-humble-purple-500 mb-2">100%</div>
-                <div className="text-white font-medium">Client Satisfaction</div>
-                <div className="text-white/60 text-sm">Exceeded expectations</div>
+              <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div className="text-4xl font-bold text-humble-purple-500 mb-3 font-space-grotesk">100%</div>
+                <div className="text-white font-medium text-lg">Client Satisfaction</div>
+                <div className="text-white/60">Exceeded expectations</div>
               </div>
               
-              <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                <div className="text-3xl font-bold text-humble-blue-500 mb-2">✨</div>
-                <div className="text-white font-medium">Professional Presence</div>
-                <div className="text-white/60 text-sm">Complete digital transformation</div>
+              <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div className="text-4xl font-bold text-humble-blue-500 mb-3 font-space-grotesk">✨</div>
+                <div className="text-white font-medium text-lg">Professional Presence</div>
+                <div className="text-white/60">Complete digital transformation</div>
               </div>
             </div>
 
             {/* Client Quote */}
-            <div className="bg-gradient-to-r from-humble-pink-500/10 via-humble-purple-500/10 to-humble-blue-500/10 rounded-2xl p-8 border border-white/10 text-center">
-              <div className="text-6xl text-humble-pink-500 mb-4">"</div>
-              <blockquote className="text-xl md:text-2xl text-white font-serif italic mb-6">
+            <div className="bg-gradient-to-r from-humble-pink-500/10 via-humble-purple-500/10 to-humble-blue-500/10 rounded-3xl p-12 border border-white/10 text-center">
+              <div className="text-8xl text-humble-pink-500 mb-6 font-serif">"</div>
+              <blockquote className="text-2xl md:text-3xl text-white font-serif italic mb-8 leading-relaxed">
                 I didn't expect this level of quality so fast — now people can finally find us online and experience our authentic Italian atmosphere before they even visit.
               </blockquote>
-              <div className="text-humble-pink-500 font-medium">— Nonna's Table Team</div>
+              <div className="text-humble-pink-500 font-medium text-lg font-space-grotesk">— Nonna's Table Team</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Section 5: Call to Action */}
-      <section className="py-20 relative z-10">
+      <section className="py-24 relative z-10">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="text-center mb-8">
-              <span className="text-6xl mb-4 block">⸻</span>
+            <div className="text-center mb-12">
+              <span className="text-6xl mb-8 block font-light">⸻</span>
             </div>
             
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 flex items-center justify-center gap-3">
-              <span className="text-4xl">🔗</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 flex items-center justify-center gap-4 font-space-grotesk">
+              <span className="text-5xl">🔗</span>
               Ready for Your Own Success Story?
             </h2>
             
-            <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+            <p className="text-2xl text-white/80 mb-12 max-w-2xl mx-auto font-light">
               💡 Want your own professional website like this — affordable and delivered fast?
             </p>
             
-            <div className="space-y-4">
+            <div className="space-y-6">
               <a
                 href="https://humblestudio.ai/inquiry"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-lg text-white bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-3 px-12 py-5 rounded-2xl font-semibold text-xl text-white bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 hover:opacity-90 transition-opacity font-space-grotesk"
               >
                 Get Started Today
-                <ExternalLink className="h-5 w-5" />
+                <ExternalLink className="h-6 w-6" />
               </a>
               
-              <div className="text-white/60">
+              <div className="text-white/60 text-lg">
                 Professional websites delivered in days, not months
               </div>
             </div>

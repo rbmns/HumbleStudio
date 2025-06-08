@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,700,500,301,300,701,501&display=swap');
 
 @tailwind base;
@@ -70,6 +71,20 @@
   body {
     @apply bg-humble-navy text-white font-space-grotesk;
     background-image: radial-gradient(circle at center, rgba(5, 5, 20, 0.8) 0%, rgba(0, 0, 8, 0.98) 100%);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  
+  /* Bold, minimal typography hierarchy */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-space-grotesk font-bold;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  
+  /* Large headlines get serif treatment for boutique feel */
+  .headline-serif {
+    @apply font-playfair;
   }
 }
 
@@ -95,47 +110,83 @@
     @apply bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all duration-300;
   }
   
+  /* Minimal, bold section styling */
   .section-title {
-    @apply text-3xl md:text-4xl font-bold mb-6 md:mb-8 gradient-text;
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold mb-8 md:mb-12 gradient-text font-space-grotesk;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
   
   .section-padding {
-    @apply py-16 md:py-24;
+    @apply py-20 md:py-32;
   }
   
+  /* Clean, minimal card styling with more whitespace */
   .service-card {
-    @apply bg-humble-charcoal/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-pink-500/50 transition-all duration-300 h-full;
+    @apply bg-humble-charcoal/50 backdrop-blur-sm p-8 md:p-10 rounded-2xl border border-humble-gray-700/50 hover:border-humble-pink-500/50 transition-all duration-300 h-full;
   }
   
   .star-background {
     @apply fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-[-1];
   }
 
-  /* New Brand Components */
+  /* Minimal, bold button styles */
   .brand-button-primary {
     background-color: var(--brand-neon-pink);
     color: var(--brand-white);
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     font-weight: 600;
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
     transition: all 150ms ease;
+    letter-spacing: -0.01em;
   }
 
   .brand-button-primary:hover {
     opacity: 0.9;
-    box-shadow: 0 0 20px rgba(255, 0, 127, 0.3);
+    box-shadow: 0 0 30px rgba(255, 0, 127, 0.3);
+    transform: translateY(-1px);
   }
 
   .brand-button-secondary {
-    border: 1px solid var(--brand-neon-pink);
+    border: 2px solid var(--brand-neon-pink);
     color: var(--brand-neon-pink);
     background: transparent;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     font-weight: 600;
+    padding: 0.875rem 1.875rem;
+    font-size: 1.125rem;
     transition: all 150ms ease;
+    letter-spacing: -0.01em;
   }
 
   .brand-button-secondary:hover {
     background-color: rgba(255, 0, 127, 0.1);
+    transform: translateY(-1px);
+  }
+  
+  /* Minimal typography with generous spacing */
+  .text-minimal {
+    @apply leading-relaxed;
+    letter-spacing: -0.01em;
+  }
+  
+  /* Bold visual hierarchy */
+  .visual-hierarchy-bold h1 {
+    @apply text-5xl md:text-6xl lg:text-7xl font-bold;
+  }
+  
+  .visual-hierarchy-bold h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold;
+  }
+  
+  .visual-hierarchy-bold h3 {
+    @apply text-2xl md:text-3xl font-semibold;
+  }
+  
+  /* Generous whitespace containers */
+  .container-minimal {
+    @apply max-w-5xl mx-auto px-8 md:px-12;
   }
 }
 
@@ -154,39 +205,49 @@
   animation: fade-in 0.3s ease-out forwards;
 }
 
-/* Optimize for mobile */
+/* Mobile optimizations with larger touch targets */
 @media (max-width: 640px) {
   html {
-    font-size: 16px; /* Increased base font for better readability on mobile */
+    font-size: 16px;
   }
 
   .container {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  /* Maintain hierarchy on mobile */
+  h1 {
+    font-size: 2.5rem;
+    line-height: 1.1;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    line-height: 1.2;
   }
   
   p {
-    font-size: 1.05rem;
-  }
-  
-  h2.section-title {
-    font-size: 2rem;
+    font-size: 1.125rem;
+    line-height: 1.6;
   }
 }
 
 /* Improve tap target sizes on mobile */
 @media (max-width: 768px) {
   button, a {
-    min-height: 44px;
-    min-width: 44px;
+    min-height: 48px;
+    min-width: 48px;
   }
   
-  .text-sm {
-    font-size: 0.9rem;
+  .brand-button-primary,
+  .brand-button-secondary {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
   }
 }
 
-/* Reduce motion for users who prefer it */
+/* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
@@ -196,10 +257,14 @@
   }
 }
 
-/* Additional mobile optimizations */
+/* Additional mobile spacing optimizations */
 @media (max-width: 480px) {
   .section-padding {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  
+  .service-card {
+    padding: 1.5rem;
   }
 }
