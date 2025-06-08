@@ -30,9 +30,20 @@ interface CaseStudy {
   cta_button_text: string;
 }
 
+interface CaseStudyMedia {
+  id: string;
+  media_url: string;
+  alt_text?: string;
+  caption?: string;
+  section?: string;
+  media_type: string;
+  display_order: number;
+}
+
 const DigitalCvCaseStudy = () => {
   const navigate = useNavigate();
   const [caseStudy, setCaseStudy] = useState<CaseStudy | null>(null);
+  const [caseStudyMedia, setCaseStudyMedia] = useState<CaseStudyMedia[]>([]);
   const [loading, setLoading] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -68,6 +79,20 @@ const DigitalCvCaseStudy = () => {
             : []
         };
         setCaseStudy(processedCaseStudy);
+
+        // Fetch case study media
+        const { data: mediaData, error: mediaError } = await supabase
+          .from('case_study_media')
+          .select('*')
+          .eq('case_study_id', caseStudyData.id)
+          .order('display_order', { ascending: true });
+
+        if (mediaError) {
+          console.error('Error fetching case study media:', mediaError);
+        } else {
+          console.log('Case study media from DB:', mediaData);
+          setCaseStudyMedia(mediaData || []);
+        }
       }
     } catch (error) {
       console.error('Error in fetchCaseStudy:', error);
@@ -187,6 +212,40 @@ const DigitalCvCaseStudy = () => {
                 </div>
               </div>
             </div>
+
+            {/* Case Study Media Images */}
+            {caseStudyMedia.length > 0 && (
+              <div className="mb-20">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {caseStudyMedia.map((media) => (
+                    <div key={media.id} className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
+                      <div className="w-full h-full rounded-xl overflow-hidden">
+                        {media.media_type === 'video' ? (
+                          <video
+                            src={media.media_url}
+                            className="w-full h-full object-cover object-left-top"
+                            controls
+                            muted
+                            playsInline
+                          >
+                            Your browser does not support the video tag.
+                          </video>
+                        ) : (
+                          <OptimizedImage
+                            src={media.media_url}
+                            alt={media.alt_text || 'Case study image'}
+                            className="w-full h-full object-cover object-left-top"
+                          />
+                        )}
+                      </div>
+                      {media.caption && (
+                        <p className="text-white/60 text-sm mt-3 text-center">{media.caption}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Project Info Grid */}
             <div className="grid md:grid-cols-2 gap-12 mb-16">
