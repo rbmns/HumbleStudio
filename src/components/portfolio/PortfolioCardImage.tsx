@@ -1,5 +1,6 @@
 
 import React, { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import OptimizedImage from './OptimizedImage';
 
 interface PortfolioCardImageProps {
@@ -24,6 +25,7 @@ const PortfolioCardImage: React.FC<PortfolioCardImageProps> = ({
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const navigate = useNavigate();
 
   const handleImageLoad = useCallback(() => {
     setImageLoaded(true);
@@ -33,6 +35,26 @@ const PortfolioCardImage: React.FC<PortfolioCardImageProps> = ({
     setImageError(true);
     setImageLoaded(true);
   }, []);
+
+  const handleButtonClick = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (projectTitle === "Nonna's Table") {
+      navigate('/case-studies/nonnas-table');
+    } else if (projectTitle === "Digital Resume Site") {
+      navigate('/case-studies/digital-cv');
+    } else {
+      onCardClick(e);
+    }
+  }, [projectTitle, navigate, onCardClick]);
+
+  const getButtonText = () => {
+    if (projectTitle === "Nonna's Table" || projectTitle === "Digital Resume Site") {
+      return 'View Case Study';
+    }
+    return 'View Project';
+  };
 
   return (
     <div className={`relative overflow-hidden bg-humble-charcoal/50 ${
@@ -66,9 +88,9 @@ const PortfolioCardImage: React.FC<PortfolioCardImageProps> = ({
             className={`bg-white/90 hover:bg-white text-humble-charcoal px-4 py-2 rounded-full font-medium ${
               featured ? 'text-lg px-6 py-3' : 'text-sm'
             }`}
-            onClick={onCardClick}
+            onClick={handleButtonClick}
           >
-            {projectTitle === "Nonna's Table" ? 'View Case Study' : 'View Project'}
+            {getButtonText()}
           </button>
         </div>
       )}
