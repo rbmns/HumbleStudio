@@ -213,40 +213,6 @@ const DigitalCvCaseStudy = () => {
               </div>
             </div>
 
-            {/* Case Study Media Images */}
-            {caseStudyMedia.length > 0 && (
-              <div className="mb-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {caseStudyMedia.map((media) => (
-                    <div key={media.id} className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
-                      <div className="w-full h-full rounded-xl overflow-hidden">
-                        {media.media_type === 'video' ? (
-                          <video
-                            src={media.media_url}
-                            className="w-full h-full object-cover object-left-top"
-                            controls
-                            muted
-                            playsInline
-                          >
-                            Your browser does not support the video tag.
-                          </video>
-                        ) : (
-                          <OptimizedImage
-                            src={media.media_url}
-                            alt={media.alt_text || 'Case study image'}
-                            className="w-full h-full object-cover object-left-top"
-                          />
-                        )}
-                      </div>
-                      {media.caption && (
-                        <p className="text-white/60 text-sm mt-3 text-center">{media.caption}</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
             {/* Project Info Grid */}
             <div className="grid md:grid-cols-2 gap-12 mb-16">
               <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
@@ -352,6 +318,40 @@ const DigitalCvCaseStudy = () => {
             <p className="text-xl text-white/80 leading-relaxed text-center max-w-3xl mx-auto mb-20">
               We built a modern one-page resume website that combines clarity, confidence, and personal style — all in under 24 hours.
             </p>
+
+            {/* Case Study Media Images from Database */}
+            {caseStudyMedia.length > 0 && (
+              <div className="mb-20">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {caseStudyMedia.map((media) => (
+                    <div key={media.id} className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
+                      <div className="w-full h-full rounded-xl overflow-hidden">
+                        {media.media_type === 'video' ? (
+                          <video
+                            src={media.media_url}
+                            className="w-full h-full object-cover object-left-top"
+                            controls
+                            muted
+                            playsInline
+                          >
+                            Your browser does not support the video tag.
+                          </video>
+                        ) : (
+                          <OptimizedImage
+                            src={media.media_url}
+                            alt={media.alt_text || 'Case study image'}
+                            className="w-full h-full object-cover object-left-top"
+                          />
+                        )}
+                      </div>
+                      {media.caption && (
+                        <p className="text-white/60 text-sm mt-3 text-center">{media.caption}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Mobile Demo Section */}
             <div className="flex flex-col lg:flex-row items-center gap-16 mb-20">
