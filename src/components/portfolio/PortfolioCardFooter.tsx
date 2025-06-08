@@ -1,6 +1,6 @@
 
-import React, { useCallback } from 'react';
-import { ExternalLink, Clock } from 'lucide-react';
+import React from 'react';
+import { Clock, ExternalLink } from 'lucide-react';
 
 interface PortfolioCardFooterProps {
   buildTime?: string;
@@ -17,49 +17,34 @@ const PortfolioCardFooter: React.FC<PortfolioCardFooterProps> = ({
   projectTitle,
   featured = false
 }) => {
-  const handleLinkClick = useCallback((e: React.MouseEvent) => {
+  const handleLinkClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     e.stopPropagation();
-  }, []);
+    
+    if (link) {
+      window.open(link, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   return (
-    <div className="flex items-center justify-between pt-4 border-t border-white/10">
+    <div className={`flex items-center justify-between ${featured ? 'mt-8' : 'mt-6'}`}>
       {buildTime && (
-        <div className={`flex items-center gap-2 text-humble-blue-400 ${
-          featured ? 'text-base' : 'text-sm'
-        }`}>
-          <Clock className={featured ? 'h-5 w-5' : 'h-4 w-4'} />
-          <span>{buildTime}</span>
+        <div className="flex items-center gap-2 text-white/60">
+          <Clock className="h-4 w-4" />
+          <span className={`${featured ? 'text-base' : 'text-sm'}`}>{buildTime}</span>
         </div>
       )}
-
-      {!isComingSoon && link && projectTitle !== "Nonna's Table" && (
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`text-humble-pink-500 hover:text-humble-pink-400 font-medium flex items-center gap-2 transition-colors ${
-            featured ? 'text-lg' : 'text-sm'
-          }`}
+      
+      {!isComingSoon && link && (
+        <button
           onClick={handleLinkClick}
-        >
-          View Site
-          <ExternalLink className={featured ? 'h-5 w-5' : 'h-4 w-4'} />
-        </a>
-      )}
-
-      {!isComingSoon && projectTitle === "Nonna's Table" && (
-        <a
-          href="https://nonnas-table.humblestudio.ai/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`text-humble-pink-500 hover:text-humble-pink-400 font-medium flex items-center gap-2 transition-colors ${
-            featured ? 'text-lg' : 'text-sm'
+          className={`flex items-center gap-2 text-humble-pink-500 hover:text-humble-pink-400 transition-colors ${
+            featured ? 'text-base font-medium' : 'text-sm'
           }`}
-          onClick={handleLinkClick}
         >
           View Live Site
-          <ExternalLink className={featured ? 'h-5 w-5' : 'h-4 w-4'} />
-        </a>
+          <ExternalLink className="h-4 w-4" />
+        </button>
       )}
     </div>
   );
