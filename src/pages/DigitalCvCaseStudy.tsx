@@ -4,6 +4,7 @@ import { ArrowLeft, ExternalLink, Menu, X, Target, Lightbulb, TrendingUp, Link, 
 import { supabase } from '@/integrations/supabase/client';
 import StarBackground from '@/components/StarBackground';
 import Contact from '@/components/Contact';
+import OptimizedImage from '@/components/portfolio/OptimizedImage';
 
 interface CaseStudy {
   id: string;
@@ -109,6 +110,10 @@ const DigitalCvCaseStudy = () => {
     }
   };
 
+  const getMediaBySection = (section: string) => {
+    return media.filter(item => item.section === section);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-humble-navy relative">
@@ -204,7 +209,7 @@ const DigitalCvCaseStudy = () => {
             <div className="mb-20">
               <div className="aspect-[16/10] rounded-3xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
                 <div className="w-full h-full rounded-2xl overflow-hidden">
-                  <img
+                  <OptimizedImage
                     src={caseStudy.hero_image_url || 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png'}
                     alt={`Digital CV Website`}
                     className="w-full h-full object-cover object-left-top"
@@ -212,6 +217,28 @@ const DigitalCvCaseStudy = () => {
                 </div>
               </div>
             </div>
+
+            {/* Additional Overview Media */}
+            {getMediaBySection('overview').length > 0 && (
+              <div className="mb-20">
+                <div className="grid md:grid-cols-2 gap-8">
+                  {getMediaBySection('overview').map((item) => (
+                    <div key={item.id} className="aspect-[16/10] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
+                      <div className="w-full h-full rounded-xl overflow-hidden">
+                        <OptimizedImage
+                          src={item.media_url}
+                          alt={item.alt_text || 'Case study image'}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      {item.caption && (
+                        <p className="text-white/60 text-sm mt-4 text-center">{item.caption}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Project Info Grid */}
             <div className="grid md:grid-cols-2 gap-12 mb-16">
@@ -337,6 +364,28 @@ const DigitalCvCaseStudy = () => {
               </div>
             </div>
 
+            {/* Solution Media */}
+            {getMediaBySection('solution').length > 0 && (
+              <div className="mb-20">
+                <div className="grid md:grid-cols-2 gap-8">
+                  {getMediaBySection('solution').map((item) => (
+                    <div key={item.id} className="aspect-[16/10] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
+                      <div className="w-full h-full rounded-xl overflow-hidden">
+                        <OptimizedImage
+                          src={item.media_url}
+                          alt={item.alt_text || 'Solution image'}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      {item.caption && (
+                        <p className="text-white/60 text-sm mt-4 text-center">{item.caption}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Key Features */}
             <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10 mb-20">
               <h3 className="text-2xl font-semibold text-white mb-8 text-center font-space-grotesk">Key Features</h3>
@@ -400,6 +449,28 @@ const DigitalCvCaseStudy = () => {
                 <div className="text-white font-medium text-lg">Total cost: just €49</div>
               </div>
             </div>
+
+            {/* Results Media */}
+            {getMediaBySection('results').length > 0 && (
+              <div className="mt-16">
+                <div className="grid md:grid-cols-2 gap-8">
+                  {getMediaBySection('results').map((item) => (
+                    <div key={item.id} className="aspect-[16/10] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
+                      <div className="w-full h-full rounded-xl overflow-hidden">
+                        <OptimizedImage
+                          src={item.media_url}
+                          alt={item.alt_text || 'Results image'}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      {item.caption && (
+                        <p className="text-white/60 text-sm mt-4 text-center">{item.caption}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Client Quote */}
             <div className="bg-gradient-to-r from-humble-pink-500/10 via-humble-purple-500/10 to-humble-blue-500/10 rounded-3xl p-12 border border-white/10 text-center">
