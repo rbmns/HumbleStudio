@@ -71,6 +71,19 @@ const Pricing = () => {
                     </div>
                   </div>
 
+                  {/* Example Projects */}
+                  <div className="bg-humble-charcoal/40 rounded-lg p-4 mb-4 border border-humble-pink-500/20">
+                    <div className="text-xs text-humble-pink-300 font-medium mb-2">Examples:</div>
+                    <div className="space-y-1">
+                      <a 
+                        href="/case-studies/digital-cv" 
+                        className="block text-xs text-white/70 hover:text-humble-pink-300 transition-colors"
+                      >
+                        → Digital Resume Site
+                      </a>
+                    </div>
+                  </div>
+
                   <div className="text-xs text-white/60 italic leading-relaxed">
                     Just getting started? This gives you everything you need to look pro online — without the overwhelm or cost.
                   </div>
@@ -158,6 +171,19 @@ const Pricing = () => {
                     <div className="flex items-start gap-2 text-white/80 text-sm">
                       <span className="text-humble-blue-500 mt-0.5">✓</span>
                       <span>Revisions + 1-on-1 support call</span>
+                    </div>
+                  </div>
+
+                  {/* Example Projects */}
+                  <div className="bg-humble-charcoal/40 rounded-lg p-4 mb-4 border border-humble-blue-500/20">
+                    <div className="text-xs text-humble-blue-300 font-medium mb-2">Examples:</div>
+                    <div className="space-y-1">
+                      <a 
+                        href="/case-studies/nonnas-table" 
+                        className="block text-xs text-white/70 hover:text-humble-blue-300 transition-colors"
+                      >
+                        → Nonna's Table Restaurant
+                      </a>
                     </div>
                   </div>
 

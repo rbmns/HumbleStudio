@@ -64,7 +64,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
             <img
               src={placeholder}
               alt=""
-              className="w-full h-full object-cover blur-sm opacity-50"
+              className="w-full h-full object-cover object-left-top blur-sm opacity-50"
             />
           ) : (
             <div className="w-4 h-4 border-2 border-humble-pink-500 border-t-transparent rounded-full animate-spin"></div>
@@ -84,7 +84,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
         <img
           src={src}
           alt={alt}
-          className={`w-full h-full object-cover transition-opacity duration-300 ${
+          className={`w-full h-full object-cover object-left-top transition-opacity duration-300 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           onLoad={handleLoad}
