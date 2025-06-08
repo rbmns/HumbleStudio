@@ -1,6 +1,7 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Menu, X } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Menu, X, Target, Lightbulb, TrendingUp, Link, User, Smartphone, FileText, Palette, CheckCircle, DollarSign, Quote } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import StarBackground from '@/components/StarBackground';
 import Contact from '@/components/Contact';
@@ -196,7 +197,7 @@ const DigitalCvCaseStudy = () => {
             {/* Project Title & Description - ABOVE IMAGE */}
             <div className="text-center mb-16 max-w-4xl mx-auto">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 font-space-grotesk leading-tight">
-                🚀 Digital CV Site
+                Digital CV Site
               </h1>
             </div>
 
@@ -218,14 +219,23 @@ const DigitalCvCaseStudy = () => {
               <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
                 <h3 className="text-xl font-semibold text-white mb-6 font-space-grotesk">Project Details</h3>
                 <div className="space-y-4 text-white/80 text-lg">
-                  <div>
-                    <strong className="text-white font-medium">Type:</strong> Personal Branding / Career Portfolio
+                  <div className="flex items-start gap-3">
+                    <User className="h-5 w-5 text-humble-pink-500 mt-1 flex-shrink-0" />
+                    <div>
+                      <strong className="text-white font-medium">Type:</strong> Personal Branding / Career Portfolio
+                    </div>
                   </div>
-                  <div>
-                    <strong className="text-white font-medium">Goal:</strong> Stand out from the crowd & impress recruiters
+                  <div className="flex items-start gap-3">
+                    <Target className="h-5 w-5 text-humble-purple-500 mt-1 flex-shrink-0" />
+                    <div>
+                      <strong className="text-white font-medium">Goal:</strong> Stand out from the crowd & impress recruiters
+                    </div>
                   </div>
-                  <div>
-                    <strong className="text-white font-medium">Solution:</strong> Clean, mobile-friendly one-pager — live in 1 day
+                  <div className="flex items-start gap-3">
+                    <Lightbulb className="h-5 w-5 text-humble-blue-500 mt-1 flex-shrink-0" />
+                    <div>
+                      <strong className="text-white font-medium">Solution:</strong> Clean, mobile-friendly one-pager — live in 1 day
+                    </div>
                   </div>
                 </div>
               </div>
@@ -239,7 +249,7 @@ const DigitalCvCaseStudy = () => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 px-8 py-3 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-xl font-semibold text-lg hover:opacity-90 transition-opacity"
                   >
-                    🖥️ See the site → rosiebiemans.com
+                    See the site → rosiebiemans.com
                     <ExternalLink className="h-5 w-5" />
                   </a>
                 </div>
@@ -257,8 +267,9 @@ const DigitalCvCaseStudy = () => {
               <span className="text-6xl mb-8 block font-light">⸻</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-space-grotesk">
-              🧩 The Challenge
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-space-grotesk flex items-center justify-center gap-4">
+              <Target className="h-12 w-12 text-humble-pink-500" />
+              The Challenge
             </h2>
             
             <div className="text-xl text-white/80 leading-relaxed space-y-6">
@@ -300,8 +311,9 @@ const DigitalCvCaseStudy = () => {
               <span className="text-6xl mb-8 block font-light">⸻</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-space-grotesk">
-              💡 The Solution
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-space-grotesk flex items-center justify-center gap-4">
+              <Lightbulb className="h-12 w-12 text-humble-purple-500" />
+              The Solution
             </h2>
             
             <p className="text-xl text-white/80 leading-relaxed text-center max-w-3xl mx-auto mb-20">
@@ -313,19 +325,19 @@ const DigitalCvCaseStudy = () => {
               <h3 className="text-2xl font-semibold text-white mb-8 text-center font-space-grotesk">Key Features</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="flex items-start gap-4">
-                  <span className="text-2xl">✍️</span>
+                  <FileText className="h-6 w-6 text-humble-pink-500 mt-1 flex-shrink-0" />
                   <span className="text-white/80 text-lg">Structured layout with skills, experience & intro</span>
                 </div>
                 <div className="flex items-start gap-4">
-                  <span className="text-2xl">📱</span>
+                  <Smartphone className="h-6 w-6 text-humble-purple-500 mt-1 flex-shrink-0" />
                   <span className="text-white/80 text-lg">Fully responsive and mobile-friendly</span>
                 </div>
                 <div className="flex items-start gap-4">
-                  <span className="text-2xl">📄</span>
+                  <FileText className="h-6 w-6 text-humble-blue-500 mt-1 flex-shrink-0" />
                   <span className="text-white/80 text-lg">Downloadable CV PDF</span>
                 </div>
                 <div className="flex items-start gap-4">
-                  <span className="text-2xl">🎨</span>
+                  <Palette className="h-6 w-6 text-humble-indigo-500 mt-1 flex-shrink-0" />
                   <span className="text-white/80 text-lg">Minimal yet polished design</span>
                 </div>
               </div>
@@ -345,35 +357,36 @@ const DigitalCvCaseStudy = () => {
               <span className="text-6xl mb-8 block font-light">⸻</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-space-grotesk">
-              🎯 The Results
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-space-grotesk flex items-center justify-center gap-4">
+              <TrendingUp className="h-12 w-12 text-humble-blue-500" />
+              The Results
             </h2>
 
             <div className="grid md:grid-cols-2 gap-8 mb-16">
               <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <div className="text-4xl font-bold text-humble-pink-500 mb-3 font-space-grotesk">✅</div>
+                <CheckCircle className="h-12 w-12 text-humble-pink-500 mx-auto mb-4" />
                 <div className="text-white font-medium text-lg">Site launched in a day</div>
               </div>
               
               <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <div className="text-4xl font-bold text-humble-purple-500 mb-3 font-space-grotesk">✅</div>
+                <CheckCircle className="h-12 w-12 text-humble-purple-500 mx-auto mb-4" />
                 <div className="text-white font-medium text-lg">Immediate positive feedback</div>
               </div>
               
               <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <div className="text-4xl font-bold text-humble-blue-500 mb-3 font-space-grotesk">✅</div>
+                <CheckCircle className="h-12 w-12 text-humble-blue-500 mx-auto mb-4" />
                 <div className="text-white font-medium text-lg">More confidence applying for jobs</div>
               </div>
               
               <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <div className="text-4xl font-bold text-humble-pink-500 mb-3 font-space-grotesk">€49</div>
-                <div className="text-white font-medium text-lg">Total cost</div>
+                <DollarSign className="h-12 w-12 text-humble-pink-500 mx-auto mb-4" />
+                <div className="text-white font-medium text-lg">Total cost: just €49</div>
               </div>
             </div>
 
             {/* Client Quote */}
             <div className="bg-gradient-to-r from-humble-pink-500/10 via-humble-purple-500/10 to-humble-blue-500/10 rounded-3xl p-12 border border-white/10 text-center">
-              <div className="text-8xl text-humble-pink-500 mb-6 font-serif">"</div>
+              <Quote className="h-16 w-16 text-humble-pink-500 mx-auto mb-6" />
               <blockquote className="text-2xl md:text-3xl text-white font-serif italic mb-8 leading-relaxed">
                 Since the CV went live, I've had lots of interviews — and many compliments from potential employers.
               </blockquote>
@@ -391,8 +404,9 @@ const DigitalCvCaseStudy = () => {
               <span className="text-6xl mb-8 block font-light">⸻</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 font-space-grotesk">
-              🔗 Want a site like this?
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 font-space-grotesk flex items-center justify-center gap-4">
+              <Link className="h-12 w-12 text-humble-pink-500" />
+              Want a site like this?
             </h2>
             
             <p className="text-2xl text-white/80 mb-12 max-w-2xl mx-auto font-light">
