@@ -276,27 +276,11 @@ const NonnasTableCaseStudy = () => {
         </div>
       </nav>
       
-      {/* Hero Section */}
+      {/* Section 1: Project Overview */}
       <section className="pt-32 pb-20 relative">
-        <div className="container mx-auto px-6 relative z-10">          
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 font-space-grotesk">
-              {caseStudy.title}
-            </h1>
-            {caseStudy.subtitle && (
-              <p className="text-xl md:text-2xl text-gray-300 mb-4 font-serif">
-                {caseStudy.subtitle}
-              </p>
-            )}
-            {caseStudy.description && (
-              <p className="text-lg text-gray-400 font-serif leading-relaxed">
-                {caseStudy.description}
-              </p>
-            )}
-          </div>
-
-          {/* Hero Image - Large */}
-          <div className="max-w-6xl mx-auto px-4 md:px-8">
+        <div className="container mx-auto px-6 relative z-10">
+          {/* Hero Image */}
+          <div className="max-w-5xl mx-auto mb-16">
             <div className="aspect-[16/10] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-1">
               <div className="w-full h-full rounded-xl">
                 <img
@@ -307,231 +291,276 @@ const NonnasTableCaseStudy = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Challenge/Process Section */}
-      <section className="py-20 relative z-10">
-        <div className="container mx-auto px-6">
+          {/* Project Details */}
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-space-grotesk bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">
-              {caseStudy.challenge_heading}
-            </h2>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 text-center">
+              {caseStudy.title}
+            </h1>
             
-            <div className="text-lg text-gray-300 leading-relaxed font-serif space-y-6">
-              <p>
-                Our approach to developing the digital solution for the Nonna's Table concept involved a methodical sequence, emphasizing both aesthetic precision and functional excellence:
-              </p>
-              
-              <div>
-                <h3 className="text-xl font-semibold text-white mb-3 font-space-grotesk">Defining Vision & Style</h3>
-                <p>
-                  We began by meticulously defining the brand's essence. This involved establishing a digital brand identity and a moodboard to capture the "warm & authentic Italian comfort" that a restaurant like Nonna's Table embodies. This foundational work guided every subsequent visual decision, including the selection of a color palette (warm neutrals, earthy tones, fresh accents), appropriate typography (classic serifs for authenticity, clean sans-serifs for readability), and a consistent imagery style (rustic-yet-refined food photography, inviting interior shots).
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-white mb-3 font-space-grotesk">Strategic System Selection & Architecture</h3>
-                <p className="mb-4">
-                  With the visual identity set, we designed the website's main sections, prioritizing intuitive navigation and a user-friendly experience reflecting the restaurant's welcoming atmosphere. Simultaneously, extensive research into best practices for restaurant technology led to the identification and integration of the most suitable systems for core operations:
-                </p>
-                <ul className="space-y-3 ml-6">
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                    <span>A seamless table reservation system to facilitate direct bookings, implemented with a booking overlay for a smooth user flow.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                    <span>A robust online ordering system (for both delivery & pickup) powered by Sitedish, chosen for its efficiency and local relevance within the Netherlands.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                    <span>Secure payment integrations with MultiSafepay, ensuring smooth processing of essential Dutch payment methods like iDEAL, alongside credit cards and digital wallets.</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-white mb-3 font-space-grotesk">Implementation & Refinement</h3>
-                <p className="mb-4">
-                  The final phase focused on the detailed development and rigorous testing of all integrated features. This included:
-                </p>
-                <ul className="space-y-3 ml-6">
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                    <span>A dedicated admin tool for efficient order management, designed to centralize incoming orders from all channels.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                    <span>Automated email notifications to streamline communication regarding new orders.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                    <span>A beautifully designed, interactive menu showcase that reflects the established visual style.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                    <span>Easy-access buttons for mobile users to reserve, call, or order online, ensuring critical actions are always a tap away.</span>
-                  </li>
-                </ul>
-                <p className="mt-4">
-                  Comprehensive testing ensured flawless functionality, a consistent user experience, and a pixel-perfect rendition of the visual style across all devices.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Media Gallery with alternating layout */}
-      {media.length > 0 && (
-        <section className="py-20 relative z-10">
-          <div className="container mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-16 font-space-grotesk bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent text-center">
-              Project Gallery
-            </h2>
-            
-            <div className="space-y-24">
-              {media.map((mediaItem, index) => (
-                <div key={mediaItem.id} className={`max-w-6xl mx-auto ${index % 2 === 1 ? 'flex flex-col lg:flex-row-reverse items-center gap-12' : 'flex flex-col lg:flex-row items-center gap-12'}`}>
-                  {/* Large Image */}
-                  <div className="lg:w-2/3">
-                    <div className="aspect-[16/10] bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-1 rounded-2xl">
-                      <img
-                        src={mediaItem.media_url}
-                        alt={mediaItem.alt_text || mediaItem.caption || 'Case study image'}
-                        className="w-full h-full object-cover rounded-xl"
-                        loading="lazy"
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Text Content */}
-                  {mediaItem.caption && (
-                    <div className="lg:w-1/3">
-                      <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                        <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 font-space-grotesk">
-                          {mediaItem.caption}
-                        </h3>
-                        {mediaItem.alt_text && (
-                          <p className="text-gray-300 font-serif leading-relaxed">
-                            {mediaItem.alt_text}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Solution Section */}
-      <section className="py-20 relative z-10">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-space-grotesk bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">
-              {caseStudy.solution_heading}
-            </h2>
-            
-            <div className="text-lg text-gray-300 leading-relaxed mb-12 font-serif">
-              <p className="mb-6">
-                The resulting digital platform for Nonna's Table is equipped with powerful features designed to empower a modern restaurant:
-              </p>
-              <ul className="space-y-4 mb-6">
-                {caseStudy.key_features.map((feature, index) => {
-                  const [title, description] = feature.includes(':') ? feature.split(':', 2) : [feature, ''];
-                  return (
-                    <li key={index} className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
-                      <div>
-                        <strong className="text-white">{title}:</strong>
-                        {description && <span> {description}</span>}
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Impact & Results Section */}
-      <section className="py-20 bg-humble-charcoal/20 relative z-10">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-space-grotesk bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">
-              {caseStudy.impact_heading}
-            </h2>
-            <p className="text-lg text-gray-300 leading-relaxed mb-12 font-serif">
-              {caseStudy.impact_content}
+            <p className="text-xl md:text-2xl text-white/80 mb-12 text-center leading-relaxed">
+              {caseStudy.description}
             </p>
 
-            {/* Results Grid */}
-            <div className="grid md:grid-cols-3 gap-8 px-4 md:px-0">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-white">🌐</span>
+            {/* Project Info Grid */}
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                <h3 className="text-lg font-semibold text-white mb-4">Business Details</h3>
+                <div className="space-y-3 text-white/80">
+                  <div>
+                    <strong className="text-white">Business:</strong> {caseStudy.client_name}
+                  </div>
+                  <div>
+                    <strong className="text-white">Type:</strong> Italian Restaurant
+                  </div>
+                  <div>
+                    <strong className="text-white">Location:</strong> {caseStudy.client_location}
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2 font-space-grotesk">Professional Website</h3>
-                <p className="text-gray-400 font-serif">Custom-branded responsive design</p>
               </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-humble-purple-500 to-humble-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-white">💼</span>
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-2 font-space-grotesk">Streamlined Operations</h3>
-                <p className="text-gray-400 font-serif">Integrated ordering and reservation systems</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-humble-blue-500 to-humble-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-white">⭐</span>
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-2 font-space-grotesk">Enhanced Experience</h3>
-                <p className="text-gray-400 font-serif">Improved customer journey and engagement</p>
+
+              <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                <h3 className="text-lg font-semibold text-white mb-4">What They Needed</h3>
+                <p className="text-white/80">
+                  A warm, welcoming digital presence that captures traditional Italian hospitality while providing modern functionality for reservations and online ordering.
+                </p>
               </div>
             </div>
 
-            {/* Live Website Link */}
-            <div className="text-center mt-12">
+            {/* Main Deliverables */}
+            <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-6 border border-white/10 mb-8">
+              <h3 className="text-lg font-semibold text-white mb-4">Main Deliverables</h3>
+              <div className="grid sm:grid-cols-3 gap-4 text-center">
+                <div className="bg-humble-pink-500/20 rounded-lg p-4">
+                  <div className="text-2xl mb-2">🎨</div>
+                  <div className="text-white font-medium">Digital Branding</div>
+                </div>
+                <div className="bg-humble-purple-500/20 rounded-lg p-4">
+                  <div className="text-2xl mb-2">🍽️</div>
+                  <div className="text-white font-medium">Restaurant Website</div>
+                </div>
+                <div className="bg-humble-blue-500/20 rounded-lg p-4">
+                  <div className="text-2xl mb-2">📱</div>
+                  <div className="text-white font-medium">Online Ordering</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Live Site Link */}
+            <div className="text-center">
               <a
                 href="https://nonnas-table.humblestudio.ai/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-full font-semibold font-space-grotesk hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-full font-semibold text-lg hover:opacity-90 transition-opacity"
               >
                 View Live Website
-                <ExternalLink className="h-4 w-4" />
+                <ExternalLink className="h-5 w-5" />
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Section 2: The Challenge */}
+      <section className="py-20 bg-humble-charcoal/20 relative z-10">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="text-6xl mb-4 block">⸻</span>
+            </div>
+            
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
+              The Challenge
+            </h2>
+            
+            <div className="text-lg text-white/80 leading-relaxed text-center max-w-3xl mx-auto">
+              <p>
+                Traditional Italian restaurants face a unique challenge: how do you maintain the authentic, warm charm that makes dining special while meeting modern customer expectations for digital convenience? 
+              </p>
+              <br />
+              <p>
+                Nonna's Table needed a digital presence that would feel as welcoming as stepping into a family kitchen, but with the functionality to handle reservations, online ordering, and payment processing seamlessly.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 3: The Solution */}
+      <section className="py-20 relative z-10">
+        <div className="container mx-auto px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="text-6xl mb-4 block">⸻</span>
+            </div>
+            
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center flex items-center justify-center gap-3">
+              <span className="text-4xl">💡</span>
+              The Solution
+            </h2>
+            
+            <p className="text-lg text-white/80 leading-relaxed text-center max-w-3xl mx-auto mb-16">
+              We created a comprehensive digital platform that maintains the warmth of Italian hospitality while providing cutting-edge functionality.
+            </p>
+
+            {/* Solution Features */}
+            <div className="grid md:grid-cols-2 gap-8 mb-16">
+              <div className="space-y-6">
+                <h3 className="text-2xl font-semibold text-white mb-6">Website Features</h3>
+                <div className="space-y-4">
+                  {[
+                    "Seamless table reservation system with booking overlay",
+                    "Direct online ordering for delivery & pickup",
+                    "Interactive menu showcase with beautiful food photography",
+                    "Mobile-optimized contact and ordering buttons",
+                    "Warm, authentic Italian visual design"
+                  ].map((feature, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-3"></div>
+                      <span className="text-white/80">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <h3 className="text-2xl font-semibold text-white mb-6">Technology & Strategy</h3>
+                <div className="space-y-4">
+                  <div>
+                    <strong className="text-white">Tech Stack:</strong>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {caseStudy.technologies.map((tech, index) => (
+                        <span key={index} className="px-3 py-1 bg-humble-blue-500/20 text-humble-blue-300 rounded text-sm">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="text-white/80">
+                    <strong className="text-white">Strategic Decisions:</strong>
+                    <ul className="mt-2 space-y-2">
+                      <li>• Warm color palette with earthy tones</li>
+                      <li>• Classic serif typography for authenticity</li>
+                      <li>• Dutch payment integration (iDEAL, MultiSafepay)</li>
+                      <li>• Centralized order management system</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Screenshots Section */}
+            {media.length > 0 && (
+              <div className="space-y-16">
+                <h3 className="text-2xl font-semibold text-white text-center mb-8">Website Showcase</h3>
+                {media.slice(0, 3).map((mediaItem, index) => (
+                  <div key={mediaItem.id} className={`${index % 2 === 1 ? 'lg:flex-row-reverse' : ''} flex flex-col lg:flex-row items-center gap-12`}>
+                    <div className="lg:w-2/3">
+                      <div className="aspect-[16/10] bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-1 rounded-2xl">
+                        <img
+                          src={mediaItem.media_url}
+                          alt={mediaItem.alt_text || 'Website feature'}
+                          className="w-full h-full object-cover rounded-xl"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    {mediaItem.caption && (
+                      <div className="lg:w-1/3">
+                        <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                          <h4 className="text-xl font-semibold text-white mb-3">{mediaItem.caption}</h4>
+                          {mediaItem.alt_text && (
+                            <p className="text-white/80">{mediaItem.alt_text}</p>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Section 4: The Results */}
+      <section className="py-20 bg-humble-charcoal/20 relative z-10">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="text-6xl mb-4 block">⸻</span>
+            </div>
+            
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center flex items-center justify-center gap-3">
+              <span className="text-4xl">🎯</span>
+              The Results
+            </h2>
+
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                <div className="text-3xl font-bold text-humble-pink-500 mb-2">{caseStudy.project_duration}</div>
+                <div className="text-white font-medium">Site Launched</div>
+                <div className="text-white/60 text-sm">From concept to live</div>
+              </div>
+              
+              <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                <div className="text-3xl font-bold text-humble-purple-500 mb-2">100%</div>
+                <div className="text-white font-medium">Client Satisfaction</div>
+                <div className="text-white/60 text-sm">Exceeded expectations</div>
+              </div>
+              
+              <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                <div className="text-3xl font-bold text-humble-blue-500 mb-2">✨</div>
+                <div className="text-white font-medium">Professional Presence</div>
+                <div className="text-white/60 text-sm">Complete digital transformation</div>
+              </div>
+            </div>
+
+            {/* Client Quote */}
+            <div className="bg-gradient-to-r from-humble-pink-500/10 via-humble-purple-500/10 to-humble-blue-500/10 rounded-2xl p-8 border border-white/10 text-center">
+              <div className="text-6xl text-humble-pink-500 mb-4">"</div>
+              <blockquote className="text-xl md:text-2xl text-white font-serif italic mb-6">
+                I didn't expect this level of quality so fast — now people can finally find us online and experience our authentic Italian atmosphere before they even visit.
+              </blockquote>
+              <div className="text-humble-pink-500 font-medium">— Nonna's Table Team</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 5: Call to Action */}
       <section className="py-20 relative z-10">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-space-grotesk bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">
-              {caseStudy.cta_heading}
+            <div className="text-center mb-8">
+              <span className="text-6xl mb-4 block">⸻</span>
+            </div>
+            
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 flex items-center justify-center gap-3">
+              <span className="text-4xl">🔗</span>
+              Ready for Your Own Success Story?
             </h2>
-            <p className="text-lg text-gray-300 mb-8 font-serif">
-              {caseStudy.cta_description}
+            
+            <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+              💡 Want your own professional website like this — affordable and delivered fast?
             </p>
-            <a
-              href="https://humblestudio.ai/inquiry"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-lg font-space-grotesk text-white bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 hover:opacity-90 transition-opacity"
-            >
-              {caseStudy.cta_button_text}
-              <ExternalLink className="h-5 w-5" />
-            </a>
+            
+            <div className="space-y-4">
+              <a
+                href="https://humblestudio.ai/inquiry"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-lg text-white bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 hover:opacity-90 transition-opacity"
+              >
+                Get Started Today
+                <ExternalLink className="h-5 w-5" />
+              </a>
+              
+              <div className="text-white/60">
+                Professional websites delivered in days, not months
+              </div>
+            </div>
           </div>
         </div>
       </section>

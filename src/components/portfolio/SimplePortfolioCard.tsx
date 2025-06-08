@@ -62,8 +62,9 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({ project, onCl
       }`}
       onClick={handleCardClick}
     >
+      {/* Image Section */}
       <div className={`relative overflow-hidden bg-humble-charcoal/50 ${
-        featured ? 'aspect-[16/10]' : 'aspect-[4/3]'
+        featured ? 'aspect-[16/9]' : 'aspect-[4/3]'
       }`}>
         {primaryImage && !imageError ? (
           <OptimizedImage
@@ -89,8 +90,8 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({ project, onCl
 
         {!project.is_coming_soon && (
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100">
-            <button className={`bg-white/90 hover:bg-white text-humble-charcoal px-3 py-2 rounded-full font-medium ${
-              featured ? 'text-base px-4 py-3' : 'text-sm'
+            <button className={`bg-white/90 hover:bg-white text-humble-charcoal px-4 py-2 rounded-full font-medium ${
+              featured ? 'text-lg px-6 py-3' : 'text-sm'
             }`}>
               {project.title === "Nonna's Table" ? 'View Case Study' : 'View Project'}
             </button>
@@ -98,69 +99,75 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({ project, onCl
         )}
 
         {featured && (
-          <div className="absolute top-3 left-3 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+          <div className="absolute top-4 left-4 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium">
             Featured
           </div>
         )}
       </div>
 
-      <div className={`p-4 ${featured ? 'md:p-6' : ''}`}>
-        <div className="mb-2">
-          <div className="flex flex-wrap gap-1">
-            {project.categories.slice(0, 2).map((category, index) => (
-              <span key={index} className="text-humble-purple-400 text-xs font-medium uppercase tracking-wide">
+      {/* Content Section - More spacious layout */}
+      <div className={`${featured ? 'p-8' : 'p-6'}`}>
+        {/* Categories */}
+        <div className="mb-3">
+          <div className="flex flex-wrap gap-2">
+            {project.categories.slice(0, 3).map((category, index) => (
+              <span key={index} className="text-humble-purple-400 text-sm font-medium uppercase tracking-wide">
                 {category}
-                {index < Math.min(project.categories.length - 1, 1) && ','}
+                {index < Math.min(project.categories.length - 1, 2) && ','}
               </span>
             ))}
-            {project.categories.length > 2 && (
-              <span className="text-humble-purple-400/60 text-xs font-medium uppercase tracking-wide">
-                +{project.categories.length - 2}
+            {project.categories.length > 3 && (
+              <span className="text-humble-purple-400/60 text-sm font-medium uppercase tracking-wide">
+                +{project.categories.length - 3}
               </span>
             )}
           </div>
         </div>
 
-        <h3 className={`font-semibold mb-2 text-white line-clamp-2 ${
-          featured ? 'text-xl md:text-2xl mb-3' : 'text-base'
+        {/* Title */}
+        <h3 className={`font-semibold mb-4 text-white leading-tight ${
+          featured ? 'text-2xl lg:text-3xl' : 'text-lg'
         }`}>
           {project.title}
         </h3>
 
-        <p className={`text-white/70 leading-relaxed mb-3 line-clamp-2 ${
-          featured ? 'text-base md:text-lg mb-4' : 'text-sm'
+        {/* Description - More width and better spacing */}
+        <p className={`text-white/80 leading-relaxed mb-6 ${
+          featured ? 'text-lg lg:text-xl' : 'text-base'
         }`}>
           {project.description}
         </p>
 
+        {/* Technologies */}
         {project.technologies.length > 0 && (
-          <div className="flex flex-wrap gap-1 mb-3">
-            {project.technologies.slice(0, featured ? 4 : 3).map((tech, index) => (
+          <div className="flex flex-wrap gap-2 mb-6">
+            {project.technologies.slice(0, featured ? 6 : 4).map((tech, index) => (
               <span
                 key={index}
-                className={`px-2 py-1 bg-humble-blue-500/20 text-humble-blue-300 rounded ${
+                className={`px-3 py-1 bg-humble-blue-500/20 text-humble-blue-300 rounded-lg ${
                   featured ? 'text-sm' : 'text-xs'
                 }`}
               >
                 {tech}
               </span>
             ))}
-            {project.technologies.length > (featured ? 4 : 3) && (
-              <span className={`px-2 py-1 bg-humble-gray-700 text-white/60 rounded ${
+            {project.technologies.length > (featured ? 6 : 4) && (
+              <span className={`px-3 py-1 bg-humble-gray-700 text-white/60 rounded-lg ${
                 featured ? 'text-sm' : 'text-xs'
               }`}>
-                +{project.technologies.length - (featured ? 4 : 3)}
+                +{project.technologies.length - (featured ? 6 : 4)}
               </span>
             )}
           </div>
         )}
 
-        <div className="flex items-center justify-between">
+        {/* Footer */}
+        <div className="flex items-center justify-between pt-4 border-t border-white/10">
           {project.build_time && (
-            <div className={`flex items-center gap-1 text-humble-blue-400 ${
-              featured ? 'text-sm' : 'text-xs'
+            <div className={`flex items-center gap-2 text-humble-blue-400 ${
+              featured ? 'text-base' : 'text-sm'
             }`}>
-              <Clock className={featured ? 'h-4 w-4' : 'h-3 w-3'} />
+              <Clock className={featured ? 'h-5 w-5' : 'h-4 w-4'} />
               <span>{project.build_time}</span>
             </div>
           )}
@@ -170,13 +177,13 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({ project, onCl
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className={`text-humble-pink-500 hover:text-humble-pink-400 font-medium flex items-center gap-1 transition-colors p-2 -m-2 ${
-                featured ? 'text-base' : 'text-sm'
+              className={`text-humble-pink-500 hover:text-humble-pink-400 font-medium flex items-center gap-2 transition-colors ${
+                featured ? 'text-lg' : 'text-sm'
               }`}
               onClick={handleLinkClick}
             >
               View Site
-              <ExternalLink className={featured ? 'h-4 w-4' : 'h-3 w-3'} />
+              <ExternalLink className={featured ? 'h-5 w-5' : 'h-4 w-4'} />
             </a>
           )}
 
@@ -185,13 +192,13 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({ project, onCl
               href="https://nonnas-table.humblestudio.ai/"
               target="_blank"
               rel="noopener noreferrer"
-              className={`text-humble-pink-500 hover:text-humble-pink-400 font-medium flex items-center gap-1 transition-colors p-2 -m-2 ${
-                featured ? 'text-base' : 'text-sm'
+              className={`text-humble-pink-500 hover:text-humble-pink-400 font-medium flex items-center gap-2 transition-colors ${
+                featured ? 'text-lg' : 'text-sm'
               }`}
               onClick={handleLinkClick}
             >
               View Live Site
-              <ExternalLink className={featured ? 'h-4 w-4' : 'h-3 w-3'} />
+              <ExternalLink className={featured ? 'h-5 w-5' : 'h-4 w-4'} />
             </a>
           )}
         </div>

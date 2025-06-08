@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
@@ -193,13 +192,13 @@ const SimplePortfolioGrid = React.memo(() => {
       </div>
 
       {filteredProjects.length > 0 ? (
-        <div className="space-y-8">
-          {/* Featured Projects - Centered on desktop */}
+        <div className="space-y-12">
+          {/* Featured Projects - Centered and Single Column */}
           {featuredProjects.length > 0 && (
             <div className="flex justify-center">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-6xl">
+              <div className="w-full max-w-4xl space-y-8">
                 {featuredProjects.map((project) => (
-                  <div key={project.id} className="md:col-span-1">
+                  <div key={project.id} className="mx-auto">
                     <SimplePortfolioCard
                       project={project}
                       onClick={handleProjectClick}
