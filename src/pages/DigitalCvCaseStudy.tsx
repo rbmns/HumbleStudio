@@ -320,6 +320,24 @@ const DigitalCvCaseStudy = () => {
               We built a modern one-page resume website that combines clarity, confidence, and personal style — all in under 24 hours.
             </p>
 
+            {/* Solution Video */}
+            <div className="mb-20">
+              <div className="aspect-[16/9] rounded-3xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
+                <div className="w-full h-full rounded-2xl overflow-hidden">
+                  <video
+                    src="https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/m-jun8.mov"
+                    className="w-full h-full object-cover"
+                    controls
+                    muted
+                    playsInline
+                    poster={caseStudy?.hero_image_url || 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png'}
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+            </div>
+
             {/* Key Features */}
             <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10 mb-20">
               <h3 className="text-2xl font-semibold text-white mb-8 text-center font-space-grotesk">Key Features</h3>
