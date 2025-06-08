@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Menu, X } from 'lucide-react';
@@ -197,12 +196,8 @@ const DigitalCvCaseStudy = () => {
             {/* Project Title & Description - ABOVE IMAGE */}
             <div className="text-center mb-16 max-w-4xl mx-auto">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 font-space-grotesk leading-tight">
-                {caseStudy.title}
+                🚀 Digital CV Site
               </h1>
-              
-              <p className="text-xl md:text-2xl lg:text-3xl text-white/80 leading-relaxed font-light max-w-3xl mx-auto">
-                {caseStudy.description}
-              </p>
             </div>
 
             {/* Hero Image */}
@@ -210,9 +205,9 @@ const DigitalCvCaseStudy = () => {
               <div className="aspect-[16/10] rounded-3xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
                 <div className="w-full h-full rounded-2xl overflow-hidden">
                   <img
-                    src={caseStudy.hero_image_url || 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/hero-image.png'}
-                    alt={`${caseStudy.client_name} Website`}
-                    className="w-full h-full object-cover"
+                    src={caseStudy.hero_image_url || 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png'}
+                    alt={`Digital CV Website`}
+                    className="w-full h-full object-cover object-left-top"
                   />
                 </div>
               </div>
@@ -227,52 +222,28 @@ const DigitalCvCaseStudy = () => {
                     <strong className="text-white font-medium">Type:</strong> Personal Branding / Career Portfolio
                   </div>
                   <div>
-                    <strong className="text-white font-medium">Goal:</strong> Create a standout digital CV
+                    <strong className="text-white font-medium">Goal:</strong> Stand out from the crowd & impress recruiters
                   </div>
                   <div>
-                    <strong className="text-white font-medium">Timeline:</strong> {caseStudy.project_duration}
+                    <strong className="text-white font-medium">Solution:</strong> Clean, mobile-friendly one-pager — live in 1 day
                   </div>
                 </div>
               </div>
 
               <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <h3 className="text-xl font-semibold text-white mb-6 font-space-grotesk">What They Needed</h3>
-                <p className="text-white/80 text-lg leading-relaxed">
-                  A standout digital CV that works across devices and helps professionals stand out in today's competitive job market.
-                </p>
-              </div>
-            </div>
-
-            {/* Main Deliverables */}
-            <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10 mb-12">
-              <h3 className="text-xl font-semibold text-white mb-8 text-center font-space-grotesk">Main Deliverables</h3>
-              <div className="grid sm:grid-cols-3 gap-6">
-                <div className="bg-humble-pink-500/20 rounded-xl p-6 text-center border border-humble-pink-500/30">
-                  <div className="text-3xl mb-4">💼</div>
-                  <div className="text-white font-medium text-lg">Professional Layout</div>
-                </div>
-                <div className="bg-humble-purple-500/20 rounded-xl p-6 text-center border border-humble-purple-500/30">
-                  <div className="text-3xl mb-4">📱</div>
-                  <div className="text-white font-medium text-lg">Responsive Design</div>
-                </div>
-                <div className="bg-humble-blue-500/20 rounded-xl p-6 text-center border border-humble-blue-500/30">
-                  <div className="text-3xl mb-4">📄</div>
-                  <div className="text-white font-medium text-lg">PDF Download</div>
+                <h3 className="text-xl font-semibold text-white mb-6 font-space-grotesk">Live Site</h3>
+                <div className="text-center">
+                  <a
+                    href="https://rosiebiemans.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 px-8 py-3 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-xl font-semibold text-lg hover:opacity-90 transition-opacity"
+                  >
+                    🖥️ See the site → rosiebiemans.com
+                    <ExternalLink className="h-5 w-5" />
+                  </a>
                 </div>
               </div>
-            </div>
-
-            {/* Live Site Link */}
-            <div className="text-center">
-              <a
-                href="https://rosiebiemans.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-2xl font-semibold text-xl hover:opacity-90 transition-opacity font-space-grotesk"
-              >
-                View Live Website
-                <ExternalLink className="h-6 w-6" />
-              </a>
             </div>
           </div>
         </div>
@@ -287,11 +258,35 @@ const DigitalCvCaseStudy = () => {
             </div>
             
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-space-grotesk">
-              {caseStudy.challenge_heading}
+              🧩 The Challenge
             </h2>
             
-            <div className="text-xl text-white/80 leading-relaxed text-center max-w-3xl mx-auto space-y-6">
-              <p>{caseStudy.challenge_content}</p>
+            <div className="text-xl text-white/80 leading-relaxed space-y-6">
+              <p className="text-center max-w-3xl mx-auto">
+                Most resumes look the same — especially when AI tools are scanning for keywords and recruiters skim through hundreds a day.
+              </p>
+              
+              <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <p className="text-lg mb-6 text-center">The challenge was to create a digital CV that:</p>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <span className="text-humble-pink-500 text-xl">→</span>
+                    <span>Grabs attention immediately</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-humble-pink-500 text-xl">→</span>
+                    <span>Reflects personality and professionalism</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-humble-pink-500 text-xl">→</span>
+                    <span>Works flawlessly on any device</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-humble-pink-500 text-xl">→</span>
+                    <span>Loads fast and communicates clearly</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -305,85 +300,39 @@ const DigitalCvCaseStudy = () => {
               <span className="text-6xl mb-8 block font-light">⸻</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center flex items-center justify-center gap-4 font-space-grotesk">
-              <span className="text-5xl">💡</span>
-              {caseStudy.solution_heading}
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-space-grotesk">
+              💡 The Solution
             </h2>
             
             <p className="text-xl text-white/80 leading-relaxed text-center max-w-3xl mx-auto mb-20">
-              {caseStudy.solution_content}
+              We built a modern one-page resume website that combines clarity, confidence, and personal style — all in under 24 hours.
             </p>
 
-            {/* Solution Features */}
-            <div className="grid md:grid-cols-2 gap-12 mb-20">
-              <div className="space-y-8">
-                <h3 className="text-2xl font-semibold text-white mb-8 font-space-grotesk">Key Features</h3>
-                <div className="space-y-6">
-                  {caseStudy.key_features.slice(0, 4).map((feature, index) => (
-                    <div key={index} className="flex items-start gap-4">
-                      <div className="w-3 h-3 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 rounded-full flex-shrink-0 mt-2"></div>
-                      <span className="text-white/80 text-lg">{feature}</span>
-                    </div>
-                  ))}
+            {/* Key Features */}
+            <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10 mb-20">
+              <h3 className="text-2xl font-semibold text-white mb-8 text-center font-space-grotesk">Key Features</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="flex items-start gap-4">
+                  <span className="text-2xl">✍️</span>
+                  <span className="text-white/80 text-lg">Structured layout with skills, experience & intro</span>
+                </div>
+                <div className="flex items-start gap-4">
+                  <span className="text-2xl">📱</span>
+                  <span className="text-white/80 text-lg">Fully responsive and mobile-friendly</span>
+                </div>
+                <div className="flex items-start gap-4">
+                  <span className="text-2xl">📄</span>
+                  <span className="text-white/80 text-lg">Downloadable CV PDF</span>
+                </div>
+                <div className="flex items-start gap-4">
+                  <span className="text-2xl">🎨</span>
+                  <span className="text-white/80 text-lg">Minimal yet polished design</span>
                 </div>
               </div>
-
-              <div className="space-y-8">
-                <h3 className="text-2xl font-semibold text-white mb-8 font-space-grotesk">Technology & Strategy</h3>
-                <div className="space-y-6">
-                  <div>
-                    <strong className="text-white text-lg font-medium">Tech Stack:</strong>
-                    <div className="flex flex-wrap gap-3 mt-3">
-                      {caseStudy.technologies.map((tech, index) => (
-                        <span key={index} className="px-4 py-2 bg-humble-blue-500/20 text-humble-blue-300 rounded-lg border border-humble-blue-500/30">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="text-white/80">
-                    <strong className="text-white text-lg font-medium">Strategic Focus:</strong>
-                    <ul className="mt-4 space-y-3 text-lg">
-                      <li>• Minimalist layout for scannability</li>
-                      <li>• Strong call-to-action sections</li>
-                      <li>• Mobile-first responsive design</li>
-                      <li>• Professional but approachable tone</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <p className="text-white/80 text-lg text-center mt-8">
+                Every block is intentional — designed to help the candidate stand out while staying easy to navigate.
+              </p>
             </div>
-
-            {/* Screenshots Section */}
-            {media.length > 0 && (
-              <div className="space-y-20">
-                <h3 className="text-3xl font-semibold text-white text-center mb-12 font-space-grotesk">Website Showcase</h3>
-                {media.slice(0, 3).map((mediaItem, index) => (
-                  <div key={mediaItem.id} className={`${index % 2 === 1 ? 'lg:flex-row-reverse' : ''} flex flex-col lg:flex-row items-center gap-16`}>
-                    <div className="lg:w-2/3">
-                      <div className="aspect-[16/10] bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2 rounded-3xl">
-                        <img
-                          src={mediaItem.media_url}
-                          alt={mediaItem.alt_text || 'Website feature'}
-                          className="w-full h-full object-cover rounded-2xl"
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
-                    {mediaItem.caption && (
-                      <div className="lg:w-1/3">
-                        <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                          <h4 className="text-2xl font-semibold text-white mb-4 font-space-grotesk">{mediaItem.caption}</h4>
-                          {mediaItem.alt_text && (
-                            <p className="text-white/80 text-lg leading-relaxed">{mediaItem.alt_text}</p>
-                          )}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
         </div>
       </section>
@@ -396,28 +345,29 @@ const DigitalCvCaseStudy = () => {
               <span className="text-6xl mb-8 block font-light">⸻</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center flex items-center justify-center gap-4 font-space-grotesk">
-              <span className="text-5xl">🎯</span>
-              {caseStudy.impact_heading}
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-space-grotesk">
+              🎯 The Results
             </h2>
 
-            <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <div className="grid md:grid-cols-2 gap-8 mb-16">
               <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <div className="text-4xl font-bold text-humble-pink-500 mb-3 font-space-grotesk">&lt;24h</div>
-                <div className="text-white font-medium text-lg">Site Launched</div>
-                <div className="text-white/60">From concept to live</div>
+                <div className="text-4xl font-bold text-humble-pink-500 mb-3 font-space-grotesk">✅</div>
+                <div className="text-white font-medium text-lg">Site launched in a day</div>
               </div>
               
               <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <div className="text-4xl font-bold text-humble-purple-500 mb-3 font-space-grotesk">€49</div>
-                <div className="text-white font-medium text-lg">Total Cost</div>
-                <div className="text-white/60">Affordable excellence</div>
+                <div className="text-4xl font-bold text-humble-purple-500 mb-3 font-space-grotesk">✅</div>
+                <div className="text-white font-medium text-lg">Immediate positive feedback</div>
               </div>
               
               <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <div className="text-4xl font-bold text-humble-blue-500 mb-3 font-space-grotesk">✨</div>
-                <div className="text-white font-medium text-lg">Strong Response</div>
-                <div className="text-white/60">From recruiters</div>
+                <div className="text-4xl font-bold text-humble-blue-500 mb-3 font-space-grotesk">✅</div>
+                <div className="text-white font-medium text-lg">More confidence applying for jobs</div>
+              </div>
+              
+              <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div className="text-4xl font-bold text-humble-pink-500 mb-3 font-space-grotesk">€49</div>
+                <div className="text-white font-medium text-lg">Total cost</div>
               </div>
             </div>
 
@@ -425,7 +375,7 @@ const DigitalCvCaseStudy = () => {
             <div className="bg-gradient-to-r from-humble-pink-500/10 via-humble-purple-500/10 to-humble-blue-500/10 rounded-3xl p-12 border border-white/10 text-center">
               <div className="text-8xl text-humble-pink-500 mb-6 font-serif">"</div>
               <blockquote className="text-2xl md:text-3xl text-white font-serif italic mb-8 leading-relaxed">
-                I finally feel like I have a CV that matches how I want to show up professionally. It's already helping me get noticed.
+                Since the CV went live, I've had lots of interviews — and many compliments from potential employers.
               </blockquote>
               <div className="text-humble-pink-500 font-medium text-lg font-space-grotesk">— Digital CV Client</div>
             </div>
@@ -441,13 +391,12 @@ const DigitalCvCaseStudy = () => {
               <span className="text-6xl mb-8 block font-light">⸻</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 flex items-center justify-center gap-4 font-space-grotesk">
-              <span className="text-5xl">🔗</span>
-              {caseStudy.cta_heading}
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 font-space-grotesk">
+              🔗 Want a site like this?
             </h2>
             
             <p className="text-2xl text-white/80 mb-12 max-w-2xl mx-auto font-light">
-              {caseStudy.cta_description}
+              Whether it's for job hunting, freelancing, or personal branding — we can build yours in 1 day. Starting at €49.
             </p>
             
             <div className="space-y-6">
@@ -457,7 +406,7 @@ const DigitalCvCaseStudy = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 px-12 py-5 rounded-2xl font-semibold text-xl text-white bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 hover:opacity-90 transition-opacity font-space-grotesk"
               >
-                {caseStudy.cta_button_text}
+                Get Your Website Built
                 <ExternalLink className="h-6 w-6" />
               </a>
               

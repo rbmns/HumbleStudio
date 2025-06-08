@@ -40,6 +40,7 @@ const PortfolioCardImage: React.FC<PortfolioCardImageProps> = ({
     e.preventDefault();
     e.stopPropagation();
     
+    // Always navigate to case study, not live site
     if (projectTitle === "Nonna's Table") {
       navigate('/case-studies/nonnas-table');
     } else if (projectTitle === "Digital Resume Site") {
