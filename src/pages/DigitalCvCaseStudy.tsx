@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Menu, X, Target, Lightbulb, TrendingUp, Link, User, Smartphone, FileText, Palette, CheckCircle, DollarSign, Quote } from 'lucide-react';
@@ -108,6 +107,9 @@ const DigitalCvCaseStudy = () => {
       setIsMobileMenuOpen(false);
     }
   };
+
+  // Filter media by section
+  const solutionMedia = caseStudyMedia.filter(media => media.section === 'solution');
 
   if (loading) {
     return (
@@ -320,33 +322,41 @@ const DigitalCvCaseStudy = () => {
             </p>
 
             {/* Case Study Media Images from Database */}
-            {caseStudyMedia.length > 0 && (
+            {solutionMedia.length > 0 && (
               <div className="mb-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {caseStudyMedia.map((media) => (
-                    <div key={media.id} className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
-                      <div className="w-full h-full rounded-xl overflow-hidden">
-                        {media.media_type === 'video' ? (
-                          <video
-                            src={media.media_url}
-                            className="w-full h-full object-cover object-left-top"
-                            controls
-                            muted
-                            playsInline
-                          >
-                            Your browser does not support the video tag.
-                          </video>
-                        ) : (
-                          <OptimizedImage
-                            src={media.media_url}
-                            alt={media.alt_text || 'Case study image'}
-                            className="w-full h-full object-cover object-left-top"
-                          />
+                  {solutionMedia.map((media) => (
+                    <div key={media.id} className="space-y-4">
+                      <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
+                        <div className="w-full h-full rounded-xl overflow-hidden">
+                          {media.media_type === 'video' ? (
+                            <video
+                              src={media.media_url}
+                              className="w-full h-full object-cover object-left-top"
+                              controls
+                              muted
+                              playsInline
+                            >
+                              Your browser does not support the video tag.
+                            </video>
+                          ) : (
+                            <OptimizedImage
+                              src={media.media_url}
+                              alt={media.alt_text || 'Case study image'}
+                              className="w-full h-full object-cover object-left-top"
+                            />
+                          )}
+                        </div>
+                      </div>
+                      {/* Title and Description */}
+                      <div className="text-center space-y-2">
+                        {media.alt_text && (
+                          <h3 className="text-white font-semibold text-lg">{media.alt_text}</h3>
+                        )}
+                        {media.caption && (
+                          <p className="text-white/60 text-sm">{media.caption}</p>
                         )}
                       </div>
-                      {media.caption && (
-                        <p className="text-white/60 text-sm mt-3 text-center">{media.caption}</p>
-                      )}
                     </div>
                   ))}
                 </div>
