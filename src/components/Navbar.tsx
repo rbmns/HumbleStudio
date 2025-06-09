@@ -48,10 +48,9 @@ const Navbar = () => {
         
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-8 items-center">
-          <button onClick={() => scrollToSection('about')} className="text-white/80 hover:text-white transition-colors">About</button>
-          <button onClick={() => scrollToSection('services')} className="text-white/80 hover:text-white transition-colors">Services</button>
-          <button onClick={() => scrollToSection('how-it-works')} className="text-white/80 hover:text-white transition-colors">Process</button>
-          <button onClick={() => scrollToSection('portfolio')} className="text-white/80 hover:text-white transition-colors">Portfolio</button>
+          <Link to="/" className="text-white/80 hover:text-white transition-colors">Home</Link>
+          <Link to="/work" className="text-white/80 hover:text-white transition-colors">Work</Link>
+          <Link to="/inquiry" className="text-white/80 hover:text-white transition-colors">Inquiry</Link>
           <button 
             onClick={() => scrollToSection('contact')} 
             className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all"
@@ -74,13 +73,12 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-humble-charcoal/95 backdrop-blur-md shadow-lg">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            <button onClick={() => scrollToSection('about')} className="text-white/80 hover:text-white transition-colors py-2">About</button>
-            <button onClick={() => scrollToSection('services')} className="text-white/80 hover:text-white transition-colors py-2">Services</button>
-            <button onClick={() => scrollToSection('how-it-works')} className="text-white/80 hover:text-white transition-colors py-2">Process</button>
-            <button onClick={() => scrollToSection('portfolio')} className="text-white/80 hover:text-white transition-colors py-2">Portfolio</button>
+            <Link to="/" className="text-white/80 hover:text-white transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
+            <Link to="/work" className="text-white/80 hover:text-white transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>Work</Link>
+            <Link to="/inquiry" className="text-white/80 hover:text-white transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>Inquiry</Link>
             <button 
               onClick={() => scrollToSection('contact')} 
-              className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all"
+              className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all text-center"
             >
               Contact
             </button>

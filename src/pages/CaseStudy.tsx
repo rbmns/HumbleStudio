@@ -1,10 +1,10 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Menu, X, User, MapPin, Calendar } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import StarBackground from '@/components/StarBackground';
 import Contact from '@/components/Contact';
+import Navbar from '@/components/Navbar';
 
 interface CaseStudy {
   id: string;
@@ -45,7 +45,6 @@ const CaseStudy = () => {
   const [media, setMedia] = useState<CaseStudyMedia[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (slug) {
@@ -67,14 +66,6 @@ const CaseStudy = () => {
     try {
       console.log(`Fetching case study with slug: ${slug}`);
       
-      // First, let's see what case studies exist in the database
-      const { data: allCaseStudies, error: listError } = await supabase
-        .from('case_studies')
-        .select('slug, title')
-        .eq('is_published', true);
-      
-      console.log('All available case studies:', allCaseStudies);
-      
       const { data: caseStudyData, error: caseStudyError } = await supabase
         .from('case_studies')
         .select('*')
@@ -93,7 +84,6 @@ const CaseStudy = () => {
 
       if (!caseStudyData) {
         console.log(`No case study found with slug: ${slug}`);
-        console.log('Available slugs:', allCaseStudies?.map(cs => cs.slug));
         setError('Case study not found');
         setLoading(false);
         return;
@@ -137,7 +127,6 @@ const CaseStudy = () => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
     }
   };
 
@@ -145,6 +134,7 @@ const CaseStudy = () => {
     return (
       <div className="min-h-screen bg-humble-navy relative">
         <StarBackground />
+        <Navbar />
         <div className="relative pt-24 pb-16 flex items-center justify-center">
           <div className="text-white text-center">
             <div className="text-xl mb-4">Loading case study...</div>
@@ -159,6 +149,7 @@ const CaseStudy = () => {
     return (
       <div className="min-h-screen bg-humble-navy relative">
         <StarBackground />
+        <Navbar />
         <div className="relative pt-24 pb-16 flex items-center justify-center">
           <div className="text-white text-center">
             <div className="text-xl mb-4">{error || 'Case study not found'}</div>
@@ -179,62 +170,7 @@ const CaseStudy = () => {
   return (
     <div className="min-h-screen bg-humble-navy text-white relative">
       <StarBackground />
-      
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-humble-navy/90 backdrop-blur-md border-b border-white/10">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <button
-              onClick={() => navigate('/')}
-              className="flex items-center"
-            >
-              <h1 className="text-xl md:text-2xl font-bold">
-                <span className="text-white">Humble</span>
-                <span className="bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">Studio</span>
-              </h1>
-            </button>
-            
-            {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-8 items-center">
-              <button onClick={() => navigate('/')} className="text-white/80 hover:text-white transition-colors">Home</button>
-              <button onClick={() => navigate('/work')} className="text-white/80 hover:text-white transition-colors">Work</button>
-              <button onClick={() => navigate('/inquiry')} className="text-white/80 hover:text-white transition-colors">Inquiry</button>
-              <button 
-                onClick={() => scrollToSection('contact')} 
-                className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all"
-              >
-                Contact
-              </button>
-            </div>
-            
-            {/* Mobile Menu Toggle */}
-            <button 
-              className="md:hidden text-white"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-          
-          {/* Mobile Menu */}
-          {isMobileMenuOpen && (
-            <div className="md:hidden absolute top-full left-0 w-full bg-humble-navy/95 backdrop-blur-md shadow-lg">
-              <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-                <button onClick={() => navigate('/')} className="text-white/80 hover:text-white transition-colors py-2 text-left">Home</button>
-                <button onClick={() => navigate('/work')} className="text-white/80 hover:text-white transition-colors py-2 text-left">Work</button>
-                <button onClick={() => navigate('/inquiry')} className="text-white/80 hover:text-white transition-colors py-2 text-left">Inquiry</button>
-                <button 
-                  onClick={() => scrollToSection('contact')} 
-                  className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all text-center"
-                >
-                  Contact
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="pt-32 pb-24 relative">
