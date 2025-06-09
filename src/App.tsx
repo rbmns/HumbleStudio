@@ -12,11 +12,10 @@ import ThankYou from "./pages/ThankYou";
 import IntakeForm from "./pages/IntakeForm";
 import Inquiry from "./pages/Inquiry";
 import BrandDiscoveryForm from "./pages/BrandDiscoveryForm";
-import NonnasTableCaseStudy from "./pages/NonnasTableCaseStudy";
-import DigitalCvCaseStudy from "./pages/DigitalCvCaseStudy";
 import ComingSoon from "./pages/ComingSoon";
 import LinkInBio from "./pages/LinkInBio";
 import Work from "./pages/Work";
+import CaseStudy from "./pages/CaseStudy";
 
 const queryClient = new QueryClient();
 
@@ -34,11 +33,11 @@ const App = () => (
           <Route path="/intake-form" element={<IntakeForm />} />
           <Route path="/inquiry" element={<Inquiry />} />
           <Route path="/brand-discovery-form" element={<BrandDiscoveryForm />} />
-          <Route path="/work/nonnas-table" element={<NonnasTableCaseStudy />} />
-          <Route path="/work/nonna-s-table" element={<NonnasTableCaseStudy />} />
-          <Route path="/work/digital-cv" element={<DigitalCvCaseStudy />} />
-          <Route path="/work/digital-resume-site" element={<DigitalCvCaseStudy />} />
-          <Route path="/work/shen-taxi-tours" element={<DigitalCvCaseStudy />} />
+          <Route path="/work/nonnas-table" element={<CaseStudy />} />
+          <Route path="/work/nonna-s-table" element={<CaseStudy />} />
+          <Route path="/work/digital-cv" element={<CaseStudy />} />
+          <Route path="/work/digital-resume-site" element={<CaseStudy />} />
+          <Route path="/work/shen-taxi-tours" element={<CaseStudy />} />
           <Route path="/work/:slug" element={<ComingSoon />} />
           <Route path="/work" element={<Work />} />
           <Route path="/link-in-bio" element={<LinkInBio />} />
