@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Menu, X, Target, Lightbulb, TrendingUp, Link, User, Smartphone, FileText, Palette, CheckCircle, DollarSign, Quote } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Menu, X } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import StarBackground from '@/components/StarBackground';
 import Contact from '@/components/Contact';
-import FastImage from '@/components/portfolio/FastImage';
 
 interface CaseStudy {
   id: string;
@@ -35,19 +34,18 @@ interface CaseStudyMedia {
   alt_text?: string;
   caption?: string;
   section?: string;
-  media_type: string;
   display_order: number;
 }
 
 const DigitalCvCaseStudy = () => {
   const navigate = useNavigate();
   const [caseStudy, setCaseStudy] = useState<CaseStudy | null>(null);
-  const [caseStudyMedia, setCaseStudyMedia] = useState<CaseStudyMedia[]>([]);
+  const [media, setMedia] = useState<CaseStudyMedia[]>([]);
   const [loading, setLoading] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    document.title = "Digital CV: Personal Branding Solution | HumbleStudio";
+    document.title = "Digital CV: Personal Brand Website | HumbleStudio";
     fetchCaseStudy();
   }, []);
 
@@ -55,6 +53,7 @@ const DigitalCvCaseStudy = () => {
     try {
       console.log('Fetching case study with slug: digital-cv');
       
+      // Try to fetch from database first
       const { data: caseStudyData, error: caseStudyError } = await supabase
         .from('case_studies')
         .select('*')
@@ -67,7 +66,25 @@ const DigitalCvCaseStudy = () => {
 
       console.log('Case study data from DB:', caseStudyData);
 
+      // Fetch media for this case study
+      let mediaData: CaseStudyMedia[] = [];
+      if (caseStudyData?.id) {
+        const { data: fetchedMedia, error: mediaError } = await supabase
+          .from('case_study_media')
+          .select('*')
+          .eq('case_study_id', caseStudyData.id)
+          .order('display_order', { ascending: true });
+
+        if (mediaError) {
+          console.error('Error fetching media:', mediaError);
+        } else {
+          console.log('Media data from DB:', fetchedMedia);
+          mediaData = fetchedMedia || [];
+        }
+      }
+
       if (caseStudyData) {
+        // Use database data
         const processedCaseStudy: CaseStudy = {
           ...caseStudyData,
           key_features: Array.isArray(caseStudyData.key_features) 
@@ -78,23 +95,84 @@ const DigitalCvCaseStudy = () => {
             : []
         };
         setCaseStudy(processedCaseStudy);
-
-        // Fetch case study media
-        const { data: mediaData, error: mediaError } = await supabase
-          .from('case_study_media')
-          .select('*')
-          .eq('case_study_id', caseStudyData.id)
-          .order('display_order', { ascending: true });
-
-        if (mediaError) {
-          console.error('Error fetching case study media:', mediaError);
-        } else {
-          console.log('Case study media from DB:', mediaData);
-          setCaseStudyMedia(mediaData || []);
-        }
+        setMedia(mediaData);
+      } else {
+        // Use fallback data if not in database
+        console.log('Using fallback data for Digital CV case study');
+        setCaseStudy({
+          id: 'fallback-digital-cv',
+          slug: 'digital-cv',
+          title: "Digital Resume Site",
+          subtitle: "Personal Branding Platform",
+          description: "A sophisticated personal website showcasing professional achievements, portfolio, and contact information with modern design and smooth animations.",
+          client_name: "Professional Individual",
+          client_location: "Global",
+          hero_image_url: 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png',
+          challenge_heading: "The Challenge",
+          challenge_content: "Creating a standout personal brand in a competitive digital landscape.",
+          solution_heading: "Our Solution",
+          solution_content: "A clean, professional website that showcases skills and experience effectively.",
+          impact_heading: "The Impact",
+          impact_content: "A powerful digital presence that opens new opportunities and establishes credibility.",
+          key_features: [
+            "Professional Portfolio Showcase",
+            "Interactive Resume Display",
+            "Contact Integration",
+            "Responsive Design",
+            "Modern Animations",
+            "SEO Optimized"
+          ],
+          technologies: [
+            "React",
+            "TypeScript",
+            "Tailwind CSS",
+            "Framer Motion"
+          ],
+          project_duration: "1 week",
+          cta_heading: "Ready to Build Your Digital Presence?",
+          cta_description: "Let's create a professional website that showcases your unique skills and opens new opportunities.",
+          cta_button_text: "Start Your Project"
+        });
+        setMedia([]);
       }
     } catch (error) {
       console.error('Error in fetchCaseStudy:', error);
+      // Use fallback data on any error
+      setCaseStudy({
+        id: 'fallback-digital-cv',
+        slug: 'digital-cv',
+        title: "Digital Resume Site",
+        subtitle: "Personal Branding Platform",
+        description: "A sophisticated personal website showcasing professional achievements, portfolio, and contact information with modern design and smooth animations.",
+        client_name: "Professional Individual",
+        client_location: "Global",
+        hero_image_url: 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png',
+        challenge_heading: "The Challenge",
+        challenge_content: "Creating a standout personal brand in a competitive digital landscape.",
+        solution_heading: "Our Solution",
+        solution_content: "A clean, professional website that showcases skills and experience effectively.",
+        impact_heading: "The Impact",
+        impact_content: "A powerful digital presence that opens new opportunities and establishes credibility.",
+        key_features: [
+          "Professional Portfolio Showcase",
+          "Interactive Resume Display",
+          "Contact Integration",
+          "Responsive Design",
+          "Modern Animations",
+          "SEO Optimized"
+        ],
+        technologies: [
+          "React",
+          "TypeScript",
+          "Tailwind CSS",
+          "Framer Motion"
+        ],
+        project_duration: "1 week",
+        cta_heading: "Ready to Build Your Digital Presence?",
+        cta_description: "Let's create a professional website that showcases your unique skills and opens new opportunities.",
+        cta_button_text: "Start Your Project"
+      });
+      setMedia([]);
     } finally {
       setLoading(false);
     }
@@ -107,9 +185,6 @@ const DigitalCvCaseStudy = () => {
       setIsMobileMenuOpen(false);
     }
   };
-
-  // Filter media by section
-  const solutionMedia = caseStudyMedia.filter(media => media.section === 'solution');
 
   if (loading) {
     return (
@@ -190,329 +265,27 @@ const DigitalCvCaseStudy = () => {
           )}
         </div>
       </nav>
-      
-      {/* Section 1: Project Overview */}
+
+      {/* Hero Section */}
       <section className="pt-32 pb-24 relative">
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            {/* Project Title & Description - ABOVE IMAGE */}
-            <div className="text-center mb-16 max-w-4xl mx-auto">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 font-space-grotesk leading-tight">
-                Digital CV Site
-              </h1>
-            </div>
+          <div className="max-w-6xl mx-auto text-center">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 font-space-grotesk leading-tight">
+              {caseStudy.title}
+            </h1>
+            
+            <p className="text-xl md:text-2xl lg:text-3xl text-white/80 leading-relaxed font-light max-w-3xl mx-auto mb-16">
+              {caseStudy.description}
+            </p>
 
             {/* Hero Image */}
-            <div className="mb-20">
-              <div className="aspect-[16/10] rounded-3xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
-                <div className="w-full h-full rounded-2xl overflow-hidden">
-                  <FastImage
-                    src={caseStudy?.hero_image_url || 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png'}
-                    alt={`Digital CV Website`}
-                    className="w-full h-full object-cover object-left-top"
-                    priority={true}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Project Info Grid */}
-            <div className="grid md:grid-cols-2 gap-12 mb-16">
-              <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <h3 className="text-xl font-semibold text-white mb-6 font-space-grotesk">Project Details</h3>
-                <div className="space-y-4 text-white/80 text-lg">
-                  <div className="flex items-start gap-3">
-                    <User className="h-5 w-5 text-humble-pink-500 mt-1 flex-shrink-0" />
-                    <div>
-                      <strong className="text-white font-medium">Type:</strong> Personal Branding / Career Portfolio
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Target className="h-5 w-5 text-humble-purple-500 mt-1 flex-shrink-0" />
-                    <div>
-                      <strong className="text-white font-medium">Goal:</strong> Stand out from the crowd & impress recruiters
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Lightbulb className="h-5 w-5 text-humble-blue-500 mt-1 flex-shrink-0" />
-                    <div>
-                      <strong className="text-white font-medium">Solution:</strong> Clean, mobile-friendly one-pager — live in 1 day
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <h3 className="text-xl font-semibold text-white mb-6 font-space-grotesk">Live Site</h3>
-                <div className="text-center">
-                  <a
-                    href="https://rosiebiemans.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 px-8 py-3 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-xl font-semibold text-lg hover:opacity-90 transition-opacity"
-                  >
-                    See the site → rosiebiemans.com
-                    <ExternalLink className="h-5 w-5" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 2: The Challenge */}
-      <section className="py-24 bg-humble-charcoal/20 relative z-10">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="text-6xl mb-8 block font-light">⸻</span>
-            </div>
-            
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-space-grotesk flex items-center justify-center gap-4">
-              <Target className="h-12 w-12 text-humble-pink-500" />
-              The Challenge
-            </h2>
-            
-            <div className="text-xl text-white/80 leading-relaxed space-y-6">
-              <p className="text-center max-w-3xl mx-auto">
-                Most resumes look the same — especially when AI tools are scanning for keywords and recruiters skim through hundreds a day.
-              </p>
-              
-              <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <p className="text-lg mb-6 text-center">The challenge was to create a digital CV that:</p>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <span className="text-humble-pink-500 text-xl">→</span>
-                    <span>Grabs attention immediately</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <span className="text-humble-pink-500 text-xl">→</span>
-                    <span>Reflects personality and professionalism</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <span className="text-humble-pink-500 text-xl">→</span>
-                    <span>Works flawlessly on any device</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <span className="text-humble-pink-500 text-xl">→</span>
-                    <span>Loads fast and communicates clearly</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 3: The Solution */}
-      <section className="py-24 relative z-10">
-        <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="text-6xl mb-8 block font-light">⸻</span>
-            </div>
-            
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-space-grotesk flex items-center justify-center gap-4">
-              <Lightbulb className="h-12 w-12 text-humble-purple-500" />
-              The Solution
-            </h2>
-            
-            <p className="text-xl text-white/80 leading-relaxed text-center max-w-3xl mx-auto mb-20">
-              We built a modern one-page resume website that combines clarity, confidence, and personal style — all in under 24 hours.
-            </p>
-
-            {/* Case Study Media Images from Database */}
-            {solutionMedia.length > 0 && (
-              <div className="mb-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {solutionMedia.map((media) => (
-                    <div key={media.id} className="space-y-4">
-                      <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
-                        <div className="w-full h-full rounded-xl overflow-hidden">
-                          {media.media_type === 'video' ? (
-                            <video
-                              src={media.media_url}
-                              className="w-full h-full object-cover object-left-top"
-                              controls
-                              muted
-                              playsInline
-                            >
-                              Your browser does not support the video tag.
-                            </video>
-                          ) : (
-                            <FastImage
-                              src={media.media_url}
-                              alt={media.alt_text || 'Case study image'}
-                              className="w-full h-full object-cover object-left-top"
-                            />
-                          )}
-                        </div>
-                      </div>
-                      {/* Title and Description */}
-                      <div className="text-center space-y-2">
-                        {media.alt_text && (
-                          <h3 className="text-white font-semibold text-lg">{media.alt_text}</h3>
-                        )}
-                        {media.caption && (
-                          <p className="text-white/60 text-sm">{media.caption}</p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Mobile Demo Section */}
-            <div className="flex flex-col lg:flex-row items-center gap-16 mb-20">
-              <div className="lg:w-1/3">
-                <div className="max-w-xs mx-auto aspect-[9/16] rounded-3xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
-                  <div className="w-full h-full rounded-2xl overflow-hidden">
-                    <video
-                      src="https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/m-jun8.mov"
-                      className="w-full h-full object-cover object-left-top"
-                      controls
-                      muted
-                      playsInline
-                      poster={caseStudy?.hero_image_url || 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png'}
-                    >
-                      Your browser does not support the video tag.
-                    </video>
-                  </div>
-                </div>
-              </div>
-
-              <div className="lg:w-2/3">
-                <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                  <h3 className="text-2xl font-semibold text-white mb-6 font-space-grotesk">Mobile-First Design</h3>
-                  <p className="text-white/80 text-lg leading-relaxed mb-6">
-                    The site works beautifully on mobile devices, ensuring recruiters can view it seamlessly whether they're at their desk or on-the-go.
-                  </p>
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <Smartphone className="h-5 w-5 text-humble-pink-500 mt-1 flex-shrink-0" />
-                      <span className="text-white/80">Optimized for mobile viewing</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <FileText className="h-5 w-5 text-humble-purple-500 mt-1 flex-shrink-0" />
-                      <span className="text-white/80">Clear information hierarchy</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Palette className="h-5 w-5 text-humble-blue-500 mt-1 flex-shrink-0" />
-                      <span className="text-white/80">Professional color scheme</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Key Features */}
-            <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10 mb-20">
-              <h3 className="text-2xl font-semibold text-white mb-8 text-center font-space-grotesk">Key Features</h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="flex items-start gap-4">
-                  <FileText className="h-6 w-6 text-humble-pink-500 mt-1 flex-shrink-0" />
-                  <span className="text-white/80 text-lg">Structured layout with skills, experience & intro</span>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Smartphone className="h-6 w-6 text-humble-purple-500 mt-1 flex-shrink-0" />
-                  <span className="text-white/80 text-lg">Fully responsive and mobile-friendly</span>
-                </div>
-                <div className="flex items-start gap-4">
-                  <FileText className="h-6 w-6 text-humble-blue-500 mt-1 flex-shrink-0" />
-                  <span className="text-white/80 text-lg">Downloadable CV PDF</span>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Palette className="h-6 w-6 text-humble-indigo-500 mt-1 flex-shrink-0" />
-                  <span className="text-white/80 text-lg">Minimal yet polished design</span>
-                </div>
-              </div>
-              <p className="text-white/80 text-lg text-center mt-8">
-                Every block is intentional — designed to help the candidate stand out while staying easy to navigate.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 4: The Results */}
-      <section className="py-24 bg-humble-charcoal/20 relative z-10">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="text-6xl mb-8 block font-light">⸻</span>
-            </div>
-            
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-space-grotesk flex items-center justify-center gap-4">
-              <TrendingUp className="h-12 w-12 text-humble-blue-500" />
-              The Results
-            </h2>
-
-            <div className="grid md:grid-cols-2 gap-8 mb-16">
-              <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <CheckCircle className="h-12 w-12 text-humble-pink-500 mx-auto mb-4" />
-                <div className="text-white font-medium text-lg">Site launched in a day</div>
-              </div>
-              
-              <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <CheckCircle className="h-12 w-12 text-humble-purple-500 mx-auto mb-4" />
-                <div className="text-white font-medium text-lg">Immediate positive feedback</div>
-              </div>
-              
-              <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <CheckCircle className="h-12 w-12 text-humble-blue-500 mx-auto mb-4" />
-                <div className="text-white font-medium text-lg">More confidence applying for jobs</div>
-              </div>
-              
-              <div className="text-center bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <DollarSign className="h-12 w-12 text-humble-pink-500 mx-auto mb-4" />
-                <div className="text-white font-medium text-lg">Total cost: just €49</div>
-              </div>
-            </div>
-
-            {/* Client Quote */}
-            <div className="bg-gradient-to-r from-humble-pink-500/10 via-humble-purple-500/10 to-humble-blue-500/10 rounded-3xl p-12 border border-white/10 text-center">
-              <Quote className="h-16 w-16 text-humble-pink-500 mx-auto mb-6" />
-              <blockquote className="text-2xl md:text-3xl text-white font-serif italic mb-8 leading-relaxed">
-                Since the CV went live, I've had lots of interviews — and many compliments from potential employers.
-              </blockquote>
-              <div className="text-humble-pink-500 font-medium text-lg font-space-grotesk">— Digital CV Client</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 5: Call to Action */}
-      <section className="py-24 relative z-10">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="text-center mb-12">
-              <span className="text-6xl mb-8 block font-light">⸻</span>
-            </div>
-            
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 font-space-grotesk flex items-center justify-center gap-4">
-              <Link className="h-12 w-12 text-humble-pink-500" />
-              Want a site like this?
-            </h2>
-            
-            <p className="text-2xl text-white/80 mb-12 max-w-2xl mx-auto font-light">
-              Whether it's for job hunting, freelancing, or personal branding — we can build yours in 1 day. Starting at €49.
-            </p>
-            
-            <div className="space-y-6">
-              <a
-                href="https://humblestudio.ai/inquiry"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-12 py-5 rounded-2xl font-semibold text-xl text-white bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 hover:opacity-90 transition-opacity font-space-grotesk"
-              >
-                Get Your Website Built
-                <ExternalLink className="h-6 w-6" />
-              </a>
-              
-              <div className="text-white/60 text-lg">
-                Professional websites delivered in days, not months
+            <div className="aspect-[16/10] rounded-3xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2 mb-16">
+              <div className="w-full h-full rounded-2xl overflow-hidden">
+                <img
+                  src={caseStudy.hero_image_url || 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png'}
+                  alt={`${caseStudy.title} Website`}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>

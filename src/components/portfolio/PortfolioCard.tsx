@@ -37,7 +37,15 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
 
   const handleCardClick = () => {
     // Navigate to case study page based on project title
-    const slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+    let slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+    
+    // Handle specific known case studies
+    if (project.title.toLowerCase().includes("nonna's table") || project.title.toLowerCase().includes("nonnas table")) {
+      slug = 'nonnas-table';
+    } else if (project.title.toLowerCase().includes("digital") && project.title.toLowerCase().includes("cv")) {
+      slug = 'digital-cv';
+    }
+    
     navigate(`/work/${slug}`);
   };
 
@@ -96,7 +104,7 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
       <div className="p-6 space-y-4">
         {/* Category & Build Time */}
         <div className="flex items-center justify-between">
-          <span className={`inline-block px-3 py-1 rounded-full bg-gradient-to-r ${getGradient(category)} text-white font-medium text-sm`}>
+          <span className={`inline-block px-3 py-1 rounded-full bg-gradient-to-r ${getGradient(category)} text-white font-medium text-sm max-w-fit`}>
             {category}
           </span>
           {project.build_time && (
@@ -141,10 +149,9 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              const slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
-              navigate(`/work/${slug}`);
+              handleCardClick();
             }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-lg font-medium text-sm hover:opacity-90 transition-opacity"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-lg font-medium text-sm hover:opacity-90 transition-opacity w-fit"
           >
             Case Study
             <ArrowRight className="h-4 w-4" />
