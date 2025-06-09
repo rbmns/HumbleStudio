@@ -44,6 +44,7 @@ const CaseStudy = () => {
   const [caseStudy, setCaseStudy] = useState<CaseStudy | null>(null);
   const [media, setMedia] = useState<CaseStudyMedia[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -67,6 +68,7 @@ const CaseStudy = () => {
 
       if (caseStudyError) {
         console.error('Error fetching case study:', caseStudyError);
+        setError('Failed to fetch case study data');
         return;
       }
 
@@ -74,7 +76,7 @@ const CaseStudy = () => {
 
       if (!caseStudyData) {
         console.log(`No case study found with slug: ${slug}`);
-        navigate('/404');
+        setError('Case study not found');
         return;
       }
 
@@ -106,7 +108,7 @@ const CaseStudy = () => {
       setCaseStudy(processedCaseStudy);
     } catch (error) {
       console.error('Error in fetchCaseStudy:', error);
-      navigate('/404');
+      setError('An unexpected error occurred');
     } finally {
       setLoading(false);
     }
@@ -125,18 +127,31 @@ const CaseStudy = () => {
       <div className="min-h-screen bg-humble-navy relative">
         <StarBackground />
         <div className="relative pt-24 pb-16 flex items-center justify-center">
-          <div className="text-white">Loading...</div>
+          <div className="text-white text-center">
+            <div className="text-xl mb-4">Loading case study...</div>
+            <div className="text-sm text-white/60">Slug: {slug}</div>
+          </div>
         </div>
       </div>
     );
   }
 
-  if (!caseStudy) {
+  if (error || !caseStudy) {
     return (
       <div className="min-h-screen bg-humble-navy relative">
         <StarBackground />
         <div className="relative pt-24 pb-16 flex items-center justify-center">
-          <div className="text-white">Case study not found</div>
+          <div className="text-white text-center">
+            <div className="text-xl mb-4">{error || 'Case study not found'}</div>
+            <div className="text-sm text-white/60 mb-6">Slug: {slug}</div>
+            <button
+              onClick={() => navigate('/work')}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Back to Work
+            </button>
+          </div>
         </div>
       </div>
     );
