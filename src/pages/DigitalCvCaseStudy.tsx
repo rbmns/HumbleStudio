@@ -1,6 +1,7 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Menu, X } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Menu, X, Clock, User, MapPin, Calendar } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import StarBackground from '@/components/StarBackground';
 import Contact from '@/components/Contact';
@@ -53,7 +54,6 @@ const DigitalCvCaseStudy = () => {
     try {
       console.log('Fetching case study with slug: digital-cv');
       
-      // Try to fetch from database first
       const { data: caseStudyData, error: caseStudyError } = await supabase
         .from('case_studies')
         .select('*')
@@ -62,117 +62,46 @@ const DigitalCvCaseStudy = () => {
 
       if (caseStudyError) {
         console.error('Error fetching case study:', caseStudyError);
+        return;
       }
 
       console.log('Case study data from DB:', caseStudyData);
 
+      if (!caseStudyData) {
+        console.log('No case study found with slug: digital-cv');
+        navigate('/404');
+        return;
+      }
+
       // Fetch media for this case study
-      let mediaData: CaseStudyMedia[] = [];
-      if (caseStudyData?.id) {
-        const { data: fetchedMedia, error: mediaError } = await supabase
-          .from('case_study_media')
-          .select('*')
-          .eq('case_study_id', caseStudyData.id)
-          .order('display_order', { ascending: true });
+      const { data: fetchedMedia, error: mediaError } = await supabase
+        .from('case_study_media')
+        .select('*')
+        .eq('case_study_id', caseStudyData.id)
+        .order('display_order', { ascending: true });
 
-        if (mediaError) {
-          console.error('Error fetching media:', mediaError);
-        } else {
-          console.log('Media data from DB:', fetchedMedia);
-          mediaData = fetchedMedia || [];
-        }
-      }
-
-      if (caseStudyData) {
-        // Use database data
-        const processedCaseStudy: CaseStudy = {
-          ...caseStudyData,
-          key_features: Array.isArray(caseStudyData.key_features) 
-            ? caseStudyData.key_features.filter((item): item is string => typeof item === 'string')
-            : [],
-          technologies: Array.isArray(caseStudyData.technologies) 
-            ? caseStudyData.technologies.filter((item): item is string => typeof item === 'string')
-            : []
-        };
-        setCaseStudy(processedCaseStudy);
-        setMedia(mediaData);
+      if (mediaError) {
+        console.error('Error fetching media:', mediaError);
       } else {
-        // Use fallback data if not in database
-        console.log('Using fallback data for Digital CV case study');
-        setCaseStudy({
-          id: 'fallback-digital-cv',
-          slug: 'digital-cv',
-          title: "Digital Resume Site",
-          subtitle: "Personal Branding Platform",
-          description: "A sophisticated personal website showcasing professional achievements, portfolio, and contact information with modern design and smooth animations.",
-          client_name: "Professional Individual",
-          client_location: "Global",
-          hero_image_url: 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png',
-          challenge_heading: "The Challenge",
-          challenge_content: "Creating a standout personal brand in a competitive digital landscape.",
-          solution_heading: "Our Solution",
-          solution_content: "A clean, professional website that showcases skills and experience effectively.",
-          impact_heading: "The Impact",
-          impact_content: "A powerful digital presence that opens new opportunities and establishes credibility.",
-          key_features: [
-            "Professional Portfolio Showcase",
-            "Interactive Resume Display",
-            "Contact Integration",
-            "Responsive Design",
-            "Modern Animations",
-            "SEO Optimized"
-          ],
-          technologies: [
-            "React",
-            "TypeScript",
-            "Tailwind CSS",
-            "Framer Motion"
-          ],
-          project_duration: "1 week",
-          cta_heading: "Ready to Build Your Digital Presence?",
-          cta_description: "Let's create a professional website that showcases your unique skills and opens new opportunities.",
-          cta_button_text: "Start Your Project"
-        });
-        setMedia([]);
+        console.log('Media data from DB:', fetchedMedia);
+        setMedia(fetchedMedia || []);
       }
+
+      // Process the case study data
+      const processedCaseStudy: CaseStudy = {
+        ...caseStudyData,
+        key_features: Array.isArray(caseStudyData.key_features) 
+          ? caseStudyData.key_features.filter((item): item is string => typeof item === 'string')
+          : [],
+        technologies: Array.isArray(caseStudyData.technologies) 
+          ? caseStudyData.technologies.filter((item): item is string => typeof item === 'string')
+          : []
+      };
+      
+      setCaseStudy(processedCaseStudy);
     } catch (error) {
       console.error('Error in fetchCaseStudy:', error);
-      // Use fallback data on any error
-      setCaseStudy({
-        id: 'fallback-digital-cv',
-        slug: 'digital-cv',
-        title: "Digital Resume Site",
-        subtitle: "Personal Branding Platform",
-        description: "A sophisticated personal website showcasing professional achievements, portfolio, and contact information with modern design and smooth animations.",
-        client_name: "Professional Individual",
-        client_location: "Global",
-        hero_image_url: 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png',
-        challenge_heading: "The Challenge",
-        challenge_content: "Creating a standout personal brand in a competitive digital landscape.",
-        solution_heading: "Our Solution",
-        solution_content: "A clean, professional website that showcases skills and experience effectively.",
-        impact_heading: "The Impact",
-        impact_content: "A powerful digital presence that opens new opportunities and establishes credibility.",
-        key_features: [
-          "Professional Portfolio Showcase",
-          "Interactive Resume Display",
-          "Contact Integration",
-          "Responsive Design",
-          "Modern Animations",
-          "SEO Optimized"
-        ],
-        technologies: [
-          "React",
-          "TypeScript",
-          "Tailwind CSS",
-          "Framer Motion"
-        ],
-        project_duration: "1 week",
-        cta_heading: "Ready to Build Your Digital Presence?",
-        cta_description: "Let's create a professional website that showcases your unique skills and opens new opportunities.",
-        cta_button_text: "Start Your Project"
-      });
-      setMedia([]);
+      navigate('/404');
     } finally {
       setLoading(false);
     }
@@ -229,6 +158,7 @@ const DigitalCvCaseStudy = () => {
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-8 items-center">
               <button onClick={() => navigate('/')} className="text-white/80 hover:text-white transition-colors">Home</button>
+              <button onClick={() => navigate('/work')} className="text-white/80 hover:text-white transition-colors">Work</button>
               <button onClick={() => navigate('/inquiry')} className="text-white/80 hover:text-white transition-colors">Inquiry</button>
               <button 
                 onClick={() => scrollToSection('contact')} 
@@ -252,11 +182,12 @@ const DigitalCvCaseStudy = () => {
           {isMobileMenuOpen && (
             <div className="md:hidden absolute top-full left-0 w-full bg-humble-navy/95 backdrop-blur-md shadow-lg">
               <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-                <button onClick={() => navigate('/')} className="text-white/80 hover:text-white transition-colors py-2">Home</button>
-                <button onClick={() => navigate('/inquiry')} className="text-white/80 hover:text-white transition-colors py-2">Inquiry</button>
+                <button onClick={() => navigate('/')} className="text-white/80 hover:text-white transition-colors py-2 text-left">Home</button>
+                <button onClick={() => navigate('/work')} className="text-white/80 hover:text-white transition-colors py-2 text-left">Work</button>
+                <button onClick={() => navigate('/inquiry')} className="text-white/80 hover:text-white transition-colors py-2 text-left">Inquiry</button>
                 <button 
                   onClick={() => scrollToSection('contact')} 
-                  className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all"
+                  className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all text-center"
                 >
                   Contact
                 </button>
@@ -269,25 +200,218 @@ const DigitalCvCaseStudy = () => {
       {/* Hero Section */}
       <section className="pt-32 pb-24 relative">
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 font-space-grotesk leading-tight">
-              {caseStudy.title}
-            </h1>
-            
-            <p className="text-xl md:text-2xl lg:text-3xl text-white/80 leading-relaxed font-light max-w-3xl mx-auto mb-16">
-              {caseStudy.description}
-            </p>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="mb-6">
+                  <button
+                    onClick={() => navigate('/work')}
+                    className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors mb-4"
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                    Back to Work
+                  </button>
+                </div>
 
-            {/* Hero Image */}
-            <div className="aspect-[16/10] rounded-3xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2 mb-16">
-              <div className="w-full h-full rounded-2xl overflow-hidden">
-                <img
-                  src={caseStudy.hero_image_url || 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png'}
-                  alt={`${caseStudy.title} Website`}
-                  className="w-full h-full object-cover"
-                />
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-space-grotesk leading-tight">
+                  {caseStudy.title}
+                </h1>
+                
+                {caseStudy.subtitle && (
+                  <p className="text-xl md:text-2xl text-humble-purple-300 mb-6">
+                    {caseStudy.subtitle}
+                  </p>
+                )}
+                
+                <p className="text-lg text-white/80 leading-relaxed mb-8">
+                  {caseStudy.description}
+                </p>
+
+                {/* Project Details */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  {caseStudy.client_name && (
+                    <div className="flex items-center gap-3">
+                      <User className="h-5 w-5 text-humble-purple-400" />
+                      <div>
+                        <p className="text-white/60 text-sm">Client</p>
+                        <p className="text-white">{caseStudy.client_name}</p>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {caseStudy.client_location && (
+                    <div className="flex items-center gap-3">
+                      <MapPin className="h-5 w-5 text-humble-purple-400" />
+                      <div>
+                        <p className="text-white/60 text-sm">Location</p>
+                        <p className="text-white">{caseStudy.client_location}</p>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {caseStudy.project_duration && (
+                    <div className="flex items-center gap-3">
+                      <Calendar className="h-5 w-5 text-humble-purple-400" />
+                      <div>
+                        <p className="text-white/60 text-sm">Duration</p>
+                        <p className="text-white">{caseStudy.project_duration}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Hero Image */}
+              <div className="aspect-[4/3] rounded-3xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
+                <div className="w-full h-full rounded-2xl overflow-hidden">
+                  <img
+                    src={caseStudy.hero_image_url || '/placeholder.svg'}
+                    alt={caseStudy.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Challenge Section */}
+      {caseStudy.challenge_content && (
+        <section className="py-24 relative">
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+                {caseStudy.challenge_heading}
+              </h2>
+              <div className="prose prose-lg prose-invert max-w-none">
+                <p className="text-white/80 leading-relaxed text-lg">
+                  {caseStudy.challenge_content}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Solution Section */}
+      {caseStudy.solution_content && (
+        <section className="py-24 bg-humble-charcoal/30 relative">
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+                {caseStudy.solution_heading}
+              </h2>
+              <div className="prose prose-lg prose-invert max-w-none">
+                <p className="text-white/80 leading-relaxed text-lg">
+                  {caseStudy.solution_content}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Key Features Section */}
+      {caseStudy.key_features && caseStudy.key_features.length > 0 && (
+        <section className="py-24 relative">
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-12">Key Features</h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                {caseStudy.key_features.map((feature, index) => (
+                  <div key={index} className="bg-humble-charcoal/50 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                    <p className="text-white font-medium">{feature}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Technologies Section */}
+      {caseStudy.technologies && caseStudy.technologies.length > 0 && (
+        <section className="py-24 bg-humble-charcoal/30 relative">
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-12">Technologies Used</h2>
+              <div className="flex flex-wrap gap-4">
+                {caseStudy.technologies.map((tech, index) => (
+                  <span
+                    key={index}
+                    className="px-4 py-2 bg-gradient-to-r from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 border border-humble-purple-500/30 rounded-lg text-white font-medium"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Impact Section */}
+      {caseStudy.impact_content && (
+        <section className="py-24 relative">
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+                {caseStudy.impact_heading}
+              </h2>
+              <div className="prose prose-lg prose-invert max-w-none">
+                <p className="text-white/80 leading-relaxed text-lg">
+                  {caseStudy.impact_content}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Media Gallery */}
+      {media && media.length > 0 && (
+        <section className="py-24 bg-humble-charcoal/30 relative">
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-12">Project Gallery</h2>
+              <div className="grid md:grid-cols-2 gap-8">
+                {media.map((item) => (
+                  <div key={item.id} className="rounded-xl overflow-hidden bg-humble-charcoal/50 border border-white/10">
+                    <img
+                      src={item.media_url}
+                      alt={item.alt_text || 'Project image'}
+                      className="w-full h-64 object-cover"
+                    />
+                    {item.caption && (
+                      <div className="p-4">
+                        <p className="text-white/70 text-sm">{item.caption}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* CTA Section */}
+      <section className="py-24 relative">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              {caseStudy.cta_heading || "Ready to Start Your Project?"}
+            </h2>
+            <p className="text-lg text-white/80 mb-8 leading-relaxed">
+              {caseStudy.cta_description || "Let's create something amazing together."}
+            </p>
+            <button
+              onClick={() => scrollToSection('contact')}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-lg font-medium text-lg hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all"
+            >
+              {caseStudy.cta_button_text}
+            </button>
           </div>
         </div>
       </section>
