@@ -32,12 +32,11 @@ const LinkInBio = () => {
               </h1>
             </button>
             
-            <div className="flex space-x-6 items-center">
-              <button onClick={() => navigate('/')} className="text-white/80 hover:text-white transition-colors">Home</button>
-              <button onClick={() => navigate('/inquiry')} className="text-white/80 hover:text-white transition-colors">Inquiry</button>
+            <div className="flex space-x-4 md:space-x-6 items-center">
+              <button onClick={() => navigate('/inquiry')} className="text-white/80 hover:text-white transition-colors text-sm md:text-base">Inquiry</button>
               <button 
                 onClick={scrollToContact}
-                className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all"
+                className="px-3 py-2 md:px-5 md:py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all text-sm md:text-base"
               >
                 Contact
               </button>
