@@ -96,7 +96,7 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
       <div className="p-6 space-y-4">
         {/* Category & Build Time */}
         <div className="flex items-center justify-between">
-          <span className={`px-3 py-1 rounded-full bg-gradient-to-r ${getGradient(category)} text-white font-medium text-sm`}>
+          <span className={`inline-block px-3 py-1 rounded-full bg-gradient-to-r ${getGradient(category)} text-white font-medium text-sm`}>
             {category}
           </span>
           {project.build_time && (
@@ -144,7 +144,7 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
               const slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
               navigate(`/work/${slug}`);
             }}
-            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-lg font-medium text-sm hover:opacity-90 transition-opacity flex-1"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-lg font-medium text-sm hover:opacity-90 transition-opacity"
           >
             Case Study
             <ArrowRight className="h-4 w-4" />

@@ -14,6 +14,7 @@ import Inquiry from "./pages/Inquiry";
 import BrandDiscoveryForm from "./pages/BrandDiscoveryForm";
 import NonnasTableCaseStudy from "./pages/NonnasTableCaseStudy";
 import DigitalCvCaseStudy from "./pages/DigitalCvCaseStudy";
+import ComingSoon from "./pages/ComingSoon";
 import LinkInBio from "./pages/LinkInBio";
 import Work from "./pages/Work";
 
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/brand-discovery-form" element={<BrandDiscoveryForm />} />
           <Route path="/work/nonnas-table" element={<NonnasTableCaseStudy />} />
           <Route path="/work/digital-cv" element={<DigitalCvCaseStudy />} />
+          <Route path="/work/:slug" element={<ComingSoon />} />
           <Route path="/work" element={<Work />} />
           <Route path="/link-in-bio" element={<LinkInBio />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
