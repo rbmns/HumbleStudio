@@ -51,24 +51,41 @@ const CaseStudy = () => {
     if (slug) {
       document.title = `${slug.replace(/-/g, ' ')} | HumbleStudio`;
       fetchCaseStudy();
+    } else {
+      setError('No case study slug provided');
+      setLoading(false);
     }
   }, [slug]);
 
   const fetchCaseStudy = async () => {
-    if (!slug) return;
+    if (!slug) {
+      setError('No slug provided');
+      setLoading(false);
+      return;
+    }
     
     try {
       console.log(`Fetching case study with slug: ${slug}`);
+      
+      // First, let's see what case studies exist in the database
+      const { data: allCaseStudies, error: listError } = await supabase
+        .from('case_studies')
+        .select('slug, title')
+        .eq('is_published', true);
+      
+      console.log('All available case studies:', allCaseStudies);
       
       const { data: caseStudyData, error: caseStudyError } = await supabase
         .from('case_studies')
         .select('*')
         .eq('slug', slug)
+        .eq('is_published', true)
         .maybeSingle();
 
       if (caseStudyError) {
         console.error('Error fetching case study:', caseStudyError);
         setError('Failed to fetch case study data');
+        setLoading(false);
         return;
       }
 
@@ -76,7 +93,9 @@ const CaseStudy = () => {
 
       if (!caseStudyData) {
         console.log(`No case study found with slug: ${slug}`);
+        console.log('Available slugs:', allCaseStudies?.map(cs => cs.slug));
         setError('Case study not found');
+        setLoading(false);
         return;
       }
 
@@ -106,10 +125,10 @@ const CaseStudy = () => {
       };
       
       setCaseStudy(processedCaseStudy);
+      setLoading(false);
     } catch (error) {
       console.error('Error in fetchCaseStudy:', error);
       setError('An unexpected error occurred');
-    } finally {
       setLoading(false);
     }
   };
@@ -129,7 +148,7 @@ const CaseStudy = () => {
         <div className="relative pt-24 pb-16 flex items-center justify-center">
           <div className="text-white text-center">
             <div className="text-xl mb-4">Loading case study...</div>
-            <div className="text-sm text-white/60">Slug: {slug}</div>
+            <div className="text-sm text-white/60">Slug: {slug || 'No slug provided'}</div>
           </div>
         </div>
       </div>
@@ -143,7 +162,7 @@ const CaseStudy = () => {
         <div className="relative pt-24 pb-16 flex items-center justify-center">
           <div className="text-white text-center">
             <div className="text-xl mb-4">{error || 'Case study not found'}</div>
-            <div className="text-sm text-white/60 mb-6">Slug: {slug}</div>
+            <div className="text-sm text-white/60 mb-6">Slug: {slug || 'No slug provided'}</div>
             <button
               onClick={() => navigate('/work')}
               className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
