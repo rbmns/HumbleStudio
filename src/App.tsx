@@ -38,6 +38,7 @@ const App = () => (
           <Route path="/work/nonna-s-table" element={<NonnasTableCaseStudy />} />
           <Route path="/work/digital-cv" element={<DigitalCvCaseStudy />} />
           <Route path="/work/digital-resume-site" element={<DigitalCvCaseStudy />} />
+          <Route path="/work/shen-taxi-tours" element={<DigitalCvCaseStudy />} />
           <Route path="/work/:slug" element={<ComingSoon />} />
           <Route path="/work" element={<Work />} />
           <Route path="/link-in-bio" element={<LinkInBio />} />
