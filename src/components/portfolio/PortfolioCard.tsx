@@ -2,7 +2,7 @@
 import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ExternalLink, Clock } from 'lucide-react';
-import PerformantImage from './PerformantImage';
+import FastImage from './FastImage';
 
 interface PortfolioCardProps {
   project: {
@@ -36,16 +36,34 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({
   const primaryImage = project.media.find(m => m.is_primary) || project.media[0];
 
   const handleCardClick = useCallback((e: React.MouseEvent) => {
-    if ((e.target as HTMLElement).closest('a, button')) {
+    // Prevent click if it's on a button or link element
+    if ((e.target as HTMLElement).closest('button, a')) {
       return;
     }
     
     if (!project.is_coming_soon) {
-      onClick(project);
+      // Navigate to case study instead of calling onClick
+      if (project.title === "Nonna's Table") {
+        navigate('/case-studies/nonnas-table');
+      } else if (project.title === "Digital Resume Site") {
+        navigate('/case-studies/digital-cv');
+      } else {
+        // For other projects, still call onClick for now
+        onClick(project);
+      }
     }
-  }, [project, onClick]);
+  }, [project, navigate, onClick]);
 
-  const handleButtonClick = useCallback((e: React.MouseEvent) => {
+  const handleLiveSiteClick = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (project.link && !project.is_coming_soon) {
+      window.open(project.link, '_blank');
+    }
+  }, [project.link, project.is_coming_soon]);
+
+  const handleCaseStudyClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
@@ -53,10 +71,8 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({
       navigate('/case-studies/nonnas-table');
     } else if (project.title === "Digital Resume Site") {
       navigate('/case-studies/digital-cv');
-    } else if (project.link && !project.is_coming_soon) {
-      window.open(project.link, '_blank');
     }
-  }, [project, navigate]);
+  }, [project.title, navigate]);
 
   const getButtonText = () => {
     if (project.title === "Nonna's Table" || project.title === "Digital Resume Site") {
@@ -77,7 +93,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({
         featured ? 'aspect-[16/9]' : 'aspect-[4/3]'
       }`}>
         {primaryImage && (
-          <PerformantImage
+          <FastImage
             src={primaryImage.media_url}
             alt={primaryImage.alt_text || project.title}
             className="w-full h-full group-hover:scale-105 transition-transform duration-300"
@@ -99,7 +115,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({
               className={`bg-white/90 hover:bg-white text-humble-charcoal px-4 py-2 rounded-full font-medium ${
                 featured ? 'text-lg px-6 py-3' : 'text-sm'
               }`}
-              onClick={handleButtonClick}
+              onClick={handleCaseStudyClick}
             >
               {getButtonText()}
             </button>
@@ -168,7 +184,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({
           
           {!project.is_coming_soon && project.link && (
             <button
-              onClick={handleButtonClick}
+              onClick={handleLiveSiteClick}
               className={`flex items-center gap-2 text-humble-pink-500 hover:text-humble-pink-400 transition-colors ${
                 featured ? 'text-base font-medium' : 'text-sm'
               }`}

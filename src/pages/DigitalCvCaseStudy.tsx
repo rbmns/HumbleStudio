@@ -4,7 +4,7 @@ import { ArrowLeft, ExternalLink, Menu, X, Target, Lightbulb, TrendingUp, Link, 
 import { supabase } from '@/integrations/supabase/client';
 import StarBackground from '@/components/StarBackground';
 import Contact from '@/components/Contact';
-import OptimizedImage from '@/components/portfolio/OptimizedImage';
+import FastImage from '@/components/portfolio/FastImage';
 
 interface CaseStudy {
   id: string;
@@ -206,10 +206,11 @@ const DigitalCvCaseStudy = () => {
             <div className="mb-20">
               <div className="aspect-[16/10] rounded-3xl bg-gradient-to-br from-humble-pink-500/20 via-humble-purple-500/20 to-humble-blue-500/20 p-2">
                 <div className="w-full h-full rounded-2xl overflow-hidden">
-                  <OptimizedImage
-                    src={caseStudy.hero_image_url || 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png'}
+                  <FastImage
+                    src={caseStudy?.hero_image_url || 'https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png'}
                     alt={`Digital CV Website`}
                     className="w-full h-full object-cover object-left-top"
+                    priority={true}
                   />
                 </div>
               </div>
@@ -340,7 +341,7 @@ const DigitalCvCaseStudy = () => {
                               Your browser does not support the video tag.
                             </video>
                           ) : (
-                            <OptimizedImage
+                            <FastImage
                               src={media.media_url}
                               alt={media.alt_text || 'Case study image'}
                               className="w-full h-full object-cover object-left-top"

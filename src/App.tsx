@@ -14,6 +14,7 @@ import Inquiry from "./pages/Inquiry";
 import BrandDiscoveryForm from "./pages/BrandDiscoveryForm";
 import NonnasTableCaseStudy from "./pages/NonnasTableCaseStudy";
 import DigitalCvCaseStudy from "./pages/DigitalCvCaseStudy";
+import LinkInBio from "./pages/LinkInBio";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/brand-discovery-form" element={<BrandDiscoveryForm />} />
           <Route path="/case-studies/nonnas-table" element={<NonnasTableCaseStudy />} />
           <Route path="/case-studies/digital-cv" element={<DigitalCvCaseStudy />} />
+          <Route path="/link-in-bio" element={<LinkInBio />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
