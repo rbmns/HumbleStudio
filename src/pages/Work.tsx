@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import StarBackground from '@/components/StarBackground';
 import Navbar from '@/components/Navbar';
 
-const CaseStudies = () => {
+const Work = () => {
   const navigate = useNavigate();
 
   const caseStudies = [
@@ -14,9 +14,9 @@ const CaseStudies = () => {
       title: "Nonna's Table",
       subtitle: "Restaurant Landing Page",
       description: "A beautiful, conversion-focused landing page for an Italian restaurant featuring online reservations, menu showcase, and seamless user experience.",
-      image: "/lovable-uploads/cabbeeb2-4701-40ca-8f62-75cb957be030.png",
+      image: "https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/nonnas-table/d-1a.png",
       liveUrl: "https://nonnas-table.humblestudio.ai/",
-      caseStudyUrl: "/case-studies/nonnas-table",
+      caseStudyUrl: "/work/nonnas-table",
       buildTime: "48 hours",
       category: "Restaurant",
       stats: {
@@ -32,9 +32,9 @@ const CaseStudies = () => {
       title: "Digital Resume Site",
       subtitle: "Personal Branding Platform",
       description: "A sophisticated personal website showcasing professional achievements, portfolio, and contact information with modern design and smooth animations.",
-      image: "/lovable-uploads/f1c45144-63a0-4f95-8d0c-21b19d944045.png",
+      image: "https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png",
       liveUrl: "https://rosiebiemans.com/",
-      caseStudyUrl: "/case-studies/digital-cv",
+      caseStudyUrl: "/work/digital-cv",
       buildTime: "36 hours",
       category: "Personal Brand",
       stats: {
@@ -58,7 +58,7 @@ const CaseStudies = () => {
           {/* Header */}
           <div className="text-center mb-20">
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 font-space-grotesk">
-              Case Studies
+              Work
             </h1>
             <p className="text-xl text-white/80 font-light max-w-3xl mx-auto">
               Deep dives into our most successful projects, showcasing the strategy, 
@@ -183,4 +183,4 @@ const CaseStudies = () => {
   );
 };
 
-export default CaseStudies;
+export default Work;
