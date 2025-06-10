@@ -1,6 +1,7 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, User, MapPin, Calendar } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import StarBackground from '@/components/StarBackground';
 import Contact from '@/components/Contact';
