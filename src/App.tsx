@@ -35,6 +35,7 @@ const App = () => (
           <Route path="/brand-discovery-form" element={<BrandDiscoveryForm />} />
           <Route path="/work" element={<Work />} />
           <Route path="/work/:slug" element={<CaseStudy />} />
+          <Route path="/case-studies/:slug" element={<CaseStudy />} />
           <Route path="/link-in-bio" element={<LinkInBio />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

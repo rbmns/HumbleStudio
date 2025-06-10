@@ -147,21 +147,29 @@ const LinkInBio = () => {
               
               <div className="space-y-4">
                 {/* Digital CV */}
-                <a
-                  href="https://rosiebiemans.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between w-full p-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-pink-500/50 transition-all duration-300 group"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-xl">🔥</span>
-                    <div>
-                      <div className="text-base font-semibold text-white">Digital CV</div>
-                      <div className="text-white/60 text-xs">Personal branding site</div>
+                <div className="flex gap-2">
+                  <a
+                    href="https://rosiebiemans.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-between p-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-pink-500/50 transition-all duration-300 group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="text-xl">🔥</span>
+                      <div>
+                        <div className="text-base font-semibold text-white">Digital CV</div>
+                        <div className="text-white/60 text-xs">Personal branding site</div>
+                      </div>
                     </div>
-                  </div>
-                  <ExternalLink className="h-4 w-4 text-white/60 group-hover:text-humble-pink-500 transition-colors" />
-                </a>
+                    <ExternalLink className="h-4 w-4 text-white/60 group-hover:text-humble-pink-500 transition-colors" />
+                  </a>
+                  <button
+                    onClick={() => navigate('/case-studies/digital-cv')}
+                    className="px-4 py-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-pink-500/50 transition-all duration-300 text-white/60 hover:text-humble-pink-500"
+                  >
+                    <span className="text-sm font-medium">Case Study</span>
+                  </button>
+                </div>
 
                 {/* Shen Taxi & Tours */}
                 <div className="flex gap-2">
