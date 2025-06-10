@@ -25,15 +25,7 @@ interface PortfolioMedia {
   display_order: number;
 }
 
-const categories = [
-  { id: 'all', label: 'All Projects' },
-  { id: 'web', label: 'Web Design' },
-  { id: 'branding', label: 'Branding' },
-  { id: 'ecommerce', label: 'E-Commerce' },
-];
-
 const PortfolioGridOptimized: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -108,19 +100,13 @@ const PortfolioGridOptimized: React.FC = () => {
     fetchProjects();
   }, [fetchProjects]);
 
-  const filteredProjects = useMemo(() => {
-    return activeCategory === 'all' 
-      ? projects 
-      : projects.filter(project => project.categories.includes(activeCategory));
-  }, [projects, activeCategory]);
-
   const featuredProjects = useMemo(() => {
-    return filteredProjects.filter(project => project.is_featured);
-  }, [filteredProjects]);
+    return projects.filter(project => project.is_featured);
+  }, [projects]);
 
   const regularProjects = useMemo(() => {
-    return filteredProjects.filter(project => !project.is_featured);
-  }, [filteredProjects]);
+    return projects.filter(project => !project.is_featured);
+  }, [projects]);
 
   const handleProjectClick = useCallback((project: PortfolioProject) => {
     console.log('Project clicked:', project.title);
@@ -157,23 +143,7 @@ const PortfolioGridOptimized: React.FC = () => {
         Showcasing beautiful websites built with AI and delivered fast
       </p>
       
-      <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12">
-        {categories.map(category => (
-          <button
-            key={category.id}
-            className={`px-3 py-2 md:px-4 md:py-2 rounded-full text-sm font-medium transition-all duration-300 min-h-[44px] ${
-              activeCategory === category.id 
-                ? 'bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white' 
-                : 'bg-humble-charcoal text-white/70 hover:bg-humble-charcoal/80'
-            }`}
-            onClick={() => setActiveCategory(category.id)}
-          >
-            {category.label}
-          </button>
-        ))}
-      </div>
-
-      {filteredProjects.length > 0 ? (
+      {projects.length > 0 ? (
         <div className="space-y-12">
           {/* Featured Projects */}
           {featuredProjects.length > 0 && (
@@ -208,7 +178,7 @@ const PortfolioGridOptimized: React.FC = () => {
         </div>
       ) : (
         <div className="text-center text-white/60 py-16">
-          <p>No projects found in this category.</p>
+          <p>No projects found.</p>
         </div>
       )}
     </div>

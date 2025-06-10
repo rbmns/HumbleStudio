@@ -46,8 +46,8 @@ const Navbar = () => {
           </h1>
         </Link>
         
-        {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-8 items-center">
+        {/* Desktop Menu - hidden on screens smaller than lg */}
+        <div className="hidden lg:flex space-x-8 items-center">
           <Link to="/" className="text-white/80 hover:text-white transition-colors">Home</Link>
           <Link to="/work" className="text-white/80 hover:text-white transition-colors">Work</Link>
           <Link to="/inquiry" className="text-white/80 hover:text-white transition-colors">Inquiry</Link>
@@ -59,9 +59,9 @@ const Navbar = () => {
           </button>
         </div>
         
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Menu Toggle - visible on screens smaller than lg */}
         <button 
-          className="md:hidden text-white"
+          className="lg:hidden text-white"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
         >
@@ -71,7 +71,7 @@ const Navbar = () => {
       
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-humble-charcoal/95 backdrop-blur-md shadow-lg">
+        <div className="lg:hidden absolute top-full left-0 w-full bg-humble-charcoal/95 backdrop-blur-md shadow-lg">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <Link to="/" className="text-white/80 hover:text-white transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
             <Link to="/work" className="text-white/80 hover:text-white transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>Work</Link>
