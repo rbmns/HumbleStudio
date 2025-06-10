@@ -44,6 +44,13 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
     }
   }, [project, onClick]);
 
+  const handleImageClick = useCallback(() => {
+    if (!project.is_coming_soon) {
+      console.log('Image clicked for project:', project.title);
+      onClick(project);
+    }
+  }, [project, onClick]);
+
   return (
     <div 
       className={`bg-humble-charcoal rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer ${
@@ -56,7 +63,7 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
         alt={primaryImage?.alt_text || project.title}
         className="aspect-[4/3]"
         priority={featured}
-        onClick={handleCardClick}
+        onClick={handleImageClick}
       />
 
       <div className={`${featured ? 'p-8' : 'p-6'}`}>
