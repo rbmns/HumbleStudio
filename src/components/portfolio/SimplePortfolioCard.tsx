@@ -52,11 +52,11 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
       onClick={handleCardClick}
     >
       <PortfolioCardImage
-        primaryImage={primaryImage}
-        projectTitle={project.title}
-        isComingSoon={project.is_coming_soon}
-        featured={featured}
-        onCardClick={handleCardClick}
+        src={primaryImage?.media_url || ''}
+        alt={primaryImage?.alt_text || project.title}
+        className="aspect-[4/3]"
+        priority={featured}
+        onClick={handleCardClick}
       />
 
       <div className={`${featured ? 'p-8' : 'p-6'}`}>
