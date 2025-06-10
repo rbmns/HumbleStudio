@@ -1,4 +1,5 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,700,500,301,300,701,501&display=swap');
@@ -69,7 +70,7 @@
 
 @layer base {
   body {
-    @apply bg-humble-navy text-white font-space-grotesk;
+    @apply bg-humble-navy text-white font-inter;
     background-image: radial-gradient(circle at center, rgba(5, 5, 20, 0.8) 0%, rgba(0, 0, 8, 0.98) 100%);
     font-weight: 400;
     letter-spacing: -0.01em;

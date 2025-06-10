@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -165,6 +164,7 @@ export default {
 				'star-twinkle': 'star-twinkle 2s ease-in-out infinite'
 			},
 			fontFamily: {
+				'inter': ['Inter', 'sans-serif'],
 				'space-grotesk': ['"Space Grotesk"', 'sans-serif'],
 				'playfair': ['"Playfair Display"', 'serif'],
 				'satoshi': ['Satoshi', 'sans-serif'],
