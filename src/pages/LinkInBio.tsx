@@ -47,13 +47,23 @@ const LinkInBio = () => {
                 </h1>
               </button>
               
-              <div className="flex space-x-4 md:space-x-6 items-center">
-                <button onClick={() => navigate('/')} className="text-white/80 hover:text-white transition-colors text-sm md:text-base">Home</button>
-                <button onClick={() => navigate('/work')} className="text-white/80 hover:text-white transition-colors text-sm md:text-base">Work</button>
-                <button onClick={() => navigate('/inquiry')} className="text-white/80 hover:text-white transition-colors text-sm md:text-base">Inquiry</button>
+              <div className="hidden md:flex space-x-6 items-center">
+                <button onClick={() => navigate('/')} className="text-white/80 hover:text-white transition-colors">Home</button>
+                <button onClick={() => navigate('/work')} className="text-white/80 hover:text-white transition-colors">Work</button>
+                <button onClick={() => navigate('/inquiry')} className="text-white/80 hover:text-white transition-colors">Inquiry</button>
                 <button 
                   onClick={scrollToContact}
-                  className="px-3 py-2 md:px-5 md:py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all text-sm md:text-base"
+                  className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all"
+                >
+                  Contact
+                </button>
+              </div>
+              
+              {/* Mobile menu button */}
+              <div className="md:hidden">
+                <button 
+                  onClick={scrollToContact}
+                  className="px-3 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all text-sm"
                 >
                   Contact
                 </button>
@@ -171,7 +181,7 @@ const LinkInBio = () => {
                     <ExternalLink className="h-4 w-4 text-white/60 group-hover:text-humble-purple-500 transition-colors" />
                   </a>
                   <button
-                    onClick={() => navigate('/work/shen-taxi-tours')}
+                    onClick={() => navigate('/case-studies/shen-taxi-tours')}
                     className="px-4 py-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-purple-500/50 transition-all duration-300 text-white/60 hover:text-humble-purple-500"
                   >
                     <span className="text-sm font-medium">Case Study</span>
@@ -196,7 +206,7 @@ const LinkInBio = () => {
                     <ExternalLink className="h-4 w-4 text-white/60 group-hover:text-humble-blue-500 transition-colors" />
                   </a>
                   <button
-                    onClick={() => navigate('/work/nonnas-table')}
+                    onClick={() => navigate('/case-studies/nonnas-table')}
                     className="px-4 py-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-blue-500/50 transition-all duration-300 text-white/60 hover:text-humble-blue-500"
                   >
                     <span className="text-sm font-medium">Case Study</span>
