@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -11,12 +10,11 @@ declare global {
     };
   }
 }
-
 const BrandDiscoveryForm = () => {
   useEffect(() => {
     // Set page title and meta tags
     document.title = "HumbleStudio Brand Discovery Form";
-    
+
     // Update meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
@@ -34,35 +32,21 @@ const BrandDiscoveryForm = () => {
       }
     };
     document.body.appendChild(script);
-    
     return () => {
       // Cleanup on unmount
       document.body.removeChild(script);
     };
   }, []);
-
-  return (
-    <div className="min-h-screen bg-humble-charcoal">
+  return <div className="min-h-screen bg-humble-charcoal">
       <Navbar />
       <div className="container mx-auto px-4 md:px-6 py-16 md:py-24">
-        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-white">HumbleStudio Intake Form</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-white">HumbleStudio Branding Form</h1>
         
         <div className="max-w-4xl mx-auto mb-16">
-          <iframe
-            data-tally-src="https://tally.so/embed/nrbjqX?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-            width="100%"
-            height="600"
-            frameBorder="0"
-            marginHeight={0}
-            marginWidth={0}
-            title="HumbleStudio Brand Discovery Form"
-            className="bg-transparent"
-          ></iframe>
+          <iframe data-tally-src="https://tally.so/embed/nrbjqX?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" width="100%" height="600" frameBorder="0" marginHeight={0} marginWidth={0} title="HumbleStudio Brand Discovery Form" className="bg-transparent"></iframe>
         </div>
       </div>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default BrandDiscoveryForm;
