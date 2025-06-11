@@ -10,7 +10,7 @@ const Services = () => {
         </svg>
       ),
       title: '🧠 Digital Branding',
-      description: 'Logo, colors, type — the visual DNA of your business.',
+      description: 'Wordmark, colors, type — the visual DNA of your business.',
     },
     {
       icon: (
