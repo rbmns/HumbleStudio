@@ -7,7 +7,10 @@ const About = () => {
         <div className="max-w-3xl mx-auto mt-12">
           <div>
             <h3 className="text-2xl font-semibold mb-4 text-center">I'm <span className="bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 bg-clip-text text-transparent">Rosie</span> — the face behind HumbleStudio.</h3>
-            <p className="text-white/80 mb-6 leading-relaxed text-base sm:text-lg text-center">After 10+ years working as a producer building digital products with top-tier global designers, developers, and creatives, I’ve learned what tasteful, high-quality output truly means. I know how to recognize a team’s strengths, identify where support is needed, and drive projects to achieve the best results while maintaining a clear creative vision. Now, with AI as my sidekick, I’ve flipped the script — offering beautiful, fast websites for small businesses, without the big agency price tag.</p>
+            <p className="text-white/80 mb-6 leading-relaxed text-base sm:text-lg text-center">After 10+ years working as a producer building digital products with top-tier global designers, developers, and creatives, I’ve learned what tasteful, high-quality output truly means. 
+I know how to recognize a team’s strengths, identify where support is needed, and drive projects to achieve the best results while maintaining a clear creative vision. 
+
+Now, with AI as my sidekick, I’ve flipped the script — offering beautiful, fast websites for small businesses, without the big agency price tag.</p>
             
             <div className="w-full h-[2px] bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 my-8 opacity-30"></div>
             
