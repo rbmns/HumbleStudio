@@ -13,22 +13,23 @@ interface Props {
 
 const MediaGallery: React.FC<Props> = ({ media }) =>
   media && media.length > 0 ? (
-    <section className="py-24 bg-humble-charcoal/30 relative">
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-12">Project Gallery</h2>
-          <div className="flex flex-col gap-16">
+    <section className="py-16 bg-humble-charcoal/30 relative">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">Project Gallery</h2>
+          <div className="flex flex-col gap-8">
             {media.map((item) => (
               <div
                 key={item.id}
-                className="rounded-2xl bg-white/5 backdrop-blur-md shadow-2xl border border-humble-purple-500/10 overflow-hidden flex flex-col"
+                className="rounded-2xl bg-white/5 backdrop-blur-md shadow-2xl border border-humble-purple-500/10 overflow-hidden flex flex-col max-w-2xl mx-auto"
               >
                 <div className="relative">
                   <AspectRatio ratio={16 / 9}>
                     <img
                       src={item.media_url}
                       alt={item.alt_text || "Project image"}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full max-h-64 object-cover max-w-full mx-auto"
+                      style={{ objectFit: "cover" }}
                     />
                     {item.caption && (
                       <div
@@ -41,16 +42,15 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
                           z-10
                         "
                         style={{
-                          // Brand gradient with HIGH transparency and blur
                           background:
                             "linear-gradient(90deg, rgba(255,75,124,0.50) 0%, rgba(183,45,236,0.34) 48%, rgba(52,102,255,0.50) 100%)",
                           backdropFilter: "blur(8px)",
                           boxShadow: "0 4px 24px 0 rgba(0,0,0,0.32), 0 0px 2px 0 rgba(0,0,0,0.16)",
-                          padding: "2rem 2.5rem",
+                          padding: "1.25rem 2rem",
                         }}
                       >
                         <span
-                          className="text-lg md:text-xl text-white font-bold drop-shadow-[0_3px_8px_rgba(8,8,8,0.5)]"
+                          className="text-base md:text-lg text-white font-bold drop-shadow-[0_3px_8px_rgba(8,8,8,0.5)]"
                           style={{
                             textShadow:
                               "0 3px 18px rgba(0,0,0,0.7), 0 1px 0 rgba(0,0,0,0.28)",
@@ -65,7 +65,7 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
                 {/* Mobile - caption below image with more transparent accent gradient and blur */}
                 {item.caption && (
                   <div
-                    className="block md:hidden px-6 py-4 rounded-b-2xl mt-[-0.5rem]"
+                    className="block md:hidden px-4 py-3 rounded-b-2xl mt-[-0.5rem]"
                     style={{
                       background:
                         "linear-gradient(90deg, rgba(255,75,124,0.59) 0%, rgba(183,45,236,0.45) 48%, rgba(52,102,255,0.59) 100%)",
@@ -74,7 +74,7 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
                     }}
                   >
                     <span
-                      className="text-base font-bold text-white leading-snug drop-shadow-[0_2px_12px_rgba(0,0,0,0.38)]"
+                      className="text-sm font-bold text-white leading-snug drop-shadow-[0_2px_12px_rgba(0,0,0,0.38)]"
                       style={{
                         textShadow: "0 2px 8px rgba(0,0,0,0.42)",
                       }}
