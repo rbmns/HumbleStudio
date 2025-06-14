@@ -22,7 +22,7 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
                 <img
                   src={item.media_url}
                   alt={item.alt_text || 'Project image'}
-                  className="w-full h-64 object-cover"
+                  className="w-full h-96 object-cover"
                 />
                 {item.caption && (
                   <div className="p-4">
@@ -38,3 +38,4 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
   ) : null;
 
 export default MediaGallery;
+
