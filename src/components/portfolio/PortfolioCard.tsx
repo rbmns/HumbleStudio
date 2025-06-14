@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { ArrowRight, ExternalLink, Clock } from 'lucide-react';
+import { ArrowRight, ExternalLink, Clock, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import FastImage from './FastImage';
 
@@ -15,6 +14,7 @@ interface PortfolioProject {
   technologies: string[];
   build_time?: string;
   media: PortfolioMedia[];
+  key_features: string[];
 }
 
 interface PortfolioMedia {
@@ -52,6 +52,7 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
   const primaryImage = project.media?.find(m => m.is_primary)?.media_url || project.media?.[0]?.media_url || '';
   const category = project.categories?.[0] || 'Project';
   const technologies = project.technologies || [];
+  const keyFeatures = project.key_features || [];
   
   // Generate gradient based on category
   const getGradient = (cat: string) => {
@@ -124,6 +125,18 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
         <p className="text-white/80 text-sm leading-relaxed">
           {project.description}
         </p>
+
+        {/* Key Features */}
+        {keyFeatures.length > 0 && (
+          <div className="space-y-2 pt-2">
+            {keyFeatures.map((feature, index) => (
+              <div key={index} className="flex items-center gap-2 text-white/80 text-sm">
+                <Check className="h-4 w-4 text-humble-purple-400 flex-shrink-0" />
+                <span>{feature}</span>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Technologies */}
         {technologies.length > 0 && (

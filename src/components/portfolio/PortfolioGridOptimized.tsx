@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import PortfolioCard from './PortfolioCard';
@@ -14,6 +13,7 @@ interface PortfolioProject {
   technologies: string[];
   build_time?: string;
   media: PortfolioMedia[];
+  key_features: string[];
 }
 
 interface PortfolioMedia {
@@ -78,6 +78,7 @@ const PortfolioGridOptimized: React.FC = () => {
         is_coming_soon: project.is_coming_soon || false,
         build_time: project.build_time || undefined,
         technologies: toStringArray(project.technologies),
+        key_features: toStringArray(project.key_features),
         media: mediaData?.filter(media => media.project_id === project.id).map(media => ({
           id: media.id,
           media_url: media.media_url,
