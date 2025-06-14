@@ -21,7 +21,6 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
             {media.map((item, index) => {
               const isEven = index % 2 === 0;
 
-              // Card effect + responsive
               return (
                 <div
                   key={item.id}
@@ -39,23 +38,10 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
                     </AspectRatio>
                   </div>
                   {item.caption && (
-                    <div
-                      className={
-                        "flex-1 flex items-center justify-center px-6 md:px-10 py-8 md:py-4 " +
-                        (isEven
-                          ? "border-l-4 border-humble-pink-500"
-                          : "md:border-r-4 md:border-l-0 border-humble-purple-500")
-                      }
-                      style={
-                        isEven
-                          ? { borderLeftWidth: 4 }
-                          : { borderRightWidth: 4, borderLeftWidth: 0 }
-                      }
-                    >
+                    <div className="flex-1 flex items-center justify-center px-6 md:px-10 py-8 md:py-4">
                       <p
-                        className={`text-base md:text-lg text-white/90 text-center md:text-left w-full`}
+                        className="text-base md:text-lg text-white/90 text-center md:text-left w-full"
                         style={{
-                          // Add faint highlight to visually separate the caption
                           background:
                             "linear-gradient(90deg, rgba(255,75,124,0.12) 0%, rgba(183,45,236,0.12) 100%)",
                           borderRadius: "0.75rem",
