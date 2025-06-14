@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface Props {
@@ -11,6 +11,35 @@ interface Props {
   }[];
 }
 
+// Helper component to handle failed images
+const SafeImage = ({
+  src,
+  alt,
+  className,
+  style,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  style?: React.CSSProperties;
+}) => {
+  const [errored, setErrored] = useState(false);
+  return errored ? (
+    <div className="w-full h-40 flex items-center justify-center bg-gray-900 text-white/60 text-center text-sm">
+      [Image failed to load]
+    </div>
+  ) : (
+    <img
+      src={src}
+      alt={alt}
+      className={className}
+      style={style}
+      loading="lazy"
+      onError={() => setErrored(true)}
+    />
+  );
+};
+
 const MediaGallery: React.FC<Props> = ({ media }) => {
   // DEBUG: log gallery content to browser console for diagnosis
   console.log("[MediaGallery] media array:", media);
@@ -21,30 +50,34 @@ const MediaGallery: React.FC<Props> = ({ media }) => {
   }
 
   return (
-    <section className="py-16 bg-humble-charcoal/30 relative">
+    <section className="py-12 bg-humble-charcoal/30 relative">
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">Project Gallery</h2>
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-6">
             {media.map((item) => {
               // DEBUG: log item and image url
               console.log("[MediaGallery] rendering item:", item);
               return (
                 <div
                   key={item.id}
-                  className="rounded-2xl bg-white/5 backdrop-blur-md shadow-2xl border border-humble-purple-500/10 overflow-hidden flex flex-col max-w-2xl mx-auto"
+                  className="rounded-2xl bg-white/5 backdrop-blur-md shadow-2xl border border-humble-purple-500/10 overflow-hidden flex flex-col max-w-xl w-full mx-auto"
+                  style={{ minWidth: 0 }}
                 >
-                  <div className="relative">
+                  <div className="relative w-full">
                     <AspectRatio ratio={16 / 9}>
                       {item.media_url ? (
-                        <img
+                        <SafeImage
                           src={item.media_url}
                           alt={item.alt_text || "Project image"}
-                          className="w-full h-full max-h-64 object-cover max-w-full mx-auto"
-                          style={{ objectFit: "cover" }}
+                          className="w-full h-full object-cover rounded-none"
+                          style={{
+                            minHeight: "180px",
+                            background: "#111729",
+                          }}
                         />
                       ) : (
-                        <div className="flex items-center justify-center w-full h-48 bg-gray-800 text-white/70">
+                        <div className="flex items-center justify-center w-full h-40 bg-gray-800 text-white/70">
                           [No Image URL]
                         </div>
                       )}
@@ -111,4 +144,3 @@ const MediaGallery: React.FC<Props> = ({ media }) => {
 };
 
 export default MediaGallery;
-
