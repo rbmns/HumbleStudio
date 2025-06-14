@@ -41,9 +41,9 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
                           z-10
                         "
                         style={{
-                          // Brand gradient from pink to purple to blue with blur and semi-opacity
+                          // Brand gradient with HIGH transparency and blur
                           background:
-                            "linear-gradient(90deg, rgba(255,75,124,0.93) 0%, rgba(183,45,236,0.82) 48%, rgba(52,102,255,0.93) 100%)",
+                            "linear-gradient(90deg, rgba(255,75,124,0.50) 0%, rgba(183,45,236,0.34) 48%, rgba(52,102,255,0.50) 100%)",
                           backdropFilter: "blur(8px)",
                           boxShadow: "0 4px 24px 0 rgba(0,0,0,0.32), 0 0px 2px 0 rgba(0,0,0,0.16)",
                           padding: "2rem 2.5rem",
@@ -62,13 +62,13 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
                     )}
                   </AspectRatio>
                 </div>
-                {/* Mobile - caption below image with accent gradient and blur */}
+                {/* Mobile - caption below image with more transparent accent gradient and blur */}
                 {item.caption && (
                   <div
                     className="block md:hidden px-6 py-4 rounded-b-2xl mt-[-0.5rem]"
                     style={{
                       background:
-                        "linear-gradient(90deg, rgba(255,75,124,0.96) 0%, rgba(183,45,236,0.88) 48%, rgba(52,102,255,0.96) 100%)",
+                        "linear-gradient(90deg, rgba(255,75,124,0.59) 0%, rgba(183,45,236,0.45) 48%, rgba(52,102,255,0.59) 100%)",
                       backdropFilter: "blur(7px)",
                       boxShadow: "0 2px 12px 0 rgba(0,0,0,0.22), 0 0px 1px 0 rgba(0,0,0,0.12)",
                     }}
