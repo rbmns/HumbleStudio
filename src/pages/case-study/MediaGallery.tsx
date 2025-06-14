@@ -23,7 +23,6 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
                 key={item.id}
                 className="rounded-2xl bg-white/5 backdrop-blur-md shadow-2xl border border-humble-purple-500/10 overflow-hidden flex flex-col"
               >
-                {/* Image container */}
                 <div className="relative">
                   <AspectRatio ratio={16 / 9}>
                     <img
@@ -31,29 +30,30 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
                       alt={item.alt_text || "Project image"}
                       className="w-full h-full object-cover"
                     />
-                    {/* Always show caption overlay at bottom (desktop & tablet), never above image */}
                     {item.caption && (
                       <div
                         className="
                           hidden md:flex
                           absolute bottom-0 left-0 w-full
-                          bg-black/80
-                          backdrop-blur-md
-                          px-8 py-6
+                          px-0 py-0
                           items-end
                           rounded-b-2xl
                           z-10
                         "
                         style={{
-                          boxShadow:
-                            "0 4px 24px 0 rgba(0,0,0,0.32), 0 0px 2px 0 rgba(0,0,0,0.16)",
+                          // Brand gradient from pink to purple to blue with blur and semi-opacity
+                          background:
+                            "linear-gradient(90deg, rgba(255,75,124,0.93) 0%, rgba(183,45,236,0.82) 48%, rgba(52,102,255,0.93) 100%)",
+                          backdropFilter: "blur(8px)",
+                          boxShadow: "0 4px 24px 0 rgba(0,0,0,0.32), 0 0px 2px 0 rgba(0,0,0,0.16)",
+                          padding: "2rem 2.5rem",
                         }}
                       >
                         <span
-                          className="text-lg text-white font-bold drop-shadow-[0_3px_8px_rgba(8,8,8,0.3)]"
+                          className="text-lg md:text-xl text-white font-bold drop-shadow-[0_3px_8px_rgba(8,8,8,0.5)]"
                           style={{
                             textShadow:
-                              "0 3px 12px rgba(0,0,0,0.6), 0 1px 0 rgba(0,0,0,0.2)",
+                              "0 3px 18px rgba(0,0,0,0.7), 0 1px 0 rgba(0,0,0,0.28)",
                           }}
                         >
                           {item.caption}
@@ -62,10 +62,23 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
                     )}
                   </AspectRatio>
                 </div>
-                {/* Mobile - caption below image, more contrast */}
+                {/* Mobile - caption below image with accent gradient and blur */}
                 {item.caption && (
-                  <div className="block md:hidden px-5 py-4 bg-black/92 rounded-b-2xl">
-                    <span className="text-base font-bold text-white leading-snug drop-shadow-[0_2px_8px_rgba(0,0,0,0.25)]" style={{textShadow:"0 2px 8px rgba(0,0,0,0.38)"}}>
+                  <div
+                    className="block md:hidden px-6 py-4 rounded-b-2xl mt-[-0.5rem]"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, rgba(255,75,124,0.96) 0%, rgba(183,45,236,0.88) 48%, rgba(52,102,255,0.96) 100%)",
+                      backdropFilter: "blur(7px)",
+                      boxShadow: "0 2px 12px 0 rgba(0,0,0,0.22), 0 0px 1px 0 rgba(0,0,0,0.12)",
+                    }}
+                  >
+                    <span
+                      className="text-base font-bold text-white leading-snug drop-shadow-[0_2px_12px_rgba(0,0,0,0.38)]"
+                      style={{
+                        textShadow: "0 2px 8px rgba(0,0,0,0.42)",
+                      }}
+                    >
                       {item.caption}
                     </span>
                   </div>
