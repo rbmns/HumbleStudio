@@ -166,12 +166,18 @@ const PortfolioGridOptimized: React.FC = () => {
           {regularProjects.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {regularProjects.map((project) => (
-                <PortfolioCard
+                <div
                   key={project.id}
-                  project={project}
-                  onClick={handleProjectClick}
-                  featured={false}
-                />
+                  className="flex justify-center items-stretch"
+                >
+                  <div className="w-full max-w-[370px] aspect-[4/3] min-h-[300px] max-h-[400px] flex">
+                    <PortfolioCard
+                      project={project}
+                      onClick={handleProjectClick}
+                      featured={false}
+                    />
+                  </div>
+                </div>
               ))}
             </div>
           )}
