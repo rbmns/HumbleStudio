@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight, ExternalLink, Clock, Check } from 'lucide-react';
+import { ArrowRight, ExternalLink, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import FastImage from './FastImage';
 
@@ -51,27 +51,7 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
   };
 
   const primaryImage = project.media?.find(m => m.is_primary)?.media_url || project.media?.[0]?.media_url || '';
-  const category = project.categories?.[0] || 'Project';
-  const keyFeatures = project.key_features || [];
   
-  // Generate gradient based on category
-  const getGradient = (cat: string) => {
-    switch (cat.toLowerCase()) {
-      case 'restaurant':
-        return 'from-amber-500 to-orange-600';
-      case 'personal brand':
-        return 'from-purple-500 to-pink-600';
-      case 'web':
-        return 'from-blue-500 to-purple-600';
-      case 'branding':
-        return 'from-pink-500 to-red-600';
-      case 'ecommerce':
-        return 'from-green-500 to-blue-600';
-      default:
-        return 'from-humble-pink-500 to-humble-purple-500';
-    }
-  };
-
   if (project.is_coming_soon) {
     return (
       <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden group">
@@ -103,11 +83,8 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
 
       {/* Content */}
       <div className="p-6 space-y-4">
-        {/* Category & Build Time */}
-        <div className="flex items-center justify-between">
-          <span className={`inline-block px-3 py-1 rounded-full bg-gradient-to-r ${getGradient(category)} text-white font-medium text-sm max-w-fit`}>
-            {category}
-          </span>
+        {/* Build Time */}
+        <div className="flex items-center justify-end h-7">
           {project.build_time && (
             <div className="flex items-center gap-2 text-white/60 text-sm">
               <Clock className="h-4 w-4" />
@@ -125,18 +102,6 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
         <p className="text-white/80 text-sm leading-relaxed">
           {project.description}
         </p>
-
-        {/* Key Features */}
-        {keyFeatures.length > 0 && (
-          <div className="space-y-2 pt-2">
-            {keyFeatures.map((feature, index) => (
-              <div key={index} className="flex items-center gap-2 text-white/80 text-sm">
-                <Check className="h-4 w-4 text-humble-purple-400 flex-shrink-0" />
-                <span>{feature}</span>
-              </div>
-            ))}
-          </div>
-        )}
 
         {/* Actions */}
         <div className="flex gap-3 pt-2">

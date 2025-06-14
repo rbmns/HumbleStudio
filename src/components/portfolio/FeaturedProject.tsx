@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from 'react';
 import { ExternalLink, Clock, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +8,6 @@ interface FeaturedProjectProps {
     id: string;
     title: string;
     description: string;
-    category: string;
     link?: string;
     build_time?: string;
     technologies: string[];
@@ -177,12 +177,6 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
 
         {/* Content Section */}
         <div className="p-6 lg:p-8 flex flex-col justify-center">
-          <div className="mb-3">
-            <span className="text-humble-pink-500 text-sm font-medium uppercase tracking-wide">
-              {project.category}
-            </span>
-          </div>
-          
           <h3 className="text-2xl lg:text-3xl font-bold mb-4 text-white">
             {project.title}
           </h3>
@@ -195,21 +189,6 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
             <div className="flex items-center gap-2 mb-4 text-humble-blue-400">
               <Clock className="h-4 w-4" />
               <span className="text-sm">Built in {project.build_time}</span>
-            </div>
-          )}
-
-          {/* Key Features */}
-          {project.key_features.length > 0 && (
-            <div className="mb-6">
-              <h4 className="text-white font-semibold mb-2 text-sm">Key Features</h4>
-              <ul className="space-y-1.5">
-                {project.key_features.slice(0, 3).map((feature, index) => (
-                  <li key={index} className="text-white/70 flex items-center gap-2 text-sm">
-                    <div className="w-1.5 h-1.5 bg-humble-pink-500 rounded-full flex-shrink-0"></div>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
             </div>
           )}
 

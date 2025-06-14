@@ -155,10 +155,7 @@ const PortfolioGridOptimized: React.FC = () => {
               {featuredProjects.map((project) => (
                 <FeaturedProject
                   key={project.id}
-                  project={{
-                    ...project,
-                    category: project.categories?.[0] || 'Project',
-                  }}
+                  project={project}
                   onImageClick={handleImageClick}
                 />
               ))}
