@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight, ExternalLink, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -54,11 +53,11 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
   
   if (project.is_coming_soon) {
     return (
-      <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden group">
+      <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden group flex flex-col">
         <div className="aspect-[4/3] bg-humble-charcoal/50 flex items-center justify-center">
           <span className="text-white/60 text-lg font-medium">Coming Soon</span>
         </div>
-        <div className="p-6 space-y-4">
+        <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
           <h3 className="text-xl font-semibold text-white">{project.title}</h3>
           <p className="text-white/80 text-sm leading-relaxed">{project.description}</p>
         </div>
@@ -66,14 +65,14 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
     );
   }
 
-  // Regular (non-featured) card: use flex-col to push actions to bottom
+  // 💡 For regular cards: always image at top, info fills vertical, actions always pinned to bottom
   return (
     <div 
       className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden group hover:border-white/20 transition-all duration-300 cursor-pointer h-full flex flex-col"
       onClick={handleCardClick}
     >
-      {/* Image */}
-      <div className="aspect-[4/3] overflow-hidden relative">
+      {/* Project Image */}
+      <div className="aspect-[4/3] w-full overflow-hidden relative flex-shrink-0">
         <OptimizedImage
           src={primaryImage}
           alt={project.title}
@@ -84,32 +83,30 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
-      {/* Content as flex column so actions are always at same spot */}
-      <div className="p-6 flex flex-col flex-1 justify-between min-h-[260px]"> {/* min-h ensures button stays aligned */}
-        <div className="space-y-4">
+      {/* Info and Action Area */}
+      <div className="flex flex-col flex-1 p-6">
+        {/* Info block (title, build_time, description) */}
+        <div className="flex flex-col gap-2 min-h-[135px]">
           {/* Build Time */}
-          <div className="flex items-center justify-end h-7">
-            {project.build_time && (
-              <div className="flex items-center gap-2 text-white/60 text-sm">
-                <Clock className="h-4 w-4" />
-                <span>{project.build_time}</span>
-              </div>
-            )}
-          </div>
+          {project.build_time && (
+            <div className="flex items-center gap-2 text-white/60 text-xs justify-end mb-1">
+              <Clock className="h-4 w-4" />
+              <span>{project.build_time}</span>
+            </div>
+          )}
 
           {/* Title */}
-          <h3 className="text-xl font-semibold text-white group-hover:text-humble-purple-400 transition-colors">
+          <h3 className="text-lg font-semibold text-white group-hover:text-humble-purple-400 transition-colors mb-1 line-clamp-2">
             {project.title}
           </h3>
 
           {/* Description */}
-          <p className="text-white/80 text-sm leading-relaxed">
+          <p className="text-white/80 text-sm leading-relaxed line-clamp-4">
             {project.description}
           </p>
         </div>
-
-        {/* Actions - always pinned to bottom */}
-        <div className="flex gap-3 pt-6 mt-6">
+        {/* Actions - pinned to bottom */}
+        <div className="flex gap-3 pt-6 mt-auto">
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -140,4 +137,3 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
 };
 
 export default PortfolioCard;
-
