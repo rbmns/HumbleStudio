@@ -52,7 +52,6 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
 
   const primaryImage = project.media?.find(m => m.is_primary)?.media_url || project.media?.[0]?.media_url || '';
   const category = project.categories?.[0] || 'Project';
-  const technologies = project.technologies || [];
   const keyFeatures = project.key_features || [];
   
   // Generate gradient based on category
@@ -136,25 +135,6 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
                 <span>{feature}</span>
               </div>
             ))}
-          </div>
-        )}
-
-        {/* Technologies */}
-        {technologies.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {technologies.slice(0, 3).map((tech, index) => (
-              <span
-                key={index}
-                className="px-2 py-1 bg-humble-blue-500/20 text-humble-blue-300 rounded text-xs"
-              >
-                {tech}
-              </span>
-            ))}
-            {technologies.length > 3 && (
-              <span className="px-2 py-1 bg-white/10 text-white/60 rounded text-xs">
-                +{technologies.length - 3} more
-              </span>
-            )}
           </div>
         )}
 
