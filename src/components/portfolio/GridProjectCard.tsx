@@ -56,7 +56,7 @@ const GridProjectCard: React.FC<GridProjectCardProps> = ({ project, index }) => 
       style={{ animationDelay: `${index * 100}ms` }}
       onClick={handleCardClick}
     >
-      <div className="aspect-[4/3] overflow-hidden relative bg-gray-100">
+      <div className="aspect-[4/3] overflow-hidden relative bg-humble-charcoal">
         <FastImage
           src={primaryImage}
           alt={project.title}

@@ -56,7 +56,7 @@ const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({ project }) =>
       className="w-full mb-16 md:mb-24 cursor-pointer group animate-fade-in"
       onClick={handleCardClick}
     >
-      <div className="aspect-[16/9] md:aspect-[2/1] overflow-hidden bg-gray-100">
+      <div className="aspect-[16/9] md:aspect-[2/1] overflow-hidden bg-humble-charcoal">
         <FastImage
           src={primaryImage}
           alt={project.title}
@@ -64,10 +64,10 @@ const FeaturedProjectCard: React.FC<FeaturedProjectCardProps> = ({ project }) =>
         />
       </div>
       <div className="mt-6 md:mt-8">
-        <h3 className="font-space-grotesk text-3xl md:text-5xl font-bold text-gray-900 group-hover:text-humble-purple-500 transition-colors duration-300">
+        <h3 className="font-space-grotesk text-3xl md:text-5xl font-bold text-white group-hover:text-humble-purple-500 transition-colors duration-300">
           {project.title}
         </h3>
-        <p className="font-inter text-lg md:text-xl text-gray-600 mt-3 md:mt-4 max-w-3xl">
+        <p className="font-inter text-lg md:text-xl text-gray-300 mt-3 md:mt-4 max-w-3xl">
           {project.description}
         </p>
         <div className="inline-flex items-center gap-2 text-lg font-semibold text-humble-blue-500 mt-4 group-hover:text-humble-pink-500 transition-colors duration-300">
