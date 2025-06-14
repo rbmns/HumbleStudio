@@ -67,20 +67,10 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
         <div className="aspect-[4/3] bg-humble-charcoal/50 flex items-center justify-center w-full">
           <span className="text-white/60 text-lg font-medium">Coming Soon</span>
         </div>
-        <div className="flex-1 flex flex-col justify-between p-6">
-          <div>
-            <h3 className="text-xl font-semibold text-white">{project.title}</h3>
-            {/* Short Description */}
-            <p className="text-white/70 text-sm leading-relaxed mt-2">{project.description}</p>
-            {/* {project.subtitle && (
-              <p className="text-humble-purple-400 text-sm mb-1">{project.subtitle}</p>
-            )} */}
-          </div>
-          {/* Optionally, you can show a description for coming soon */}
-          {/* <p className="text-white/80 text-sm leading-relaxed mt-4">{project.description}</p> */}
-          <div className="mt-auto flex flex-col">
-            &nbsp;
-          </div>
+        <div className="flex-1 flex flex-col p-6 h-full">
+          <h3 className="text-xl font-semibold text-white">{project.title}</h3>
+          <p className="text-white/70 text-sm leading-relaxed mt-2">{project.description}</p>
+          <div className="mt-auto flex flex-col">&nbsp;</div>
         </div>
       </div>
     );
@@ -102,15 +92,11 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
-      {/* Main Info + Buttons */}
-      <div className="flex flex-col flex-1 p-6">
-        <div>
-          <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-humble-purple-400 transition-colors">
-            {project.title}
-          </h3>
-          {/* Short Description */}
-          <p className="text-white/70 text-sm leading-relaxed mb-4">{project.description}</p>
-        </div>
+      <div className="flex flex-col flex-1 p-6 h-full">
+        <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-humble-purple-400 transition-colors">
+          {project.title}
+        </h3>
+        <p className="text-white/70 text-sm leading-relaxed mb-4">{project.description}</p>
         <div className="mt-auto flex gap-3">
           <button
             onClick={(e) => {
