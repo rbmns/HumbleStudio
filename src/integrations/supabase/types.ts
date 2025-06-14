@@ -161,6 +161,68 @@ export type Database = {
         }
         Relationships: []
       }
+      cms_project_users: {
+        Row: {
+          project_id: string
+          role: Database["public"]["Enums"]["project_role"]
+          user_id: string
+        }
+        Insert: {
+          project_id: string
+          role?: Database["public"]["Enums"]["project_role"]
+          user_id: string
+        }
+        Update: {
+          project_id?: string
+          role?: Database["public"]["Enums"]["project_role"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_users_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "cms_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_users_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cms_projects: {
+        Row: {
+          client_database_config_id: string | null
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          client_database_config_id?: string | null
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          client_database_config_id?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_client_database_config_id_fkey"
+            columns: ["client_database_config_id"]
+            isOneToOne: false
+            referencedRelation: "client_database_configs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contact_submissions: {
         Row: {
           created_at: string
@@ -307,7 +369,7 @@ export type Database = {
             foreignKeyName: "profiles_assigned_project_id_fkey"
             columns: ["assigned_project_id"]
             isOneToOne: false
-            referencedRelation: "projects"
+            referencedRelation: "cms_projects"
             referencedColumns: ["id"]
           },
         ]
@@ -340,68 +402,6 @@ export type Database = {
             columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "portfolio_projects"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      project_users: {
-        Row: {
-          project_id: string
-          role: Database["public"]["Enums"]["project_role"]
-          user_id: string
-        }
-        Insert: {
-          project_id: string
-          role?: Database["public"]["Enums"]["project_role"]
-          user_id: string
-        }
-        Update: {
-          project_id?: string
-          role?: Database["public"]["Enums"]["project_role"]
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "project_users_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "projects"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "project_users_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      projects: {
-        Row: {
-          client_database_config_id: string | null
-          created_at: string
-          id: string
-          name: string
-        }
-        Insert: {
-          client_database_config_id?: string | null
-          created_at?: string
-          id?: string
-          name: string
-        }
-        Update: {
-          client_database_config_id?: string | null
-          created_at?: string
-          id?: string
-          name?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "projects_client_database_config_id_fkey"
-            columns: ["client_database_config_id"]
-            isOneToOne: false
-            referencedRelation: "client_database_configs"
             referencedColumns: ["id"]
           },
         ]
