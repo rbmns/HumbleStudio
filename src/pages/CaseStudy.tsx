@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, User, MapPin, Calendar } from 'lucide-react';
@@ -38,6 +37,30 @@ interface CaseStudyMedia {
   section?: string;
   display_order: number;
 }
+
+const renderContentWithBullets = (content?: string) => {
+  if (!content) return null;
+  // Split input string into non-empty trimmed lines
+  const lines = content.split('\n').map(line => line.trim()).filter(line => line !== '');
+  // Check if most lines look like bullets (start with "-", "*" or numbered "1.")
+  const isBulletList = lines.length > 0 &&
+    lines.filter(line => /^(-|\*|\d+\.)\s/.test(line)).length >= Math.max(1, Math.floor(lines.length * 0.7));
+  if (isBulletList) {
+    return (
+      <ul className="list-disc ml-6 space-y-2">
+        {lines.map((line, idx) => {
+          // Remove bullet marker for clean list item
+          const text = line.replace(/^(-|\*|\d+\.)\s/, '');
+          return <li key={idx}>{text}</li>;
+        })}
+      </ul>
+    );
+  }
+  // fallback to paragraph(s)
+  return lines.map((line, idx) => (
+    <p key={idx} className="mb-4">{line}</p>
+  ));
+};
 
 const CaseStudy = () => {
   const navigate = useNavigate();
@@ -250,9 +273,9 @@ const CaseStudy = () => {
                 {caseStudy.challenge_heading}
               </h2>
               <div className="prose prose-lg prose-invert max-w-none">
-                <p className="text-white/80 leading-relaxed text-lg">
-                  {caseStudy.challenge_content}
-                </p>
+                <div className="text-white/80 leading-relaxed text-lg">
+                  {renderContentWithBullets(caseStudy.challenge_content)}
+                </div>
               </div>
             </div>
           </div>
@@ -268,9 +291,9 @@ const CaseStudy = () => {
                 {caseStudy.solution_heading}
               </h2>
               <div className="prose prose-lg prose-invert max-w-none">
-                <p className="text-white/80 leading-relaxed text-lg">
-                  {caseStudy.solution_content}
-                </p>
+                <div className="text-white/80 leading-relaxed text-lg">
+                  {renderContentWithBullets(caseStudy.solution_content)}
+                </div>
               </div>
             </div>
           </div>
@@ -325,9 +348,9 @@ const CaseStudy = () => {
                 {caseStudy.impact_heading}
               </h2>
               <div className="prose prose-lg prose-invert max-w-none">
-                <p className="text-white/80 leading-relaxed text-lg">
-                  {caseStudy.impact_content}
-                </p>
+                <div className="text-white/80 leading-relaxed text-lg">
+                  {renderContentWithBullets(caseStudy.impact_content)}
+                </div>
               </div>
             </div>
           </div>
@@ -390,4 +413,3 @@ const CaseStudy = () => {
 };
 
 export default CaseStudy;
-
