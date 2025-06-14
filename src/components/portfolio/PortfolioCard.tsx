@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -59,23 +58,30 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
   const primaryImage =
     project.media?.find((m) => m.is_primary)?.media_url || project.media?.[0]?.media_url;
 
+  // --- "Coming Soon" Card: Use exact same structure as regular cards for identical height/alignment ---
   if (project.is_coming_soon) {
     return (
       <div
         className={`bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden group flex flex-col ${CARD_HEIGHT}`}
       >
-        <div className="aspect-[4/3] bg-humble-charcoal/50 flex items-center justify-center w-full">
+        {/* Placeholder image box for same aspect ratio */}
+        <div className="aspect-[4/3] w-full bg-humble-charcoal/50 flex items-center justify-center relative flex-shrink-0">
           <span className="text-white/60 text-lg font-medium">Coming Soon</span>
         </div>
-        <div className="flex-1 flex flex-col p-6 h-full">
-          <h3 className="text-xl font-semibold text-white">{project.title}</h3>
-          <p className="text-white/70 text-sm leading-relaxed mt-2">{project.description}</p>
-          <div className="mt-auto flex flex-col">&nbsp;</div>
+        {/* Card Content - matching structure with action button area */}
+        <div className="flex flex-col flex-1 p-6 h-full">
+          <h3 className="text-lg font-semibold text-white mb-1">{project.title}</h3>
+          <p className="text-white/70 text-sm leading-relaxed mb-4">{project.description}</p>
+          <div className="mt-auto flex gap-3">
+            {/* Empty gap for alignment - so button area matches other cards */}
+            {/* Could put a disabled or placeholder button here if desired */}
+          </div>
         </div>
       </div>
     );
   }
 
+  // --- Normal / Featured Project Card ---
   return (
     <div
       className={`bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden group hover:border-white/20 transition-all duration-300 cursor-pointer flex flex-col ${CARD_HEIGHT}`}
@@ -92,6 +98,7 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
+      {/* Main Info + Buttons */}
       <div className="flex flex-col flex-1 p-6 h-full">
         <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-humble-purple-400 transition-colors">
           {project.title}
@@ -127,4 +134,3 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
 };
 
 export default PortfolioCard;
-
