@@ -9,74 +9,6 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      bibi_project_media: {
-        Row: {
-          alt_text: string | null
-          created_at: string
-          display_order: number | null
-          id: string
-          media_type: string
-          media_url: string
-          project_id: string | null
-        }
-        Insert: {
-          alt_text?: string | null
-          created_at?: string
-          display_order?: number | null
-          id?: string
-          media_type: string
-          media_url: string
-          project_id?: string | null
-        }
-        Update: {
-          alt_text?: string | null
-          created_at?: string
-          display_order?: number | null
-          id?: string
-          media_type?: string
-          media_url?: string
-          project_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "bibi_project_media_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "bibi_projects"
-            referencedColumns: ["project_uuid"]
-          },
-        ]
-      }
-      bibi_projects: {
-        Row: {
-          created_at: string
-          long_description: string | null
-          main_picture: string | null
-          project_name: string | null
-          project_uuid: string
-          responsibility: string | null
-          short_description: string | null
-        }
-        Insert: {
-          created_at?: string
-          long_description?: string | null
-          main_picture?: string | null
-          project_name?: string | null
-          project_uuid?: string
-          responsibility?: string | null
-          short_description?: string | null
-        }
-        Update: {
-          created_at?: string
-          long_description?: string | null
-          main_picture?: string | null
-          project_name?: string | null
-          project_uuid?: string
-          responsibility?: string | null
-          short_description?: string | null
-        }
-        Relationships: []
-      }
       case_studies: {
         Row: {
           challenge_content: string | null
@@ -168,6 +100,7 @@ export type Database = {
           id: string
           media_type: string
           media_url: string
+          Name: string | null
           section: string | null
         }
         Insert: {
@@ -179,6 +112,7 @@ export type Database = {
           id?: string
           media_type?: string
           media_url: string
+          Name?: string | null
           section?: string | null
         }
         Update: {
@@ -190,6 +124,7 @@ export type Database = {
           id?: string
           media_type?: string
           media_url?: string
+          Name?: string | null
           section?: string | null
         }
         Relationships: [
@@ -201,6 +136,30 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      client_database_configs: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          supabase_anon_key: string
+          supabase_url: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          supabase_anon_key: string
+          supabase_url: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          supabase_anon_key?: string
+          supabase_url?: string
+        }
+        Relationships: []
       }
       contact_submissions: {
         Row: {
@@ -318,15 +277,191 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          assigned_project_id: string | null
+          email: string | null
+          full_name: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          updated_at: string | null
+        }
+        Insert: {
+          assigned_project_id?: string | null
+          email?: string | null
+          full_name?: string | null
+          id: string
+          role?: Database["public"]["Enums"]["app_role"]
+          updated_at?: string | null
+        }
+        Update: {
+          assigned_project_id?: string | null
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_assigned_project_id_fkey"
+            columns: ["assigned_project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_assignments: {
+        Row: {
+          created_at: string
+          id: string
+          permission: Database["public"]["Enums"]["project_permission"]
+          project_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          permission: Database["public"]["Enums"]["project_permission"]
+          project_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          permission?: Database["public"]["Enums"]["project_permission"]
+          project_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_assignments_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "portfolio_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_users: {
+        Row: {
+          project_id: string
+          role: Database["public"]["Enums"]["project_role"]
+          user_id: string
+        }
+        Insert: {
+          project_id: string
+          role?: Database["public"]["Enums"]["project_role"]
+          user_id: string
+        }
+        Update: {
+          project_id?: string
+          role?: Database["public"]["Enums"]["project_role"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_users_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_users_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          client_database_config_id: string | null
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          client_database_config_id?: string | null
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          client_database_config_id?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_client_database_config_id_fkey"
+            columns: ["client_database_config_id"]
+            isOneToOne: false
+            referencedRelation: "client_database_configs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
-      [_ in never]: never
+      case_study_media_with_project: {
+        Row: {
+          alt_text: string | null
+          caption: string | null
+          case_study_id: string | null
+          created_at: string | null
+          display_order: number | null
+          id: string | null
+          media_type: string | null
+          media_url: string | null
+          Name: string | null
+          project_name: string | null
+          section: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "case_study_media_case_study_id_fkey"
+            columns: ["case_study_id"]
+            isOneToOne: false
+            referencedRelation: "case_studies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
-      [_ in never]: never
+      assign_client_to_project: {
+        Args: { p_user_id: string; p_project_id: string }
+        Returns: undefined
+      }
+      create_project_and_assign_owner: {
+        Args: { p_name: string }
+        Returns: {
+          client_database_config_id: string | null
+          created_at: string
+          id: string
+          name: string
+        }
+      }
+      get_public_tables: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          table_name: string
+        }[]
+      }
+      is_admin: {
+        Args: { p_user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user" | "client"
+      project_permission: "editor" | "viewer"
+      project_role: "editor" | "viewer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -441,6 +576,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user", "client"],
+      project_permission: ["editor", "viewer"],
+      project_role: ["editor", "viewer"],
+    },
   },
 } as const

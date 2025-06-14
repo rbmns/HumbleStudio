@@ -114,12 +114,12 @@ const PortfolioGridOptimized: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 sm:px-6">
+      <>
         <p className="text-center text-white/80 text-base sm:text-lg md:text-xl mb-8 max-w-2xl mx-auto">
           Showcasing beautiful websites built with AI and delivered fast
         </p>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {[...Array(8)].map((_, i) => (
             <div key={i} className="bg-humble-charcoal rounded-xl overflow-hidden">
               <div className="aspect-[4/3] bg-humble-charcoal/50 animate-pulse"></div>
@@ -131,12 +131,12 @@ const PortfolioGridOptimized: React.FC = () => {
             </div>
           ))}
         </div>
-      </div>
+      </>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6">
+    <>
       <p className="text-center text-white/80 text-base sm:text-lg md:text-xl mb-8 max-w-2xl mx-auto">
         Showcasing beautiful websites built with AI and delivered fast
       </p>
@@ -146,7 +146,7 @@ const PortfolioGridOptimized: React.FC = () => {
           {/* Featured Projects - Smaller and Centered */}
           {featuredProjects.length > 0 && (
             <div className="flex justify-center">
-              <div className="w-full max-w-2xl space-y-8">
+              <div className="w-full max-w-xl space-y-8">
                 {featuredProjects.map((project) => (
                   <div key={project.id} className="mx-auto">
                     <PortfolioCard
@@ -162,7 +162,7 @@ const PortfolioGridOptimized: React.FC = () => {
 
           {/* Regular Projects - Improved Grid */}
           {regularProjects.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {regularProjects.map((project) => (
                 <PortfolioCard
                   key={project.id}
@@ -179,7 +179,7 @@ const PortfolioGridOptimized: React.FC = () => {
           <p>No projects found.</p>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
