@@ -1,8 +1,7 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import FeaturedProjectCard from './FeaturedProjectCard';
-import GridProjectCard from './GridProjectCard';
+import PortfolioCard from './PortfolioCard';
 
 interface PortfolioProject {
   id: string;
@@ -106,52 +105,78 @@ const PortfolioGridOptimized: React.FC = () => {
   }, [projects]);
 
   const regularProjects = useMemo(() => {
-    return projects.filter(project => !project.is_featured && !project.is_coming_soon).slice(0, 6);
+    return projects.filter(project => !project.is_featured);
   }, [projects]);
+
+  const handleProjectClick = useCallback((project: PortfolioProject) => {
+    console.log('Project clicked:', project.title);
+  }, []);
 
   if (loading) {
     return (
-      <div className="space-y-16">
-        {/* Skeleton for featured project */}
-        <div>
-          <div className="aspect-[16/9] md:aspect-[2/1] bg-gray-200 rounded-lg animate-pulse"></div>
-          <div className="mt-6 md:mt-8">
-            <div className="h-10 bg-gray-200 rounded w-1/2 animate-pulse"></div>
-            <div className="h-6 bg-gray-200 rounded w-3/4 mt-4 animate-pulse"></div>
-            <div className="h-6 bg-gray-200 rounded w-1/4 mt-4 animate-pulse"></div>
-          </div>
-        </div>
-        {/* Skeleton for grid projects */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {[...Array(4)].map((_, i) => (
-            <div key={i} className="aspect-[4/3] bg-gray-200 rounded-lg animate-pulse"></div>
+      <>
+        <p className="text-center text-white/80 text-base sm:text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+          Showcasing beautiful websites built with AI and delivered fast
+        </p>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          {[...Array(8)].map((_, i) => (
+            <div key={i} className="bg-humble-charcoal rounded-xl overflow-hidden">
+              <div className="aspect-[4/3] bg-humble-charcoal/50 animate-pulse"></div>
+              <div className="p-4 md:p-5 space-y-3">
+                <div className="h-4 bg-humble-charcoal/50 rounded animate-pulse"></div>
+                <div className="h-6 bg-humble-charcoal/50 rounded animate-pulse"></div>
+                <div className="h-4 bg-humble-charcoal/50 rounded animate-pulse w-2/3"></div>
+              </div>
+            </div>
           ))}
         </div>
-      </div>
+      </>
     );
   }
 
   return (
     <>
+      <p className="text-center text-white/80 text-base sm:text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+        Showcasing beautiful websites built with AI and delivered fast
+      </p>
+      
       {projects.length > 0 ? (
-        <div>
-          {/* Featured Project */}
+        <div className="space-y-12">
+          {/* Featured Projects - Smaller and Centered */}
           {featuredProjects.length > 0 && (
-            <FeaturedProjectCard project={featuredProjects[0]} />
+            <div className="flex justify-center">
+              <div className="w-full max-w-xl space-y-8">
+                {featuredProjects.map((project) => (
+                  <div key={project.id} className="mx-auto">
+                    <PortfolioCard
+                      project={project}
+                      onClick={handleProjectClick}
+                      featured={true}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           )}
 
-          {/* Regular Projects Grid */}
+          {/* Regular Projects - Improved Grid */}
           {regularProjects.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {regularProjects.map((project, index) => (
-                <GridProjectCard key={project.id} project={project} index={index} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {regularProjects.map((project) => (
+                <PortfolioCard
+                  key={project.id}
+                  project={project}
+                  onClick={handleProjectClick}
+                  featured={false}
+                />
               ))}
             </div>
           )}
         </div>
       ) : (
-        <div className="text-center text-gray-500 py-16">
-          <p>More projects coming soon.</p>
+        <div className="text-center text-white/60 py-16">
+          <p>No projects found.</p>
         </div>
       )}
     </>
