@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowRight, ExternalLink, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -38,19 +39,16 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
   const handleCardClick = () => {
     // Navigate to case study page based on project title
     let slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
-    
-    // Handle specific known case studies
     if (project.title.toLowerCase().includes("nonna's table") || project.title.toLowerCase().includes("nonnas table")) {
       slug = 'nonnas-table';
     } else if (project.title.toLowerCase().includes("digital") && (project.title.toLowerCase().includes("cv") || project.title.toLowerCase().includes("resume"))) {
       slug = 'digital-cv';
     }
-    
     navigate(`/work/${slug}`);
   };
 
   const primaryImage = project.media?.find(m => m.is_primary)?.media_url || project.media?.[0]?.media_url;
-  
+
   if (project.is_coming_soon) {
     return (
       <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden group flex flex-col">
@@ -65,9 +63,9 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
     );
   }
 
-  // 💡 For regular cards: always image at top, info fills vertical, actions always pinned to bottom
+  // Show the image, and then always show the full main project info (title, description, build_time), then buttons
   return (
-    <div 
+    <div
       className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden group hover:border-white/20 transition-all duration-300 cursor-pointer h-full flex flex-col"
       onClick={handleCardClick}
     >
@@ -83,10 +81,10 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
-      {/* Info and Action Area */}
+      {/* Info and Actions */}
       <div className="flex flex-col flex-1 p-6">
-        {/* Info block (title, build_time, description) */}
-        <div className="flex flex-col gap-2 min-h-[135px]">
+        {/* Main Info (no clamping) */}
+        <div className="flex flex-col gap-2 mb-6 flex-1">
           {/* Build Time */}
           {project.build_time && (
             <div className="flex items-center gap-2 text-white/60 text-xs justify-end mb-1">
@@ -96,17 +94,17 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
           )}
 
           {/* Title */}
-          <h3 className="text-lg font-semibold text-white group-hover:text-humble-purple-400 transition-colors mb-1 line-clamp-2">
+          <h3 className="text-lg font-semibold text-white group-hover:text-humble-purple-400 transition-colors mb-1">
             {project.title}
           </h3>
 
           {/* Description */}
-          <p className="text-white/80 text-sm leading-relaxed line-clamp-4">
+          <p className="text-white/80 text-sm leading-relaxed">
             {project.description}
           </p>
         </div>
-        {/* Actions - pinned to bottom */}
-        <div className="flex gap-3 pt-6 mt-auto">
+        {/* Actions pinned to the bottom */}
+        <div className="flex gap-3 pt-2 mt-auto">
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -117,7 +115,6 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
             Case Study
             <ArrowRight className="h-4 w-4" />
           </button>
-          
           {project.link && (
             <a
               href={project.link}
@@ -137,3 +134,4 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
 };
 
 export default PortfolioCard;
+
