@@ -43,7 +43,7 @@ const CaseStudy: React.FC = () => {
       <ChallengeSection heading={caseStudy.challenge_heading} content={caseStudy.challenge_content} />
       <SolutionSection heading={caseStudy.solution_heading} content={caseStudy.solution_content} />
       <KeyFeatures features={caseStudy.key_features} />
-      <Technologies technologies={caseStudy.technologies} />
+      {/* Removed Technologies section */}
       <ImpactSection heading={caseStudy.impact_heading} content={caseStudy.impact_content} />
       <MediaGallery media={media} />
       <CtaSection
