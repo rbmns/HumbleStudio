@@ -23,7 +23,7 @@ const StarBackground: React.FC = () => {
           id: i,
           x: Math.random() * 100,
           y: Math.random() * 100,
-          size: Math.random() * 0.2 + 0.1,
+          size: Math.random() * 1.5 + 0.5,
           opacity: Math.random() * 0.5 + 0.3,
           animationDelay: Math.random() * 2,
         });

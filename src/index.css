@@ -10,22 +10,22 @@
 
 @layer base {
   :root {
-    --background: 220 100% 2%;  /* Very dark blue, almost black */
+    --background: 220 25% 6%; /* Lighter dark blue */
     --foreground: 210 40% 98%;
 
-    --card: 220 100% 2%;  /* Very dark blue, almost black */
+    --card: 220 25% 6%; /* Lighter dark blue */
     --card-foreground: 210 40% 98%;
 
-    --popover: 220 100% 2%;  /* Very dark blue, almost black */
+    --popover: 220 25% 6%; /* Lighter dark blue */
     --popover-foreground: 210 40% 98%;
 
     --primary: 342 100% 65%;  /* Updated to match pink color */
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 220 90% 4%;  /* Slightly lighter dark blue */
+    --secondary: 220 20% 10%;  /* Lighter dark blue */
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 220 90% 4%;  /* Slightly lighter dark blue */
+    --muted: 220 20% 10%;  /* Lighter dark blue */
     --muted-foreground: 215 20.2% 65.1%;
 
     --accent: 270 84% 55%;  /* Updated to match purple color */
@@ -34,15 +34,15 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 90% 4%;  /* Slightly lighter dark blue */
-    --input: 220 90% 4%;  /* Slightly lighter dark blue */
+    --border: 220 20% 10%;  /* Lighter dark blue */
+    --input: 220 20% 10%;  /* Lighter dark blue */
     --ring: 270 84% 55%;
     
     --radius: 0.5rem;
     
     /* Updated Humble Studio Colors - much darker */
-    --humble-navy: #000308;  /* Almost black with hint of blue */
-    --humble-charcoal: #0A0A1A;  /* Very dark blue-black */
+    --humble-navy: #0D1117;  /* Almost black with hint of blue */
+    --humble-charcoal: #161B22;  /* Very dark blue-black */
     --humble-pink-300: #FF78A0;
     --humble-pink-400: #FF5F8C;
     --humble-pink-500: #FF4B7C;
@@ -71,7 +71,7 @@
 @layer base {
   body {
     @apply bg-humble-navy text-white font-inter;
-    background-image: radial-gradient(circle at center, rgba(5, 5, 20, 0.8) 0%, rgba(0, 0, 8, 0.98) 100%);
+    background-image: radial-gradient(circle at center, rgba(22, 27, 34, 0.9) 0%, rgba(13, 17, 23, 1) 100%);
     font-weight: 400;
     letter-spacing: -0.01em;
   }
