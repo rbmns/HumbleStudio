@@ -19,38 +19,40 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12">Project Gallery</h2>
           <div className="flex flex-col gap-16">
             {media.map((item, index) => {
-              const isEven = index % 2 === 0;
-
               return (
                 <div
                   key={item.id}
-                  className={`flex flex-col md:flex-row items-center md:items-stretch gap-0 rounded-2xl bg-white/5 backdrop-blur-md shadow-2xl border border-humble-purple-500/10 overflow-hidden ${
-                    isEven ? "" : "md:flex-row-reverse"
-                  }`}
+                  className="rounded-2xl bg-white/5 backdrop-blur-md shadow-2xl border border-humble-purple-500/10 overflow-hidden flex flex-col"
                 >
-                  <div className="flex-1 flex items-center justify-center px-0 md:px-2 py-8 md:py-10">
+                  {/* Image container */}
+                  <div className="relative">
                     <AspectRatio ratio={16 / 9}>
                       <img
                         src={item.media_url}
                         alt={item.alt_text || "Project image"}
-                        className="w-full h-full object-cover rounded-xl shadow-lg max-h-72 md:max-h-96"
+                        className="w-full h-full object-cover"
                       />
+                      {item.caption && (
+                        <div
+                          className="
+                            hidden md:flex
+                            absolute bottom-0 left-0 w-full
+                            bg-gradient-to-t from-black/70 via-black/20 to-transparent
+                            backdrop-blur-sm
+                            px-8 py-4
+                          "
+                        >
+                          <span className="text-base md:text-lg text-white/95 font-medium drop-shadow">
+                            {item.caption}
+                          </span>
+                        </div>
+                      )}
                     </AspectRatio>
                   </div>
+                  {/* Mobile - caption below image */}
                   {item.caption && (
-                    <div className="flex-1 flex items-center justify-center px-6 md:px-10 py-8 md:py-4">
-                      <p
-                        className="text-base md:text-lg text-white/90 text-center md:text-left w-full"
-                        style={{
-                          background:
-                            "linear-gradient(90deg, rgba(255,75,124,0.12) 0%, rgba(183,45,236,0.12) 100%)",
-                          borderRadius: "0.75rem",
-                          padding: "1.5rem",
-                          fontWeight: 500,
-                        }}
-                      >
-                        {item.caption}
-                      </p>
+                    <div className="block md:hidden px-6 py-4 bg-black/60 backdrop-blur-sm rounded-b-2xl mt-[-0.5rem]">
+                      <span className="text-base text-white/90 font-medium">{item.caption}</span>
                     </div>
                   )}
                 </div>
