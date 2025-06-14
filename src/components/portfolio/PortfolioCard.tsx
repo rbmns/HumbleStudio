@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowRight, ExternalLink, Clock, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -42,7 +43,7 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
     // Handle specific known case studies
     if (project.title.toLowerCase().includes("nonna's table") || project.title.toLowerCase().includes("nonnas table")) {
       slug = 'nonnas-table';
-    } else if (project.title.toLowerCase().includes("digital") && project.title.toLowerCase().includes("cv")) {
+    } else if (project.title.toLowerCase().includes("digital") && (project.title.toLowerCase().includes("cv") || project.title.toLowerCase().includes("resume"))) {
       slug = 'digital-cv';
     }
     
