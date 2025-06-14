@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -23,6 +22,7 @@ export interface CaseStudy {
   cta_heading?: string;
   cta_description?: string;
   cta_button_text: string;
+  live_site_url?: string;
 }
 
 export interface CaseStudyMedia {
