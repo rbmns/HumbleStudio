@@ -17,19 +17,21 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12">Project Gallery</h2>
-          <div className="flex flex-col gap-16">
+          <div className="flex flex-col gap-12">
             {media.map((item) => (
-              <div key={item.id} className="w-full">
-                <AspectRatio ratio={16 / 9}>
-                  <img
-                    src={item.media_url}
-                    alt={item.alt_text || "Project image"}
-                    className="w-full h-full object-cover rounded-2xl shadow-xl"
-                  />
-                </AspectRatio>
+              <div key={item.id} className="w-full flex flex-col items-center">
+                <div className="w-full max-w-md md:max-w-lg lg:max-w-2xl mx-auto">
+                  <AspectRatio ratio={16 / 9}>
+                    <img
+                      src={item.media_url}
+                      alt={item.alt_text || "Project image"}
+                      className="w-full h-full object-cover rounded-xl shadow-lg"
+                    />
+                  </AspectRatio>
+                </div>
                 {item.caption && (
-                  <div className="mt-4 px-2">
-                    <p className="text-lg text-white/80">{item.caption}</p>
+                  <div className="mt-3 w-full max-w-md md:max-w-lg lg:max-w-2xl mx-auto px-2">
+                    <p className="text-base md:text-lg text-white/80 text-center">{item.caption}</p>
                   </div>
                 )}
               </div>
@@ -41,4 +43,3 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
   ) : null;
 
 export default MediaGallery;
-
