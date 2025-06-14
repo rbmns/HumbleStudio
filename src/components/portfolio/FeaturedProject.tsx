@@ -1,6 +1,6 @@
-
 import React, { useState, useCallback } from 'react';
-import { ExternalLink, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ExternalLink, Clock, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface FeaturedProjectProps {
   project: {
@@ -27,6 +27,21 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
   const [imageLoaded, setImageLoaded] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    // Navigate to case study page based on project title
+    let slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+    
+    // Handle specific known case studies
+    if (project.title.toLowerCase().includes("nonna's table") || project.title.toLowerCase().includes("nonnas table")) {
+      slug = 'nonnas-table';
+    } else if (project.title.toLowerCase().includes("digital") && (project.title.toLowerCase().includes("cv") || project.title.toLowerCase().includes("resume"))) {
+      slug = 'digital-cv';
+    }
+    
+    navigate(`/work/${slug}`);
+  };
 
   const nextImage = useCallback(() => {
     setCurrentImageIndex((prev) => 
@@ -55,7 +70,6 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
     setImageLoaded(false);
   }, []);
 
-  // Touch handlers for mobile swipe
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
@@ -83,7 +97,7 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
   if (!project.media.length) return null;
 
   return (
-    <div className="bg-humble-charcoal rounded-2xl overflow-hidden shadow-2xl mb-16">
+    <div className="bg-humble-charcoal rounded-2xl overflow-hidden shadow-2xl">
       <div className="grid lg:grid-cols-2 gap-0">
         {/* Image Gallery Section */}
         <div 
@@ -184,23 +198,6 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
             </div>
           )}
 
-          {/* Technologies */}
-          {project.technologies.length > 0 && (
-            <div className="mb-5">
-              <h4 className="text-white font-semibold mb-2 text-sm">Technologies Used</h4>
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.map((tech, index) => (
-                  <span
-                    key={index}
-                    className="px-2.5 py-1 bg-humble-purple-500/20 text-humble-purple-300 rounded-full text-xs"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
           {/* Key Features */}
           {project.key_features.length > 0 && (
             <div className="mb-6">
@@ -216,18 +213,28 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
             </div>
           )}
 
-          {/* CTA */}
-          {project.link && (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-5 py-2.5 rounded-full font-medium hover:scale-105 transition-transform w-fit text-sm"
+          {/* Actions */}
+          <div className="flex flex-wrap items-center gap-4 pt-2">
+            <button
+              onClick={handleCardClick}
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-full font-medium text-sm hover:opacity-90 transition-opacity"
             >
-              View Live Site
-              <ExternalLink className="h-4 w-4" />
-            </a>
-          )}
+              Case Study
+              <ArrowRight className="h-4 w-4" />
+            </button>
+            
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white/80 font-medium text-sm hover:text-white transition-colors"
+              >
+                Live Site
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import PortfolioCard from './PortfolioCard';
+import FeaturedProject from './FeaturedProject';
 
 interface PortfolioProject {
   id: string;
@@ -113,6 +114,10 @@ const PortfolioGridOptimized: React.FC = () => {
     console.log('Project clicked:', project.title);
   }, []);
 
+  const handleImageClick = useCallback((projectId: string, mediaIndex: number) => {
+    console.log(`Image clicked: projectId=${projectId}, mediaIndex=${mediaIndex}`);
+  }, []);
+
   if (loading) {
     return (
       <>
@@ -144,20 +149,19 @@ const PortfolioGridOptimized: React.FC = () => {
       
       {projects.length > 0 ? (
         <div className="space-y-12">
-          {/* Featured Projects - Smaller and Centered */}
+          {/* Featured Projects */}
           {featuredProjects.length > 0 && (
-            <div className="flex justify-center">
-              <div className="w-full max-w-xl space-y-8">
-                {featuredProjects.map((project) => (
-                  <div key={project.id} className="mx-auto">
-                    <PortfolioCard
-                      project={project}
-                      onClick={handleProjectClick}
-                      featured={true}
-                    />
-                  </div>
-                ))}
-              </div>
+            <div className="space-y-16">
+              {featuredProjects.map((project) => (
+                <FeaturedProject
+                  key={project.id}
+                  project={{
+                    ...project,
+                    category: project.categories?.[0] || 'Project',
+                  }}
+                  onImageClick={handleImageClick}
+                />
+              ))}
             </div>
           )}
 
