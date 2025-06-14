@@ -80,7 +80,7 @@ const CaseStudy = () => {
 
   useEffect(() => {
     if (slug) {
-      document.title = `${slug.replace(/-/g, ' ')} | HumbleStudio';
+      document.title = `${slug.replace(/-/g, ' ')} | HumbleStudio`;
       fetchCaseStudy();
     } else {
       setError('No case study slug provided');
