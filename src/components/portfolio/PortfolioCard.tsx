@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowRight, ExternalLink, Hourglass } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import OptimizedImage from './OptimizedImage';
 
@@ -15,7 +16,6 @@ interface PortfolioProject {
   build_time?: string;
   media: PortfolioMedia[];
   key_features: string[];
-  // If in the future a `subtitle` is available, add here: subtitle?: string
 }
 
 interface PortfolioMedia {
@@ -33,7 +33,7 @@ interface PortfolioCardProps {
   featured: boolean;
 }
 
-const CARD_HEIGHT = "h-[430px] md:h-[430px]"; // adjust if needed for your UI
+const CARD_HEIGHT = "h-[430px] md:h-[430px]";
 
 const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
   const navigate = useNavigate();
@@ -58,23 +58,42 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
   const primaryImage =
     project.media?.find((m) => m.is_primary)?.media_url || project.media?.[0]?.media_url;
 
-  // --- "Coming Soon" Card: Use exact same structure as regular cards for identical height/alignment ---
+  // --- "Coming Soon" Card: Improved Look & Consistency ---
   if (project.is_coming_soon) {
     return (
       <div
-        className={`bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden group flex flex-col ${CARD_HEIGHT}`}
+        className={`bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-humble-purple-400/30 overflow-hidden group flex flex-col shadow-lg ${CARD_HEIGHT}`}
+        tabIndex={0}
+        aria-label={`${project.title} (Coming Soon)`}
       >
         {/* Placeholder image box for same aspect ratio */}
-        <div className="aspect-[4/3] w-full bg-humble-charcoal/50 flex items-center justify-center relative flex-shrink-0">
-          <span className="text-white/60 text-lg font-medium">Coming Soon</span>
+        <div className="aspect-[4/3] w-full bg-gradient-to-br from-humble-charcoal/60 to-humble-purple-500/10 flex items-center justify-center relative flex-shrink-0 overflow-hidden">
+          {/* Subtle shimmer effect */}
+          <div className="absolute inset-0 bg-humble-charcoal/60 animate-pulse" />
+          {/* Icon & label */}
+          <div className="relative z-10 flex flex-col items-center justify-center">
+            <Hourglass className="w-10 h-10 text-humble-purple-400 mb-3 animate-float" />
+            <span className="text-white/70 text-base font-semibold mb-1 animate-fade-in">Coming Soon</span>
+          </div>
         </div>
         {/* Card Content - matching structure with action button area */}
         <div className="flex flex-col flex-1 p-6 h-full">
           <h3 className="text-lg font-semibold text-white mb-1">{project.title}</h3>
-          <p className="text-white/70 text-sm leading-relaxed mb-4">{project.description}</p>
+          <p className="text-white/70 text-sm leading-relaxed mb-4">
+            {project.description || "We're putting the finishing touches on this project. Check back soon for a detailed look!"}
+          </p>
           <div className="mt-auto flex gap-3">
-            {/* Empty gap for alignment - so button area matches other cards */}
-            {/* Could put a disabled or placeholder button here if desired */}
+            {/* Disabled button for case study link */}
+            <button
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-humble-gray-700 via-humble-charcoal to-humble-purple-900 text-white/50 rounded-lg font-medium text-sm cursor-not-allowed opacity-50"
+              disabled
+              tabIndex={-1}
+              aria-disabled="true"
+            >
+              Case Study
+              <ArrowRight className="h-4 w-4" />
+            </button>
+            {/* Live site link omitted because it's 'coming soon' */}
           </div>
         </div>
       </div>
@@ -87,7 +106,6 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
       className={`bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden group hover:border-white/20 transition-all duration-300 cursor-pointer flex flex-col ${CARD_HEIGHT}`}
       onClick={handleCardClick}
     >
-      {/* Image */}
       <div className="aspect-[4/3] w-full overflow-hidden relative flex-shrink-0">
         <OptimizedImage
           src={primaryImage}
@@ -98,7 +116,6 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
-      {/* Main Info + Buttons */}
       <div className="flex flex-col flex-1 p-6 h-full">
         <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-humble-purple-400 transition-colors">
           {project.title}
