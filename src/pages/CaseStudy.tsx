@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, User, MapPin, Calendar } from 'lucide-react';
@@ -179,16 +178,6 @@ const CaseStudy = () => {
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="mb-6">
-                  <button
-                    onClick={() => navigate('/work')}
-                    className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors mb-4"
-                  >
-                    <ArrowLeft className="h-4 w-4" />
-                    Back to Work
-                  </button>
-                </div>
-
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-space-grotesk leading-tight">
                   {caseStudy.title}
                 </h1>

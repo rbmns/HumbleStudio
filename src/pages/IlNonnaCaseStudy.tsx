@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
@@ -114,19 +113,6 @@ const IlNonnaCaseStudy = () => {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Simple Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-gray-800">
-        <div className="container mx-auto px-6 py-4">
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Portfolio
-          </button>
-        </div>
-      </nav>
-      
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-black">
         <div className="container mx-auto px-6">          
