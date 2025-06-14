@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, User, MapPin, Calendar } from 'lucide-react';
@@ -203,7 +204,7 @@ const CaseStudy = () => {
                       </div>
                     </div>
                   )}
-                  
+                  {/* Removed client_location display
                   {caseStudy.client_location && (
                     <div className="flex items-center gap-3">
                       <MapPin className="h-5 w-5 text-humble-purple-400" />
@@ -212,8 +213,7 @@ const CaseStudy = () => {
                         <p className="text-white">{caseStudy.client_location}</p>
                       </div>
                     </div>
-                  )}
-                  
+                  )} */}
                   {caseStudy.project_duration && (
                     <div className="flex items-center gap-3">
                       <Calendar className="h-5 w-5 text-humble-purple-400" />
@@ -390,3 +390,4 @@ const CaseStudy = () => {
 };
 
 export default CaseStudy;
+
