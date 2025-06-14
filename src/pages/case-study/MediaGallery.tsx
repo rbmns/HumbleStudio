@@ -1,5 +1,6 @@
 
 import React from "react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface Props {
   media: {
@@ -18,12 +19,17 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12">Project Gallery</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {media.map((item) => (
-              <div key={item.id} className="rounded-xl overflow-hidden bg-humble-charcoal/50 border border-white/10">
-                <img
-                  src={item.media_url}
-                  alt={item.alt_text || 'Project image'}
-                  className="w-full h-96 object-cover"
-                />
+              <div
+                key={item.id}
+                className="rounded-xl overflow-hidden bg-humble-charcoal/50 border border-white/10"
+              >
+                <AspectRatio ratio={16 / 9}>
+                  <img
+                    src={item.media_url}
+                    alt={item.alt_text || 'Project image'}
+                    className="w-full h-full object-cover"
+                  />
+                </AspectRatio>
                 {item.caption && (
                   <div className="p-4">
                     <p className="text-white/70 text-sm">{item.caption}</p>
