@@ -20,14 +20,16 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
           <div className="flex flex-col gap-16">
             {media.map((item, index) => {
               const isEven = index % 2 === 0;
+
+              // Card effect + responsive
               return (
                 <div
                   key={item.id}
-                  className={`flex flex-col md:flex-row items-center md:items-stretch gap-6 md:gap-10 ${
+                  className={`flex flex-col md:flex-row items-center md:items-stretch gap-0 rounded-2xl bg-white/5 backdrop-blur-md shadow-2xl border border-humble-purple-500/10 overflow-hidden ${
                     isEven ? "" : "md:flex-row-reverse"
                   }`}
                 >
-                  <div className="flex-1 flex items-center justify-center">
+                  <div className="flex-1 flex items-center justify-center px-0 md:px-2 py-8 md:py-10">
                     <AspectRatio ratio={16 / 9}>
                       <img
                         src={item.media_url}
@@ -37,8 +39,32 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
                     </AspectRatio>
                   </div>
                   {item.caption && (
-                    <div className="flex-1 flex items-center justify-center">
-                      <p className="text-base md:text-lg text-white/80 text-center md:text-left">{item.caption}</p>
+                    <div
+                      className={
+                        "flex-1 flex items-center justify-center px-6 md:px-10 py-8 md:py-4 " +
+                        (isEven
+                          ? "border-l-4 border-humble-pink-500"
+                          : "md:border-r-4 md:border-l-0 border-humble-purple-500")
+                      }
+                      style={
+                        isEven
+                          ? { borderLeftWidth: 4 }
+                          : { borderRightWidth: 4, borderLeftWidth: 0 }
+                      }
+                    >
+                      <p
+                        className={`text-base md:text-lg text-white/90 text-center md:text-left w-full`}
+                        style={{
+                          // Add faint highlight to visually separate the caption
+                          background:
+                            "linear-gradient(90deg, rgba(255,75,124,0.12) 0%, rgba(183,45,236,0.12) 100%)",
+                          borderRadius: "0.75rem",
+                          padding: "1.5rem",
+                          fontWeight: 500,
+                        }}
+                      >
+                        {item.caption}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -51,4 +77,3 @@ const MediaGallery: React.FC<Props> = ({ media }) =>
   ) : null;
 
 export default MediaGallery;
-
