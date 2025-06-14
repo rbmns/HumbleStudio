@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { ArrowRight, ExternalLink, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import FastImage from './FastImage';
+import OptimizedImage from './OptimizedImage';
 
 interface PortfolioProject {
   id: string;
@@ -50,7 +49,7 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
     navigate(`/work/${slug}`);
   };
 
-  const primaryImage = project.media?.find(m => m.is_primary)?.media_url || project.media?.[0]?.media_url || '';
+  const primaryImage = project.media?.find(m => m.is_primary)?.media_url || project.media?.[0]?.media_url;
   
   if (project.is_coming_soon) {
     return (
@@ -73,9 +72,11 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
     >
       {/* Image */}
       <div className="aspect-[4/3] overflow-hidden relative">
-        <FastImage
+        <OptimizedImage
           src={primaryImage}
           alt={project.title}
+          width={400}
+          height={300}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

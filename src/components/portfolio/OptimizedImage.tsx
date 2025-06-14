@@ -2,31 +2,53 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 interface OptimizedImageProps {
-  src: string;
+  src?: string;
   alt: string;
+  width: number;
+  height: number;
   className?: string;
-  onLoad?: () => void;
-  onError?: () => void;
   priority?: boolean;
-  placeholder?: string;
+  onClick?: () => void;
 }
+
+const getOptimizedSrc = (originalSrc: string | undefined, width: number, height: number, quality: number) => {
+  if (!originalSrc || !originalSrc.includes('supabase.co/storage')) {
+    return originalSrc || '';
+  }
+  
+  try {
+    const url = new URL(originalSrc);
+    // Don't add transform params if an explicit transform is already there.
+    if(url.searchParams.has('transform')) return originalSrc;
+
+    url.searchParams.set('width', String(width));
+    url.searchParams.set('height', String(height));
+    url.searchParams.set('resize', 'cover');
+    url.searchParams.set('quality', String(quality));
+    url.searchParams.set('format', 'webp');
+    return url.toString();
+  } catch (e) {
+    console.error("Invalid URL for image optimization:", originalSrc);
+    return originalSrc;
+  }
+};
 
 const OptimizedImage: React.FC<OptimizedImageProps> = ({
   src,
   alt,
+  width,
+  height,
   className = '',
-  onLoad,
-  onError,
   priority = false,
-  placeholder
+  onClick
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isInView, setIsInView] = useState(priority);
-  const imgRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (priority) return;
+    if (priority || !containerRef.current) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -35,63 +57,84 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           observer.disconnect();
         }
       },
-      { rootMargin: '50px' }
+      { 
+        rootMargin: '200px', // Start loading when image is 200px away from viewport
+      }
     );
-
-    if (imgRef.current) {
-      observer.observe(imgRef.current);
+    
+    const currentRef = containerRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
-
-    return () => observer.disconnect();
+    
+    return () => {
+      if(currentRef) {
+        observer.unobserve(currentRef);
+      }
+      observer.disconnect();
+    }
   }, [priority]);
 
   const handleLoad = () => {
     setIsLoaded(true);
-    onLoad?.();
   };
 
   const handleError = () => {
     setHasError(true);
-    onError?.();
   };
+  
+  const lqipHeight = Math.round(20 * (height / width)) || 15;
+  const lqipSrc = getOptimizedSrc(src, 20, lqipHeight, 20);
+  const highResSrc = getOptimizedSrc(src, width, height, 80);
+
+  if (!src) {
+    return (
+        <div className={`relative overflow-hidden bg-humble-charcoal/30 ${className}`}>
+            <div className="absolute inset-0 bg-humble-charcoal/50 flex items-center justify-center">
+                <div className="text-white/40 text-sm">No Image</div>
+            </div>
+        </div>
+    );
+  }
 
   return (
-    <div ref={imgRef} className={`relative overflow-hidden ${className}`}>
-      {/* Placeholder/Loading state */}
-      {!isLoaded && !hasError && (
-        <div className="absolute inset-0 bg-humble-charcoal/50 animate-pulse flex items-center justify-center">
-          {placeholder ? (
-            <img
-              src={placeholder}
-              alt=""
-              className="w-full h-full object-cover object-left-top blur-sm opacity-50"
-            />
-          ) : (
-            <div className="w-4 h-4 border-2 border-humble-pink-500 border-t-transparent rounded-full animate-spin"></div>
-          )}
-        </div>
-      )}
-
-      {/* Error state */}
-      {hasError && (
-        <div className="absolute inset-0 bg-humble-charcoal/80 flex items-center justify-center">
-          <div className="text-white/50 text-xs">Image unavailable</div>
-        </div>
-      )}
-
-      {/* Main image */}
-      {isInView && (
+    <div 
+      ref={containerRef} 
+      className={`relative overflow-hidden bg-humble-charcoal/40 ${className} ${onClick ? 'cursor-pointer' : ''}`}
+      onClick={onClick}
+    >
+      {/* LQIP Background */}
+      <img
+        src={lqipSrc}
+        alt=""
+        aria-hidden="true"
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-0' : 'opacity-100'}`}
+        style={{ filter: 'blur(10px)', transform: 'scale(1.05)' }}
+        decoding="async"
+        loading="lazy"
+      />
+      
+      {/* High-res Image */}
+      {isInView && !hasError && (
         <img
-          src={src}
+          src={highResSrc}
           alt={alt}
-          className={`w-full h-full object-cover object-left-top transition-opacity duration-300 ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`relative w-full h-full object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
           onLoad={handleLoad}
           onError={handleError}
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
+          fetchPriority={priority ? 'high' : 'auto'}
+          width={width}
+          height={height}
         />
+      )}
+
+      {/* Error state */}
+      {hasError && (
+        <div className="absolute inset-0 bg-humble-charcoal/60 flex items-center justify-center">
+          <div className="text-white/40 text-sm">Image unavailable</div>
+        </div>
       )}
     </div>
   );

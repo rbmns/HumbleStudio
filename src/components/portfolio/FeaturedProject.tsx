@@ -1,7 +1,7 @@
-
 import React, { useState, useCallback } from 'react';
 import { ExternalLink, Clock, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import OptimizedImage from './OptimizedImage';
 
 interface FeaturedProjectProps {
   project: {
@@ -24,7 +24,6 @@ interface FeaturedProjectProps {
 
 const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, onImageClick }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const navigate = useNavigate();
@@ -47,27 +46,20 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
     setCurrentImageIndex((prev) => 
       prev < project.media.length - 1 ? prev + 1 : 0
     );
-    setImageLoaded(false);
   }, [project.media.length]);
 
   const prevImage = useCallback(() => {
     setCurrentImageIndex((prev) => 
       prev > 0 ? prev - 1 : project.media.length - 1
     );
-    setImageLoaded(false);
   }, [project.media.length]);
 
   const handleImageClick = useCallback(() => {
     onImageClick(project.id, currentImageIndex);
   }, [project.id, currentImageIndex, onImageClick]);
 
-  const handleImageLoad = useCallback(() => {
-    setImageLoaded(true);
-  }, []);
-
   const handleIndicatorClick = useCallback((index: number) => {
     setCurrentImageIndex(index);
-    setImageLoaded(false);
   }, []);
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
@@ -111,24 +103,15 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
           </div>
           
           {project.media[currentImageIndex] && (
-            <>
-              {!imageLoaded && (
-                <div className="absolute inset-0 bg-humble-charcoal/50 animate-pulse flex items-center justify-center">
-                  <div className="text-white/50">Loading...</div>
-                </div>
-              )}
-              <img
-                src={project.media[currentImageIndex].media_url}
-                alt={project.media[currentImageIndex].alt_text || project.title}
-                className={`w-full h-full object-cover cursor-pointer transition-all duration-300 group-hover:scale-105 select-none ${
-                  imageLoaded ? 'opacity-100' : 'opacity-0'
-                }`}
-                onClick={handleImageClick}
-                onLoad={handleImageLoad}
-                loading="lazy"
-                draggable={false}
-              />
-            </>
+            <OptimizedImage
+              src={project.media[currentImageIndex].media_url}
+              alt={project.media[currentImageIndex].alt_text || project.title}
+              width={800}
+              height={600}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 select-none"
+              priority
+              onClick={handleImageClick}
+            />
           )}
 
           {/* Navigation overlay - hidden on mobile */}
