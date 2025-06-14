@@ -9,6 +9,8 @@ interface OptimizedImageProps {
   className?: string;
   priority?: boolean;
   onClick?: () => void;
+  onLoad?: () => void;
+  objectFit?: 'cover' | 'contain';
 }
 
 const getOptimizedSrc = (originalSrc: string | undefined, width: number, height: number, quality: number) => {
@@ -40,7 +42,9 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   height,
   className = '',
   priority = false,
-  onClick
+  onClick,
+  onLoad,
+  objectFit = 'cover',
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -77,6 +81,9 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
 
   const handleLoad = () => {
     setIsLoaded(true);
+    if (onLoad) {
+      onLoad();
+    }
   };
 
   const handleError = () => {
@@ -108,7 +115,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
         src={lqipSrc}
         alt=""
         aria-hidden="true"
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-0' : 'opacity-100'}`}
+        className={`absolute inset-0 w-full h-full object-${objectFit} transition-opacity duration-300 ${isLoaded ? 'opacity-0' : 'opacity-100'}`}
         style={{ filter: 'blur(10px)', transform: 'scale(1.05)' }}
         decoding="async"
         loading="lazy"
@@ -119,7 +126,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
         <img
           src={highResSrc}
           alt={alt}
-          className={`relative w-full h-full object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+          className={`relative w-full h-full object-${objectFit} transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
           onLoad={handleLoad}
           onError={handleError}
           loading={priority ? 'eager' : 'lazy'}

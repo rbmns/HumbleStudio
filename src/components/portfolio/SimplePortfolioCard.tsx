@@ -1,8 +1,7 @@
-
 import React, { useCallback } from 'react';
-import PortfolioCardImage from './PortfolioCardImage';
 import PortfolioCardContent from './PortfolioCardContent';
 import PortfolioCardFooter from './PortfolioCardFooter';
+import OptimizedImage from './OptimizedImage';
 
 interface SimplePortfolioCardProps {
   project: {
@@ -58,9 +57,11 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
       }`}
       onClick={handleCardClick}
     >
-      <PortfolioCardImage
+      <OptimizedImage
         src={primaryImage?.media_url || ''}
         alt={primaryImage?.alt_text || project.title}
+        width={400}
+        height={300}
         className="aspect-[4/3]"
         priority={featured}
         onClick={handleImageClick}

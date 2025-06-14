@@ -178,7 +178,10 @@ const ProjectPreviewModal: React.FC<ProjectPreviewModalProps> = ({ isOpen, onClo
                 <OptimizedImage
                   src={currentMedia.media_url}
                   alt={currentMedia.alt_text || project.title}
-                  className={`max-w-full max-h-full object-contain transition-opacity ${
+                  width={1200}
+                  height={900}
+                  objectFit="contain"
+                  className={`w-full h-full transition-opacity ${
                     imageLoaded ? 'opacity-100' : 'opacity-0'
                   }`}
                   onLoad={() => setImageLoaded(true)}
