@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -69,6 +70,8 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
         <div className="flex-1 flex flex-col justify-between p-6">
           <div>
             <h3 className="text-xl font-semibold text-white">{project.title}</h3>
+            {/* Short Description */}
+            <p className="text-white/70 text-sm leading-relaxed mt-2">{project.description}</p>
             {/* {project.subtitle && (
               <p className="text-humble-purple-400 text-sm mb-1">{project.subtitle}</p>
             )} */}
@@ -76,7 +79,6 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
           {/* Optionally, you can show a description for coming soon */}
           {/* <p className="text-white/80 text-sm leading-relaxed mt-4">{project.description}</p> */}
           <div className="mt-auto flex flex-col">
-            {/* This empty block keeps the spacing for the button row, even if no actions. */}
             &nbsp;
           </div>
         </div>
@@ -106,9 +108,8 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
           <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-humble-purple-400 transition-colors">
             {project.title}
           </h3>
-          {/* {project.subtitle && (
-            <p className="text-humble-purple-400 text-sm mb-2">{project.subtitle}</p>
-          )} */}
+          {/* Short Description */}
+          <p className="text-white/70 text-sm leading-relaxed mb-4">{project.description}</p>
         </div>
         <div className="mt-auto flex gap-3">
           <button
@@ -140,3 +141,4 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
 };
 
 export default PortfolioCard;
+
