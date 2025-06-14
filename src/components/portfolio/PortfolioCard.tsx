@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowRight, ExternalLink, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -65,9 +66,10 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
     );
   }
 
+  // Regular (non-featured) card: use flex-col to push actions to bottom
   return (
     <div 
-      className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden group hover:border-white/20 transition-all duration-300 cursor-pointer"
+      className="bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden group hover:border-white/20 transition-all duration-300 cursor-pointer h-full flex flex-col"
       onClick={handleCardClick}
     >
       {/* Image */}
@@ -82,30 +84,32 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
-      {/* Content */}
-      <div className="p-6 space-y-4">
-        {/* Build Time */}
-        <div className="flex items-center justify-end h-7">
-          {project.build_time && (
-            <div className="flex items-center gap-2 text-white/60 text-sm">
-              <Clock className="h-4 w-4" />
-              <span>{project.build_time}</span>
-            </div>
-          )}
+      {/* Content as flex column so actions are always at same spot */}
+      <div className="p-6 flex flex-col flex-1 justify-between min-h-[260px]"> {/* min-h ensures button stays aligned */}
+        <div className="space-y-4">
+          {/* Build Time */}
+          <div className="flex items-center justify-end h-7">
+            {project.build_time && (
+              <div className="flex items-center gap-2 text-white/60 text-sm">
+                <Clock className="h-4 w-4" />
+                <span>{project.build_time}</span>
+              </div>
+            )}
+          </div>
+
+          {/* Title */}
+          <h3 className="text-xl font-semibold text-white group-hover:text-humble-purple-400 transition-colors">
+            {project.title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-white/80 text-sm leading-relaxed">
+            {project.description}
+          </p>
         </div>
 
-        {/* Title */}
-        <h3 className="text-xl font-semibold text-white group-hover:text-humble-purple-400 transition-colors">
-          {project.title}
-        </h3>
-
-        {/* Description */}
-        <p className="text-white/80 text-sm leading-relaxed">
-          {project.description}
-        </p>
-
-        {/* Actions */}
-        <div className="flex gap-3 pt-2">
+        {/* Actions - always pinned to bottom */}
+        <div className="flex gap-3 pt-6 mt-6">
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -136,3 +140,4 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
 };
 
 export default PortfolioCard;
+
