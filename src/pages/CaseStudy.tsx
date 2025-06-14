@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useCaseStudy } from "./case-study/useCaseStudy";
@@ -46,12 +45,13 @@ const CaseStudy: React.FC = () => {
       {/* Removed Technologies section */}
       <ImpactSection heading={caseStudy.impact_heading} content={caseStudy.impact_content} />
       <MediaGallery media={media} />
-      <CtaSection
+      {/* REMOVED CTA SECTION */}
+      {/* <CtaSection
         heading={caseStudy.cta_heading}
         description={caseStudy.cta_description}
         buttonText={caseStudy.cta_button_text}
         onClick={() => scrollToSection("contact")}
-      />
+      /> */}
       <div id="contact">
         <Contact />
       </div>
