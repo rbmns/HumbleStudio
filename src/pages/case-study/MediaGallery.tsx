@@ -55,7 +55,7 @@ const MediaGallery: React.FC<Props> = ({ media }) => {
               // Alternate flex direction for desktop: left (even), right (odd)
               const isEven = idx % 2 === 0;
               const baseFlex =
-                "flex flex-col md:flex-row items-center gap-0 md:gap-10";
+                "flex flex-col md:flex-row items-start gap-0 md:gap-10";
               const flexDirection = isEven
                 ? "md:flex-row"
                 : "md:flex-row-reverse";
@@ -63,87 +63,50 @@ const MediaGallery: React.FC<Props> = ({ media }) => {
 
               return (
                 <div key={item.id} className={containerClass}>
-                  <div
-                    className={`
-                      group relative overflow-hidden flex-1 w-full max-w-xl min-w-[0]
-                      rounded-3xl bg-white/5 border border-humble-purple-500/20
-                      shadow-2xl
-                      transition-transform duration-300
-                      hover:scale-[1.02] hover:shadow-3xl
-                      before:content-[''] before:absolute before:inset-0 before:rounded-3xl before:pointer-events-none
-                    `}
-                  >
-                    <div className="relative w-full">
-                      <AspectRatio ratio={16 / 9}>
-                        {item.media_url ? (
-                          <SafeImage
-                            src={item.media_url}
-                            alt={item.alt_text || "Project image"}
-                            className="w-full h-full object-cover rounded-3xl"
-                            style={{
-                              minHeight: "180px",
-                              background: "#111729",
-                            }}
-                          />
-                        ) : (
-                          <div className="flex items-center justify-center w-full h-40 bg-gray-800 text-white/70">
-                            [No Image URL]
-                          </div>
-                        )}
-                        {item.caption && (
-                          <div
-                            className="
-                              hidden md:flex
-                              absolute bottom-0 left-0 w-full
-                              px-0 py-0
-                              items-end
-                              rounded-b-3xl
-                              z-10
-                              pointer-events-none
-                            "
-                            style={{
-                              background:
-                                "linear-gradient(90deg, rgba(255,75,124,0.60) 0%, rgba(183,45,236,0.46) 48%, rgba(52,102,255,0.60) 100%)",
-                              backdropFilter: "blur(10px)",
-                              boxShadow: "0 4px 28px 0 rgba(0,0,0,0.34), 0 0px 2px 0 rgba(0,0,0,0.13)",
-                              padding: "1.25rem 2rem",
-                            }}
-                          >
-                            <span
-                              className="text-base md:text-lg text-white font-bold drop-shadow-[0_4px_16px_rgba(8,8,8,0.66)]"
+                  {/* Image Container */}
+                  <div className="flex-1 w-full max-w-xl min-w-[0]">
+                    <div
+                      className={`
+                        group relative overflow-hidden
+                        rounded-3xl bg-white/5 border border-humble-purple-500/20
+                        shadow-2xl
+                        transition-transform duration-300
+                        hover:scale-[1.02] hover:shadow-3xl
+                        before:content-[''] before:absolute before:inset-0 before:rounded-3xl before:pointer-events-none
+                      `}
+                    >
+                      <div className="relative w-full">
+                        <AspectRatio ratio={16 / 9}>
+                          {item.media_url ? (
+                            <SafeImage
+                              src={item.media_url}
+                              alt={item.alt_text || "Project image"}
+                              className="w-full h-full object-cover rounded-3xl"
                               style={{
-                                textShadow:
-                                  "0 4px 18px rgba(0,0,0,0.75), 0 2px 0 rgba(0,0,0,0.28)",
+                                minHeight: "180px",
+                                background: "#111729",
                               }}
-                            >
-                              {item.caption}
-                            </span>
-                          </div>
-                        )}
-                      </AspectRatio>
-                    </div>
-                    {/* Mobile - caption below image with more transparent accent gradient and blur */}
-                    {item.caption && (
-                      <div
-                        className="block md:hidden px-4 py-3 rounded-b-3xl mt-[-0.5rem]"
-                        style={{
-                          background:
-                            "linear-gradient(90deg, rgba(255,75,124,0.62) 0%, rgba(183,45,236,0.54) 48%, rgba(52,102,255,0.62) 100%)",
-                          backdropFilter: "blur(8px)",
-                          boxShadow: "0 2px 14px 0 rgba(0,0,0,0.27), 0 0px 1px 0 rgba(0,0,0,0.12)",
-                        }}
-                      >
-                        <span
-                          className="text-sm font-bold text-white leading-snug drop-shadow-[0_2px_10px_rgba(0,0,0,0.39)]"
-                          style={{
-                            textShadow: "0 1.5px 8px rgba(0,0,0,0.49)",
-                          }}
-                        >
-                          {item.caption}
-                        </span>
+                            />
+                          ) : (
+                            <div className="flex items-center justify-center w-full h-40 bg-gray-800 text-white/70">
+                              [No Image URL]
+                            </div>
+                          )}
+                        </AspectRatio>
                       </div>
-                    )}
+                    </div>
                   </div>
+
+                  {/* Caption Card - Only show if caption exists */}
+                  {item.caption && (
+                    <div className="flex-1 w-full max-w-xl min-w-[0] mt-4 md:mt-0">
+                      <div className="bg-humble-charcoal/50 border border-humble-purple-500/20 rounded-xl p-6 backdrop-blur-sm">
+                        <p className="text-white text-base md:text-lg leading-relaxed">
+                          {item.caption}
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -155,4 +118,3 @@ const MediaGallery: React.FC<Props> = ({ media }) => {
 };
 
 export default MediaGallery;
-
