@@ -47,6 +47,7 @@ const WebsitePackages = () => {
                   <li>• 2–3 work samples or links</li>
                   <li>• Resume upload</li>
                   <li>• Contact CTA</li>
+                   <li>• Simple styling</li>
                 </ul>
               </div>
               
