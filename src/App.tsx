@@ -16,6 +16,7 @@ import ComingSoon from "./pages/ComingSoon";
 import LinkInBio from "./pages/LinkInBio";
 import Work from "./pages/Work";
 import CaseStudy from "./pages/CaseStudy";
+import WebsitePackages from "./pages/WebsitePackages";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/work/:slug" element={<CaseStudy />} />
           <Route path="/case-studies/:slug" element={<CaseStudy />} />
           <Route path="/link-in-bio" element={<LinkInBio />} />
+          <Route path="/website-packages" element={<WebsitePackages />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

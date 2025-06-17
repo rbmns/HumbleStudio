@@ -142,6 +142,7 @@ export type Database = {
           created_at: string
           id: string
           name: string
+          schema_mapping: Json | null
           supabase_anon_key: string
           supabase_url: string
         }
@@ -149,6 +150,7 @@ export type Database = {
           created_at?: string
           id?: string
           name: string
+          schema_mapping?: Json | null
           supabase_anon_key: string
           supabase_url: string
         }
@@ -156,10 +158,46 @@ export type Database = {
           created_at?: string
           id?: string
           name?: string
+          schema_mapping?: Json | null
           supabase_anon_key?: string
           supabase_url?: string
         }
         Relationships: []
+      }
+      client_project_order: {
+        Row: {
+          client_database_config_id: string
+          created_at: string
+          display_order: number
+          id: string
+          project_id: string
+          updated_at: string
+        }
+        Insert: {
+          client_database_config_id: string
+          created_at?: string
+          display_order: number
+          id?: string
+          project_id: string
+          updated_at?: string
+        }
+        Update: {
+          client_database_config_id?: string
+          created_at?: string
+          display_order?: number
+          id?: string
+          project_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "client_project_order_client_database_config_id_fkey"
+            columns: ["client_database_config_id"]
+            isOneToOne: false
+            referencedRelation: "client_database_configs"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       cms_project_users: {
         Row: {
@@ -402,6 +440,95 @@ export type Database = {
             columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "portfolio_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          build_time: string | null
+          category: string | null
+          created_at: string
+          description: string
+          id: string
+          is_coming_soon: boolean | null
+          is_featured: boolean | null
+          key_features: Json | null
+          link: string | null
+          technologies: Json | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          build_time?: string | null
+          category?: string | null
+          created_at?: string
+          description: string
+          id?: string
+          is_coming_soon?: boolean | null
+          is_featured?: boolean | null
+          key_features?: Json | null
+          link?: string | null
+          technologies?: Json | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          build_time?: string | null
+          category?: string | null
+          created_at?: string
+          description?: string
+          id?: string
+          is_coming_soon?: boolean | null
+          is_featured?: boolean | null
+          key_features?: Json | null
+          link?: string | null
+          technologies?: Json | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      projects_detail: {
+        Row: {
+          alt_text: string | null
+          created_at: string
+          device_type: string | null
+          display_order: number | null
+          id: string
+          is_primary: boolean | null
+          media_type: string
+          media_url: string
+          project_id: string
+        }
+        Insert: {
+          alt_text?: string | null
+          created_at?: string
+          device_type?: string | null
+          display_order?: number | null
+          id?: string
+          is_primary?: boolean | null
+          media_type?: string
+          media_url: string
+          project_id: string
+        }
+        Update: {
+          alt_text?: string | null
+          created_at?: string
+          device_type?: string | null
+          display_order?: number | null
+          id?: string
+          is_primary?: boolean | null
+          media_type?: string
+          media_url?: string
+          project_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_detail_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
             referencedColumns: ["id"]
           },
         ]
