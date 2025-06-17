@@ -48,7 +48,7 @@ const WebsitePackages = () => {
                   <li>• Resume upload</li>
                   <li>• Contact CTA</li>
                    <li>• Simple styling</li>
-                   <li>• Mobile Optimised</li>
+                   <li>• Mobile-optimized</li>
                 </ul>
               </div>
               
