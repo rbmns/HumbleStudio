@@ -95,6 +95,22 @@ const LinkInBio = () => {
             {/* Main Action Links */}
             <div className="space-y-4 mb-16">
               
+            
+                {/* Packages */}
+              <button
+                onClick={() => navigate('/website-packages')}
+                className="flex items-center justify-between w-full p-5 bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-humble-pink-500/50 transition-all duration-300 group"
+              >
+                <div className="flex items-center gap-4">
+                  <span className="text-2xl">📦</span>
+                  <div className="text-left">
+                    <div className="text-lg font-semibold text-white">See Packages</div>
+                    <div className="text-white/60 text-sm">Need a Website? Start Here</div>
+                  </div>
+                </div>
+                <ExternalLink className="h-5 w-5 text-white/60 group-hover:text-humble-pink-500 transition-colors" />
+              </button>
+              
               {/* See My Work */}
               <button
                 onClick={() => navigate('/work')}
@@ -125,20 +141,7 @@ const LinkInBio = () => {
                 <ExternalLink className="h-5 w-5 text-white/60 group-hover:text-humble-purple-500 transition-colors" />
               </button>
 
-               {/* Packages */}
-              <button
-                onClick={() => navigate('/website-packages')}
-                className="flex items-center justify-between w-full p-5 bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-humble-pink-500/50 transition-all duration-300 group"
-              >
-                <div className="flex items-center gap-4">
-                  <span className="text-2xl">💼</span>
-                  <div className="text-left">
-                    <div className="text-lg font-semibold text-white">See Packages</div>
-                    <div className="text-white/60 text-sm">Need a Website? Start Here</div>
-                  </div>
-                </div>
-                <ExternalLink className="h-5 w-5 text-white/60 group-hover:text-humble-pink-500 transition-colors" />
-              </button>
+             
 
               {/* Start a Project */}
               <button
