@@ -54,18 +54,16 @@ const WebsitePackages = () => {
                 <div className="text-sm text-white/60 mb-2">
                   <strong>Delivery:</strong> 24h
                 </div>
-                <div className="text-sm text-white/60">
+                <div className="text-sm text-white/60 mb-4">
                   <strong>Perfect for:</strong> "Open to work" posts, job apps, LinkedIn bios
                 </div>
+                <Link 
+                  to="/work/digital-cv"
+                  className="text-humble-pink-400 hover:text-humble-pink-300 text-sm underline"
+                >
+                  See example: Digital CV →
+                </Link>
               </div>
-              
-              <Link 
-                to="/inquiry"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-all duration-300 w-full justify-center"
-              >
-                Book now
-                <ArrowRight className="h-4 w-4" />
-              </Link>
             </div>
 
             {/* Tier 2: Digital Business Card */}
@@ -95,18 +93,16 @@ const WebsitePackages = () => {
                 <div className="text-sm text-white/60 mb-2">
                   <strong>Delivery:</strong> 1–2 days
                 </div>
-                <div className="text-sm text-white/60">
+                <div className="text-sm text-white/60 mb-4">
                   <strong>Perfect for:</strong> Freelancers, coaches, stylists, service pros
                 </div>
+                <Link 
+                  to="/work/shen-taxi"
+                  className="text-humble-blue-400 hover:text-humble-blue-300 text-sm underline"
+                >
+                  See example: Shen Taxi →
+                </Link>
               </div>
-              
-              <Link 
-                to="/work"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-all duration-300 w-full justify-center"
-              >
-                See examples
-                <ArrowRight className="h-4 w-4" />
-              </Link>
             </div>
 
             {/* Tier 3: Starter Website */}
@@ -135,16 +131,34 @@ const WebsitePackages = () => {
                 <div className="text-sm text-white/60 mb-2">
                   <strong>Delivery:</strong> 2–4 days
                 </div>
-                <div className="text-sm text-white/60">
+                <div className="text-sm text-white/60 mb-4">
                   <strong>Perfect for:</strong> Small businesses, founders, teams
                 </div>
+                <Link 
+                  to="/work/nonnas-table"
+                  className="text-humble-purple-400 hover:text-humble-purple-300 text-sm underline"
+                >
+                  See example: Nonna's Table →
+                </Link>
               </div>
-              
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="text-center mb-16">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link 
+                to="/work"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 text-white px-8 py-4 rounded-full font-medium text-lg hover:scale-105 transition-all duration-300"
+              >
+                View All Case Studies
+                <ArrowRight className="h-4 w-4" />
+              </Link>
               <Link 
                 to="/inquiry"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-purple-500 to-humble-pink-500 text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-all duration-300 w-full justify-center"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-8 py-4 rounded-full font-medium text-lg hover:scale-105 transition-all duration-300"
               >
-                Let's talk
+                Book Now
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
