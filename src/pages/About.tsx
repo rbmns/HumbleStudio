@@ -25,7 +25,7 @@ const About = () => {
                 
                 <div className="space-y-6 text-white/80 text-lg leading-relaxed">
                   <p>
-                    HumbleStudio is a fast, focused web design service run by me — <span className="text-white font-medium">Roosje Biemans</span>, a senior creative producer with over a decade of experience delivering digital projects for agencies, artists, and small brands.
+                    HumbleStudio is a fast, focused web design & development service run by me — <span className="text-white font-medium">Rosie</span>, a senior producer with over a decade of experience delivering digital projects for agencies, artists, and small brands.
                   </p>
                   
                   <p>
@@ -76,7 +76,7 @@ const About = () => {
           </div>
 
           {/* Values Grid */}
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-5xl mx-auto mb-16">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               
               <div className="bg-humble-charcoal/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-pink-500/50 transition-all duration-300 text-center">
@@ -109,6 +109,18 @@ const About = () => {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* LinkedIn Link */}
+          <div className="max-w-4xl mx-auto text-center">
+            <a 
+              href="https://linkedin.com/in/roosjebiemans" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium transition-all duration-300 backdrop-blur-sm hover:scale-105"
+            >
+              Connect with me on LinkedIn
+            </a>
           </div>
         </div>
       </main>
