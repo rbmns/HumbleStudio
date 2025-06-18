@@ -1,46 +1,61 @@
-import React from 'react';
+
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
 const About = () => {
-  return <section id="about" className="section-padding relative bg-humble-charcoal/50 backdrop-blur-sm">
+  return (
+    <section id="about" className="py-20 relative">
       <div className="container mx-auto px-4 md:px-6">
-        <h2 className="section-title text-center">About Humble Studio</h2>
-        
-        <div className="max-w-3xl mx-auto mt-12">
-          <div>
-            <h3 className="text-2xl font-semibold mb-4 text-center">I'm <span className="bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 bg-clip-text text-transparent">Rosie</span> — the face behind HumbleStudio.</h3>
-            <p className="text-white/80 mb-6 leading-relaxed text-base sm:text-lg text-center">After 10+ years working as a producer building digital products with top-tier global designers, developers, and creatives, I’ve learned what tasteful, high-quality output truly means. Now, with AI as my sidekick, I’ve flipped the script — offering beautiful, fast websites for small businesses, without the big agency price tag.</p>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             
-            <div className="w-full h-[2px] bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 my-8 opacity-30"></div>
-            
-            <p className="text-white/80 leading-relaxed mb-8 text-center text-lg sm:text-xl font-light">At HumbleStudio.ai, I combine that eye for quality with daily knowledge of AI tools and my network of talents. I use automation to move fast — and bring in humans where it's needed.</p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10">
-              <div className="bg-humble-charcoal/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-pink-500/50 transition-all duration-300 text-center">
-                <div className="w-12 h-12 rounded-full bg-humble-pink-500/20 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-humble-pink-500 font-bold text-xl">10+</span>
-                </div>
-                <h4 className="font-medium text-white mb-2">Years Experience</h4>
-                <p className="text-white/60 text-sm sm:text-base">Building digital products for global teams</p>
+            {/* Text Content */}
+            <div className="order-2 lg:order-1">
+              <div className="inline-block px-4 py-2 rounded-full bg-humble-pink-500/20 text-humble-pink-400 text-sm font-medium mb-6">
+                About HumbleStudio
               </div>
               
-              <div className="bg-humble-charcoal/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-purple-500/50 transition-all duration-300 text-center">
-                <div className="w-12 h-12 rounded-full bg-humble-purple-500/20 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-humble-purple-500 font-bold text-xl">50+</span>
-                </div>
-                <h4 className="font-medium text-white mb-2">Happy Clients</h4>
-                <p className="text-white/60 text-sm sm:text-base">Delivering exceptional customer experiences</p>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white leading-tight">
+                Meet the Creator
+              </h2>
+              
+              <div className="space-y-4 text-white/80 text-base md:text-lg leading-relaxed mb-8">
+                <p>
+                  Hi, I'm Rose — a senior producer who helps people get beautiful websites live, fast. At HumbleStudio, I use smart AI tools, no-code platforms, and a sharp eye for quality to deliver websites that feel professional and clear — often in just one day.
+                </p>
+                
+                <p>
+                  I work hands-on and bring in talented creatives from my network when a project needs extra direction or polish. The result: thoughtful, good-looking websites without the usual overhead.
+                </p>
               </div>
               
-              <div className="bg-humble-charcoal/50 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 hover:border-humble-blue-500/50 transition-all duration-300 text-center">
-                <div className="w-12 h-12 rounded-full bg-humble-blue-500/20 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-humble-blue-500 font-bold text-xl">100+</span>
+              <Link 
+                to="/about"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium transition-all duration-300 backdrop-blur-sm hover:scale-105"
+              >
+                Read More About Me
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+            
+            {/* Image */}
+            <div className="order-1 lg:order-2">
+              <div className="relative max-w-sm mx-auto lg:max-w-none">
+                <div className="absolute inset-0 bg-gradient-to-br from-humble-pink-500/20 to-humble-purple-500/20 rounded-2xl blur-xl"></div>
+                <div className="relative bg-humble-charcoal/50 backdrop-blur-sm rounded-2xl p-2 border border-humble-gray-700/50">
+                  <img 
+                    src="/lovable-uploads/6ecd6047-6122-476e-bb89-caeb1e260203.png"
+                    alt="Roosje Biemans - Founder of HumbleStudio"
+                    className="w-full h-auto rounded-xl object-cover"
+                  />
                 </div>
-                <h4 className="font-medium text-white mb-2">Websites Launched</h4>
-                <p className="text-white/60 text-sm sm:text-base">From simple landing pages to complex platforms</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default About;
