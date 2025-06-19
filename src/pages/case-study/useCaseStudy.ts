@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -50,41 +51,73 @@ export function useCaseStudy(slug?: string) {
     try {
       document.title = `${slug.replace(/-/g, ' ')} | HumbleStudio`;
 
-      const { data: caseStudyData, error: caseStudyError } = await supabase
-        .from('case_studies')
+      // Use projects table instead of case_studies table
+      const { data: projectData, error: projectError } = await supabase
+        .from('projects')
         .select('*')
-        .eq('slug', slug)
-        .eq('is_published', true)
+        .eq('title', slug.replace(/-/g, ' '))
         .maybeSingle();
 
-      if (caseStudyError) {
+      if (projectError) {
         setError('Failed to fetch case study data');
         setLoading(false);
         return;
       }
 
-      if (!caseStudyData) {
+      if (!projectData) {
         setError('Case study not found');
         setLoading(false);
         return;
       }
 
+      // Use projects_detail table instead of case_study_media table
       const { data: fetchedMedia, error: mediaError } = await supabase
-        .from('case_study_media')
+        .from('projects_detail')
         .select('*')
-        .eq('case_study_id', caseStudyData.id)
+        .eq('project_id', projectData.id)
         .order('display_order', { ascending: true });
-      if (!mediaError && fetchedMedia) setMedia(fetchedMedia);
+      
+      if (!mediaError && fetchedMedia) {
+        const processedMedia = fetchedMedia.map(item => ({
+          id: item.id,
+          media_url: item.media_url,
+          alt_text: item.alt_text,
+          caption: item.alt_text, // Use alt_text as caption for now
+          section: 'solution', // Default section
+          display_order: item.display_order || 0
+        }));
+        setMedia(processedMedia);
+      }
 
+      // Map project data to case study format
       const processedCaseStudy: CaseStudy = {
-        ...caseStudyData,
-        key_features: Array.isArray(caseStudyData.key_features)
-          ? caseStudyData.key_features.filter((item: unknown): item is string => typeof item === "string")
+        id: projectData.id,
+        slug: slug,
+        title: projectData.title || '',
+        subtitle: '', // Not in projects table
+        description: projectData.description || '',
+        client_name: '', // Not in projects table
+        client_location: '', // Not in projects table
+        hero_image_url: fetchedMedia?.[0]?.media_url || '',
+        challenge_heading: 'The Challenge',
+        challenge_content: 'Challenge content based on project requirements.',
+        solution_heading: 'The Solution',
+        solution_content: projectData.description || '',
+        impact_heading: 'Results & Impact',
+        impact_content: 'The project delivered excellent results.',
+        key_features: Array.isArray(projectData.key_features)
+          ? projectData.key_features.filter((item: unknown): item is string => typeof item === "string")
           : [],
-        technologies: Array.isArray(caseStudyData.technologies)
-          ? caseStudyData.technologies.filter((item: unknown): item is string => typeof item === "string")
+        technologies: Array.isArray(projectData.technologies)
+          ? projectData.technologies.filter((item: unknown): item is string => typeof item === "string")
           : [],
+        project_duration: projectData.build_time || '',
+        cta_heading: 'Ready to Start Your Project?',
+        cta_description: 'Let\'s create something amazing together.',
+        cta_button_text: 'Get Started',
+        live_site_url: projectData.link || ''
       };
+      
       setCaseStudy(processedCaseStudy);
       setLoading(false);
     } catch (error) {

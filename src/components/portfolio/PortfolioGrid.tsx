@@ -53,7 +53,7 @@ const PortfolioGrid = React.memo(() => {
       console.log('Fetching projects from Supabase...');
       
       const { data: projectsData, error: projectsError } = await supabase
-        .from('portfolio_projects')
+        .from('projects')
         .select('*')
         .order('created_at', { ascending: false });
 
@@ -63,7 +63,7 @@ const PortfolioGrid = React.memo(() => {
       }
 
       const { data: mediaData, error: mediaError } = await supabase
-        .from('portfolio_media')
+        .from('projects_detail')
         .select('*')
         .order('display_order', { ascending: true });
 

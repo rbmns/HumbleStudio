@@ -43,7 +43,7 @@ const SimplePortfolioGrid = React.memo(() => {
   const fetchProjects = useCallback(async () => {
     try {
       const { data: projectsData, error: projectsError } = await supabase
-        .from('portfolio_projects')
+        .from('projects')
         .select('*')
         .order('created_at', { ascending: false });
 
@@ -53,7 +53,7 @@ const SimplePortfolioGrid = React.memo(() => {
       }
 
       const { data: mediaData, error: mediaError } = await supabase
-        .from('portfolio_media')
+        .from('projects_detail')
         .select('*')
         .order('display_order', { ascending: true });
 
@@ -134,6 +134,9 @@ const SimplePortfolioGrid = React.memo(() => {
     if (project.title === "Nonna's Table" || project.title.toLowerCase().includes("nonna")) {
       console.log('Navigating to Nonnas Table case study');
       navigate('/case-studies/nonnas-table');
+    } else if (project.title === "Surf Coach E. - Surf Instructor" || project.title.toLowerCase().includes("surf")) {
+      console.log('Navigating to Surf Instructor case study');
+      navigate('/case-studies/surf-instructor');
     } else if (project.link && !project.is_coming_soon) {
       console.log('Opening external link:', project.link);
       window.open(project.link, '_blank');

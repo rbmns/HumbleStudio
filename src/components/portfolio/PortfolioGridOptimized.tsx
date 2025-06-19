@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import PortfolioCard from './PortfolioCard';
@@ -30,38 +31,10 @@ const PortfolioGridOptimized: React.FC = () => {
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Add the surf instructor project manually (NOT featured)
-  const surfInstructorProject: PortfolioProject = {
-    id: 'surf-instructor',
-    title: 'Surf Coach E. - Surf Instructor',
-    description: 'A bilingual professional website for a certified surf coach offering private and freelance lessons in Spain, featuring coastal design and credibility-focused content.',
-    categories: ['freelance', 'web'],
-    link: 'https://coastvibe-surf.lovable.app',
-    is_featured: false,
-    is_coming_soon: false,
-    build_time: '5 days',
-    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
-    key_features: [
-      'Fully bilingual website (EN/NL)',
-      'Coastal and surf-inspired design',
-      'Professional certifications display',
-      'Mobile-responsive design',
-      'Digital business card functionality'
-    ],
-    media: [{
-      id: 'surf-1',
-      media_url: '/lovable-uploads/62039a47-ce32-4800-bfec-e882f691e01f.png',
-      alt_text: 'Surf Coach E. website homepage',
-      is_primary: true,
-      media_type: 'image',
-      display_order: 1
-    }]
-  };
-
   const fetchProjects = useCallback(async () => {
     try {
       const { data: projectsData, error: projectsError } = await supabase
-        .from('portfolio_projects')
+        .from('projects')
         .select('*')
         .order('created_at', { ascending: false });
 
@@ -71,7 +44,7 @@ const PortfolioGridOptimized: React.FC = () => {
       }
 
       const { data: mediaData, error: mediaError } = await supabase
-        .from('portfolio_media')
+        .from('projects_detail')
         .select('*')
         .order('display_order', { ascending: true });
 
@@ -118,8 +91,7 @@ const PortfolioGridOptimized: React.FC = () => {
         })) || []
       })) || [];
 
-      // Only add the surf instructor project - no fake digital CV project
-      setProjects([surfInstructorProject, ...projectsWithMedia]);
+      setProjects(projectsWithMedia);
     } catch (error) {
       console.error('Error in fetchProjects:', error);
     } finally {
