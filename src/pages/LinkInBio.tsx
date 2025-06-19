@@ -24,6 +24,18 @@ const LinkInBio = () => {
     }
   };
 
+  const handleDigitalCVCaseStudy = () => {
+    navigate('/work/digital-resume');
+  };
+
+  const handleShenTaxiCaseStudy = () => {
+    navigate('/work/shen-taxi-tours');
+  };
+
+  const handleNonnasCaseStudy = () => {
+    navigate('/work/nonnas-table');
+  };
+
   return (
     <>
       {/* Calendly CSS and JS */}
@@ -182,7 +194,7 @@ const LinkInBio = () => {
                     <ExternalLink className="h-4 w-4 text-white/60 group-hover:text-humble-pink-500 transition-colors" />
                   </a>
                   <button
-                    onClick={() => navigate('/case-studies/digital-cv')}
+                    onClick={handleDigitalCVCaseStudy}
                     className="px-4 py-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-pink-500/50 transition-all duration-300 text-white/60 hover:text-humble-pink-500"
                   >
                     <span className="text-sm font-medium">Case Study</span>
@@ -207,7 +219,7 @@ const LinkInBio = () => {
                     <ExternalLink className="h-4 w-4 text-white/60 group-hover:text-humble-purple-500 transition-colors" />
                   </a>
                   <button
-                    onClick={() => navigate('/case-studies/shen-taxi-tours')}
+                    onClick={handleShenTaxiCaseStudy}
                     className="px-4 py-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-purple-500/50 transition-all duration-300 text-white/60 hover:text-humble-purple-500"
                   >
                     <span className="text-sm font-medium">Case Study</span>
@@ -232,7 +244,7 @@ const LinkInBio = () => {
                     <ExternalLink className="h-4 w-4 text-white/60 group-hover:text-humble-blue-500 transition-colors" />
                   </a>
                   <button
-                    onClick={() => navigate('/case-studies/nonnas-table')}
+                    onClick={handleNonnasCaseStudy}
                     className="px-4 py-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-blue-500/50 transition-all duration-300 text-white/60 hover:text-humble-blue-500"
                   >
                     <span className="text-sm font-medium">Case Study</span>
