@@ -1,18 +1,15 @@
-
 import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-
 const HireMePageThanksStep2 = () => {
   const [searchParams] = useSearchParams();
   const ref = searchParams.get('ref');
-
   useEffect(() => {
     // Set page title and meta tags
     document.title = "Thank You - Next Steps | HumbleStudio";
-    
+
     // Update meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
@@ -21,12 +18,8 @@ const HireMePageThanksStep2 = () => {
   }, []);
 
   // Build the intake form URL with ref parameter if it exists
-  const intakeFormUrl = ref 
-    ? `/hire-me-page/intake?ref=${encodeURIComponent(ref)}`
-    : '/hire-me-page/intake';
-
-  return (
-    <div className="min-h-screen bg-humble-charcoal">
+  const intakeFormUrl = ref ? `/hire-me-page/intake?ref=${encodeURIComponent(ref)}` : '/hire-me-page/intake';
+  return <div className="min-h-screen bg-humble-charcoal">
       <Navbar />
       <div className="container mx-auto px-4 md:px-6 py-16 md:py-24">
         {/* Hero Section */}
@@ -35,9 +28,7 @@ const HireMePageThanksStep2 = () => {
             🎉 You're In — Let's Build Your Site
           </h1>
           
-          <p className="text-xl md:text-2xl text-white/80 mb-12 leading-relaxed max-w-3xl mx-auto">
-            Thanks for your interest. To create your personal CV website, I'll need a bit more input from you.
-          </p>
+          <p className="text-xl md:text-2xl text-white/80 mb-12 leading-relaxed max-w-3xl mx-auto">Thanks for your interest, I'll be in touch very soon.</p>
         </div>
 
         {/* Body Section */}
@@ -56,11 +47,7 @@ const HireMePageThanksStep2 = () => {
                 When you're ready, click the button below to begin.
               </p>
               
-              <a 
-                href={intakeFormUrl}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all duration-300 text-lg hover:scale-105"
-                data-gtm="continue-to-intake-form"
-              >
+              <a href={intakeFormUrl} className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all duration-300 text-lg hover:scale-105" data-gtm="continue-to-intake-form">
                 Continue to Intake Form
                 <ArrowRight size={20} />
               </a>
@@ -72,18 +59,14 @@ const HireMePageThanksStep2 = () => {
           </div>
           
           {/* Text Footer */}
-          {ref && (
-            <div className="text-center">
+          {ref && <div className="text-center">
               <p className="text-white/60 text-sm">
                 If you were referred by someone, your code has been saved.
               </p>
-            </div>
-          )}
+            </div>}
         </div>
       </div>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default HireMePageThanksStep2;
