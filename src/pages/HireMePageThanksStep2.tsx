@@ -20,10 +20,10 @@ const HireMePageThanksStep2 = () => {
     }
   }, []);
 
-  // Build the branding form URL with ref parameter if it exists
-  const brandingFormUrl = ref 
-    ? `/brand-discovery-form?ref=${encodeURIComponent(ref)}`
-    : '/brand-discovery-form';
+  // Build the intake form URL with ref parameter if it exists
+  const intakeFormUrl = ref 
+    ? `/hire-me-page/intake?ref=${encodeURIComponent(ref)}`
+    : '/hire-me-page/intake';
 
   return (
     <div className="min-h-screen bg-humble-charcoal">
@@ -45,19 +45,23 @@ const HireMePageThanksStep2 = () => {
           <div className="bg-humble-charcoal/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-humble-gray-700/50 mb-8">
             <div className="mb-8">
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
-                Step 1: Define Your Style
+                Already want to start immediately?
               </h2>
               
               <p className="text-lg text-white/70 mb-8 leading-relaxed">
-                Tell me how you'd like your site to look and feel — tone, colors, personal touch.
+                Fill in some details about your job preferences and style so we can create your tailored digital CV.
+              </p>
+              
+              <p className="text-lg text-white/70 mb-8 leading-relaxed">
+                When you're ready, click the button below to begin.
               </p>
               
               <a 
-                href={brandingFormUrl}
+                href={intakeFormUrl}
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all duration-300 text-lg hover:scale-105"
-                data-gtm="continue-to-branding-form"
+                data-gtm="continue-to-intake-form"
               >
-                Continue to Branding Form
+                Continue to Intake Form
                 <ArrowRight size={20} />
               </a>
             </div>
