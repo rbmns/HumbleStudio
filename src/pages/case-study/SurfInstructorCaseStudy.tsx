@@ -46,7 +46,7 @@ const SurfInstructorCaseStudy: React.FC = () => {
               Freelance Profile Website
             </div>
             <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-              Elias Visser
+              Surf Coach E.
               <span className="block text-2xl lg:text-3xl text-humble-blue-400 font-normal mt-2">
                 Surf Instructor & Freelancer
               </span>
@@ -72,7 +72,7 @@ const SurfInstructorCaseStudy: React.FC = () => {
           <div className="relative">
             <img 
               src="/lovable-uploads/62039a47-ce32-4800-bfec-e882f691e01f.png" 
-              alt="Elias Visser surf instructor website"
+              alt="Surf Coach E. website"
               className="rounded-2xl shadow-2xl w-full"
             />
           </div>
@@ -85,7 +85,7 @@ const SurfInstructorCaseStudy: React.FC = () => {
           <h2 className="text-3xl font-bold mb-8 text-center">The Challenge</h2>
           <div className="max-w-4xl mx-auto">
             <p className="text-lg text-white/80 mb-6 leading-relaxed">
-              Elias Visser needed a digital presence to showcase his surf coaching services and establish credibility within the surf and hospitality industries. As a certified surf coach offering services in Spain, he required a professional platform that could serve multiple purposes.
+              Surf Coach E. needed a digital presence to showcase his surf coaching services and establish credibility within the surf and hospitality industries. As a certified surf coach offering services in Spain, he required a professional platform that could serve multiple purposes.
             </p>
             <div className="grid md:grid-cols-2 gap-8 mt-8">
               <div className="space-y-4">
@@ -118,7 +118,7 @@ const SurfInstructorCaseStudy: React.FC = () => {
           <h2 className="text-3xl font-bold mb-8 text-center">The Solution</h2>
           <div className="max-w-4xl mx-auto">
             <p className="text-lg text-white/80 mb-8 leading-relaxed">
-              We designed and developed coastvibe-surf.lovable.app using Lovable.dev, creating a clean, coastal-themed website that perfectly captures Elias's professional surf coaching brand while maintaining an approachable, authentic feel.
+              We designed and developed coastvibe-surf.lovable.app using Lovable.dev, creating a clean, coastal-themed website that perfectly captures the professional surf coaching brand while maintaining an approachable, authentic feel.
             </p>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="text-center p-6 bg-humble-charcoal/30 rounded-xl">
@@ -189,7 +189,7 @@ const SurfInstructorCaseStudy: React.FC = () => {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-xl font-semibold text-humble-blue-400 mb-3">Professional Presence</h3>
-                  <p className="text-white/80">Elias now has a professional, approachable online presence that effectively communicates his unique surf coaching approach and qualifications.</p>
+                  <p className="text-white/80">Surf Coach E. now has a professional, approachable online presence that effectively communicates his unique surf coaching approach and qualifications.</p>
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-humble-purple-400 mb-3">Expanded Reach</h3>
@@ -199,7 +199,7 @@ const SurfInstructorCaseStudy: React.FC = () => {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-xl font-semibold text-humble-pink-400 mb-3">Business Connections</h3>
-                  <p className="text-white/80">The site acts as a digital business card, helping Elias connect with surf camps, campgrounds, and hospitality clients.</p>
+                  <p className="text-white/80">The site acts as a digital business card, helping Surf Coach E. connect with surf camps, campgrounds, and hospitality clients.</p>
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-humble-blue-400 mb-3">Client Trust</h3>
