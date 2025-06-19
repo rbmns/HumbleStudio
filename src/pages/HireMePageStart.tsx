@@ -1,10 +1,49 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import StarBackground from '../components/StarBackground';
 
+// Add type definition for the Tally object
+declare global {
+  interface Window {
+    Tally?: {
+      loadEmbeds: () => void;
+    };
+  }
+}
+
 const HireMePageStart = () => {
+  useEffect(() => {
+    // Set page title and meta tags
+    document.title = "Get Your Hire Me Page - HumbleStudio";
+    
+    // Update meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', "Fill out the form below to get started with your professional Hire Me Page.");
+    }
+
+    // Load Tally script dynamically
+    const script = document.createElement('script');
+    script.src = 'https://tally.so/widgets/embed.js';
+    script.async = true;
+    script.onload = () => {
+      // Execute Tally.loadEmbeds once script is loaded
+      if (window.Tally) {
+        window.Tally.loadEmbeds();
+      }
+    };
+    document.body.appendChild(script);
+    
+    return () => {
+      // Cleanup on unmount
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen relative overflow-x-hidden">
       <StarBackground />
@@ -27,21 +66,13 @@ const HireMePageStart = () => {
               <iframe
                 data-tally-src="https://tally.so/embed/mVX1vJ?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
                 width="100%"
-                height="500"
+                height="600"
                 frameBorder="0"
                 marginHeight={0}
                 marginWidth={0}
                 title="Hire Me Page Form"
-                className="rounded-lg"
+                className="rounded-lg bg-transparent"
               ></iframe>
-              
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `
-                    var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc})};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.head.appendChild(s);}
-                  `
-                }}
-              />
             </div>
           </div>
         </div>
