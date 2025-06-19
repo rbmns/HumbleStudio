@@ -33,6 +33,7 @@ const PortfolioGridOptimized: React.FC = () => {
 
   const fetchProjects = useCallback(async () => {
     try {
+      console.log('Fetching projects from projects table...');
       const { data: projectsData, error: projectsError } = await supabase
         .from('projects')
         .select('*')
@@ -43,7 +44,10 @@ const PortfolioGridOptimized: React.FC = () => {
         return;
       }
 
-      // Use portfolio_media table since projects_media doesn't exist in types yet
+      console.log('Projects data received:', projectsData);
+
+      // Fetch media from portfolio_media table
+      console.log('Fetching media from portfolio_media table...');
       const { data: mediaData, error: mediaError } = await supabase
         .from('portfolio_media')
         .select('*')
@@ -53,6 +57,8 @@ const PortfolioGridOptimized: React.FC = () => {
         console.error('Error fetching media:', mediaError);
         return;
       }
+
+      console.log('Media data received:', mediaData);
 
       const toStringArray = (data: any): string[] => {
         if (Array.isArray(data)) {
@@ -69,28 +75,34 @@ const PortfolioGridOptimized: React.FC = () => {
         return [];
       };
 
-      const projectsWithMedia: PortfolioProject[] = projectsData?.map(project => ({
-        id: project.id,
-        title: project.title || '',
-        description: project.description || '',
-        // Handle category field from database (singular) to categories array (plural)
-        categories: project.category ? [project.category] : [],
-        link: project.link || undefined,
-        is_featured: project.is_featured || false,
-        is_coming_soon: project.is_coming_soon || false,
-        build_time: project.build_time || undefined,
-        technologies: toStringArray(project.technologies),
-        key_features: toStringArray(project.key_features),
-        media: mediaData?.filter(media => media.project_id === project.id).map(media => ({
-          id: media.id,
-          media_url: media.media_url,
-          alt_text: media.alt_text || undefined,
-          is_primary: media.is_primary || false,
-          media_type: media.media_type,
-          display_order: media.display_order || 0
-        })) || []
-      })) || [];
+      const projectsWithMedia: PortfolioProject[] = projectsData?.map(project => {
+        const projectMedia = mediaData?.filter(media => media.project_id === project.id) || [];
+        console.log(`Project ${project.title} has ${projectMedia.length} media items`);
+        
+        return {
+          id: project.id,
+          title: project.title || '',
+          description: project.description || '',
+          // Handle category field from database (singular) to categories array (plural)
+          categories: project.category ? [project.category] : [],
+          link: project.link || undefined,
+          is_featured: project.is_featured || false,
+          is_coming_soon: project.is_coming_soon || false,
+          build_time: project.build_time || undefined,
+          technologies: toStringArray(project.technologies),
+          key_features: toStringArray(project.key_features),
+          media: projectMedia.map(media => ({
+            id: media.id,
+            media_url: media.media_url,
+            alt_text: media.alt_text || undefined,
+            is_primary: media.is_primary || false,
+            media_type: media.media_type,
+            display_order: media.display_order || 0
+          }))
+        };
+      }) || [];
 
+      console.log('Final processed projects:', projectsWithMedia);
       setProjects(projectsWithMedia);
     } catch (error) {
       console.error('Error in fetchProjects:', error);
@@ -186,6 +198,7 @@ const PortfolioGridOptimized: React.FC = () => {
       ) : (
         <div className="text-center text-white/60 py-16">
           <p>No projects found.</p>
+          <p className="text-sm mt-2">Check the console for debugging information.</p>
         </div>
       )}
     </>
