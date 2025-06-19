@@ -6,6 +6,7 @@ import StarBackground from '../components/StarBackground';
 import HeroSection from '../components/digital-cv/HeroSection';
 import WhyChooseSection from '../components/digital-cv/WhyChooseSection';
 import WhatsIncludedSection from '../components/digital-cv/WhatsIncludedSection';
+import PricingSection from '../components/digital-cv/PricingSection';
 import WhatYouProvideSection from '../components/digital-cv/WhatYouProvideSection';
 import DomainHostingSection from '../components/digital-cv/DomainHostingSection';
 import AboutSection from '../components/digital-cv/AboutSection';
@@ -22,6 +23,7 @@ const DigitalCV = () => {
           <HeroSection />
           <WhyChooseSection />
           <WhatsIncludedSection />
+          <PricingSection />
           <WhatYouProvideSection />
           <DomainHostingSection />
           <AboutSection />
