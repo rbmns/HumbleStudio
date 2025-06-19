@@ -55,7 +55,7 @@ export function useCaseStudy(slug?: string) {
       const { data: projectData, error: projectError } = await supabase
         .from('projects')
         .select('*')
-        .eq('slug', slug)
+        .eq('title', slug.replace(/-/g, ' '))
         .maybeSingle();
 
       if (projectError) {

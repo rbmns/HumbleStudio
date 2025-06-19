@@ -73,10 +73,8 @@ const PortfolioGridOptimized: React.FC = () => {
         id: project.id,
         title: project.title || '',
         description: project.description || '',
-        // Handle both categories and category fields
-        categories: project.categories ? 
-          (Array.isArray(project.categories) ? project.categories : [project.categories]) : 
-          [],
+        // Handle category field from database (singular) to categories array (plural)
+        categories: project.category ? [project.category] : [],
         link: project.link || undefined,
         is_featured: project.is_featured || false,
         is_coming_soon: project.is_coming_soon || false,
