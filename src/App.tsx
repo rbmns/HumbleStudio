@@ -29,7 +29,7 @@ const queryClient = new QueryClient();
 
 // GTM initialization function
 const initializeGTM = () => {
-  const gtmId = 'GTM-XXXXXXX'; // Replace with your actual GTM container ID
+  const gtmId = 'GTM-WKLFDVVQ'; // Replace with your actual GTM container ID
   
   // GTM script
   const script = document.createElement('script');
