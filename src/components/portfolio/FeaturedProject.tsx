@@ -29,6 +29,12 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
   const navigate = useNavigate();
 
   const handleCardClick = () => {
+    // Handle special case for surf instructor
+    if (project.id === 'surf-instructor') {
+      navigate('/case-studies/surf-instructor');
+      return;
+    }
+
     // Navigate to case study page based on project title
     let slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
     

@@ -30,6 +30,34 @@ const PortfolioGridOptimized: React.FC = () => {
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Add the surf instructor project manually
+  const surfInstructorProject: PortfolioProject = {
+    id: 'surf-instructor',
+    title: 'Elias Visser - Surf Instructor',
+    description: 'A bilingual professional website for a certified surf coach offering private and freelance lessons in Spain, featuring coastal design and credibility-focused content.',
+    categories: ['freelance', 'web'],
+    link: 'https://coastvibe-surf.lovable.app',
+    is_featured: true,
+    is_coming_soon: false,
+    build_time: '5 days',
+    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
+    key_features: [
+      'Fully bilingual website (EN/NL)',
+      'Coastal and surf-inspired design',
+      'Professional certifications display',
+      'Mobile-responsive design',
+      'Digital business card functionality'
+    ],
+    media: [{
+      id: 'surf-1',
+      media_url: '/lovable-uploads/62039a47-ce32-4800-bfec-e882f691e01f.png',
+      alt_text: 'Elias Visser surf instructor website homepage',
+      is_primary: true,
+      media_type: 'image',
+      display_order: 1
+    }]
+  };
+
   const fetchProjects = useCallback(async () => {
     try {
       const { data: projectsData, error: projectsError } = await supabase
@@ -90,7 +118,8 @@ const PortfolioGridOptimized: React.FC = () => {
         })) || []
       })) || [];
 
-      setProjects(projectsWithMedia);
+      // Add the surf instructor project to the beginning
+      setProjects([surfInstructorProject, ...projectsWithMedia]);
     } catch (error) {
       console.error('Error in fetchProjects:', error);
     } finally {
