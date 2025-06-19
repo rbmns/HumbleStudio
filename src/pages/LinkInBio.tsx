@@ -24,7 +24,7 @@ const LinkInBio = () => {
   };
 
   const handleDigitalCVCaseStudy = () => {
-    navigate('/work/digital-cv');
+    navigate('/work/digital-resume-site');
   };
 
   const handleShenTaxiCaseStudy = () => {

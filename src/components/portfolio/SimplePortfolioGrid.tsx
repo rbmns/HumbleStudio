@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
@@ -43,6 +44,7 @@ const SimplePortfolioGrid = React.memo(() => {
       const { data: projectsData, error: projectsError } = await supabase
         .from('projects')
         .select('*')
+        .order('is_featured', { ascending: false })
         .order('created_at', { ascending: false });
 
       if (projectsError) {
@@ -111,7 +113,7 @@ const SimplePortfolioGrid = React.memo(() => {
           });
         }
         
-        console.log(`Project ${project.title} has slug: ${project.slug} and image: ${imageUrl}`);
+        console.log(`Project ${project.title} has slug: ${project.slug}, is_featured: ${project.is_featured}, and image: ${imageUrl}`);
         
         return {
           id: project.id,
@@ -132,7 +134,7 @@ const SimplePortfolioGrid = React.memo(() => {
         };
       });
 
-      console.log('Final processed projects with slugs:', projectsWithMedia.map(p => ({ title: p.title, slug: p.slug })));
+      console.log('Final processed projects with slugs and featured status:', projectsWithMedia.map(p => ({ title: p.title, slug: p.slug, is_featured: p.is_featured })));
       setProjects(projectsWithMedia);
     } catch (error) {
       console.error('Error in fetchProjects:', error);

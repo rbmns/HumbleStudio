@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Clock, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +14,7 @@ interface Project {
   main_image?: string;
   build_time?: string;
   link?: string;
+  is_featured?: boolean;
   created_at: string;
 }
 
@@ -33,6 +33,7 @@ const Work = () => {
       const { data: projectsData, error: projectsError } = await supabase
         .from('projects')
         .select('*')
+        .order('is_featured', { ascending: false })
         .order('created_at', { ascending: false });
 
       if (projectsError) {
@@ -50,6 +51,7 @@ const Work = () => {
           main_image: project.main_image,
           build_time: project.build_time,
           link: project.link,
+          is_featured: project.is_featured,
           created_at: project.created_at
         })) || [];
         
@@ -131,6 +133,11 @@ const Work = () => {
                   
                   {/* Image */}
                   <div className={`relative group ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                    {project.is_featured && (
+                      <div className="absolute -top-3 -left-3 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium z-10">
+                        Featured
+                      </div>
+                    )}
                     <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-humble-charcoal/30 backdrop-blur-sm border border-white/10">
                       <img 
                         src={project.main_image || `https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop`}
