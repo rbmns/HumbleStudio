@@ -112,6 +112,7 @@ const SimplePortfolioGrid = React.memo(() => {
             alt_text: `${project.title} preview`,
             is_primary: true,
             media_type: 'image',
+            device_type: 'desktop',
             display_order: 1,
             created_at: new Date().toISOString()
           });
@@ -150,6 +151,10 @@ const SimplePortfolioGrid = React.memo(() => {
       setLoading(false);
     }
   }, []);
+
+  useEffect(() => {
+    fetchProjects();
+  }, [fetchProjects]);
 
   const filteredProjects = useMemo(() => {
     return activeCategory === 'all' 
