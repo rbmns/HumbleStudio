@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, ExternalLink, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -29,14 +28,15 @@ const Work = () => {
 
   const fetchCaseStudies = async () => {
     try {
-      const { data, error } = await supabase
-        .from('case_studies')
+      // Fetch from projects table instead of case_studies
+      const { data: projectsData, error: projectsError } = await supabase
+        .from('projects')
         .select('*')
-        .eq('is_published', true)
+        .eq('is_featured', true)
         .order('created_at', { ascending: false });
 
-      if (error) {
-        console.error('Error fetching case studies:', error);
+      if (projectsError) {
+        console.error('Error fetching projects:', projectsError);
         // Use fallback data
         setCaseStudies([
           {
@@ -61,20 +61,38 @@ const Work = () => {
           }
         ]);
       } else {
+        // Fetch media for hero images
+        const { data: mediaData, error: mediaError } = await supabase
+          .from('projects_media')
+          .select('*')
+          .in('project_id', projectsData.map(p => p.id))
+          .eq('is_primary', true)
+          .order('display_order', { ascending: true });
+
+        if (mediaError) {
+          console.error('Error fetching media:', mediaError);
+        }
+
         // Process database data
-        const processedCaseStudies = data.map(study => ({
-          id: study.id,
-          slug: study.slug,
-          title: study.title,
-          subtitle: study.subtitle,
-          description: study.description,
-          client_name: study.client_name,
-          hero_image_url: study.hero_image_url,
-          project_duration: study.project_duration,
-          technologies: Array.isArray(study.technologies) 
-            ? study.technologies.filter((item): item is string => typeof item === 'string')
-            : []
-        }));
+        const processedCaseStudies = projectsData.map(project => {
+          const projectMedia = mediaData?.find(media => media.project_id === project.id);
+          
+          return {
+            id: project.id,
+            slug: project.title === "Nonna's Table" ? 'nonnas-table' : 
+                  project.title === 'Digital Resume Site' ? 'digital-resume' :
+                  project.title.toLowerCase().replace(/\s+/g, '-'),
+            title: project.title,
+            subtitle: project.categories?.[0] || 'Web Design',
+            description: project.description,
+            client_name: '',
+            hero_image_url: projectMedia?.media_url || '',
+            project_duration: project.build_time,
+            technologies: Array.isArray(project.technologies) 
+              ? project.technologies.filter((item: unknown): item is string => typeof item === 'string')
+              : []
+          };
+        });
         setCaseStudies(processedCaseStudies);
       }
     } catch (error) {
