@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import PortfolioCard from './PortfolioCard';
@@ -38,7 +37,7 @@ const PortfolioGridOptimized: React.FC = () => {
     description: 'A bilingual professional website for a certified surf coach offering private and freelance lessons in Spain, featuring coastal design and credibility-focused content.',
     categories: ['freelance', 'web'],
     link: 'https://coastvibe-surf.lovable.app',
-    is_featured: false, // Changed to false
+    is_featured: false,
     is_coming_soon: false,
     build_time: '5 days',
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
@@ -53,34 +52,6 @@ const PortfolioGridOptimized: React.FC = () => {
       id: 'surf-1',
       media_url: '/lovable-uploads/62039a47-ce32-4800-bfec-e882f691e01f.png',
       alt_text: 'Surf Coach E. website homepage',
-      is_primary: true,
-      media_type: 'image',
-      display_order: 1
-    }]
-  };
-
-  // Add a Digital CV project as featured
-  const digitalCvProject: PortfolioProject = {
-    id: 'digital-cv',
-    title: 'Digital CV & Portfolio Service',
-    description: 'A professional digital CV and portfolio service that helps freelancers and professionals showcase their skills and experience online with a beautiful, mobile-responsive website.',
-    categories: ['service', 'web'],
-    link: '/hire-me-page',
-    is_featured: true,
-    is_coming_soon: false,
-    build_time: '3-5 days',
-    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Responsive Design'],
-    key_features: [
-      'Professional CV presentation',
-      'Portfolio showcase',
-      'Mobile-responsive design',
-      'Contact integration',
-      'Fast delivery'
-    ],
-    media: [{
-      id: 'cv-1',
-      media_url: '/lovable-uploads/dfddb649-24c5-41a5-9ca5-91eb97e74dfb.png',
-      alt_text: 'Digital CV service homepage',
       is_primary: true,
       media_type: 'image',
       display_order: 1
@@ -147,8 +118,8 @@ const PortfolioGridOptimized: React.FC = () => {
         })) || []
       })) || [];
 
-      // Add the custom projects - Digital CV as featured, surf instructor as regular
-      setProjects([digitalCvProject, surfInstructorProject, ...projectsWithMedia]);
+      // Only add the surf instructor project - no fake digital CV project
+      setProjects([surfInstructorProject, ...projectsWithMedia]);
     } catch (error) {
       console.error('Error in fetchProjects:', error);
     } finally {
