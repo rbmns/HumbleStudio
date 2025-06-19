@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
@@ -148,11 +147,23 @@ const SimplePortfolioGrid = React.memo(() => {
   }, [fetchProjects]);
 
   const featuredProjects = useMemo(() => {
-    return projects.filter(project => project.is_featured);
+    const featured = projects.filter(project => project.is_featured);
+    // Sort featured projects: regular projects first, then coming soon projects
+    return featured.sort((a, b) => {
+      if (a.is_coming_soon && !b.is_coming_soon) return 1;
+      if (!a.is_coming_soon && b.is_coming_soon) return -1;
+      return 0;
+    });
   }, [projects]);
 
   const regularProjects = useMemo(() => {
-    return projects.filter(project => !project.is_featured);
+    const regular = projects.filter(project => !project.is_featured);
+    // Sort regular projects: regular projects first, then coming soon projects
+    return regular.sort((a, b) => {
+      if (a.is_coming_soon && !b.is_coming_soon) return 1;
+      if (!a.is_coming_soon && b.is_coming_soon) return -1;
+      return 0;
+    });
   }, [projects]);
 
   const handleProjectClick = useCallback((project: PortfolioProject) => {

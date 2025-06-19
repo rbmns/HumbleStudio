@@ -15,6 +15,7 @@ interface Project {
   build_time?: string;
   link?: string;
   is_featured?: boolean;
+  is_coming_soon?: boolean;
   created_at: string;
 }
 
@@ -52,10 +53,25 @@ const Work = () => {
           build_time: project.build_time,
           link: project.link,
           is_featured: project.is_featured,
+          is_coming_soon: project.is_coming_soon,
           created_at: project.created_at
         })) || [];
         
-        setProjects(processedProjects);
+        // Sort projects to show coming soon projects at the end
+        const sortedProjects = processedProjects.sort((a, b) => {
+          // First sort by featured status
+          if (a.is_featured && !b.is_featured) return -1;
+          if (!a.is_featured && b.is_featured) return 1;
+          
+          // Then within each group, put coming soon projects at the end
+          if (a.is_coming_soon && !b.is_coming_soon) return 1;
+          if (!a.is_coming_soon && b.is_coming_soon) return -1;
+          
+          // Finally sort by creation date
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        });
+        
+        setProjects(sortedProjects);
       }
     } catch (error) {
       console.error('Error in fetchProjects:', error);
@@ -138,12 +154,21 @@ const Work = () => {
                         Featured
                       </div>
                     )}
-                    <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-humble-charcoal/30 backdrop-blur-sm border border-white/10">
+                    <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-humble-charcoal/30 backdrop-blur-sm border border-white/10 relative">
                       <img 
                         src={project.main_image || `https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop`}
                         alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
+                          project.is_coming_soon ? 'blur-sm' : ''
+                        }`}
                       />
+                      {project.is_coming_soon && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                          <div className="bg-humble-purple-500 text-white px-6 py-3 rounded-full font-semibold text-lg">
+                            Coming Soon
+                          </div>
+                        </div>
+                      )}
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
@@ -156,7 +181,7 @@ const Work = () => {
                       <span className={`px-3 py-1 rounded-full bg-gradient-to-r ${getGradient(project.title)} text-white font-medium`}>
                         {getCategory(project.categories || [])}
                       </span>
-                      {project.build_time && (
+                      {project.build_time && !project.is_coming_soon && (
                         <div className="flex items-center gap-2 text-white/60">
                           <Clock className="h-4 w-4" />
                           <span>{project.build_time}</span>
@@ -183,22 +208,30 @@ const Work = () => {
 
                     {/* Actions */}
                     <div className="flex flex-col sm:flex-row gap-4">
-                      <button
-                        onClick={() => navigate(`/work/${project.slug}`)}
-                        className="flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-xl font-semibold hover:opacity-90 transition-opacity"
-                      >
-                        View Case Study
-                        <ArrowRight className="h-5 w-5" />
-                      </button>
-                      
-                      {project.link && (
-                        <button
-                          onClick={() => window.open(project.link, '_blank')}
-                          className="flex items-center justify-center gap-3 px-6 py-3 bg-humble-charcoal/80 text-white rounded-xl font-semibold hover:bg-humble-charcoal transition-colors border border-white/10"
-                        >
-                          Visit Live Site
-                          <ExternalLink className="h-5 w-5" />
-                        </button>
+                      {!project.is_coming_soon ? (
+                        <>
+                          <button
+                            onClick={() => navigate(`/work/${project.slug}`)}
+                            className="flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-xl font-semibold hover:opacity-90 transition-opacity"
+                          >
+                            View Case Study
+                            <ArrowRight className="h-5 w-5" />
+                          </button>
+                          
+                          {project.link && (
+                            <button
+                              onClick={() => window.open(project.link, '_blank')}
+                              className="flex items-center justify-center gap-3 px-6 py-3 bg-humble-charcoal/80 text-white rounded-xl font-semibold hover:bg-humble-charcoal transition-colors border border-white/10"
+                            >
+                              Visit Live Site
+                              <ExternalLink className="h-5 w-5" />
+                            </button>
+                          )}
+                        </>
+                      ) : (
+                        <div className="text-white/60 font-medium text-lg">
+                          Project details coming soon...
+                        </div>
                       )}
                     </div>
                   </div>
