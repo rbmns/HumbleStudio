@@ -176,13 +176,13 @@ const SimplePortfolioGrid = React.memo(() => {
     // Handle specific case studies
     if (project.title.toLowerCase().includes("nonna")) {
       console.log('Navigating to Nonnas Table case study');
-      navigate('/case-studies/nonnas-table');
+      navigate('/work/nonnas-table');
       return;
     } 
     
     if (project.title.toLowerCase().includes("digital") && project.title.toLowerCase().includes("resume")) {
       console.log('Navigating to Digital Resume case study');
-      navigate('/case-studies/digital-resume');
+      navigate('/work/digital-resume');
       return;
     }
     
@@ -248,20 +248,18 @@ const SimplePortfolioGrid = React.memo(() => {
 
       {filteredProjects.length > 0 ? (
         <div className="space-y-12">
-          {/* Featured Projects - Centered and Single Column */}
+          {/* Featured Projects - Smaller and Centered */}
           {featuredProjects.length > 0 && (
-            <div className="flex justify-center">
-              <div className="w-full max-w-4xl space-y-8">
-                {featuredProjects.map((project) => (
-                  <div key={project.id} className="mx-auto">
-                    <SimplePortfolioCard
-                      project={project}
-                      onClick={handleProjectClick}
-                      featured={true}
-                    />
-                  </div>
-                ))}
-              </div>
+            <div className="flex flex-wrap justify-center gap-6">
+              {featuredProjects.map((project) => (
+                <div key={project.id} className="w-full sm:w-auto">
+                  <SimplePortfolioCard
+                    project={project}
+                    onClick={handleProjectClick}
+                    featured={true}
+                  />
+                </div>
+              ))}
             </div>
           )}
 

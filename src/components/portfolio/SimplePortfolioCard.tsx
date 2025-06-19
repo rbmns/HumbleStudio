@@ -1,4 +1,6 @@
+
 import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PortfolioCardContent from './PortfolioCardContent';
 import PortfolioCardFooter from './PortfolioCardFooter';
 import OptimizedImage from './OptimizedImage';
@@ -29,6 +31,7 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
   onClick, 
   featured = false 
 }) => {
+  const navigate = useNavigate();
   const primaryImage = project.media[0];
 
   const handleCardClick = useCallback((e: React.MouseEvent) => {
@@ -39,21 +42,49 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
     
     if (!project.is_coming_soon) {
       console.log('Card clicked for project:', project.title);
-      onClick(project);
+      
+      // Navigate to case study detail page for featured projects
+      if (featured) {
+        if (project.title.toLowerCase().includes("nonna")) {
+          navigate('/work/nonnas-table');
+        } else if (project.title.toLowerCase().includes("digital") && project.title.toLowerCase().includes("resume")) {
+          navigate('/work/digital-resume');
+        } else {
+          // For other featured projects, create slug from title
+          const slug = project.title.toLowerCase().replace(/\s+/g, '-');
+          navigate(`/work/${slug}`);
+        }
+      } else {
+        // For non-featured projects, use the original onClick behavior
+        onClick(project);
+      }
     }
-  }, [project, onClick]);
+  }, [project, onClick, featured, navigate]);
 
   const handleImageClick = useCallback(() => {
     if (!project.is_coming_soon) {
       console.log('Image clicked for project:', project.title);
-      onClick(project);
+      
+      // Same logic as card click
+      if (featured) {
+        if (project.title.toLowerCase().includes("nonna")) {
+          navigate('/work/nonnas-table');
+        } else if (project.title.toLowerCase().includes("digital") && project.title.toLowerCase().includes("resume")) {
+          navigate('/work/digital-resume');
+        } else {
+          const slug = project.title.toLowerCase().replace(/\s+/g, '-');
+          navigate(`/work/${slug}`);
+        }
+      } else {
+        onClick(project);
+      }
     }
-  }, [project, onClick]);
+  }, [project, onClick, featured, navigate]);
 
   return (
     <div 
       className={`bg-humble-charcoal rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer ${
-        featured ? 'transform hover:scale-[1.02]' : ''
+        featured ? 'transform hover:scale-[1.02] max-w-2xl' : ''
       }`}
       onClick={handleCardClick}
     >
@@ -67,7 +98,7 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
         onClick={handleImageClick}
       />
 
-      <div className={`${featured ? 'p-8' : 'p-6'}`}>
+      <div className={`${featured ? 'p-6' : 'p-6'}`}>
         <PortfolioCardContent
           categories={project.categories}
           title={project.title}

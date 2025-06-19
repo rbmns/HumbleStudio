@@ -513,11 +513,13 @@ export type Database = {
           categories: string[] | null
           created_at: string | null
           description: string | null
+          featured_image: string | null
           id: string
           is_coming_soon: boolean | null
           is_featured: boolean | null
           key_features: string[] | null
           link: string | null
+          main_image: string | null
           slug: string | null
           technologies: string[] | null
           title: string
@@ -528,11 +530,13 @@ export type Database = {
           categories?: string[] | null
           created_at?: string | null
           description?: string | null
+          featured_image?: string | null
           id?: string
           is_coming_soon?: boolean | null
           is_featured?: boolean | null
           key_features?: string[] | null
           link?: string | null
+          main_image?: string | null
           slug?: string | null
           technologies?: string[] | null
           title: string
@@ -543,11 +547,13 @@ export type Database = {
           categories?: string[] | null
           created_at?: string | null
           description?: string | null
+          featured_image?: string | null
           id?: string
           is_coming_soon?: boolean | null
           is_featured?: boolean | null
           key_features?: string[] | null
           link?: string | null
+          main_image?: string | null
           slug?: string | null
           technologies?: string[] | null
           title?: string
