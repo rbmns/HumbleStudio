@@ -14,6 +14,9 @@ interface PortfolioProject {
   technologies: string[];
   key_features: string[];
   build_time?: string;
+  featured_image?: string;
+  main_image?: string;
+  slug?: string;
   media: PortfolioMedia[];
 }
 
@@ -55,20 +58,6 @@ const SimplePortfolioGrid = React.memo(() => {
 
       console.log('Projects data received:', projectsData);
 
-      // Fetch media from projects_media table
-      console.log('Fetching media from projects_media table...');
-      const { data: mediaData, error: mediaError } = await supabase
-        .from('projects_media')
-        .select('*')
-        .order('display_order', { ascending: true });
-
-      if (mediaError) {
-        console.error('Error fetching media:', mediaError);
-        return;
-      }
-
-      console.log('Media data received:', mediaData);
-
       const toStringArray = (data: any): string[] => {
         if (Array.isArray(data)) {
           return data.filter(item => typeof item === 'string');
@@ -101,24 +90,34 @@ const SimplePortfolioGrid = React.memo(() => {
       console.log('Unique projects after deduplication:', uniqueProjects);
 
       const projectsWithMedia: PortfolioProject[] = uniqueProjects.map(project => {
-        const projectMedia = mediaData?.filter(media => media.project_id === project.id) || [];
+        // Create media array with the appropriate image
+        const imageUrl = project.is_featured ? project.featured_image : project.main_image;
+        const projectMedia = [];
         
-        // If no media exists for this project, create a placeholder
-        if (projectMedia.length === 0) {
+        if (imageUrl) {
+          projectMedia.push({
+            id: `main-${project.id}`,
+            media_url: imageUrl,
+            alt_text: `${project.title} preview`,
+            is_primary: true,
+            media_type: 'image',
+            device_type: 'desktop',
+            display_order: 1
+          });
+        } else {
+          // Fallback placeholder if no image
           projectMedia.push({
             id: `placeholder-${project.id}`,
-            project_id: project.id,
             media_url: `https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop`,
             alt_text: `${project.title} preview`,
             is_primary: true,
             media_type: 'image',
             device_type: 'desktop',
-            display_order: 1,
-            created_at: new Date().toISOString()
+            display_order: 1
           });
         }
         
-        console.log(`Project ${project.title} has ${projectMedia.length} media items`);
+        console.log(`Project ${project.title} has image: ${imageUrl}`);
         
         return {
           id: project.id,
@@ -131,15 +130,10 @@ const SimplePortfolioGrid = React.memo(() => {
           build_time: project.build_time || undefined,
           technologies: toStringArray(project.technologies),
           key_features: toStringArray(project.key_features),
-          media: projectMedia.map(media => ({
-            id: media.id,
-            media_url: media.media_url,
-            alt_text: media.alt_text || undefined,
-            is_primary: media.is_primary || false,
-            media_type: media.media_type || 'image',
-            device_type: media.device_type || undefined,
-            display_order: media.display_order || 0
-          }))
+          featured_image: project.featured_image,
+          main_image: project.main_image,
+          slug: project.slug,
+          media: projectMedia
         };
       });
 
@@ -248,17 +242,16 @@ const SimplePortfolioGrid = React.memo(() => {
 
       {filteredProjects.length > 0 ? (
         <div className="space-y-12">
-          {/* Featured Projects - Smaller and Centered */}
+          {/* Featured Projects */}
           {featuredProjects.length > 0 && (
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {featuredProjects.map((project) => (
-                <div key={project.id} className="w-full sm:w-auto">
-                  <SimplePortfolioCard
-                    project={project}
-                    onClick={handleProjectClick}
-                    featured={true}
-                  />
-                </div>
+                <SimplePortfolioCard
+                  key={project.id}
+                  project={project}
+                  onClick={handleProjectClick}
+                  featured={true}
+                />
               ))}
             </div>
           )}
