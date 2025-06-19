@@ -1,9 +1,8 @@
-
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import StarBackground from '../components/StarBackground';
-import { ArrowRight, Check, ChevronDown, User, Globe, Palette, FileText, Clock, Shield, Star, Zap } from 'lucide-react';
+import { ArrowRight, Check, ChevronDown, User, Globe, Palette, FileText, Clock, Shield, Star, Zap, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
@@ -78,10 +77,10 @@ const DigitalCV = () => {
               
               <div className="bg-humble-charcoal/30 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 text-center hover:border-humble-blue-500/50 transition-all duration-300">
                 <div className="w-16 h-16 rounded-full bg-humble-blue-500/20 flex items-center justify-center mx-auto mb-4">
-                  <Zap size={24} className="text-humble-blue-500" />
+                  <Target size={24} className="text-humble-blue-500" />
                 </div>
-                <h3 className="font-semibold text-white mb-3 text-lg">Always Updated</h3>
-                <p className="text-white/70">Easy to update and share instantly — no more outdated PDF versions</p>
+                <h3 className="font-semibold text-white mb-3 text-lg">Tailored to You</h3>
+                <p className="text-white/70">Customized for your target role and career aspirations — perfectly aligned with your goals</p>
               </div>
             </div>
           </div>
