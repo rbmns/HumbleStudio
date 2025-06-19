@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,7 +19,6 @@ import CaseStudy from "./pages/CaseStudy";
 import WebsitePackages from "./pages/WebsitePackages";
 import About from "./pages/About";
 import DigitalCV from "./pages/DigitalCV";
-import HireMePage from "./pages/HireMePage";
 
 const queryClient = new QueryClient();
 
@@ -31,8 +31,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
-          <Route path="/digital-cv" element={<DigitalCV />} />
-          <Route path="/hire-me-page" element={<HireMePage />} />
+          <Route path="/hire-me-page" element={<DigitalCV />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/thank-you" element={<ThankYou />} />
