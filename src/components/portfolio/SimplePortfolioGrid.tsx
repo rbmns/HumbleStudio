@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
@@ -68,6 +69,29 @@ const SimplePortfolioGrid = React.memo(() => {
       }
 
       console.log('Media data received:', mediaData);
+
+      // If no media data exists, let's create some placeholder entries
+      if (!mediaData || mediaData.length === 0) {
+        console.log('No media found, creating placeholder images...');
+        
+        const placeholderMedia = projectsData?.map((project, index) => ({
+          project_id: project.id,
+          media_url: `https://images.unsplash.com/photo-146092589591${index + 7}-afdab827c52f?w=800&h=600&fit=crop`,
+          alt_text: `${project.title} preview`,
+          is_primary: true,
+          media_type: 'image',
+          display_order: 1
+        }));
+
+        if (placeholderMedia && placeholderMedia.length > 0) {
+          const { data: insertedMedia } = await supabase
+            .from('projects_media')
+            .insert(placeholderMedia)
+            .select();
+          
+          console.log('Created placeholder media:', insertedMedia);
+        }
+      }
 
       const toStringArray = (data: any): string[] => {
         if (Array.isArray(data)) {
@@ -157,18 +181,31 @@ const SimplePortfolioGrid = React.memo(() => {
   const handleProjectClick = useCallback((project: PortfolioProject) => {
     console.log('handleProjectClick called for:', project.title);
     
-    // Check if this is Nonna's Table specifically for case study
-    if (project.title === "Nonna's Table" || project.title.toLowerCase().includes("nonna")) {
-      console.log('Navigating to Nonnas Table case study');
-      navigate('/case-studies/nonnas-table');
-    } else if (project.title === "Digital Resume Site" || project.title.toLowerCase().includes("digital")) {
-      console.log('Navigating to digital resume case study');
-      navigate('/case-studies/digital-resume');
+    // Create slug from project title
+    let slug = project.title.toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and hyphens
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+      .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+    
+    // Handle specific known projects
+    if (project.title.toLowerCase().includes("nonna")) {
+      slug = 'nonnas-table';
+    } else if (project.title.toLowerCase().includes("digital") && project.title.toLowerCase().includes("resume")) {
+      slug = 'digital-resume';
+    }
+    
+    console.log('Navigating to case study with slug:', slug);
+    
+    // Try case study route first
+    if (!project.is_coming_soon && (project.title.toLowerCase().includes("nonna") || project.title.toLowerCase().includes("digital"))) {
+      navigate(`/case-studies/${slug}`);
     } else if (project.link && !project.is_coming_soon) {
+      // Open external link if available
       console.log('Opening external link:', project.link);
       window.open(project.link, '_blank');
     } else {
-      console.log('No specific navigation defined for:', project.title);
+      console.log('No navigation available for:', project.title);
     }
   }, [navigate]);
 

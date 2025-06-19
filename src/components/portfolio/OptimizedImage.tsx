@@ -14,8 +14,13 @@ interface OptimizedImageProps {
 }
 
 const getOptimizedSrc = (originalSrc: string | undefined, width: number, height: number, quality: number) => {
-  if (!originalSrc || !originalSrc.includes('supabase.co/storage')) {
-    return originalSrc || '';
+  if (!originalSrc) {
+    // Return a placeholder image from Unsplash if no src provided
+    return `https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=${width}&h=${height}&fit=crop&q=${quality}`;
+  }
+  
+  if (!originalSrc.includes('supabase.co/storage')) {
+    return originalSrc;
   }
   
   try {
@@ -93,16 +98,6 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const lqipHeight = Math.round(20 * (height / width)) || 15;
   const lqipSrc = getOptimizedSrc(src, 20, lqipHeight, 20);
   const highResSrc = getOptimizedSrc(src, width, height, 80);
-
-  if (!src) {
-    return (
-        <div className={`relative overflow-hidden bg-humble-charcoal/30 ${className}`}>
-            <div className="absolute inset-0 bg-humble-charcoal/50 flex items-center justify-center">
-                <div className="text-white/40 text-sm">No Image</div>
-            </div>
-        </div>
-    );
-  }
 
   return (
     <div 
