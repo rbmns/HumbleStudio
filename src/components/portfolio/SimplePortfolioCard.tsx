@@ -39,6 +39,8 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
   const handleCaseStudyClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     
+    if (project.is_coming_soon) return;
+    
     // Always navigate to /work/slug format
     if (project.slug) {
       navigate(`/work/${project.slug}`);
@@ -70,19 +72,29 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
 
   return (
     <div 
-      className={`bg-humble-charcoal rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer ${
-        featured ? 'transform hover:scale-[1.02]' : ''
-      }`}
+      className={`bg-humble-charcoal rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group ${
+        project.is_coming_soon ? 'cursor-default' : 'cursor-pointer'
+      } ${featured ? 'transform hover:scale-[1.02]' : ''}`}
       onClick={handleCardClick}
     >
-      <OptimizedImage
-        src={primaryImage?.media_url || ''}
-        alt={primaryImage?.alt_text || project.title}
-        width={400}
-        height={300}
-        className="aspect-[4/3]"
-        priority={featured}
-      />
+      <div className="relative">
+        <OptimizedImage
+          src={primaryImage?.media_url || ''}
+          alt={primaryImage?.alt_text || project.title}
+          width={400}
+          height={300}
+          className={`aspect-[4/3] ${project.is_coming_soon ? 'blur-sm' : ''}`}
+          priority={featured}
+        />
+        
+        {project.is_coming_soon && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+            <div className="bg-humble-purple-500 text-white px-4 py-2 rounded-full font-semibold text-sm">
+              Coming Soon
+            </div>
+          </div>
+        )}
+      </div>
 
       <div className="p-6">
         <h3 className="text-xl font-bold mb-2 text-white">
@@ -101,14 +113,16 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
 
         {/* Action Buttons */}
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
-          {/* Case Study Link */}
-          <button
-            onClick={handleCaseStudyClick}
-            className="flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white rounded-lg font-medium hover:opacity-90 transition-opacity text-sm"
-          >
-            <Eye className="h-4 w-4" />
-            Case Study
-          </button>
+          {/* Case Study Link - Hidden for coming soon projects */}
+          {!project.is_coming_soon && (
+            <button
+              onClick={handleCaseStudyClick}
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white rounded-lg font-medium hover:opacity-90 transition-opacity text-sm"
+            >
+              <Eye className="h-4 w-4" />
+              Case Study
+            </button>
+          )}
 
           {/* Live Site Link */}
           {project.link && !project.is_coming_soon && (
@@ -121,10 +135,10 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
             </button>
           )}
 
-          {/* Coming Soon Badge */}
+          {/* Coming Soon Message */}
           {project.is_coming_soon && (
             <div className="flex items-center justify-center px-4 py-2 bg-humble-charcoal/50 text-white/60 rounded-lg text-sm border border-white/10">
-              Coming Soon
+              Project details coming soon...
             </div>
           )}
         </div>

@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from 'react';
 import { ExternalLink, Clock, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +14,7 @@ interface FeaturedProjectProps {
     technologies: string[];
     key_features: string[];
     slug?: string;
+    is_coming_soon?: boolean;
     media: Array<{
       id: string;
       media_url: string;
@@ -30,6 +32,8 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
   const navigate = useNavigate();
 
   const handleCardClick = () => {
+    if (project.is_coming_soon) return;
+    
     console.log('FeaturedProject handleCardClick for:', project.title, 'with slug:', project.slug);
     
     // Always navigate to /work/slug format
@@ -105,19 +109,31 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
           </div>
           
           {project.media[currentImageIndex] && (
-            <OptimizedImage
-              src={project.media[currentImageIndex].media_url}
-              alt={project.media[currentImageIndex].alt_text || project.title}
-              width={800}
-              height={600}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 select-none"
-              priority
-              onClick={handleImageClick}
-            />
+            <div className="relative w-full h-full">
+              <OptimizedImage
+                src={project.media[currentImageIndex].media_url}
+                alt={project.media[currentImageIndex].alt_text || project.title}
+                width={800}
+                height={600}
+                className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 select-none ${
+                  project.is_coming_soon ? 'blur-sm' : ''
+                }`}
+                priority
+                onClick={project.is_coming_soon ? undefined : handleImageClick}
+              />
+              
+              {project.is_coming_soon && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                  <div className="bg-humble-purple-500 text-white px-6 py-3 rounded-full font-semibold text-lg">
+                    Coming Soon
+                  </div>
+                </div>
+              )}
+            </div>
           )}
 
-          {/* Navigation overlay - hidden on mobile */}
-          {project.media.length > 1 && (
+          {/* Navigation overlay - hidden on mobile and for coming soon projects */}
+          {project.media.length > 1 && !project.is_coming_soon && (
             <div className="absolute inset-0 items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:flex">
               <button
                 onClick={prevImage}
@@ -136,27 +152,27 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
             </div>
           )}
 
-          {/* Image indicators - optimized for mobile */}
-          {project.media.length > 1 && (
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2">
-              {project.media.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleIndicatorClick(index)}
-                  className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-colors touch-manipulation ${
-                    index === currentImageIndex ? 'bg-white' : 'bg-white/50'
-                  }`}
-                  aria-label={`Go to image ${index + 1}`}
-                />
-              ))}
-            </div>
-          )}
-
-          {project.media.length > 1 && (
-            <div className="absolute top-4 right-4 bg-black/50 text-white px-2 py-1 rounded text-sm">
-              {currentImageIndex + 1} / {project.media.length}
-              <span className="sm:hidden ml-1 text-xs">• Swipe</span>
-            </div>
+          {/* Image indicators - optimized for mobile and hidden for coming soon */}
+          {project.media.length > 1 && !project.is_coming_soon && (
+            <>
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2">
+                {project.media.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleIndicatorClick(index)}
+                    className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-colors touch-manipulation ${
+                      index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                    }`}
+                    aria-label={`Go to image ${index + 1}`}
+                  />
+                ))}
+              </div>
+              
+              <div className="absolute top-4 right-4 bg-black/50 text-white px-2 py-1 rounded text-sm">
+                {currentImageIndex + 1} / {project.media.length}
+                <span className="sm:hidden ml-1 text-xs">• Swipe</span>
+              </div>
+            </>
           )}
         </div>
 
@@ -170,7 +186,7 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
             {project.description}
           </p>
 
-          {project.build_time && (
+          {project.build_time && !project.is_coming_soon && (
             <div className="flex items-center gap-2 mb-4 text-humble-blue-400">
               <Clock className="h-4 w-4" />
               <span className="text-sm">Built in {project.build_time}</span>
@@ -179,24 +195,32 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
 
           {/* Actions */}
           <div className="flex flex-wrap items-center gap-4 pt-2">
-            <button
-              onClick={handleCardClick}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-full font-medium text-sm hover:opacity-90 transition-opacity"
-            >
-              Case Study
-              <ArrowRight className="h-4 w-4" />
-            </button>
-            
-            {project.link && (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-white/80 font-medium text-sm hover:text-white transition-colors"
-              >
-                Live Site
-                <ExternalLink className="h-4 w-4" />
-              </a>
+            {!project.is_coming_soon ? (
+              <>
+                <button
+                  onClick={handleCardClick}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-full font-medium text-sm hover:opacity-90 transition-opacity"
+                >
+                  Case Study
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+                
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-white/80 font-medium text-sm hover:text-white transition-colors"
+                  >
+                    Live Site
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                )}
+              </>
+            ) : (
+              <div className="text-white/60 font-medium text-sm">
+                Project details coming soon...
+              </div>
             )}
           </div>
         </div>
