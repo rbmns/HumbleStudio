@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ExternalLink, Mail, Instagram } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +24,7 @@ const LinkInBio = () => {
   };
 
   const handleDigitalCVCaseStudy = () => {
-    navigate('/work/digital-resume');
+    navigate('/work/digital-cv');
   };
 
   const handleShenTaxiCaseStudy = () => {

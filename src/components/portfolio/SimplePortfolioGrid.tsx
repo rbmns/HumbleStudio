@@ -111,7 +111,7 @@ const SimplePortfolioGrid = React.memo(() => {
           });
         }
         
-        console.log(`Project ${project.title} has image: ${imageUrl}`);
+        console.log(`Project ${project.title} has slug: ${project.slug} and image: ${imageUrl}`);
         
         return {
           id: project.id,
@@ -132,7 +132,7 @@ const SimplePortfolioGrid = React.memo(() => {
         };
       });
 
-      console.log('Final processed projects:', projectsWithMedia);
+      console.log('Final processed projects with slugs:', projectsWithMedia.map(p => ({ title: p.title, slug: p.slug })));
       setProjects(projectsWithMedia);
     } catch (error) {
       console.error('Error in fetchProjects:', error);
@@ -154,7 +154,7 @@ const SimplePortfolioGrid = React.memo(() => {
   }, [projects]);
 
   const handleProjectClick = useCallback((project: PortfolioProject) => {
-    console.log('handleProjectClick called for:', project.title);
+    console.log('handleProjectClick called for:', project.title, 'with slug:', project.slug);
     
     // Always navigate to /work/slug format
     if (project.slug) {
