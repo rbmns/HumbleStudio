@@ -12,6 +12,7 @@ interface FeaturedProjectProps {
     build_time?: string;
     technologies: string[];
     key_features: string[];
+    slug?: string;
     media: Array<{
       id: string;
       media_url: string;
@@ -29,23 +30,18 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    // Handle special case for surf instructor
-    if (project.id === 'surf-instructor') {
-      navigate('/case-studies/surf-instructor');
-      return;
-    }
-
-    // Navigate to case study page based on project title
-    let slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+    console.log('FeaturedProject handleCardClick for:', project.title, 'with slug:', project.slug);
     
-    // Handle specific known case studies
-    if (project.title.toLowerCase().includes("nonna's table") || project.title.toLowerCase().includes("nonnas table")) {
-      slug = 'nonnas-table';
-    } else if (project.title.toLowerCase().includes("digital") && (project.title.toLowerCase().includes("cv") || project.title.toLowerCase().includes("resume"))) {
-      slug = 'digital-cv';
+    // Always navigate to /work/slug format
+    if (project.slug) {
+      console.log(`Navigating to /work/${project.slug}`);
+      navigate(`/work/${project.slug}`);
+    } else {
+      // Fallback slug generation
+      const slug = project.title.toLowerCase().replace(/\s+/g, '-');
+      console.log(`Navigating to /work/${slug} (generated slug)`);
+      navigate(`/work/${slug}`);
     }
-    
-    navigate(`/work/${slug}`);
   };
 
   const nextImage = useCallback(() => {
