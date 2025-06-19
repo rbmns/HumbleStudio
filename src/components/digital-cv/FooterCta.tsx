@@ -16,7 +16,7 @@ const FooterCta = () => {
         </p>
         
         <Link 
-          to="/hire-me-page"
+          to="/hire-me-page/start"
           className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all duration-300 text-lg hover:scale-105"
           data-gtm="hire-me-page-footer-cta"
         >

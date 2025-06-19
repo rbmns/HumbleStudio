@@ -19,6 +19,8 @@ import CaseStudy from "./pages/CaseStudy";
 import WebsitePackages from "./pages/WebsitePackages";
 import About from "./pages/About";
 import DigitalCV from "./pages/DigitalCV";
+import HireMePage from "./pages/HireMePage";
+import HireMePageStart from "./pages/HireMePageStart";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +34,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/hire-me-page" element={<DigitalCV />} />
+          <Route path="/hire-me-page/start" element={<HireMePageStart />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/thank-you" element={<ThankYou />} />

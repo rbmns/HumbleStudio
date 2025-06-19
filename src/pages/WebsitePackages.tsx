@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight, Check, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -70,7 +69,7 @@ const WebsitePackages = () => {
 
               <div className="text-center">
                 <Link 
-                  to="/hire-me-page"
+                  to="/hire-me-page/start"
                   className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-all duration-300"
                   data-gtm="website-packages-hire-me-i-want-this"
                 >
