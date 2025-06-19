@@ -8,7 +8,6 @@ import WhyChooseSection from '../components/digital-cv/WhyChooseSection';
 import WhatsIncludedSection from '../components/digital-cv/WhatsIncludedSection';
 import PricingSection from '../components/digital-cv/PricingSection';
 import WhatYouProvideSection from '../components/digital-cv/WhatYouProvideSection';
-import DomainHostingSection from '../components/digital-cv/DomainHostingSection';
 import AboutSection from '../components/digital-cv/AboutSection';
 import FooterCta from '../components/digital-cv/FooterCta';
 
@@ -25,7 +24,6 @@ const DigitalCV = () => {
           <WhatsIncludedSection />
           <PricingSection />
           <WhatYouProvideSection />
-          <DomainHostingSection />
           <AboutSection />
           <FooterCta />
         </div>
