@@ -39,13 +39,8 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
   const handleCaseStudyClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     
-    if (project.title.toLowerCase().includes("nonna")) {
-      navigate('/work/nonnas-table');
-    } else if (project.title.toLowerCase().includes("digital") && project.title.toLowerCase().includes("resume")) {
-      navigate('/work/digital-resume');
-    } else if (project.slug === 'surf-instructor') {
-      navigate('/case-studies/surf-instructor');
-    } else if (project.slug) {
+    // Always navigate to /work/slug format
+    if (project.slug) {
       navigate(`/work/${project.slug}`);
     } else {
       // Fallback slug generation

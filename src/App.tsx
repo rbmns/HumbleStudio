@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -24,7 +25,6 @@ import HireMePage from "./pages/HireMePage";
 import HireMePageStart from "./pages/HireMePageStart";
 import HireMePageThanksStep2 from "./pages/HireMePageThanksStep2";
 import HireMePageIntake from "./pages/HireMePageIntake";
-import SurfInstructorCaseStudy from "./pages/case-study/SurfInstructorCaseStudy";
 
 const queryClient = new QueryClient();
 
@@ -76,8 +76,6 @@ const App = () => {
             <Route path="/brand-discovery-form" element={<BrandDiscoveryForm />} />
             <Route path="/work" element={<Work />} />
             <Route path="/work/:slug" element={<CaseStudy />} />
-            <Route path="/case-studies/:slug" element={<CaseStudy />} />
-            <Route path="/case-studies/surf-instructor" element={<SurfInstructorCaseStudy />} />
             <Route path="/link-in-bio" element={<LinkInBio />} />
             <Route path="/website-packages" element={<WebsitePackages />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

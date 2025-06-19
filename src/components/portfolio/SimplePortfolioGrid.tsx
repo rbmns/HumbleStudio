@@ -32,13 +32,6 @@ interface PortfolioMedia {
   display_order: number;
 }
 
-const categories = [
-  { id: 'all', label: 'All Projects' },
-  { id: 'web', label: 'Web Design' },
-  { id: 'branding', label: 'Branding' },
-  { id: 'ecommerce', label: 'E-Commerce' },
-];
-
 const SimplePortfolioGrid = React.memo(() => {
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [loading, setLoading] = useState(true);
@@ -163,31 +156,15 @@ const SimplePortfolioGrid = React.memo(() => {
   const handleProjectClick = useCallback((project: PortfolioProject) => {
     console.log('handleProjectClick called for:', project.title);
     
-    // Handle specific case studies
-    if (project.title.toLowerCase().includes("nonna")) {
-      console.log('Navigating to Nonnas Table case study');
-      navigate('/work/nonnas-table');
-      return;
-    } 
-    
-    if (project.title.toLowerCase().includes("digital") && project.title.toLowerCase().includes("resume")) {
-      console.log('Navigating to Digital Resume case study');
-      navigate('/work/digital-resume');
-      return;
-    }
-
-    if (project.slug === 'surf-instructor') {
-      console.log('Navigating to Surf Instructor case study');
-      navigate('/case-studies/surf-instructor');
-      return;
-    }
-    
-    // For other projects, open external link if available
-    if (project.link && !project.is_coming_soon) {
-      console.log('Opening external link:', project.link);
-      window.open(project.link, '_blank');
+    // Always navigate to /work/slug format
+    if (project.slug) {
+      console.log(`Navigating to /work/${project.slug}`);
+      navigate(`/work/${project.slug}`);
     } else {
-      console.log('No navigation available for:', project.title);
+      // Fallback slug generation
+      const slug = project.title.toLowerCase().replace(/\s+/g, '-');
+      console.log(`Navigating to /work/${slug} (generated slug)`);
+      navigate(`/work/${slug}`);
     }
   }, [navigate]);
 
