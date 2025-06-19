@@ -44,7 +44,7 @@ const PortfolioGridOptimized: React.FC = () => {
       }
 
       const { data: mediaData, error: mediaError } = await supabase
-        .from('projects_detail')
+        .from('projects_media')
         .select('*')
         .order('display_order', { ascending: true });
 
@@ -72,9 +72,8 @@ const PortfolioGridOptimized: React.FC = () => {
         id: project.id,
         title: project.title || '',
         description: project.description || '',
-        categories: project.category ? 
-          (Array.isArray(project.category) ? project.category : [project.category]) : 
-          [],
+        categories: Array.isArray(project.categories) ? project.categories : 
+          (project.categories ? [project.categories] : []),
         link: project.link || undefined,
         is_featured: project.is_featured || false,
         is_coming_soon: project.is_coming_soon || false,

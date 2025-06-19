@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import FeaturedProject from './FeaturedProject';
@@ -7,7 +8,7 @@ interface PortfolioProject {
   id: string;
   title: string;
   description: string;
-  category: string;
+  categories: string[];
   link?: string;
   is_featured: boolean;
   is_coming_soon: boolean;
@@ -63,7 +64,7 @@ const PortfolioGrid = React.memo(() => {
       }
 
       const { data: mediaData, error: mediaError } = await supabase
-        .from('projects_detail')
+        .from('projects_media')
         .select('*')
         .order('display_order', { ascending: true });
 
@@ -91,7 +92,8 @@ const PortfolioGrid = React.memo(() => {
         id: project.id,
         title: project.title || '',
         description: project.description || '',
-        category: project.category || '',
+        categories: Array.isArray(project.categories) ? project.categories : 
+          (project.categories ? [project.categories] : []),
         link: project.link || undefined,
         is_featured: project.is_featured || false,
         is_coming_soon: project.is_coming_soon || false,
@@ -126,7 +128,7 @@ const PortfolioGrid = React.memo(() => {
   const filteredProjects = useMemo(() => {
     return activeCategory === 'all' 
       ? projects 
-      : projects.filter(project => project.category === activeCategory);
+      : projects.filter(project => project.categories.includes(activeCategory));
   }, [projects, activeCategory]);
 
   // Memoize featured and regular projects

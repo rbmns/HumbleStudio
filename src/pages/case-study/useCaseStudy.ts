@@ -51,14 +51,15 @@ export function useCaseStudy(slug?: string) {
     try {
       document.title = `${slug.replace(/-/g, ' ')} | HumbleStudio`;
 
-      // Use projects table instead of case_studies table
+      // Use projects table
       const { data: projectData, error: projectError } = await supabase
         .from('projects')
         .select('*')
-        .eq('title', slug.replace(/-/g, ' '))
+        .eq('slug', slug)
         .maybeSingle();
 
       if (projectError) {
+        console.error('Error fetching project:', projectError);
         setError('Failed to fetch case study data');
         setLoading(false);
         return;
@@ -70,9 +71,9 @@ export function useCaseStudy(slug?: string) {
         return;
       }
 
-      // Use projects_detail table instead of case_study_media table
+      // Use projects_media table
       const { data: fetchedMedia, error: mediaError } = await supabase
-        .from('projects_detail')
+        .from('projects_media')
         .select('*')
         .eq('project_id', projectData.id)
         .order('display_order', { ascending: true });
@@ -121,6 +122,7 @@ export function useCaseStudy(slug?: string) {
       setCaseStudy(processedCaseStudy);
       setLoading(false);
     } catch (error) {
+      console.error('Error in fetchCaseStudy:', error);
       setError('An unexpected error occurred');
       setLoading(false);
     }
