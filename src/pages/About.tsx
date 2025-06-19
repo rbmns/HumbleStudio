@@ -114,7 +114,7 @@ const About = () => {
           {/* LinkedIn Link */}
           <div className="max-w-4xl mx-auto text-center">
             <a 
-              href="https://linkedin.com/in/roosjebiemans" 
+              href="https://www.linkedin.com/in/rosiebiemans/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium transition-all duration-300 backdrop-blur-sm hover:scale-105"

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Clock, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +10,7 @@ interface Project {
   id: string;
   slug?: string;
   title: string;
+  subtitle?: string;
   description?: string;
   categories?: string[];
   main_image?: string;
@@ -47,6 +49,7 @@ const Work = () => {
           id: project.id,
           slug: project.slug || project.title.toLowerCase().replace(/\s+/g, '-'),
           title: project.title,
+          subtitle: project.subtitle,
           description: project.description,
           categories: project.categories || [],
           main_image: project.main_image,
@@ -178,8 +181,8 @@ const Work = () => {
                     
                     {/* Category & Build Time */}
                     <div className="flex items-center gap-4 text-sm">
-                      <span className={`px-3 py-1 rounded-full bg-gradient-to-r ${getGradient(project.title)} text-white font-medium`}>
-                        {getCategory(project.categories || [])}
+                      <span className={`px-3 py-1 rounded-full bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white font-medium`}>
+                        {project.categories?.[0] || 'Web Design'}
                       </span>
                       {project.build_time && !project.is_coming_soon && (
                         <div className="flex items-center gap-2 text-white/60">
@@ -189,22 +192,24 @@ const Work = () => {
                       )}
                     </div>
 
-                    {/* Title */}
+                    {/* Title and Subtitle */}
                     <div>
                       <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
                         {project.title}
                       </h2>
-                      {project.description && (
-                        <p className="text-white/60 text-lg">
-                          {project.description}
+                      {project.subtitle && (
+                        <p className="text-white/70 text-lg mb-3">
+                          {project.subtitle}
                         </p>
                       )}
                     </div>
 
                     {/* Description */}
-                    <p className="text-white/80 text-lg leading-relaxed">
-                      {project.description}
-                    </p>
+                    {project.description && (
+                      <p className="text-white/80 text-lg leading-relaxed">
+                        {project.description}
+                      </p>
+                    )}
 
                     {/* Actions */}
                     <div className="flex flex-col sm:flex-row gap-4">

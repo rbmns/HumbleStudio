@@ -102,14 +102,10 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
         </h3>
         
         {project.subtitle && (
-          <p className="text-white/70 text-sm mb-3">
+          <p className="text-white/80 text-sm leading-relaxed mb-6">
             {project.subtitle}
           </p>
         )}
-        
-        <p className="text-white/80 text-sm leading-relaxed mb-6">
-          {project.description}
-        </p>
 
         {/* Action Buttons */}
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
