@@ -25,6 +25,29 @@ const Hero = () => {
     }
   };
 
+  const handleLetsTalkClick = () => {
+    // GTM tracking
+    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+      (window as any).dataLayer.push({
+        event: 'button_click',
+        button_name: 'lets_talk_hero',
+        page_location: window.location.href
+      });
+    }
+  };
+
+  const handleHowItWorksClick = () => {
+    // GTM tracking
+    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+      (window as any).dataLayer.push({
+        event: 'button_click',
+        button_name: 'how_it_works_hero',
+        page_location: window.location.href
+      });
+    }
+    scrollToSection('how-it-works');
+  };
+
   return (
     <div ref={heroRef} className="relative min-h-screen flex items-center justify-center px-6 sm:px-4 overflow-hidden">
       {/* SparklesCore as background */}
@@ -65,13 +88,14 @@ const Hero = () => {
             href="https://humblestudio.ai/inquiry"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={handleLetsTalkClick}
             className="max-w-[240px] w-auto sm:w-auto px-8 py-2.5 sm:py-3 rounded-full button-gradient text-white font-medium text-lg flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300 shadow-lg shadow-humble-pink-500/20"
           >
            Let's Talk
             <ArrowRight size={18} />
           </a>
           <button 
-            onClick={() => scrollToSection('how-it-works')}
+            onClick={handleHowItWorksClick}
             className="max-w-[240px] w-auto sm:w-auto px-8 py-2.5 sm:py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium text-lg transition-all duration-300 backdrop-blur-sm"
           >
             How It Works

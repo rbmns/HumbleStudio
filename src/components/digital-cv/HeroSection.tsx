@@ -4,6 +4,28 @@ import { ArrowRight, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
+  const handleGetHireMePageClick = () => {
+    // GTM tracking
+    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+      (window as any).dataLayer.push({
+        event: 'button_click',
+        button_name: 'get_hire_me_page_hero',
+        page_location: window.location.href
+      });
+    }
+  };
+
+  const handleSeeExampleClick = () => {
+    // GTM tracking
+    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+      (window as any).dataLayer.push({
+        event: 'button_click',
+        button_name: 'see_example_hero',
+        page_location: window.location.href
+      });
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto text-center mb-24 px-4 py-12 md:py-20">
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 md:mb-12 text-white leading-tight">
@@ -17,6 +39,7 @@ const HeroSection = () => {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8 px-4">
         <Link 
           to="/hire-me-page/start"
+          onClick={handleGetHireMePageClick}
           className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all duration-300 text-lg hover:scale-105"
           data-gtm="hire-me-page-hero-cta"
         >
@@ -28,6 +51,7 @@ const HeroSection = () => {
           href="https://rosiebiemans.com/"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={handleSeeExampleClick}
           className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-white/20 text-white hover:border-humble-pink-500/50 hover:bg-humble-pink-500/10 transition-all duration-300"
           data-gtm="hire-me-page-example-link"
         >

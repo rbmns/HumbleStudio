@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
@@ -32,6 +31,29 @@ const Navbar = () => {
     }
   };
 
+  const handleContactClick = () => {
+    // GTM tracking
+    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+      (window as any).dataLayer.push({
+        event: 'button_click',
+        button_name: 'contact_navbar',
+        page_location: window.location.href
+      });
+    }
+    scrollToSection('contact');
+  };
+
+  const handleNavClick = (navItem: string) => {
+    // GTM tracking
+    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+      (window as any).dataLayer.push({
+        event: 'nav_click',
+        nav_item: navItem,
+        page_location: window.location.href
+      });
+    }
+  };
+
   return (
     <nav 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
@@ -39,7 +61,7 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <Link to="/" className="flex items-center">
+        <Link to="/" onClick={() => handleNavClick('home_logo')} className="flex items-center">
           <h1 className="text-xl md:text-2xl font-bold">
             <span className="text-white">Humble</span>
             <span className="bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">Studio</span>
@@ -48,12 +70,12 @@ const Navbar = () => {
         
         {/* Desktop Menu - hidden on screens smaller than lg */}
         <div className="hidden lg:flex space-x-8 items-center">
-          <Link to="/" className="text-white/80 hover:text-white transition-colors">Home</Link>
-          <Link to="/about" className="text-white/80 hover:text-white transition-colors">About</Link>
-          <Link to="/work" className="text-white/80 hover:text-white transition-colors">Work</Link>
-          <Link to="/inquiry" className="text-white/80 hover:text-white transition-colors">Inquiry</Link>
+          <Link to="/" onClick={() => handleNavClick('home')} className="text-white/80 hover:text-white transition-colors">Home</Link>
+          <Link to="/about" onClick={() => handleNavClick('about')} className="text-white/80 hover:text-white transition-colors">About</Link>
+          <Link to="/work" onClick={() => handleNavClick('work')} className="text-white/80 hover:text-white transition-colors">Work</Link>
+          <Link to="/inquiry" onClick={() => handleNavClick('inquiry')} className="text-white/80 hover:text-white transition-colors">Inquiry</Link>
           <button 
-            onClick={() => scrollToSection('contact')} 
+            onClick={handleContactClick}
             className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all"
           >
             Contact
@@ -74,12 +96,12 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 w-full bg-humble-charcoal/95 backdrop-blur-md shadow-lg">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            <Link to="/" className="text-white/80 hover:text-white transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
-            <Link to="/about" className="text-white/80 hover:text-white transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
-            <Link to="/work" className="text-white/80 hover:text-white transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>Work</Link>
-            <Link to="/inquiry" className="text-white/80 hover:text-white transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>Inquiry</Link>
+            <Link to="/" onClick={() => {handleNavClick('home_mobile'); setIsMobileMenuOpen(false);}} className="text-white/80 hover:text-white transition-colors py-2">Home</Link>
+            <Link to="/about" onClick={() => {handleNavClick('about_mobile'); setIsMobileMenuOpen(false);}} className="text-white/80 hover:text-white transition-colors py-2">About</Link>
+            <Link to="/work" onClick={() => {handleNavClick('work_mobile'); setIsMobileMenuOpen(false);}} className="text-white/80 hover:text-white transition-colors py-2">Work</Link>
+            <Link to="/inquiry" onClick={() => {handleNavClick('inquiry_mobile'); setIsMobileMenuOpen(false);}} className="text-white/80 hover:text-white transition-colors py-2">Inquiry</Link>
             <button 
-              onClick={() => scrollToSection('contact')} 
+              onClick={handleContactClick}
               className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all text-center"
             >
               Contact
