@@ -23,7 +23,7 @@ const Hero: React.FC<Props> = ({
   live_site_url,
 }) => {
   return (
-    <section className="pt-8 pb-24 relative">
+    <section className="pt-24 pb-24 relative">
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
