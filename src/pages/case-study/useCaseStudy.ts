@@ -49,13 +49,26 @@ export function useCaseStudy(slug?: string) {
     }
 
     try {
-      document.title = `${slug.replace(/-/g, ' ')} | HumbleStudio`;
+      console.log('Fetching case study for slug:', slug);
+
+      // Map slug to project title
+      let projectTitle = '';
+      if (slug === 'nonnas-table') {
+        projectTitle = "Nonna's Table";
+      } else if (slug === 'digital-resume') {
+        projectTitle = 'Digital Resume Site';
+      } else {
+        // Try to convert slug to title format
+        projectTitle = slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      }
+
+      console.log('Looking for project with title:', projectTitle);
 
       // Use projects table
       const { data: projectData, error: projectError } = await supabase
         .from('projects')
         .select('*')
-        .eq('title', slug.replace(/-/g, ' '))
+        .eq('title', projectTitle)
         .maybeSingle();
 
       if (projectError) {
@@ -66,12 +79,15 @@ export function useCaseStudy(slug?: string) {
       }
 
       if (!projectData) {
+        console.log('No project found with title:', projectTitle);
         setError('Case study not found');
         setLoading(false);
         return;
       }
 
-      // Use projects_media table (the correct table name)
+      console.log('Found project:', projectData);
+
+      // Fetch media from projects_media table
       const { data: fetchedMedia, error: mediaError } = await supabase
         .from('projects_media')
         .select('*')
@@ -88,6 +104,7 @@ export function useCaseStudy(slug?: string) {
           display_order: item.display_order || 0
         }));
         setMedia(processedMedia);
+        console.log('Processed media:', processedMedia);
       }
 
       // Map project data to case study format
@@ -101,11 +118,11 @@ export function useCaseStudy(slug?: string) {
         client_location: '', // Not in projects table
         hero_image_url: fetchedMedia?.[0]?.media_url || '',
         challenge_heading: 'The Challenge',
-        challenge_content: 'Challenge content based on project requirements.',
+        challenge_content: 'Understanding the unique requirements and creating a solution that meets all expectations.',
         solution_heading: 'The Solution',
         solution_content: projectData.description || '',
         impact_heading: 'Results & Impact',
-        impact_content: 'The project delivered excellent results.',
+        impact_content: 'The project delivered excellent results and exceeded expectations.',
         key_features: Array.isArray(projectData.key_features)
           ? projectData.key_features.filter((item: unknown): item is string => typeof item === "string")
           : [],
@@ -120,6 +137,7 @@ export function useCaseStudy(slug?: string) {
       };
       
       setCaseStudy(processedCaseStudy);
+      console.log('Case study processed:', processedCaseStudy);
       setLoading(false);
     } catch (error) {
       console.error('Error in fetchCaseStudy:', error);

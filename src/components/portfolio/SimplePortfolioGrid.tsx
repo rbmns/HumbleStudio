@@ -42,6 +42,7 @@ const SimplePortfolioGrid = React.memo(() => {
 
   const fetchProjects = useCallback(async () => {
     try {
+      console.log('Fetching projects from projects table...');
       const { data: projectsData, error: projectsError } = await supabase
         .from('projects')
         .select('*')
@@ -52,7 +53,10 @@ const SimplePortfolioGrid = React.memo(() => {
         return;
       }
 
-      // Use projects_media table (the correct table name)
+      console.log('Projects data received:', projectsData);
+
+      // Fetch media from projects_media table
+      console.log('Fetching media from projects_media table...');
       const { data: mediaData, error: mediaError } = await supabase
         .from('projects_media')
         .select('*')
@@ -62,6 +66,8 @@ const SimplePortfolioGrid = React.memo(() => {
         console.error('Error fetching media:', mediaError);
         return;
       }
+
+      console.log('Media data received:', mediaData);
 
       const toStringArray = (data: any): string[] => {
         if (Array.isArray(data)) {
@@ -78,29 +84,50 @@ const SimplePortfolioGrid = React.memo(() => {
         return [];
       };
 
-      const projectsWithMedia: PortfolioProject[] = projectsData?.map(project => ({
-        id: project.id,
-        title: project.title || '',
-        description: project.description || '',
-        // Use categories field (which is an array) instead of category
-        categories: project.categories || [],
-        link: project.link || undefined,
-        is_featured: project.is_featured || false,
-        is_coming_soon: project.is_coming_soon || false,
-        build_time: project.build_time || undefined,
-        technologies: toStringArray(project.technologies),
-        key_features: toStringArray(project.key_features),
-        media: mediaData?.filter(media => media.project_id === project.id).map(media => ({
-          id: media.id,
-          media_url: media.media_url,
-          alt_text: media.alt_text || undefined,
-          is_primary: media.is_primary || false,
-          media_type: media.media_type || 'image',
-          device_type: media.device_type || undefined,
-          display_order: media.display_order || 0
-        })) || []
-      })) || [];
+      // Remove duplicates by grouping by title and keeping the most recent one
+      const uniqueProjects = projectsData?.reduce((acc: any[], project: any) => {
+        const existingIndex = acc.findIndex(p => p.title === project.title);
+        if (existingIndex >= 0) {
+          // Keep the more recent one
+          if (new Date(project.created_at) > new Date(acc[existingIndex].created_at)) {
+            acc[existingIndex] = project;
+          }
+        } else {
+          acc.push(project);
+        }
+        return acc;
+      }, []) || [];
 
+      console.log('Unique projects after deduplication:', uniqueProjects);
+
+      const projectsWithMedia: PortfolioProject[] = uniqueProjects.map(project => {
+        const projectMedia = mediaData?.filter(media => media.project_id === project.id) || [];
+        console.log(`Project ${project.title} has ${projectMedia.length} media items`);
+        
+        return {
+          id: project.id,
+          title: project.title || '',
+          description: project.description || '',
+          categories: project.categories || [],
+          link: project.link || undefined,
+          is_featured: project.is_featured || false,
+          is_coming_soon: project.is_coming_soon || false,
+          build_time: project.build_time || undefined,
+          technologies: toStringArray(project.technologies),
+          key_features: toStringArray(project.key_features),
+          media: projectMedia.map(media => ({
+            id: media.id,
+            media_url: media.media_url,
+            alt_text: media.alt_text || undefined,
+            is_primary: media.is_primary || false,
+            media_type: media.media_type || 'image',
+            device_type: media.device_type || undefined,
+            display_order: media.display_order || 0
+          }))
+        };
+      });
+
+      console.log('Final processed projects:', projectsWithMedia);
       setProjects(projectsWithMedia);
     } catch (error) {
       console.error('Error in fetchProjects:', error);
@@ -134,12 +161,14 @@ const SimplePortfolioGrid = React.memo(() => {
     if (project.title === "Nonna's Table" || project.title.toLowerCase().includes("nonna")) {
       console.log('Navigating to Nonnas Table case study');
       navigate('/case-studies/nonnas-table');
-    } else if (project.title === "Surf Coach E. - Surf Instructor" || project.title.toLowerCase().includes("surf")) {
-      console.log('Navigating to Surf Instructor case study');
-      navigate('/case-studies/surf-instructor');
+    } else if (project.title === "Digital Resume Site" || project.title.toLowerCase().includes("digital")) {
+      console.log('Navigating to digital resume case study');
+      navigate('/case-studies/digital-resume');
     } else if (project.link && !project.is_coming_soon) {
       console.log('Opening external link:', project.link);
       window.open(project.link, '_blank');
+    } else {
+      console.log('No specific navigation defined for:', project.title);
     }
   }, [navigate]);
 
