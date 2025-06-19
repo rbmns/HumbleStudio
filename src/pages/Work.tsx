@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Clock } from 'lucide-react';
+import { ArrowRight, Clock, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import StarBackground from '@/components/StarBackground';
@@ -12,12 +12,10 @@ interface Project {
   title: string;
   description?: string;
   categories?: string[];
-  hero_image_url?: string;
-  build_time?: string;
-  technologies?: string[];
-  is_featured: boolean;
-  featured_image?: string;
   main_image?: string;
+  build_time?: string;
+  link?: string;
+  created_at: string;
 }
 
 const Work = () => {
@@ -31,11 +29,10 @@ const Work = () => {
 
   const fetchProjects = async () => {
     try {
-      console.log('Fetching projects from projects table...');
+      console.log('Fetching all projects from projects table...');
       const { data: projectsData, error: projectsError } = await supabase
         .from('projects')
         .select('*')
-        .eq('is_featured', true)
         .order('created_at', { ascending: false });
 
       if (projectsError) {
@@ -50,14 +47,10 @@ const Work = () => {
           title: project.title,
           description: project.description,
           categories: project.categories || [],
-          hero_image_url: project.is_featured ? project.featured_image : project.main_image,
+          main_image: project.main_image,
           build_time: project.build_time,
-          technologies: Array.isArray(project.technologies) 
-            ? project.technologies.filter((item: unknown): item is string => typeof item === 'string')
-            : [],
-          is_featured: project.is_featured,
-          featured_image: project.featured_image,
-          main_image: project.main_image
+          link: project.link,
+          created_at: project.created_at
         })) || [];
         
         setProjects(processedProjects);
@@ -101,7 +94,7 @@ const Work = () => {
                 Work
               </h1>
               <p className="text-xl text-white/80 font-light max-w-3xl mx-auto">
-                Loading our case studies...
+                Loading our projects...
               </p>
             </div>
           </div>
@@ -124,8 +117,7 @@ const Work = () => {
               Work
             </h1>
             <p className="text-xl text-white/80 font-light max-w-3xl mx-auto">
-              Deep dives into our most successful projects, showcasing the strategy, 
-              design process, and results that drive real business impact.
+              Our latest projects showcasing innovative web solutions and creative design.
             </p>
           </div>
 
@@ -141,7 +133,7 @@ const Work = () => {
                   <div className={`relative group ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                     <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-humble-charcoal/30 backdrop-blur-sm border border-white/10">
                       <img 
-                        src={project.hero_image_url || `https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop`}
+                        src={project.main_image || `https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop`}
                         alt={project.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
@@ -170,6 +162,11 @@ const Work = () => {
                       <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
                         {project.title}
                       </h2>
+                      {project.description && (
+                        <p className="text-white/60 text-lg">
+                          {project.description}
+                        </p>
+                      )}
                     </div>
 
                     {/* Description */}
@@ -177,29 +174,25 @@ const Work = () => {
                       {project.description}
                     </p>
 
-                    {/* Technologies */}
-                    {project.technologies && project.technologies.length > 0 && (
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies.map((tech, techIndex) => (
-                          <span
-                            key={techIndex}
-                            className="px-3 py-1 bg-humble-blue-500/20 text-humble-blue-300 rounded-lg text-sm"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-
                     {/* Actions */}
                     <div className="flex flex-col sm:flex-row gap-4">
                       <button
                         onClick={() => navigate(`/work/${project.slug}`)}
                         className="flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-xl font-semibold hover:opacity-90 transition-opacity"
                       >
-                        Read Case Study
+                        View Case Study
                         <ArrowRight className="h-5 w-5" />
                       </button>
+                      
+                      {project.link && (
+                        <button
+                          onClick={() => window.open(project.link, '_blank')}
+                          className="flex items-center justify-center gap-3 px-6 py-3 bg-humble-charcoal/80 text-white rounded-xl font-semibold hover:bg-humble-charcoal transition-colors border border-white/10"
+                        >
+                          Visit Live Site
+                          <ExternalLink className="h-5 w-5" />
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -207,7 +200,7 @@ const Work = () => {
             </div>
           ) : (
             <div className="text-center text-white/60 py-16">
-              <p>No featured projects found.</p>
+              <p>No projects found.</p>
             </div>
           )}
 

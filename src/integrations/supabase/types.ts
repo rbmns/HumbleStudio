@@ -460,53 +460,6 @@ export type Database = {
           },
         ]
       }
-      "project_media-1": {
-        Row: {
-          alt_text: string | null
-          created_at: string
-          device_type: string | null
-          display_order: number | null
-          id: string
-          is_primary: boolean | null
-          media_type: string
-          media_url: string
-          project_id: string
-          section: string | null
-        }
-        Insert: {
-          alt_text?: string | null
-          created_at?: string
-          device_type?: string | null
-          display_order?: number | null
-          id?: string
-          is_primary?: boolean | null
-          media_type?: string
-          media_url: string
-          project_id: string
-          section?: string | null
-        }
-        Update: {
-          alt_text?: string | null
-          created_at?: string
-          device_type?: string | null
-          display_order?: number | null
-          id?: string
-          is_primary?: boolean | null
-          media_type?: string
-          media_url?: string
-          project_id?: string
-          section?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "projects_detail_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "projects-1"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       projects: {
         Row: {
           build_time: string | null
