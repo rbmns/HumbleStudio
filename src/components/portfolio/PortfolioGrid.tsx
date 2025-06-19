@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import FeaturedProject from './FeaturedProject';
@@ -62,9 +63,9 @@ const PortfolioGrid = React.memo(() => {
         return;
       }
 
-      // Use portfolio_media table since projects_media doesn't exist in types yet
+      // Use projects_media table (the correct table name)
       const { data: mediaData, error: mediaError } = await supabase
-        .from('portfolio_media')
+        .from('projects_media')
         .select('*')
         .order('display_order', { ascending: true });
 
@@ -92,8 +93,8 @@ const PortfolioGrid = React.memo(() => {
         id: project.id,
         title: project.title || '',
         description: project.description || '',
-        // Handle category field from database (singular) to categories array (plural)
-        categories: project.category ? [project.category] : [],
+        // Use categories field (which is an array) instead of category
+        categories: project.categories || [],
         link: project.link || undefined,
         is_featured: project.is_featured || false,
         is_coming_soon: project.is_coming_soon || false,
@@ -105,7 +106,7 @@ const PortfolioGrid = React.memo(() => {
           media_url: media.media_url,
           alt_text: media.alt_text || undefined,
           is_primary: media.is_primary || false,
-          media_type: media.media_type,
+          media_type: media.media_type || 'image',
           device_type: media.device_type || undefined,
           display_order: media.display_order || 0
         })) || []
