@@ -43,6 +43,8 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
       navigate('/work/nonnas-table');
     } else if (project.title.toLowerCase().includes("digital") && project.title.toLowerCase().includes("resume")) {
       navigate('/work/digital-resume');
+    } else if (project.title.toLowerCase().includes("surf")) {
+      navigate('/case-studies/surf-instructor');
     } else if (project.slug) {
       navigate(`/work/${project.slug}`);
     } else {

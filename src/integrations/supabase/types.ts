@@ -464,6 +464,7 @@ export type Database = {
         Row: {
           build_time: string | null
           categories: string[] | null
+          challenge: string | null
           created_at: string | null
           description: string | null
           featured_image: string | null
@@ -473,7 +474,9 @@ export type Database = {
           key_features: string[] | null
           link: string | null
           main_image: string | null
+          results: string | null
           slug: string | null
+          solution: string | null
           technologies: string[] | null
           title: string
           updated_at: string | null
@@ -481,6 +484,7 @@ export type Database = {
         Insert: {
           build_time?: string | null
           categories?: string[] | null
+          challenge?: string | null
           created_at?: string | null
           description?: string | null
           featured_image?: string | null
@@ -490,7 +494,9 @@ export type Database = {
           key_features?: string[] | null
           link?: string | null
           main_image?: string | null
+          results?: string | null
           slug?: string | null
+          solution?: string | null
           technologies?: string[] | null
           title: string
           updated_at?: string | null
@@ -498,6 +504,7 @@ export type Database = {
         Update: {
           build_time?: string | null
           categories?: string[] | null
+          challenge?: string | null
           created_at?: string | null
           description?: string | null
           featured_image?: string | null
@@ -507,7 +514,9 @@ export type Database = {
           key_features?: string[] | null
           link?: string | null
           main_image?: string | null
+          results?: string | null
           slug?: string | null
+          solution?: string | null
           technologies?: string[] | null
           title?: string
           updated_at?: string | null
