@@ -477,6 +477,7 @@ export type Database = {
           results: string | null
           slug: string | null
           solution: string | null
+          subtitle: string | null
           technologies: string[] | null
           title: string
           updated_at: string | null
@@ -497,6 +498,7 @@ export type Database = {
           results?: string | null
           slug?: string | null
           solution?: string | null
+          subtitle?: string | null
           technologies?: string[] | null
           title: string
           updated_at?: string | null
@@ -517,6 +519,7 @@ export type Database = {
           results?: string | null
           slug?: string | null
           solution?: string | null
+          subtitle?: string | null
           technologies?: string[] | null
           title?: string
           updated_at?: string | null

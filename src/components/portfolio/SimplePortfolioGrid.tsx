@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import SimplePortfolioCard from './SimplePortfolioCard';
+import FeaturedProject from './FeaturedProject';
 
 interface PortfolioProject {
   id: string;
@@ -17,6 +18,7 @@ interface PortfolioProject {
   featured_image?: string;
   main_image?: string;
   slug?: string;
+  subtitle?: string;
   media: PortfolioMedia[];
 }
 
@@ -38,7 +40,6 @@ const categories = [
 ];
 
 const SimplePortfolioGrid = React.memo(() => {
-  const [activeCategory, setActiveCategory] = useState('all');
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -133,6 +134,7 @@ const SimplePortfolioGrid = React.memo(() => {
           featured_image: project.featured_image,
           main_image: project.main_image,
           slug: project.slug,
+          subtitle: project.subtitle,
           media: projectMedia
         };
       });
@@ -150,19 +152,13 @@ const SimplePortfolioGrid = React.memo(() => {
     fetchProjects();
   }, [fetchProjects]);
 
-  const filteredProjects = useMemo(() => {
-    return activeCategory === 'all' 
-      ? projects 
-      : projects.filter(project => project.categories.includes(activeCategory));
-  }, [projects, activeCategory]);
-
   const featuredProjects = useMemo(() => {
-    return filteredProjects.filter(project => project.is_featured);
-  }, [filteredProjects]);
+    return projects.filter(project => project.is_featured);
+  }, [projects]);
 
   const regularProjects = useMemo(() => {
-    return filteredProjects.filter(project => !project.is_featured);
-  }, [filteredProjects]);
+    return projects.filter(project => !project.is_featured);
+  }, [projects]);
 
   const handleProjectClick = useCallback((project: PortfolioProject) => {
     console.log('handleProjectClick called for:', project.title);
@@ -179,6 +175,12 @@ const SimplePortfolioGrid = React.memo(() => {
       navigate('/work/digital-resume');
       return;
     }
+
+    if (project.slug === 'surf-instructor') {
+      console.log('Navigating to Surf Instructor case study');
+      navigate('/case-studies/surf-instructor');
+      return;
+    }
     
     // For other projects, open external link if available
     if (project.link && !project.is_coming_soon) {
@@ -189,8 +191,9 @@ const SimplePortfolioGrid = React.memo(() => {
     }
   }, [navigate]);
 
-  const handleCategoryChange = useCallback((categoryId: string) => {
-    setActiveCategory(categoryId);
+  const handleImageClick = useCallback((projectId: string, mediaIndex: number) => {
+    // Handle lightbox or image modal if needed
+    console.log('Image clicked:', projectId, mediaIndex);
   }, []);
 
   if (loading) {
@@ -223,34 +226,17 @@ const SimplePortfolioGrid = React.memo(() => {
       <p className="text-center text-white/80 text-base sm:text-lg md:text-xl mb-8 max-w-2xl mx-auto">
         Showcasing beautiful websites built with AI and delivered fast
       </p>
-      
-      <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12">
-        {categories.map(category => (
-          <button
-            key={category.id}
-            className={`px-3 py-2 md:px-4 md:py-2 rounded-full text-sm font-medium transition-all duration-300 min-h-[44px] ${
-              activeCategory === category.id 
-                ? 'bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white' 
-                : 'bg-humble-charcoal text-white/70 hover:bg-humble-charcoal/80'
-            }`}
-            onClick={() => handleCategoryChange(category.id)}
-          >
-            {category.label}
-          </button>
-        ))}
-      </div>
 
-      {filteredProjects.length > 0 ? (
+      {projects.length > 0 ? (
         <div className="space-y-12">
           {/* Featured Projects */}
           {featuredProjects.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div className="space-y-8">
               {featuredProjects.map((project) => (
-                <SimplePortfolioCard
+                <FeaturedProject
                   key={project.id}
                   project={project}
-                  onClick={handleProjectClick}
-                  featured={true}
+                  onImageClick={handleImageClick}
                 />
               ))}
             </div>
@@ -272,7 +258,7 @@ const SimplePortfolioGrid = React.memo(() => {
         </div>
       ) : (
         <div className="text-center text-white/60 py-16">
-          <p>No projects found in this category.</p>
+          <p>No projects found.</p>
         </div>
       )}
     </div>

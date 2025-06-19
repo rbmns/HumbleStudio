@@ -2,7 +2,6 @@
 import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ExternalLink, Eye } from 'lucide-react';
-import PortfolioCardContent from './PortfolioCardContent';
 import OptimizedImage from './OptimizedImage';
 
 interface SimplePortfolioCardProps {
@@ -17,6 +16,7 @@ interface SimplePortfolioCardProps {
     is_coming_soon: boolean;
     is_featured: boolean;
     slug?: string;
+    subtitle?: string;
     media: Array<{
       id: string;
       media_url: string;
@@ -43,7 +43,7 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
       navigate('/work/nonnas-table');
     } else if (project.title.toLowerCase().includes("digital") && project.title.toLowerCase().includes("resume")) {
       navigate('/work/digital-resume');
-    } else if (project.title.toLowerCase().includes("surf")) {
+    } else if (project.slug === 'surf-instructor') {
       navigate('/case-studies/surf-instructor');
     } else if (project.slug) {
       navigate(`/work/${project.slug}`);
@@ -90,13 +90,19 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
       />
 
       <div className="p-6">
-        <PortfolioCardContent
-          categories={project.categories}
-          title={project.title}
-          description={project.description}
-          technologies={project.technologies}
-          featured={featured}
-        />
+        <h3 className="text-xl font-bold mb-2 text-white">
+          {project.title}
+        </h3>
+        
+        {project.subtitle && (
+          <p className="text-white/70 text-sm mb-3">
+            {project.subtitle}
+          </p>
+        )}
+        
+        <p className="text-white/80 text-sm leading-relaxed mb-6">
+          {project.description}
+        </p>
 
         {/* Action Buttons */}
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
@@ -127,13 +133,6 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
             </div>
           )}
         </div>
-
-        {/* Build Time */}
-        {project.build_time && (
-          <div className="mt-4 text-center">
-            <span className="text-xs text-white/60">Built in {project.build_time}</span>
-          </div>
-        )}
       </div>
     </div>
   );
