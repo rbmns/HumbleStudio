@@ -285,52 +285,68 @@ export type Database = {
         }
         Relationships: []
       }
-      portfolio_media: {
+      cv_submissions: {
         Row: {
-          alt_text: string | null
+          additional_info: string | null
+          certifications: Json | null
+          core_skills: Json | null
           created_at: string
-          device_type: string | null
-          display_order: number | null
+          education: Json | null
+          email: string
+          experience: Json | null
+          full_name: string
           id: string
-          is_primary: boolean | null
-          media_type: string
-          media_url: string
-          project_id: string | null
-          project_name: string | null
+          languages: Json | null
+          linkedin_url: string | null
+          location: string | null
+          payment_status: string | null
+          phone: string | null
+          portfolio_url: string | null
+          professional_summary: string | null
+          updated_at: string
+          user_email: string | null
         }
         Insert: {
-          alt_text?: string | null
+          additional_info?: string | null
+          certifications?: Json | null
+          core_skills?: Json | null
           created_at?: string
-          device_type?: string | null
-          display_order?: number | null
+          education?: Json | null
+          email: string
+          experience?: Json | null
+          full_name: string
           id?: string
-          is_primary?: boolean | null
-          media_type: string
-          media_url: string
-          project_id?: string | null
-          project_name?: string | null
+          languages?: Json | null
+          linkedin_url?: string | null
+          location?: string | null
+          payment_status?: string | null
+          phone?: string | null
+          portfolio_url?: string | null
+          professional_summary?: string | null
+          updated_at?: string
+          user_email?: string | null
         }
         Update: {
-          alt_text?: string | null
+          additional_info?: string | null
+          certifications?: Json | null
+          core_skills?: Json | null
           created_at?: string
-          device_type?: string | null
-          display_order?: number | null
+          education?: Json | null
+          email?: string
+          experience?: Json | null
+          full_name?: string
           id?: string
-          is_primary?: boolean | null
-          media_type?: string
-          media_url?: string
-          project_id?: string | null
-          project_name?: string | null
+          languages?: Json | null
+          linkedin_url?: string | null
+          location?: string | null
+          payment_status?: string | null
+          phone?: string | null
+          portfolio_url?: string | null
+          professional_summary?: string | null
+          updated_at?: string
+          user_email?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "portfolio_media_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "portfolio_projects"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       portfolio_projects: {
         Row: {
@@ -444,52 +460,7 @@ export type Database = {
           },
         ]
       }
-      projects: {
-        Row: {
-          build_time: string | null
-          category: string | null
-          created_at: string
-          description: string
-          id: string
-          is_coming_soon: boolean | null
-          is_featured: boolean | null
-          key_features: Json | null
-          link: string | null
-          technologies: Json | null
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          build_time?: string | null
-          category?: string | null
-          created_at?: string
-          description: string
-          id?: string
-          is_coming_soon?: boolean | null
-          is_featured?: boolean | null
-          key_features?: Json | null
-          link?: string | null
-          technologies?: Json | null
-          title: string
-          updated_at?: string
-        }
-        Update: {
-          build_time?: string | null
-          category?: string | null
-          created_at?: string
-          description?: string
-          id?: string
-          is_coming_soon?: boolean | null
-          is_featured?: boolean | null
-          key_features?: Json | null
-          link?: string | null
-          technologies?: Json | null
-          title?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      projects_detail: {
+      "project_media-1": {
         Row: {
           alt_text: string | null
           created_at: string
@@ -500,6 +471,7 @@ export type Database = {
           media_type: string
           media_url: string
           project_id: string
+          section: string | null
         }
         Insert: {
           alt_text?: string | null
@@ -511,6 +483,7 @@ export type Database = {
           media_type?: string
           media_url: string
           project_id: string
+          section?: string | null
         }
         Update: {
           alt_text?: string | null
@@ -522,16 +495,175 @@ export type Database = {
           media_type?: string
           media_url?: string
           project_id?: string
+          section?: string | null
         }
         Relationships: [
           {
             foreignKeyName: "projects_detail_project_id_fkey"
             columns: ["project_id"]
             isOneToOne: false
+            referencedRelation: "projects-1"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          build_time: string | null
+          categories: string[] | null
+          created_at: string | null
+          description: string | null
+          id: string
+          is_coming_soon: boolean | null
+          is_featured: boolean | null
+          key_features: string[] | null
+          link: string | null
+          slug: string | null
+          technologies: string[] | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          build_time?: string | null
+          categories?: string[] | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_coming_soon?: boolean | null
+          is_featured?: boolean | null
+          key_features?: string[] | null
+          link?: string | null
+          slug?: string | null
+          technologies?: string[] | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          build_time?: string | null
+          categories?: string[] | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_coming_soon?: boolean | null
+          is_featured?: boolean | null
+          key_features?: string[] | null
+          link?: string | null
+          slug?: string | null
+          technologies?: string[] | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      projects_media: {
+        Row: {
+          alt_text: string | null
+          created_at: string | null
+          device_type: string | null
+          display_order: number | null
+          id: string
+          is_primary: boolean | null
+          media_type: string | null
+          media_url: string
+          project_id: string | null
+        }
+        Insert: {
+          alt_text?: string | null
+          created_at?: string | null
+          device_type?: string | null
+          display_order?: number | null
+          id?: string
+          is_primary?: boolean | null
+          media_type?: string | null
+          media_url: string
+          project_id?: string | null
+        }
+        Update: {
+          alt_text?: string | null
+          created_at?: string | null
+          device_type?: string | null
+          display_order?: number | null
+          id?: string
+          is_primary?: boolean | null
+          media_type?: string | null
+          media_url?: string
+          project_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_media_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
             referencedRelation: "projects"
             referencedColumns: ["id"]
           },
         ]
+      }
+      "projects-1": {
+        Row: {
+          build_time: string | null
+          category: string | null
+          Challenge: string | null
+          client_name: string | null
+          created_at: string
+          description: string | null
+          id: string
+          intro: string | null
+          is_coming_soon: boolean | null
+          is_featured: boolean | null
+          key_features: Json | null
+          live_link: string | null
+          results: string | null
+          short_description: string | null
+          slug: string | null
+          Solution: string | null
+          subtitle: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          build_time?: string | null
+          category?: string | null
+          Challenge?: string | null
+          client_name?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          intro?: string | null
+          is_coming_soon?: boolean | null
+          is_featured?: boolean | null
+          key_features?: Json | null
+          live_link?: string | null
+          results?: string | null
+          short_description?: string | null
+          slug?: string | null
+          Solution?: string | null
+          subtitle: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          build_time?: string | null
+          category?: string | null
+          Challenge?: string | null
+          client_name?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          intro?: string | null
+          is_coming_soon?: boolean | null
+          is_featured?: boolean | null
+          key_features?: Json | null
+          live_link?: string | null
+          results?: string | null
+          short_description?: string | null
+          slug?: string | null
+          Solution?: string | null
+          subtitle?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
     }
     Views: {
