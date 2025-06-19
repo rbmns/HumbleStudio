@@ -29,6 +29,7 @@ const DigitalCV = () => {
             <Link 
               to="/start-digital-cv"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all duration-300 text-lg hover:scale-105"
+              data-gtm="digital-cv-hero-cta"
             >
               Start Your Digital CV
               <ArrowRight size={20} />
@@ -261,7 +262,13 @@ const DigitalCV = () => {
               
               <div className="max-w-3xl mx-auto space-y-4 text-white/80 text-lg leading-relaxed">
                 <p>
-                  Your Digital CV is built by Roosje Biemans, creative producer and founder of HumbleStudio, with 15+ years of agency experience delivering digital projects for brands and professionals.
+                  Your Digital CV is built by <Link 
+                    to="/about" 
+                    className="text-white font-medium hover:text-humble-pink-400 transition-colors underline"
+                    data-gtm="digital-cv-about-link"
+                  >
+                    Rosie Biemans
+                  </Link>, creative producer and founder of HumbleStudio, with 15+ years of agency experience delivering digital projects for brands and professionals.
                 </p>
                 
                 <p>
@@ -285,6 +292,7 @@ const DigitalCV = () => {
               <Link 
                 to="/start-digital-cv"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all duration-300 text-lg hover:scale-105"
+                data-gtm="digital-cv-footer-cta"
               >
                 Start Your Digital CV
                 <ArrowRight size={20} />
