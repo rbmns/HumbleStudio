@@ -51,24 +51,11 @@ export function useCaseStudy(slug?: string) {
     try {
       console.log('Fetching case study for slug:', slug);
 
-      // Map slug to project title
-      let projectTitle = '';
-      if (slug === 'nonnas-table') {
-        projectTitle = "Nonna's Table";
-      } else if (slug === 'digital-resume') {
-        projectTitle = 'Digital Resume Site';
-      } else {
-        // Try to convert slug to title format
-        projectTitle = slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-      }
-
-      console.log('Looking for project with title:', projectTitle);
-
-      // Use projects table and get the most recent project with this title
+      // Fetch project directly by slug
       const { data: projectData, error: projectError } = await supabase
         .from('projects')
         .select('*')
-        .eq('title', projectTitle)
+        .eq('slug', slug)
         .order('created_at', { ascending: false })
         .limit(1);
 
@@ -80,7 +67,7 @@ export function useCaseStudy(slug?: string) {
       }
 
       if (!projectData || projectData.length === 0) {
-        console.log('No project found with title:', projectTitle);
+        console.log('No project found with slug:', slug);
         setError('Case study not found');
         setLoading(false);
         return;
@@ -112,13 +99,13 @@ export function useCaseStudy(slug?: string) {
       // Map project data to case study format
       const processedCaseStudy: CaseStudy = {
         id: project.id,
-        slug: slug,
+        slug: project.slug || slug,
         title: project.title || '',
         subtitle: '', // Not in projects table
         description: project.description || '',
         client_name: '', // Not in projects table
         client_location: '', // Not in projects table
-        hero_image_url: fetchedMedia?.[0]?.media_url || '',
+        hero_image_url: project.is_featured ? project.featured_image : project.main_image,
         challenge_heading: 'The Challenge',
         challenge_content: 'Understanding the unique requirements and creating a solution that meets all expectations.',
         solution_heading: 'The Solution',
