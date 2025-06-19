@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import PortfolioCard from './PortfolioCard';
@@ -75,7 +74,23 @@ const PortfolioGridOptimized: React.FC = () => {
         return [];
       };
 
-      const projectsWithMedia: PortfolioProject[] = projectsData?.map(project => {
+      // Remove duplicates by grouping by title and keeping the most recent one
+      const uniqueProjects = projectsData?.reduce((acc: any[], project: any) => {
+        const existingIndex = acc.findIndex(p => p.title === project.title);
+        if (existingIndex >= 0) {
+          // Keep the more recent one (or the one with more data)
+          if (new Date(project.created_at) > new Date(acc[existingIndex].created_at)) {
+            acc[existingIndex] = project;
+          }
+        } else {
+          acc.push(project);
+        }
+        return acc;
+      }, []) || [];
+
+      console.log('Unique projects after deduplication:', uniqueProjects);
+
+      const projectsWithMedia: PortfolioProject[] = uniqueProjects.map(project => {
         const projectMedia = mediaData?.filter(media => media.project_id === project.id) || [];
         console.log(`Project ${project.title} has ${projectMedia.length} media items`);
         
@@ -100,7 +115,7 @@ const PortfolioGridOptimized: React.FC = () => {
             display_order: media.display_order || 0
           }))
         };
-      }) || [];
+      });
 
       console.log('Final processed projects:', projectsWithMedia);
       setProjects(projectsWithMedia);
@@ -139,7 +154,7 @@ const PortfolioGridOptimized: React.FC = () => {
         </p>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {[...Array(8)].map((_, i) => (
+          {[...Array(6)].map((_, i) => (
             <div key={i} className="bg-humble-charcoal rounded-xl overflow-hidden">
               <div className="aspect-[4/3] bg-humble-charcoal/50 animate-pulse"></div>
               <div className="p-4 md:p-5 space-y-3">
@@ -164,7 +179,7 @@ const PortfolioGridOptimized: React.FC = () => {
         <div className="space-y-12">
           {/* Featured Projects */}
           {featuredProjects.length > 0 && (
-            <div className="space-y-16">
+            <div className="space-y-8">
               {featuredProjects.map((project) => (
                 <FeaturedProject
                   key={project.id}
@@ -177,20 +192,14 @@ const PortfolioGridOptimized: React.FC = () => {
 
           {/* Regular Projects */}
           {regularProjects.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {regularProjects.map((project) => (
-                <div
+                <PortfolioCard
                   key={project.id}
-                  className="flex justify-center items-stretch h-full"
-                >
-                  <div className="w-full max-w-[370px] h-full flex">
-                    <PortfolioCard
-                      project={project}
-                      onClick={handleProjectClick}
-                      featured={false}
-                    />
-                  </div>
-                </div>
+                  project={project}
+                  onClick={handleProjectClick}
+                  featured={false}
+                />
               ))}
             </div>
           )}
