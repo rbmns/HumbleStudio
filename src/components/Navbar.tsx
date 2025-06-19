@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
@@ -40,7 +41,6 @@ const Navbar = () => {
         page_location: window.location.href
       });
     }
-    scrollToSection('contact');
   };
 
   const handleNavClick = (navItem: string) => {
@@ -73,13 +73,14 @@ const Navbar = () => {
           <Link to="/" onClick={() => handleNavClick('home')} className="text-white/80 hover:text-white transition-colors">Home</Link>
           <Link to="/about" onClick={() => handleNavClick('about')} className="text-white/80 hover:text-white transition-colors">About</Link>
           <Link to="/work" onClick={() => handleNavClick('work')} className="text-white/80 hover:text-white transition-colors">Work</Link>
-          <Link to="/inquiry" onClick={() => handleNavClick('inquiry')} className="text-white/80 hover:text-white transition-colors">Inquiry</Link>
-          <button 
+          <Link to="/website-packages" onClick={() => handleNavClick('packages')} className="text-white/80 hover:text-white transition-colors">Packages</Link>
+          <Link 
+            to="/inquiry"
             onClick={handleContactClick}
             className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all"
           >
             Contact
-          </button>
+          </Link>
         </div>
         
         {/* Mobile Menu Toggle - visible on screens smaller than lg */}
@@ -99,13 +100,14 @@ const Navbar = () => {
             <Link to="/" onClick={() => {handleNavClick('home_mobile'); setIsMobileMenuOpen(false);}} className="text-white/80 hover:text-white transition-colors py-2">Home</Link>
             <Link to="/about" onClick={() => {handleNavClick('about_mobile'); setIsMobileMenuOpen(false);}} className="text-white/80 hover:text-white transition-colors py-2">About</Link>
             <Link to="/work" onClick={() => {handleNavClick('work_mobile'); setIsMobileMenuOpen(false);}} className="text-white/80 hover:text-white transition-colors py-2">Work</Link>
-            <Link to="/inquiry" onClick={() => {handleNavClick('inquiry_mobile'); setIsMobileMenuOpen(false);}} className="text-white/80 hover:text-white transition-colors py-2">Inquiry</Link>
-            <button 
-              onClick={handleContactClick}
+            <Link to="/website-packages" onClick={() => {handleNavClick('packages_mobile'); setIsMobileMenuOpen(false);}} className="text-white/80 hover:text-white transition-colors py-2">Packages</Link>
+            <Link 
+              to="/inquiry"
+              onClick={() => {handleContactClick(); setIsMobileMenuOpen(false);}}
               className="px-5 py-2 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all text-center"
             >
               Contact
-            </button>
+            </Link>
           </div>
         </div>
       )}

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight, Clock, Target, Globe, ChevronDown } from 'lucide-react';
+import { ArrowRight, Clock, Target, Globe, ChevronDown, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
@@ -72,6 +72,23 @@ const PricingSection = () => {
                 <div className="text-white font-medium">Perfect for:</div>
                 <div className="text-white/60 text-sm">"Open to work" posts, job apps, LinkedIn bios</div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Optional Add-ons Section */}
+        <div className="mb-8">
+          <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-lg p-4 border border-humble-purple-500/30">
+            <div className="flex items-center gap-2 mb-3">
+              <Plus size={16} className="text-humble-purple-500" />
+              <span className="text-white font-medium">Optional Add-ons (€25 each):</span>
+            </div>
+            <ul className="space-y-2 text-white/80 text-sm ml-6">
+              <li>• Personal branding page</li>
+              <li>• Simple static portfolio</li>
+            </ul>
+            <div className="mt-3 text-humble-purple-400 text-sm font-medium">
+              Complete package with both add-ons: €99
             </div>
           </div>
         </div>
