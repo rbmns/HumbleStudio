@@ -1,0 +1,183 @@
+
+import React from 'react';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import StarBackground from '../components/StarBackground';
+import { ArrowRight, Check } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+const DigitalCV = () => {
+  return (
+    <div className="min-h-screen relative overflow-x-hidden">
+      <StarBackground />
+      <Navbar />
+      
+      <main className="pt-24 pb-16">
+        <div className="container mx-auto px-4 md:px-6">
+          
+          {/* Hero Section */}
+          <div className="max-w-4xl mx-auto text-center mb-20">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight">
+              Your CV, <span className="bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 bg-clip-text text-transparent">Reimagined</span> for the Web
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-white/80 mb-8 leading-relaxed">
+              A clean, personal website designed to pass ATS scans and leave a lasting impression.
+            </p>
+            
+            <Link 
+              to="/start-digital-cv"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all duration-300 text-lg hover:scale-105"
+            >
+              Start Your Digital CV
+              <ArrowRight size={20} />
+            </Link>
+            
+            <p className="text-white/60 text-sm mt-4">
+              Were you referred? Use your referral code or special link — referrers may receive a small commission.
+            </p>
+          </div>
+
+          {/* What's Included Section */}
+          <div className="max-w-5xl mx-auto mb-20">
+            <div className="bg-humble-charcoal/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-humble-gray-700/50">
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+                What's <span className="bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 bg-clip-text text-transparent">Included</span>
+              </h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-humble-pink-500/20 flex items-center justify-center mt-1 flex-shrink-0">
+                    <Check size={14} className="text-humble-pink-500" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white mb-2">One-page personal site</h3>
+                    <p className="text-white/70">Clean, focused layout that tells your professional story</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-humble-purple-500/20 flex items-center justify-center mt-1 flex-shrink-0">
+                    <Check size={14} className="text-humble-purple-500" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white mb-2">ATS-compatible layout</h3>
+                    <p className="text-white/70">Structured to pass applicant tracking systems</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-humble-blue-500/20 flex items-center justify-center mt-1 flex-shrink-0">
+                    <Check size={14} className="text-humble-blue-500" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white mb-2">Tailored design and tone</h3>
+                    <p className="text-white/70">Customized based on your target role and industry</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-humble-pink-500/20 flex items-center justify-center mt-1 flex-shrink-0">
+                    <Check size={14} className="text-humble-pink-500" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white mb-2">Mobile-friendly and fast-loading</h3>
+                    <p className="text-white/70">Optimized for all devices and quick loading times</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* What You Provide Section */}
+          <div className="max-w-4xl mx-auto mb-20">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-white">
+              What You <span className="bg-gradient-to-r from-humble-pink-500 to-humble-blue-500 bg-clip-text text-transparent">Provide</span>
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-humble-charcoal/30 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50">
+                <h3 className="font-semibold text-white mb-4 text-xl">Content Form</h3>
+                <ul className="space-y-2 text-white/70">
+                  <li>• Your experience and achievements</li>
+                  <li>• Education and qualifications</li>
+                  <li>• Contact information and location</li>
+                  <li>• Target role and career goals</li>
+                </ul>
+              </div>
+              
+              <div className="bg-humble-charcoal/30 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50">
+                <h3 className="font-semibold text-white mb-4 text-xl">Branding Form</h3>
+                <ul className="space-y-2 text-white/70">
+                  <li>• Design tone preferences</li>
+                  <li>• Style guide (calm, bold, minimalist, etc.)</li>
+                  <li>• Color preferences</li>
+                  <li>• Industry-specific considerations</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Domain & Hosting Section */}
+          <div className="max-w-4xl mx-auto mb-20">
+            <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-8 border border-humble-gray-700/50">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">
+                Domain & <span className="bg-gradient-to-r from-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">Hosting</span>
+              </h2>
+              
+              <div className="space-y-4 text-white/80">
+                <p>• Not included in the base package</p>
+                <p>• Usually costs €10–€20/year for a custom domain</p>
+                <p>• Free options may be possible — <Link to="/inquiry" className="text-humble-pink-500 hover:text-humble-pink-400 transition-colors underline">contact me for advice</Link></p>
+              </div>
+            </div>
+          </div>
+
+          {/* About/Trust Section */}
+          <div className="max-w-5xl mx-auto mb-20">
+            <div className="bg-humble-charcoal/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-humble-gray-700/50 text-center">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">
+                Built by <span className="bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 bg-clip-text text-transparent">Experience</span>
+              </h2>
+              
+              <div className="max-w-3xl mx-auto space-y-4 text-white/80 text-lg leading-relaxed">
+                <p>
+                  Your Digital CV is built by Roosje Biemans, creative producer and founder of HumbleStudio, with 15+ years of agency experience delivering digital projects for brands and professionals.
+                </p>
+                
+                <p>
+                  Every Digital CV is crafted with a focus on clear, modern design that showcases your experience in the best possible light while ensuring compatibility with modern hiring processes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer CTA */}
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="bg-gradient-to-br from-humble-pink-500/10 to-humble-purple-500/10 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-humble-pink-500/20">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
+                Ready to Stand Out?
+              </h2>
+              
+              <p className="text-white/70 mb-8 text-lg">
+                Get a professional Digital CV that works as hard as you do.
+              </p>
+              
+              <Link 
+                to="/start-digital-cv"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all duration-300 text-lg hover:scale-105"
+              >
+                Start Your Digital CV
+                <ArrowRight size={20} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </main>
+      
+      <Footer />
+    </div>
+  );
+};
+
+export default DigitalCV;

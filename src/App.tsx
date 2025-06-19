@@ -18,6 +18,7 @@ import Work from "./pages/Work";
 import CaseStudy from "./pages/CaseStudy";
 import WebsitePackages from "./pages/WebsitePackages";
 import About from "./pages/About";
+import DigitalCV from "./pages/DigitalCV";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
+          <Route path="/digital-cv" element={<DigitalCV />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/thank-you" element={<ThankYou />} />
