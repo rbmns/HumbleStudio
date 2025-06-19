@@ -67,6 +67,17 @@ const WebsitePackages = () => {
                   See example: Digital CV →
                 </Link>
               </div>
+
+              <div className="text-center">
+                <Link 
+                  to="/hire-me-page"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-all duration-300"
+                  data-gtm="website-packages-hire-me-i-want-this"
+                >
+                  I want this
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
 
             {/* Tier 2: Digital Business Card */}
