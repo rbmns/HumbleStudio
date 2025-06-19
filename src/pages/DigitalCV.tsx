@@ -3,8 +3,9 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import StarBackground from '../components/StarBackground';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight, Check, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 const DigitalCV = () => {
   return (
@@ -125,11 +126,40 @@ const DigitalCV = () => {
                 Domain & <span className="bg-gradient-to-r from-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">Hosting</span>
               </h2>
               
-              <div className="space-y-4 text-white/80">
+              <div className="space-y-4 text-white/80 mb-6">
                 <p>• Not included in the base package</p>
                 <p>• Usually costs €10–€20/year for a custom domain</p>
                 <p>• Free options may be possible — <Link to="/inquiry" className="text-humble-pink-500 hover:text-humble-pink-400 transition-colors underline">contact me for advice</Link></p>
+                <p>• I will set this up for you, no problem</p>
               </div>
+
+              <Collapsible>
+                <CollapsibleTrigger className="flex items-center gap-2 text-humble-pink-500 hover:text-humble-pink-400 transition-colors font-medium">
+                  <span>Learn more about domain names & hosting</span>
+                  <ChevronDown size={16} className="transition-transform group-data-[state=open]:rotate-180" />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="mt-4 space-y-4 text-white/70">
+                  <p className="text-white/90 font-medium">
+                    To get your personal website online — and keep it online — you'll need two things:
+                  </p>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="text-white font-semibold mb-2">• A domain name</h4>
+                      <p>This is your web address, like yourname.com. It's what people type to find your site.</p>
+                    </div>
+                    
+                    <div>
+                      <h4 className="text-white font-semibold mb-2">• Hosting</h4>
+                      <p>This is the service that stores your site and makes it accessible 24/7.</p>
+                    </div>
+                  </div>
+                  
+                  <p className="pt-2 border-t border-humble-gray-700/50">
+                    These are not included in the base package, but I'll help you choose the right setup and set it up for you. Most paid options cost around €10–€20 per year, and there may also be free solutions available.
+                  </p>
+                </CollapsibleContent>
+              </Collapsible>
             </div>
           </div>
 
