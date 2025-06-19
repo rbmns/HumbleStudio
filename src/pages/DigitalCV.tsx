@@ -3,7 +3,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import StarBackground from '../components/StarBackground';
-import { ArrowRight, Check, ChevronDown } from 'lucide-react';
+import { ArrowRight, Check, ChevronDown, User, Globe, Palette, FileText, Clock, Shield, Star, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
@@ -39,6 +39,39 @@ const DigitalCV = () => {
             </p>
           </div>
 
+          {/* Why Choose Digital CV Section */}
+          <div className="max-w-5xl mx-auto mb-20">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
+              Why Choose a <span className="bg-gradient-to-r from-humble-pink-500 to-humble-blue-500 bg-clip-text text-transparent">Digital CV?</span>
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-humble-charcoal/30 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 text-center hover:border-humble-pink-500/50 transition-all duration-300">
+                <div className="w-16 h-16 rounded-full bg-humble-pink-500/20 flex items-center justify-center mx-auto mb-4">
+                  <Shield size={24} className="text-humble-pink-500" />
+                </div>
+                <h3 className="font-semibold text-white mb-3 text-lg">ATS-Friendly</h3>
+                <p className="text-white/70">Built to pass through applicant tracking systems while maintaining visual appeal</p>
+              </div>
+              
+              <div className="bg-humble-charcoal/30 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 text-center hover:border-humble-purple-500/50 transition-all duration-300">
+                <div className="w-16 h-16 rounded-full bg-humble-purple-500/20 flex items-center justify-center mx-auto mb-4">
+                  <Star size={24} className="text-humble-purple-500" />
+                </div>
+                <h3 className="font-semibold text-white mb-3 text-lg">Stand Out</h3>
+                <p className="text-white/70">Make a memorable first impression that sets you apart from other candidates</p>
+              </div>
+              
+              <div className="bg-humble-charcoal/30 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50 text-center hover:border-humble-blue-500/50 transition-all duration-300">
+                <div className="w-16 h-16 rounded-full bg-humble-blue-500/20 flex items-center justify-center mx-auto mb-4">
+                  <Zap size={24} className="text-humble-blue-500" />
+                </div>
+                <h3 className="font-semibold text-white mb-3 text-lg">Always Updated</h3>
+                <p className="text-white/70">Easy to update and share instantly — no more outdated PDF versions</p>
+              </div>
+            </div>
+          </div>
+
           {/* What's Included Section */}
           <div className="max-w-5xl mx-auto mb-20">
             <div className="bg-humble-charcoal/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-humble-gray-700/50">
@@ -49,41 +82,41 @@ const DigitalCV = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex items-start gap-3">
                   <div className="w-6 h-6 rounded-full bg-humble-pink-500/20 flex items-center justify-center mt-1 flex-shrink-0">
-                    <Check size={14} className="text-humble-pink-500" />
+                    <Globe size={14} className="text-humble-pink-500" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-2">One-page personal site</h3>
-                    <p className="text-white/70">Clean, focused layout that tells your professional story</p>
+                    <p className="text-white/70">Clean, focused layout that tells your professional story effectively</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
                   <div className="w-6 h-6 rounded-full bg-humble-purple-500/20 flex items-center justify-center mt-1 flex-shrink-0">
-                    <Check size={14} className="text-humble-purple-500" />
+                    <Shield size={14} className="text-humble-purple-500" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-2">ATS-compatible layout</h3>
-                    <p className="text-white/70">Structured to pass applicant tracking systems</p>
+                    <p className="text-white/70">Structured to pass applicant tracking systems seamlessly</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
                   <div className="w-6 h-6 rounded-full bg-humble-blue-500/20 flex items-center justify-center mt-1 flex-shrink-0">
-                    <Check size={14} className="text-humble-blue-500" />
+                    <Palette size={14} className="text-humble-blue-500" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-2">Tailored design and tone</h3>
-                    <p className="text-white/70">Customized based on your target role and industry</p>
+                    <p className="text-white/70">Customized based on your target role and industry preferences</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
                   <div className="w-6 h-6 rounded-full bg-humble-pink-500/20 flex items-center justify-center mt-1 flex-shrink-0">
-                    <Check size={14} className="text-humble-pink-500" />
+                    <Clock size={14} className="text-humble-pink-500" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-2">Mobile-friendly and fast-loading</h3>
-                    <p className="text-white/70">Optimized for all devices and quick loading times</p>
+                    <p className="text-white/70">Optimized for all devices with lightning-quick loading times</p>
                   </div>
                 </div>
               </div>
@@ -98,22 +131,56 @@ const DigitalCV = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-humble-charcoal/30 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50">
-                <h3 className="font-semibold text-white mb-4 text-xl">Content Form</h3>
-                <ul className="space-y-2 text-white/70">
-                  <li>• Your experience and achievements</li>
-                  <li>• Education and qualifications</li>
-                  <li>• Contact information and location</li>
-                  <li>• Target role and career goals</li>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-humble-pink-500/20 flex items-center justify-center">
+                    <FileText size={20} className="text-humble-pink-500" />
+                  </div>
+                  <h3 className="font-semibold text-white text-xl">Content Form</h3>
+                </div>
+                <ul className="space-y-3 text-white/70">
+                  <li className="flex items-start gap-2">
+                    <Check size={16} className="text-humble-pink-500 mt-0.5 flex-shrink-0" />
+                    <span>Your experience and key achievements</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check size={16} className="text-humble-pink-500 mt-0.5 flex-shrink-0" />
+                    <span>Education and professional qualifications</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check size={16} className="text-humble-pink-500 mt-0.5 flex-shrink-0" />
+                    <span>Contact information and location</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check size={16} className="text-humble-pink-500 mt-0.5 flex-shrink-0" />
+                    <span>Target role and career aspirations</span>
+                  </li>
                 </ul>
               </div>
               
               <div className="bg-humble-charcoal/30 backdrop-blur-sm p-6 rounded-xl border border-humble-gray-700/50">
-                <h3 className="font-semibold text-white mb-4 text-xl">Branding Form</h3>
-                <ul className="space-y-2 text-white/70">
-                  <li>• Design tone preferences</li>
-                  <li>• Style guide (calm, bold, minimalist, etc.)</li>
-                  <li>• Color preferences</li>
-                  <li>• Industry-specific considerations</li>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-humble-blue-500/20 flex items-center justify-center">
+                    <Palette size={20} className="text-humble-blue-500" />
+                  </div>
+                  <h3 className="font-semibold text-white text-xl">Branding Form</h3>
+                </div>
+                <ul className="space-y-3 text-white/70">
+                  <li className="flex items-start gap-2">
+                    <Check size={16} className="text-humble-blue-500 mt-0.5 flex-shrink-0" />
+                    <span>Design tone preferences (calm, bold, etc.)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check size={16} className="text-humble-blue-500 mt-0.5 flex-shrink-0" />
+                    <span>Style guide and visual direction</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check size={16} className="text-humble-blue-500 mt-0.5 flex-shrink-0" />
+                    <span>Color palette preferences</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check size={16} className="text-humble-blue-500 mt-0.5 flex-shrink-0" />
+                    <span>Industry-specific considerations</span>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -122,15 +189,32 @@ const DigitalCV = () => {
           {/* Domain & Hosting Section */}
           <div className="max-w-4xl mx-auto mb-20">
             <div className="bg-humble-charcoal/30 backdrop-blur-sm rounded-xl p-8 border border-humble-gray-700/50">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">
-                Domain & <span className="bg-gradient-to-r from-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">Hosting</span>
-              </h2>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-full bg-humble-purple-500/20 flex items-center justify-center">
+                  <Globe size={24} className="text-humble-purple-500" />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-white">
+                  Domain & <span className="bg-gradient-to-r from-humble-purple-500 to-humble-blue-500 bg-clip-text text-transparent">Hosting</span>
+                </h2>
+              </div>
               
               <div className="space-y-4 text-white/80 mb-6">
-                <p>• Not included in the base package</p>
-                <p>• Usually costs €10–€20/year for a custom domain</p>
-                <p>• Free options may be possible — <Link to="/inquiry" className="text-humble-pink-500 hover:text-humble-pink-400 transition-colors underline">contact me for advice</Link></p>
-                <p>• I will set this up for you, no problem</p>
+                <div className="flex items-start gap-2">
+                  <Check size={16} className="text-humble-purple-500 mt-0.5 flex-shrink-0" />
+                  <span>Not included in the base package</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check size={16} className="text-humble-purple-500 mt-0.5 flex-shrink-0" />
+                  <span>Usually costs €10–€20/year for a custom domain</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check size={16} className="text-humble-purple-500 mt-0.5 flex-shrink-0" />
+                  <span>Free options may be possible — <Link to="/inquiry" className="text-humble-pink-500 hover:text-humble-pink-400 transition-colors underline">contact me for advice</Link></span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check size={16} className="text-humble-purple-500 mt-0.5 flex-shrink-0" />
+                  <span>I will set this up for you, no problem</span>
+                </div>
               </div>
 
               <Collapsible>
@@ -166,9 +250,14 @@ const DigitalCV = () => {
           {/* About/Trust Section */}
           <div className="max-w-5xl mx-auto mb-20">
             <div className="bg-humble-charcoal/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-humble-gray-700/50 text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">
-                Built by <span className="bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 bg-clip-text text-transparent">Experience</span>
-              </h2>
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <div className="w-16 h-16 rounded-full bg-humble-pink-500/20 flex items-center justify-center">
+                  <User size={28} className="text-humble-pink-500" />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-white">
+                  Built by <span className="bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 bg-clip-text text-transparent">Experience</span>
+                </h2>
+              </div>
               
               <div className="max-w-3xl mx-auto space-y-4 text-white/80 text-lg leading-relaxed">
                 <p>
