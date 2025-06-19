@@ -46,10 +46,10 @@ const PortfolioGridOptimized: React.FC = () => {
 
       console.log('Projects data received:', projectsData);
 
-      // Fetch media from portfolio_media table
-      console.log('Fetching media from portfolio_media table...');
+      // Fetch media from projects_media table
+      console.log('Fetching media from projects_media table...');
       const { data: mediaData, error: mediaError } = await supabase
-        .from('portfolio_media')
+        .from('projects_media')
         .select('*')
         .order('display_order', { ascending: true });
 
