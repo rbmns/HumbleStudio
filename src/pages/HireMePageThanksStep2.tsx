@@ -35,9 +35,7 @@ const HireMePageThanksStep2 = () => {
         <div className="max-w-3xl mx-auto">
           <div className="bg-humble-charcoal/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-humble-gray-700/50 mb-8">
             <div className="mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
-                Already want to start immediately?
-              </h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Want to speed things up and get going?</h2>
               
               <p className="text-lg text-white/70 mb-8 leading-relaxed">
                 Fill in some details about your job preferences and style so we can create your tailored digital CV.
