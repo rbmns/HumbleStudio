@@ -113,6 +113,13 @@ const SimplePortfolioGrid = React.memo(() => {
         
         console.log(`Project ${project.title} has slug: ${project.slug} and image: ${imageUrl}`);
         
+        // Special handling for Digital Resume Site - map to digital-cv slug
+        let finalSlug = project.slug;
+        if (project.title === 'Digital Resume Site' || project.title?.toLowerCase().includes('digital') && project.title?.toLowerCase().includes('resume')) {
+          finalSlug = 'digital-cv';
+          console.log(`Mapping ${project.title} to slug: digital-cv`);
+        }
+        
         return {
           id: project.id,
           title: project.title || '',
@@ -126,7 +133,7 @@ const SimplePortfolioGrid = React.memo(() => {
           key_features: toStringArray(project.key_features),
           featured_image: project.featured_image,
           main_image: project.main_image,
-          slug: project.slug,
+          slug: finalSlug,
           subtitle: project.subtitle,
           media: projectMedia
         };
