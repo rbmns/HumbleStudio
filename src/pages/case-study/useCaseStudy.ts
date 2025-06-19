@@ -64,12 +64,13 @@ export function useCaseStudy(slug?: string) {
 
       console.log('Looking for project with title:', projectTitle);
 
-      // Use projects table
+      // Use projects table and get the most recent project with this title
       const { data: projectData, error: projectError } = await supabase
         .from('projects')
         .select('*')
         .eq('title', projectTitle)
-        .maybeSingle();
+        .order('created_at', { ascending: false })
+        .limit(1);
 
       if (projectError) {
         console.error('Error fetching project:', projectError);
@@ -78,20 +79,21 @@ export function useCaseStudy(slug?: string) {
         return;
       }
 
-      if (!projectData) {
+      if (!projectData || projectData.length === 0) {
         console.log('No project found with title:', projectTitle);
         setError('Case study not found');
         setLoading(false);
         return;
       }
 
-      console.log('Found project:', projectData);
+      const project = projectData[0];
+      console.log('Found project:', project);
 
       // Fetch media from projects_media table
       const { data: fetchedMedia, error: mediaError } = await supabase
         .from('projects_media')
         .select('*')
-        .eq('project_id', projectData.id)
+        .eq('project_id', project.id)
         .order('display_order', { ascending: true });
       
       if (!mediaError && fetchedMedia) {
@@ -109,31 +111,31 @@ export function useCaseStudy(slug?: string) {
 
       // Map project data to case study format
       const processedCaseStudy: CaseStudy = {
-        id: projectData.id,
+        id: project.id,
         slug: slug,
-        title: projectData.title || '',
+        title: project.title || '',
         subtitle: '', // Not in projects table
-        description: projectData.description || '',
+        description: project.description || '',
         client_name: '', // Not in projects table
         client_location: '', // Not in projects table
         hero_image_url: fetchedMedia?.[0]?.media_url || '',
         challenge_heading: 'The Challenge',
         challenge_content: 'Understanding the unique requirements and creating a solution that meets all expectations.',
         solution_heading: 'The Solution',
-        solution_content: projectData.description || '',
+        solution_content: project.description || '',
         impact_heading: 'Results & Impact',
         impact_content: 'The project delivered excellent results and exceeded expectations.',
-        key_features: Array.isArray(projectData.key_features)
-          ? projectData.key_features.filter((item: unknown): item is string => typeof item === "string")
+        key_features: Array.isArray(project.key_features)
+          ? project.key_features.filter((item: unknown): item is string => typeof item === "string")
           : [],
-        technologies: Array.isArray(projectData.technologies)
-          ? projectData.technologies.filter((item: unknown): item is string => typeof item === "string")
+        technologies: Array.isArray(project.technologies)
+          ? project.technologies.filter((item: unknown): item is string => typeof item === "string")
           : [],
-        project_duration: projectData.build_time || '',
+        project_duration: project.build_time || '',
         cta_heading: 'Ready to Start Your Project?',
         cta_description: 'Let\'s create something amazing together.',
         cta_button_text: 'Get Started',
-        live_site_url: projectData.link || ''
+        live_site_url: project.link || ''
       };
       
       setCaseStudy(processedCaseStudy);
