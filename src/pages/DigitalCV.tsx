@@ -26,14 +26,27 @@ const DigitalCV = () => {
               A clean, personal website designed to pass ATS scans and leave a lasting impression.
             </p>
             
-            <Link 
-              to="/start-digital-cv"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all duration-300 text-lg hover:scale-105"
-              data-gtm="digital-cv-hero-cta"
-            >
-              Start Your Digital CV
-              <ArrowRight size={20} />
-            </Link>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
+              <Link 
+                to="/start-digital-cv"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all duration-300 text-lg hover:scale-105"
+                data-gtm="digital-cv-hero-cta"
+              >
+                Start Your Digital CV
+                <ArrowRight size={20} />
+              </Link>
+              
+              <a 
+                href="https://rosiebiemans.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 text-white hover:border-humble-pink-500/50 hover:bg-humble-pink-500/10 transition-all duration-300"
+                data-gtm="digital-cv-example-link"
+              >
+                See Example CV
+                <Globe size={18} />
+              </a>
+            </div>
             
             <p className="text-white/60 text-sm mt-4">
               Were you referred? Use your referral code or special link — referrers may receive a small commission.
