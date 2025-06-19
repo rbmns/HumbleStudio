@@ -1,34 +1,37 @@
+
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, ExternalLink, Clock } from 'lucide-react';
+import { ArrowRight, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import StarBackground from '@/components/StarBackground';
 import Navbar from '@/components/Navbar';
 
-interface CaseStudy {
+interface Project {
   id: string;
-  slug: string;
+  slug?: string;
   title: string;
-  subtitle?: string;
   description?: string;
-  client_name?: string;
+  categories?: string[];
   hero_image_url?: string;
-  project_duration?: string;
-  technologies: string[];
+  build_time?: string;
+  technologies?: string[];
+  is_featured: boolean;
+  featured_image?: string;
+  main_image?: string;
 }
 
 const Work = () => {
   const navigate = useNavigate();
-  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchCaseStudies();
+    fetchProjects();
   }, []);
 
-  const fetchCaseStudies = async () => {
+  const fetchProjects = async () => {
     try {
-      // Fetch from projects table instead of case_studies
+      console.log('Fetching projects from projects table...');
       const { data: projectsData, error: projectsError } = await supabase
         .from('projects')
         .select('*')
@@ -37,89 +40,31 @@ const Work = () => {
 
       if (projectsError) {
         console.error('Error fetching projects:', projectsError);
-        // Use fallback data
-        setCaseStudies([
-          {
-            id: '1',
-            slug: 'nonnas-table',
-            title: "Nonna's Table",
-            subtitle: "Restaurant Landing Page",
-            description: "A beautiful, conversion-focused landing page for an Italian restaurant featuring online reservations, menu showcase, and seamless user experience.",
-            hero_image_url: "https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/nonnas-table/d-1b.png",
-            project_duration: "48 hours",
-            technologies: ["React", "Tailwind CSS", "Framer Motion", "Supabase"]
-          },
-          {
-            id: '2',
-            slug: 'digital-cv',
-            title: "Digital Resume Site",
-            subtitle: "Personal Branding Platform", 
-            description: "A sophisticated personal website showcasing professional achievements, portfolio, and contact information with modern design and smooth animations.",
-            hero_image_url: "https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png",
-            project_duration: "36 hours",
-            technologies: ["React", "TypeScript", "Tailwind CSS", "Lucide Icons"]
-          }
-        ]);
+        setProjects([]);
       } else {
-        // Fetch media for hero images
-        const { data: mediaData, error: mediaError } = await supabase
-          .from('projects_media')
-          .select('*')
-          .in('project_id', projectsData.map(p => p.id))
-          .eq('is_primary', true)
-          .order('display_order', { ascending: true });
-
-        if (mediaError) {
-          console.error('Error fetching media:', mediaError);
-        }
-
-        // Process database data
-        const processedCaseStudies = projectsData.map(project => {
-          const projectMedia = mediaData?.find(media => media.project_id === project.id);
-          
-          return {
-            id: project.id,
-            slug: project.title === "Nonna's Table" ? 'nonnas-table' : 
-                  project.title === 'Digital Resume Site' ? 'digital-resume' :
-                  project.title.toLowerCase().replace(/\s+/g, '-'),
-            title: project.title,
-            subtitle: project.categories?.[0] || 'Web Design',
-            description: project.description,
-            client_name: '',
-            hero_image_url: projectMedia?.media_url || '',
-            project_duration: project.build_time,
-            technologies: Array.isArray(project.technologies) 
-              ? project.technologies.filter((item: unknown): item is string => typeof item === 'string')
-              : []
-          };
-        });
-        setCaseStudies(processedCaseStudies);
+        console.log('Projects data received:', projectsData);
+        
+        const processedProjects = projectsData?.map(project => ({
+          id: project.id,
+          slug: project.slug || project.title.toLowerCase().replace(/\s+/g, '-'),
+          title: project.title,
+          description: project.description,
+          categories: project.categories || [],
+          hero_image_url: project.is_featured ? project.featured_image : project.main_image,
+          build_time: project.build_time,
+          technologies: Array.isArray(project.technologies) 
+            ? project.technologies.filter((item: unknown): item is string => typeof item === 'string')
+            : [],
+          is_featured: project.is_featured,
+          featured_image: project.featured_image,
+          main_image: project.main_image
+        })) || [];
+        
+        setProjects(processedProjects);
       }
     } catch (error) {
-      console.error('Error in fetchCaseStudies:', error);
-      // Use fallback data on error
-      setCaseStudies([
-        {
-          id: '1',
-          slug: 'nonnas-table',
-          title: "Nonna's Table",
-          subtitle: "Restaurant Landing Page",
-          description: "A beautiful, conversion-focused landing page for an Italian restaurant featuring online reservations, menu showcase, and seamless user experience.",
-          hero_image_url: "https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/nonnas-table/d-1b.png",
-          project_duration: "48 hours",
-          technologies: ["React", "Tailwind CSS", "Framer Motion", "Supabase"]
-        },
-        {
-          id: '2',
-          slug: 'digital-cv', 
-          title: "Digital Resume Site",
-          subtitle: "Personal Branding Platform",
-          description: "A sophisticated personal website showcasing professional achievements, portfolio, and contact information with modern design and smooth animations.",
-          hero_image_url: "https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/digital-cv/d-front-2.png",
-          project_duration: "36 hours",
-          technologies: ["React", "TypeScript", "Tailwind CSS", "Lucide Icons"]
-        }
-      ]);
+      console.error('Error in fetchProjects:', error);
+      setProjects([]);
     } finally {
       setLoading(false);
     }
@@ -136,15 +81,11 @@ const Work = () => {
     }
   };
 
-  const getCategory = (title: string) => {
-    switch (title.toLowerCase()) {
-      case "nonna's table":
-        return 'Restaurant';
-      case 'digital resume site':
-        return 'Personal Brand';
-      default:
-        return 'Web Design';
+  const getCategory = (categories: string[]) => {
+    if (categories && categories.length > 0) {
+      return categories[0];
     }
+    return 'Web Design';
   };
 
   if (loading) {
@@ -188,86 +129,87 @@ const Work = () => {
             </p>
           </div>
 
-          {/* Case Studies Grid */}
-          <div className="space-y-16">
-            {caseStudies.map((study, index) => (
-              <div key={study.id} className={`grid lg:grid-cols-2 gap-12 items-center ${
-                index % 2 === 1 ? 'lg:grid-flow-dense' : ''
-              }`}>
-                
-                {/* Image */}
-                <div className={`relative group ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-                  <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-humble-charcoal/30 backdrop-blur-sm border border-white/10">
-                    <img 
-                      src={study.hero_image_url || `https://tputfqwgyfpbtfoinluo.supabase.co/storage/v1/object/public/humblestudio/${study.slug}/d-1a.png`}
-                      alt={study.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-
-                {/* Content */}
-                <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+          {/* Projects Grid */}
+          {projects.length > 0 ? (
+            <div className="space-y-16">
+              {projects.map((project, index) => (
+                <div key={project.id} className={`grid lg:grid-cols-2 gap-12 items-center ${
+                  index % 2 === 1 ? 'lg:grid-flow-dense' : ''
+                }`}>
                   
-                  {/* Category & Build Time */}
-                  <div className="flex items-center gap-4 text-sm">
-                    <span className={`px-3 py-1 rounded-full bg-gradient-to-r ${getGradient(study.title)} text-white font-medium`}>
-                      {getCategory(study.title)}
-                    </span>
-                    {study.project_duration && (
-                      <div className="flex items-center gap-2 text-white/60">
-                        <Clock className="h-4 w-4" />
-                        <span>{study.project_duration}</span>
+                  {/* Image */}
+                  <div className={`relative group ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                    <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-humble-charcoal/30 backdrop-blur-sm border border-white/10">
+                      <img 
+                        src={project.hero_image_url || `https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop`}
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+
+                  {/* Content */}
+                  <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+                    
+                    {/* Category & Build Time */}
+                    <div className="flex items-center gap-4 text-sm">
+                      <span className={`px-3 py-1 rounded-full bg-gradient-to-r ${getGradient(project.title)} text-white font-medium`}>
+                        {getCategory(project.categories || [])}
+                      </span>
+                      {project.build_time && (
+                        <div className="flex items-center gap-2 text-white/60">
+                          <Clock className="h-4 w-4" />
+                          <span>{project.build_time}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Title */}
+                    <div>
+                      <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                        {project.title}
+                      </h2>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-white/80 text-lg leading-relaxed">
+                      {project.description}
+                    </p>
+
+                    {/* Technologies */}
+                    {project.technologies && project.technologies.length > 0 && (
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech, techIndex) => (
+                          <span
+                            key={techIndex}
+                            className="px-3 py-1 bg-humble-blue-500/20 text-humble-blue-300 rounded-lg text-sm"
+                          >
+                            {tech}
+                          </span>
+                        ))}
                       </div>
                     )}
-                  </div>
 
-                  {/* Title & Subtitle */}
-                  <div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                      {study.title}
-                    </h2>
-                    {study.subtitle && (
-                      <p className="text-lg text-humble-purple-400 font-medium">
-                        {study.subtitle}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-white/80 text-lg leading-relaxed">
-                    {study.description}
-                  </p>
-
-                  {/* Technologies */}
-                  {study.technologies.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      {study.technologies.map((tech, techIndex) => (
-                        <span
-                          key={techIndex}
-                          className="px-3 py-1 bg-humble-blue-500/20 text-humble-blue-300 rounded-lg text-sm"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                    {/* Actions */}
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <button
+                        onClick={() => navigate(`/work/${project.slug}`)}
+                        className="flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-xl font-semibold hover:opacity-90 transition-opacity"
+                      >
+                        Read Case Study
+                        <ArrowRight className="h-5 w-5" />
+                      </button>
                     </div>
-                  )}
-
-                  {/* Actions */}
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <button
-                      onClick={() => navigate(`/work/${study.slug}`)}
-                      className="flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white rounded-xl font-semibold hover:opacity-90 transition-opacity"
-                    >
-                      Read Case Study
-                      <ArrowRight className="h-5 w-5" />
-                    </button>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-white/60 py-16">
+              <p>No featured projects found.</p>
+            </div>
+          )}
 
           {/* Call to Action */}
           <div className="text-center mt-20 pt-16 border-t border-white/10">
