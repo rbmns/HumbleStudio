@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import PortfolioCard from './PortfolioCard';
@@ -45,10 +46,10 @@ const PortfolioGridOptimized: React.FC = () => {
 
       console.log('Projects data received:', projectsData);
 
-      // Fetch media from projects_detail table
-      console.log('Fetching media from projects_detail table...');
+      // Fetch media from portfolio_media table
+      console.log('Fetching media from portfolio_media table...');
       const { data: mediaData, error: mediaError } = await supabase
-        .from('projects_detail')
+        .from('portfolio_media')
         .select('*')
         .order('display_order', { ascending: true });
 
