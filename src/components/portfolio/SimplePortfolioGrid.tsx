@@ -53,8 +53,9 @@ const SimplePortfolioGrid = React.memo(() => {
         return;
       }
 
+      // Use portfolio_media table since projects_media doesn't exist in types yet
       const { data: mediaData, error: mediaError } = await supabase
-        .from('projects_media')
+        .from('portfolio_media')
         .select('*')
         .order('display_order', { ascending: true });
 
@@ -82,8 +83,10 @@ const SimplePortfolioGrid = React.memo(() => {
         id: project.id,
         title: project.title || '',
         description: project.description || '',
-        categories: Array.isArray(project.categories) ? project.categories : 
-          (project.categories ? [project.categories] : []),
+        // Handle both categories and category fields
+        categories: project.categories ? 
+          (Array.isArray(project.categories) ? project.categories : [project.categories]) : 
+          [],
         link: project.link || undefined,
         is_featured: project.is_featured || false,
         is_coming_soon: project.is_coming_soon || false,

@@ -71,9 +71,9 @@ export function useCaseStudy(slug?: string) {
         return;
       }
 
-      // Use projects_media table
+      // Use portfolio_media table since projects_media doesn't exist in types yet
       const { data: fetchedMedia, error: mediaError } = await supabase
-        .from('projects_media')
+        .from('portfolio_media')
         .select('*')
         .eq('project_id', projectData.id)
         .order('display_order', { ascending: true });
