@@ -36,7 +36,7 @@ const About = () => {
               
               {/* Image */}
               <div className="order-1 lg:order-2">
-                <div className="relative">
+                <div className="relative max-w-sm mx-auto">
                   <div className="absolute inset-0 bg-gradient-to-br from-humble-pink-500/20 to-humble-purple-500/20 rounded-2xl blur-xl"></div>
                   <div className="relative bg-humble-charcoal/50 backdrop-blur-sm rounded-2xl p-2 border border-humble-gray-700/50">
                     <img 
