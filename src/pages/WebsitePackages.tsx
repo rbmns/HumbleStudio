@@ -62,6 +62,7 @@ const WebsitePackages = () => {
                 <Link 
                   to="/work/digital-cv"
                   className="text-humble-pink-400 hover:text-humble-pink-300 text-sm underline"
+                  data-gtm="website-packages-hire-me-example"
                 >
                   See example: Digital CV →
                 </Link>
@@ -101,6 +102,7 @@ const WebsitePackages = () => {
                 <Link 
                   to="/work/shen-taxi"
                   className="text-humble-blue-400 hover:text-humble-blue-300 text-sm underline"
+                  data-gtm="website-packages-business-card-example"
                 >
                   See example: Shen Taxi →
                 </Link>
@@ -139,6 +141,7 @@ const WebsitePackages = () => {
                 <Link 
                   to="/work/nonnas-table"
                   className="text-humble-purple-400 hover:text-humble-purple-300 text-sm underline"
+                  data-gtm="website-packages-starter-website-example"
                 >
                   See example: Nonna's Table →
                 </Link>
@@ -152,6 +155,7 @@ const WebsitePackages = () => {
               <Link 
                 to="/work"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 text-white px-8 py-4 rounded-full font-medium text-lg hover:scale-105 transition-all duration-300"
+                data-gtm="website-packages-view-case-studies"
               >
                 View All Case Studies
                 <ArrowRight className="h-4 w-4" />
@@ -159,6 +163,7 @@ const WebsitePackages = () => {
               <Link 
                 to="/inquiry"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-8 py-4 rounded-full font-medium text-lg hover:scale-105 transition-all duration-300"
+                data-gtm="website-packages-book-now"
               >
                 Book Now
                 <ArrowRight className="h-4 w-4" />
@@ -232,6 +237,7 @@ const WebsitePackages = () => {
             <Link 
               to="/inquiry"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-8 py-4 rounded-full font-medium text-lg hover:scale-105 transition-all duration-300"
+              data-gtm="website-packages-get-advice"
             >
               Get personalized advice
               <ArrowRight className="h-4 w-4" />

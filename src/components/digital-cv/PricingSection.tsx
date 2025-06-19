@@ -87,7 +87,10 @@ const PricingSection = () => {
             </div>
 
             <Collapsible>
-              <CollapsibleTrigger className="flex items-center gap-2 text-humble-pink-500 hover:text-humble-pink-400 transition-colors text-sm">
+              <CollapsibleTrigger 
+                className="flex items-center gap-2 text-humble-pink-500 hover:text-humble-pink-400 transition-colors text-sm"
+                data-gtm="hire-me-page-domain-hosting-expand"
+              >
                 <span>Learn more about domain & hosting</span>
                 <ChevronDown size={14} className="transition-transform group-data-[state=open]:rotate-180" />
               </CollapsibleTrigger>
@@ -113,7 +116,11 @@ const PricingSection = () => {
                     Most paid options cost around €10–€20 per year, and I'll help you choose the right setup and set it up for you.
                   </p>
                   <p className="text-xs">
-                    Free options may be possible — <Link to="/inquiry" className="text-humble-pink-500 hover:text-humble-pink-400 transition-colors underline">contact me for advice</Link>
+                    Free options may be possible — <Link 
+                      to="/inquiry" 
+                      className="text-humble-pink-500 hover:text-humble-pink-400 transition-colors underline"
+                      data-gtm="hire-me-page-domain-hosting-inquiry"
+                    >contact me for advice</Link>
                   </p>
                 </div>
               </CollapsibleContent>
@@ -125,7 +132,7 @@ const PricingSection = () => {
           <Link 
             to="/hire-me-page"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-humble-pink-500 via-humble-purple-500 to-humble-blue-500 text-white font-medium hover:from-humble-pink-600 hover:via-humble-purple-600 hover:to-humble-blue-600 transition-all duration-300 text-lg hover:scale-105"
-            data-gtm="digital-cv-pricing-cta"
+            data-gtm="hire-me-page-pricing-cta"
           >
             Get Your Hire Me Page
             <ArrowRight size={20} />

@@ -21,7 +21,7 @@ const AboutSection = () => {
             Your Digital CV is built by <Link 
               to="/about" 
               className="text-white font-medium hover:text-humble-pink-400 transition-colors underline"
-              data-gtm="digital-cv-about-link"
+              data-gtm="hire-me-page-about-link"
             >
               Rosie Biemans
             </Link>, creative producer and founder of HumbleStudio, with 15+ years of agency experience delivering digital projects for brands and professionals.
