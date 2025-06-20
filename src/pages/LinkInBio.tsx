@@ -31,8 +31,8 @@ const LinkInBio = () => {
     navigate('/work/shen-taxi-tours');
   };
 
-  const handleNonnasCaseStudy = () => {
-    navigate('/work/nonnas-table');
+  const handleSurfInstructorCaseStudy = () => {
+    navigate('/work/surf-instructor');
   };
 
   return (
