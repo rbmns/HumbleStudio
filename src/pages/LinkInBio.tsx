@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ExternalLink, Mail, Instagram } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -31,8 +32,8 @@ const LinkInBio = () => {
     navigate('/work/shen-taxi-tours');
   };
 
-  const handleNonnasCaseStudy = () => {
-    navigate('/work/nonnas-table');
+  const handleSurfInstructorCaseStudy = () => {
+    navigate('/work/surf-instructor');
   };
 
   return (
@@ -225,25 +226,25 @@ const LinkInBio = () => {
                   </button>
                 </div>
 
-                {/* Nonna's Table */}
+                {/* Surf Instructor */}
                 <div className="flex gap-2">
                   <a
-                    href="https://nonnas-table.humblestudio.ai/"
+                    href="https://humblestudio.ai/work/surf-instructor"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 flex items-center justify-between p-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-blue-500/50 transition-all duration-300 group"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-xl">🍝</span>
+                      <span className="text-xl">🏄</span>
                       <div>
-                        <div className="text-base font-semibold text-white">Nonna's Table</div>
-                        <div className="text-white/60 text-xs">Restaurant landing page</div>
+                        <div className="text-base font-semibold text-white">Surf Instructor</div>
+                        <div className="text-white/60 text-xs">Personal coaching website</div>
                       </div>
                     </div>
                     <ExternalLink className="h-4 w-4 text-white/60 group-hover:text-humble-blue-500 transition-colors" />
                   </a>
                   <button
-                    onClick={handleNonnasCaseStudy}
+                    onClick={handleSurfInstructorCaseStudy}
                     className="px-4 py-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-blue-500/50 transition-all duration-300 text-white/60 hover:text-humble-blue-500"
                   >
                     <span className="text-sm font-medium">Case Study</span>
