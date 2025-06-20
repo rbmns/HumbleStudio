@@ -31,9 +31,9 @@ const LinkInBio = () => {
     navigate('/work/shen-taxi-tours');
   };
 
-const handleSurfInstructorCaseStudy = () => {
-  navigate('/work/surf-instructor');
-};
+  const handleNonnasCaseStudy = () => {
+    navigate('/work/nonnas-table');
+  };
 
   return (
     <>
