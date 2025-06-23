@@ -39,7 +39,14 @@ const Pricing = () => {
                 </div>
                 <div className="text-2xl font-bold text-humble-pink-500 mb-2">€49</div>
                 <p className="text-white/70 text-sm mb-4">Perfect for freelancers & creatives</p>
-                <div className="text-xs text-white/60">1-page • 4 sections • 1-2 days</div>
+                <div className="text-xs text-white/60 mb-4">1-page • 4 sections • 1-2 days</div>
+                <Link 
+                  to="/hire-me-page/start"
+                  className="inline-flex items-center gap-1 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 text-white px-4 py-2 rounded-full font-medium text-sm hover:scale-105 transition-all duration-300"
+                >
+                  Get Started
+                  <ArrowRight className="h-3 w-3" />
+                </Link>
               </div>
 
               {/* Tier 2 - Standard Site */}
@@ -50,7 +57,14 @@ const Pricing = () => {
                 </div>
                 <div className="text-2xl font-bold text-humble-purple-500 mb-2">From €99</div>
                 <p className="text-white/70 text-sm mb-4">Great for small businesses</p>
-                <div className="text-xs text-white/60">Multi-section • Contact forms • 2-4 days</div>
+                <div className="text-xs text-white/60 mb-4">Multi-section • Contact forms • 2-4 days</div>
+                <Link 
+                  to="/digital-business-card/intake"
+                  className="inline-flex items-center gap-1 bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 text-white px-4 py-2 rounded-full font-medium text-sm hover:scale-105 transition-all duration-300"
+                >
+                  Get Started
+                  <ArrowRight className="h-3 w-3" />
+                </Link>
               </div>
 
               {/* Tier 3 - Custom Site */}
@@ -61,7 +75,14 @@ const Pricing = () => {
                 </div>
                 <div className="text-2xl font-bold text-humble-blue-500 mb-2">€249–€500</div>
                 <p className="text-white/70 text-sm mb-4">For those ready to stand out</p>
-                <div className="text-xs text-white/60">Fully custom • Advanced features</div>
+                <div className="text-xs text-white/60 mb-4">Fully custom • Advanced features</div>
+                <Link 
+                  to="/inquiry"
+                  className="inline-flex items-center gap-1 bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 text-white px-4 py-2 rounded-full font-medium text-sm hover:scale-105 transition-all duration-300"
+                >
+                  Get Started
+                  <ArrowRight className="h-3 w-3" />
+                </Link>
               </div>
             </div>
 

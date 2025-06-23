@@ -117,6 +117,17 @@ const WebsitePackages = () => {
                   See example: Shen Taxi →
                 </Link>
               </div>
+
+              <div className="text-center">
+                <Link 
+                  to="/digital-business-card/intake"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-humble-blue-500 to-humble-purple-500 text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-all duration-300"
+                  data-gtm="website-packages-digital-business-card-i-want-this"
+                >
+                  I want this
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
 
             {/* Tier 3: Starter Website */}

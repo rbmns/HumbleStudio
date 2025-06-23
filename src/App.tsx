@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -25,6 +24,7 @@ import HireMePage from "./pages/HireMePage";
 import HireMePageStart from "./pages/HireMePageStart";
 import HireMePageThanksStep2 from "./pages/HireMePageThanksStep2";
 import HireMePageIntake from "./pages/HireMePageIntake";
+import DigitalBusinessCardIntake from "./pages/DigitalBusinessCardIntake";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +68,7 @@ const App = () => {
             <Route path="/hire-me-page/start" element={<HireMePageStart />} />
             <Route path="/hire-me-page/thanks-step-2" element={<HireMePageThanksStep2 />} />
             <Route path="/hire-me-page/intake" element={<HireMePageIntake />} />
+            <Route path="/digital-business-card/intake" element={<DigitalBusinessCardIntake />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/thank-you" element={<ThankYou />} />
