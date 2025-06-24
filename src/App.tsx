@@ -25,6 +25,7 @@ import HireMePageStart from "./pages/HireMePageStart";
 import HireMePageThanksStep2 from "./pages/HireMePageThanksStep2";
 import HireMePageIntake from "./pages/HireMePageIntake";
 import DigitalBusinessCardIntake from "./pages/DigitalBusinessCardIntake";
+import Affiliates from "./pages/Affiliates";
 
 const queryClient = new QueryClient();
 
@@ -69,6 +70,7 @@ const App = () => {
             <Route path="/hire-me-page/thanks-step-2" element={<HireMePageThanksStep2 />} />
             <Route path="/hire-me-page/intake" element={<HireMePageIntake />} />
             <Route path="/digital-business-card/intake" element={<DigitalBusinessCardIntake />} />
+            <Route path="/affiliates" element={<Affiliates />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/thank-you" element={<ThankYou />} />
