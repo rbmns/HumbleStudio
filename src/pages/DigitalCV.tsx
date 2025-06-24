@@ -10,6 +10,7 @@ import PricingSection from '../components/digital-cv/PricingSection';
 import WhatYouProvideSection from '../components/digital-cv/WhatYouProvideSection';
 import AboutSection from '../components/digital-cv/AboutSection';
 import FooterCta from '../components/digital-cv/FooterCta';
+import FilteredPortfolioGrid from '../components/portfolio/FilteredPortfolioGrid';
 
 const DigitalCV = () => {
   return (
@@ -22,6 +23,15 @@ const DigitalCV = () => {
           <HeroSection />
           <WhyChooseSection />
           <WhatsIncludedSection />
+          
+          {/* Add Hire Me Examples Section */}
+          <div className="mb-16">
+            <FilteredPortfolioGrid 
+              categoryFilter="hire_me" 
+              showTitle={true}
+            />
+          </div>
+          
           <PricingSection />
           <WhatYouProvideSection />
           <AboutSection />

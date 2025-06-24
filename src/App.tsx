@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -25,6 +26,8 @@ import HireMePageStart from "./pages/HireMePageStart";
 import HireMePageThanksStep2 from "./pages/HireMePageThanksStep2";
 import HireMePageIntake from "./pages/HireMePageIntake";
 import DigitalBusinessCardIntake from "./pages/DigitalBusinessCardIntake";
+import DigitalBusinessCardPage from "./pages/DigitalBusinessCardPage";
+import CustomSitePage from "./pages/CustomSitePage";
 import Affiliates from "./pages/Affiliates";
 
 const queryClient = new QueryClient();
@@ -69,7 +72,9 @@ const App = () => {
             <Route path="/hire-me-page/start" element={<HireMePageStart />} />
             <Route path="/hire-me-page/thanks-step-2" element={<HireMePageThanksStep2 />} />
             <Route path="/hire-me-page/intake" element={<HireMePageIntake />} />
+            <Route path="/digital-business-card" element={<DigitalBusinessCardPage />} />
             <Route path="/digital-business-card/intake" element={<DigitalBusinessCardIntake />} />
+            <Route path="/custom-site" element={<CustomSitePage />} />
             <Route path="/affiliates" element={<Affiliates />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />

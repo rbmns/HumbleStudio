@@ -59,11 +59,11 @@ const WebsitePackages = () => {
                   <strong>Perfect for:</strong> "Open to work" posts, job apps, LinkedIn bios
                 </div>
                 <Link 
-                  to="/work/digital-cv"
+                  to="/hire-me-page"
                   className="text-humble-pink-400 hover:text-humble-pink-300 text-sm underline"
                   data-gtm="website-packages-hire-me-example"
                 >
-                  See example: Digital CV →
+                  See examples →
                 </Link>
               </div>
 
@@ -110,11 +110,11 @@ const WebsitePackages = () => {
                   <strong>Perfect for:</strong> Freelancers, coaches, stylists, service pros
                 </div>
                 <Link 
-                  to="/work/shen-taxi"
+                  to="/digital-business-card"
                   className="text-humble-blue-400 hover:text-humble-blue-300 text-sm underline"
                   data-gtm="website-packages-business-card-example"
                 >
-                  See example: Shen Taxi →
+                  See examples →
                 </Link>
               </div>
 
@@ -160,11 +160,11 @@ const WebsitePackages = () => {
                   <strong>Perfect for:</strong> Small businesses, founders, teams
                 </div>
                 <Link 
-                  to="/work/nonnas-table"
+                  to="/custom-site"
                   className="text-humble-purple-400 hover:text-humble-purple-300 text-sm underline"
                   data-gtm="website-packages-starter-website-example"
                 >
-                  See example: Nonna's Table →
+                  See examples →
                 </Link>
               </div>
             </div>

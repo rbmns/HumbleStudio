@@ -1,11 +1,11 @@
 
 import React from 'react';
-import SimplePortfolioGrid from './portfolio/SimplePortfolioGrid';
+import FilteredPortfolioGrid from './portfolio/FilteredPortfolioGrid';
 
 const Portfolio = () => {
   return (
     <section id="portfolio" className="section-padding bg-humble-charcoal/30">
-      <SimplePortfolioGrid />
+      <FilteredPortfolioGrid showOnHomeOnly={true} />
     </section>
   );
 };

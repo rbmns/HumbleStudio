@@ -470,11 +470,15 @@ export type Database = {
           featured_image: string | null
           id: string
           is_coming_soon: boolean | null
+          is_custom_site: boolean | null
+          is_digital_business_card: boolean | null
           is_featured: boolean | null
+          is_hire_me: boolean | null
           key_features: string[] | null
           link: string | null
           main_image: string | null
           results: string | null
+          show_on_home: boolean | null
           slug: string | null
           solution: string | null
           subtitle: string | null
@@ -491,11 +495,15 @@ export type Database = {
           featured_image?: string | null
           id?: string
           is_coming_soon?: boolean | null
+          is_custom_site?: boolean | null
+          is_digital_business_card?: boolean | null
           is_featured?: boolean | null
+          is_hire_me?: boolean | null
           key_features?: string[] | null
           link?: string | null
           main_image?: string | null
           results?: string | null
+          show_on_home?: boolean | null
           slug?: string | null
           solution?: string | null
           subtitle?: string | null
@@ -512,11 +520,15 @@ export type Database = {
           featured_image?: string | null
           id?: string
           is_coming_soon?: boolean | null
+          is_custom_site?: boolean | null
+          is_digital_business_card?: boolean | null
           is_featured?: boolean | null
+          is_hire_me?: boolean | null
           key_features?: string[] | null
           link?: string | null
           main_image?: string | null
           results?: string | null
+          show_on_home?: boolean | null
           slug?: string | null
           solution?: string | null
           subtitle?: string | null
