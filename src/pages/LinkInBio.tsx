@@ -138,20 +138,7 @@ const LinkInBio = () => {
                 <ExternalLink className="h-5 w-5 text-white/60 group-hover:text-humble-pink-500 transition-colors" />
               </button>
 
-              {/* Book a Free Call */}
-              <button
-                onClick={openCalendly}
-                className="flex items-center justify-between w-full p-5 bg-humble-charcoal/30 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-humble-purple-500/50 transition-all duration-300 group"
-              >
-                <div className="flex items-center gap-4">
-                  <span className="text-2xl">📞</span>
-                  <div className="text-left">
-                    <div className="text-lg font-semibold text-white">Book a Free Call</div>
-                    <div className="text-white/60 text-sm">30-minute consultation</div>
-                  </div>
-                </div>
-                <ExternalLink className="h-5 w-5 text-white/60 group-hover:text-humble-purple-500 transition-colors" />
-              </button>
+      
 
              
 
