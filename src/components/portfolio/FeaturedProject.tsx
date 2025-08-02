@@ -113,8 +113,8 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
               <OptimizedImage
                 src={project.media[currentImageIndex].media_url}
                 alt={project.media[currentImageIndex].alt_text || project.title}
-                width={800}
-                height={600}
+                width={600}
+                height={450}
                 className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 select-none ${
                   project.is_coming_soon ? 'blur-sm' : ''
                 }`}
