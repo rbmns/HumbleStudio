@@ -28,6 +28,17 @@ const getOptimizedSrc = (originalSrc: string | undefined, width: number, height:
     // Don't add transform params if an explicit transform is already there.
     if(url.searchParams.has('transform')) return originalSrc;
 
+    // For Supabase storage, use transform endpoint for better optimization
+    const pathParts = url.pathname.split('/');
+    const bucketIndex = pathParts.findIndex(part => part === 'object');
+    if (bucketIndex !== -1 && pathParts[bucketIndex + 1] === 'public') {
+      // Construct transform URL for better compression
+      const bucketName = pathParts[bucketIndex + 2];
+      const objectPath = pathParts.slice(bucketIndex + 3).join('/');
+      const baseUrl = `${url.origin}/storage/v1/object/public/${bucketName}`;
+      return `${baseUrl}/${objectPath}?width=${width}&height=${height}&resize=cover&quality=${quality}&format=webp`;
+    }
+
     url.searchParams.set('width', String(width));
     url.searchParams.set('height', String(height));
     url.searchParams.set('resize', 'cover');
