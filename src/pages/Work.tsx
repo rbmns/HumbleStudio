@@ -36,6 +36,7 @@ const Work = () => {
       const { data: projectsData, error: projectsError } = await supabase
         .from('projects')
         .select('*')
+        .eq('show_on_home', true)
         .order('is_featured', { ascending: false })
         .order('created_at', { ascending: false });
 
