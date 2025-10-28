@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import SimplePortfolioCard from './SimplePortfolioCard';
 import FeaturedProject from './FeaturedProject';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 interface PortfolioProject {
   id: string;
@@ -276,16 +278,48 @@ const FilteredPortfolioGrid = React.memo(({
 
           {/* Regular Projects */}
           {regularProjects.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {regularProjects.map((project) => (
-                <SimplePortfolioCard
-                  key={project.id}
-                  project={project}
-                  onClick={handleProjectClick}
-                  featured={false}
-                />
-              ))}
-            </div>
+            <>
+              {showOnHomeOnly ? (
+                // Home page: horizontal scroll with limited projects
+                <div className="space-y-6">
+                  <div className="flex overflow-x-auto gap-4 md:gap-6 pb-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent hover:scrollbar-thumb-primary/40">
+                    {regularProjects.slice(0, 6).map((project) => (
+                      <div key={project.id} className="flex-none w-[280px] sm:w-[320px] snap-start">
+                        <SimplePortfolioCard
+                          project={project}
+                          onClick={handleProjectClick}
+                          featured={false}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {/* View Full Portfolio Button */}
+                  <div className="flex justify-center pt-4">
+                    <Button
+                      onClick={() => navigate('/work')}
+                      size="lg"
+                      className="group"
+                    >
+                      View Full Portfolio
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                // Full portfolio page: grid layout
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                  {regularProjects.map((project) => (
+                    <SimplePortfolioCard
+                      key={project.id}
+                      project={project}
+                      onClick={handleProjectClick}
+                      featured={false}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
           )}
         </div>
       ) : (
