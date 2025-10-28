@@ -72,7 +72,7 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
 
   return (
     <div 
-      className={`bg-humble-charcoal rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group ${
+      className={`bg-humble-charcoal rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group h-full flex flex-col ${
         project.is_coming_soon ? 'cursor-default' : 'cursor-pointer'
       } ${featured ? 'transform hover:scale-[1.02]' : ''}`}
       onClick={handleCardClick}
@@ -96,19 +96,19 @@ const SimplePortfolioCard: React.FC<SimplePortfolioCardProps> = ({
         )}
       </div>
 
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-grow">
         <h3 className="text-xl font-bold mb-2 text-white">
           {project.title}
         </h3>
         
         {project.subtitle && (
-          <p className="text-white/80 text-sm leading-relaxed mb-6">
+          <p className="text-white/80 text-sm leading-relaxed mb-4">
             {project.subtitle}
           </p>
         )}
 
         {/* Action Buttons */}
-        <div className="mt-6 flex flex-col sm:flex-row gap-3">
+        <div className="mt-auto flex flex-col sm:flex-row gap-3">
           {/* Case Study Link - Hidden for coming soon projects */}
           {!project.is_coming_soon && (
             <button

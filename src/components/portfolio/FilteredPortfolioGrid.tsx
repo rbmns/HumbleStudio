@@ -319,7 +319,7 @@ const FilteredPortfolioGrid = React.memo(({
                     {showLeftArrow && (
                       <button
                         onClick={() => scroll('left')}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-humble-charcoal/90 hover:bg-humble-charcoal text-white p-3 rounded-full shadow-lg transition-all hidden sm:block"
+                        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-r from-humble-pink-500 to-humble-purple-500 hover:opacity-90 text-white p-3 rounded-full shadow-lg transition-all hidden sm:block"
                         aria-label="Scroll left"
                       >
                         <ChevronLeft className="h-5 w-5" />
@@ -348,7 +348,7 @@ const FilteredPortfolioGrid = React.memo(({
                     {showRightArrow && (
                       <button
                         onClick={() => scroll('right')}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-humble-charcoal/90 hover:bg-humble-charcoal text-white p-3 rounded-full shadow-lg transition-all hidden sm:block"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-r from-humble-purple-500 to-humble-pink-500 hover:opacity-90 text-white p-3 rounded-full shadow-lg transition-all hidden sm:block"
                         aria-label="Scroll right"
                       >
                         <ChevronRight className="h-5 w-5" />
