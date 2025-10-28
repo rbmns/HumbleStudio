@@ -48,11 +48,6 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
 
     let slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
     if (
-      project.title.toLowerCase().includes("nonna's table") ||
-      project.title.toLowerCase().includes('nonnas table')
-    ) {
-      slug = 'nonnas-table';
-    } else if (
       project.title.toLowerCase().includes('digital') &&
       (project.title.toLowerCase().includes('cv') ||
         project.title.toLowerCase().includes('resume'))

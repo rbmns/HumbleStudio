@@ -86,8 +86,6 @@ const Work = () => {
 
   const getGradient = (title: string) => {
     switch (title.toLowerCase()) {
-      case "nonna's table":
-        return 'from-amber-500 to-orange-600';
       case 'digital resume site':
         return 'from-purple-500 to-pink-600';
       default:
