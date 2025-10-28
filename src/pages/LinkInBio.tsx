@@ -24,13 +24,6 @@ const LinkInBio = () => {
     }
   };
 
-  const handleDigitalCVCaseStudy = () => {
-    navigate('/work/digital-resume-site');
-  };
-
-  const handleShenTaxiCaseStudy = () => {
-    navigate('/work/shen-taxi-tours');
-  };
 
   return (
     <>
@@ -159,10 +152,10 @@ const LinkInBio = () => {
               <h2 className="text-xl font-semibold text-white mb-6 text-center">Featured Projects</h2>
               
               <div className="space-y-4">
-                {/* Digital CV */}
+                {/* The Lineup - Featured */}
                 <div className="flex gap-2">
                   <a
-                    href="https://rosiebiemans.com/"
+                    href="https://thelineup.humblestudio.ai/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 flex items-center justify-between p-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-pink-500/50 transition-all duration-300 group"
@@ -170,53 +163,53 @@ const LinkInBio = () => {
                     <div className="flex items-center gap-3">
                       <span className="text-xl">🔥</span>
                       <div>
-                        <div className="text-base font-semibold text-white">Digital CV</div>
-                        <div className="text-white/60 text-xs">Personal branding site</div>
+                        <div className="text-base font-semibold text-white">The Lineup</div>
+                        <div className="text-white/60 text-xs">Music Duo Website</div>
                       </div>
                     </div>
                     <ExternalLink className="h-4 w-4 text-white/60 group-hover:text-humble-pink-500 transition-colors" />
                   </a>
                   <button
-                    onClick={handleDigitalCVCaseStudy}
+                    onClick={() => navigate('/work/the-lineup')}
                     className="px-4 py-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-pink-500/50 transition-all duration-300 text-white/60 hover:text-humble-pink-500"
                   >
                     <span className="text-sm font-medium">Case Study</span>
                   </button>
                 </div>
 
-                {/* Shen Taxi & Tours */}
+                {/* Lanzarote Surf Lessons */}
                 <div className="flex gap-2">
                   <a
-                    href="https://shentaxiandtours.humblestudio.ai/"
+                    href="https://lanzarotesurflessons.com/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 flex items-center justify-between p-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-purple-500/50 transition-all duration-300 group"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-xl">🚗</span>
+                      <span className="text-xl">🏄</span>
                       <div>
-                        <div className="text-base font-semibold text-white">Shen Taxi & Tours</div>
-                        <div className="text-white/60 text-xs">Local business website</div>
+                        <div className="text-base font-semibold text-white">Lanzarote Surf Lessons</div>
+                        <div className="text-white/60 text-xs">Surf instructor website</div>
                       </div>
                     </div>
                     <ExternalLink className="h-4 w-4 text-white/60 group-hover:text-humble-purple-500 transition-colors" />
                   </a>
                   <button
-                    onClick={handleShenTaxiCaseStudy}
+                    onClick={() => navigate('/work/lanzarote-surf-lessons')}
                     className="px-4 py-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-purple-500/50 transition-all duration-300 text-white/60 hover:text-humble-purple-500"
                   >
                     <span className="text-sm font-medium">Case Study</span>
                   </button>
                 </div>
 
-                {/* Surf Instructor - Coming Soon */}
+                {/* Lizzy Van Baaren - Coming Soon */}
                 <div className="flex gap-2 opacity-50">
                   <div className="flex-1 flex items-center justify-between p-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 relative">
                     <div className="flex items-center gap-3">
-                      <span className="text-xl">🏄</span>
+                      <span className="text-xl">✨</span>
                       <div>
-                        <div className="text-base font-semibold text-white">Surf Instructor</div>
-                        <div className="text-white/60 text-xs">Coming Soon</div>
+                        <div className="text-base font-semibold text-white">Lizzy Van Baaren</div>
+                        <div className="text-white/60 text-xs">Human Design Coach - Coming Soon</div>
                       </div>
                     </div>
                     <div className="px-2 py-1 bg-humble-purple-500 text-white text-xs rounded-full">
