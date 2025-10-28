@@ -61,8 +61,16 @@ const FeaturedProject: React.FC<FeaturedProjectProps> = React.memo(({ project, o
   }, [project.media.length]);
 
   const handleImageClick = useCallback(() => {
-    onImageClick(project.id, currentImageIndex);
-  }, [project.id, currentImageIndex, onImageClick]);
+    if (project.is_coming_soon) return;
+    
+    // Navigate to project detail page
+    if (project.slug) {
+      navigate(`/work/${project.slug}`);
+    } else {
+      const slug = project.title.toLowerCase().replace(/\s+/g, '-');
+      navigate(`/work/${slug}`);
+    }
+  }, [project.is_coming_soon, project.slug, project.title, navigate]);
 
   const handleIndicatorClick = useCallback((index: number) => {
     setCurrentImageIndex(index);

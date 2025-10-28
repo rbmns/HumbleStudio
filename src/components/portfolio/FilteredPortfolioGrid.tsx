@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import SimplePortfolioCard from './SimplePortfolioCard';
 import FeaturedProject from './FeaturedProject';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface PortfolioProject {
   id: string;
@@ -51,6 +51,9 @@ const FilteredPortfolioGrid = React.memo(({
 }: FilteredPortfolioGridProps) => {
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   const fetchProjects = useCallback(async () => {
@@ -215,6 +218,35 @@ const FilteredPortfolioGrid = React.memo(({
     console.log('Image clicked:', projectId, mediaIndex);
   }, []);
 
+  const checkScrollButtons = useCallback(() => {
+    if (!scrollContainerRef.current) return;
+    
+    const container = scrollContainerRef.current;
+    const scrollLeft = container.scrollLeft;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    
+    setShowLeftArrow(scrollLeft > 10);
+    setShowRightArrow(scrollLeft < maxScroll - 10);
+  }, []);
+
+  const scroll = useCallback((direction: 'left' | 'right') => {
+    if (!scrollContainerRef.current) return;
+    
+    const container = scrollContainerRef.current;
+    const scrollAmount = 320; // Width of one card plus gap
+    
+    container.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth'
+    });
+  }, []);
+
+  useEffect(() => {
+    checkScrollButtons();
+    window.addEventListener('resize', checkScrollButtons);
+    return () => window.removeEventListener('resize', checkScrollButtons);
+  }, [checkScrollButtons, projects]);
+
   const getCategoryTitle = () => {
     if (categoryFilter === 'hire_me') return 'Hire Me Page Examples';
     if (categoryFilter === 'digital_business_card') return 'Digital Business Card Examples';
@@ -282,16 +314,46 @@ const FilteredPortfolioGrid = React.memo(({
               {showOnHomeOnly ? (
                 // Home page: horizontal scroll with limited projects
                 <div className="space-y-6">
-                  <div className="flex overflow-x-auto gap-4 md:gap-6 pb-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent hover:scrollbar-thumb-primary/40">
-                    {regularProjects.slice(0, 6).map((project) => (
-                      <div key={project.id} className="flex-none w-[280px] sm:w-[320px] snap-start">
-                        <SimplePortfolioCard
-                          project={project}
-                          onClick={handleProjectClick}
-                          featured={false}
-                        />
-                      </div>
-                    ))}
+                  <div className="relative">
+                    {/* Left Arrow */}
+                    {showLeftArrow && (
+                      <button
+                        onClick={() => scroll('left')}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-humble-charcoal/90 hover:bg-humble-charcoal text-white p-3 rounded-full shadow-lg transition-all hidden sm:block"
+                        aria-label="Scroll left"
+                      >
+                        <ChevronLeft className="h-5 w-5" />
+                      </button>
+                    )}
+                    
+                    {/* Scrollable Container */}
+                    <div 
+                      ref={scrollContainerRef}
+                      onScroll={checkScrollButtons}
+                      className="flex overflow-x-auto gap-4 md:gap-6 pb-4 snap-x snap-mandatory scrollbar-none"
+                      style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                    >
+                      {regularProjects.slice(0, 6).map((project) => (
+                        <div key={project.id} className="flex-none w-[280px] sm:w-[320px] snap-start">
+                          <SimplePortfolioCard
+                            project={project}
+                            onClick={handleProjectClick}
+                            featured={false}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {/* Right Arrow */}
+                    {showRightArrow && (
+                      <button
+                        onClick={() => scroll('right')}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-humble-charcoal/90 hover:bg-humble-charcoal text-white p-3 rounded-full shadow-lg transition-all hidden sm:block"
+                        aria-label="Scroll right"
+                      >
+                        <ChevronRight className="h-5 w-5" />
+                      </button>
+                    )}
                   </div>
                   
                   {/* View Full Portfolio Button */}
