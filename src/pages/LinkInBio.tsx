@@ -32,10 +32,6 @@ const LinkInBio = () => {
     navigate('/work/shen-taxi-tours');
   };
 
-  const handleSurfInstructorCaseStudy = () => {
-    navigate('/work/surf-instructor');
-  };
-
   return (
     <>
       {/* Calendly CSS and JS */}
@@ -213,29 +209,20 @@ const LinkInBio = () => {
                   </button>
                 </div>
 
-                {/* Surf Instructor */}
-                <div className="flex gap-2">
-                  <a
-                    href="https://humblestudio.ai/work/surf-instructor"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-between p-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-blue-500/50 transition-all duration-300 group"
-                  >
+                {/* Surf Instructor - Coming Soon */}
+                <div className="flex gap-2 opacity-50">
+                  <div className="flex-1 flex items-center justify-between p-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 relative">
                     <div className="flex items-center gap-3">
                       <span className="text-xl">🏄</span>
                       <div>
                         <div className="text-base font-semibold text-white">Surf Instructor</div>
-                        <div className="text-white/60 text-xs">Personal coaching website</div>
+                        <div className="text-white/60 text-xs">Coming Soon</div>
                       </div>
                     </div>
-                    <ExternalLink className="h-4 w-4 text-white/60 group-hover:text-humble-blue-500 transition-colors" />
-                  </a>
-                  <button
-                    onClick={handleSurfInstructorCaseStudy}
-                    className="px-4 py-4 bg-humble-charcoal/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-humble-blue-500/50 transition-all duration-300 text-white/60 hover:text-humble-blue-500"
-                  >
-                    <span className="text-sm font-medium">Case Study</span>
-                  </button>
+                    <div className="px-2 py-1 bg-humble-purple-500 text-white text-xs rounded-full">
+                      Coming Soon
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

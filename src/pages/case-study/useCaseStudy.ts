@@ -67,6 +67,13 @@ export function useCaseStudy(slug?: string) {
           return;
         }
 
+        // Check if project is coming soon
+        if (projectData.is_coming_soon) {
+          setError('This case study is coming soon');
+          setLoading(false);
+          return;
+        }
+
         // Fetch media from projects_media table
         const { data: fetchedMedia, error: mediaError } = await supabase
           .from('projects_media')
@@ -144,6 +151,13 @@ export function useCaseStudy(slug?: string) {
 
       const project = projectData[0];
       console.log('Found project:', project);
+
+      // Check if project is coming soon
+      if (project.is_coming_soon) {
+        setError('This case study is coming soon');
+        setLoading(false);
+        return;
+      }
 
       // Fetch media from projects_media table
       const { data: fetchedMedia, error: mediaError } = await supabase

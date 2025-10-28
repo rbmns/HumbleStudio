@@ -40,12 +40,6 @@ const PortfolioCard = ({ project, onClick, featured }: PortfolioCardProps) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    // Handle special case for surf instructor
-    if (project.id === 'surf-instructor') {
-      navigate('/case-studies/surf-instructor');
-      return;
-    }
-
     let slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
     if (
       project.title.toLowerCase().includes('digital') &&
